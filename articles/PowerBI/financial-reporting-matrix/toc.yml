@@ -2,6 +2,8 @@
   href: ask-ai.md
 - name: Getting started
   href: getting-started/toc.yml
+- name: FAQ
+  href: faq.md
   topicHref: getting-started/getting-started.md
 - name: Security
   href: security.md

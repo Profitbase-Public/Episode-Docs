@@ -11,7 +11,7 @@ Optionally, you can also specify the `Domain` if you are not hosted in the stand
 | Name            | Required | Description                      |
 |-----------------|------------------|----------------------------------|
 | Portfolio ID    | Yes | The Portfolio ID to connect to.  |
-| Domain          | No | Specify the domain if you are not hosted in the standard Portfolios cloud environment. The default value is 'https://hub.thinking1.com'. |
+| Domain          | No | Specify the domain if you are not hosted in the standard Portfolios cloud environment. The default value is 'https://hub.portfolio.hypergene.cloud'. |
 | User name       | Yes | The user name to authenticate with.    |
 | Password        | Yes | The password to authenticate with.     |
 

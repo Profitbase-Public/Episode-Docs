@@ -1,9 +1,10 @@
-
 # Change Log
 
 ### What's new?
 
 Learn about the cool new features, updates, and bug fixes.
+
+- [Change Log 2026.1](../invision/changelog/changelog26_1.md)
 - [Change Log 2025.6](../invision/changelog/changelog25_6.md)
 - [Change Log 2025.5](../invision/changelog/changelog25_5.md)
 - [Change Log 2025.4](../invision/changelog/changelog25_4.md)
@@ -11,7 +12,6 @@ Learn about the cool new features, updates, and bug fixes.
 - [Change Log 2025.2](../invision/changelog/changelog25_2.md)
 - [Change Log 2025.1](../invision/changelog/changelog25_1.md)
 - [Change Log 2024.5](../invision/changelog/changelog24_5.md)
-- [Change Log 2025.1](../invision/changelog/changelog25_1.md)
 - [Change Log 2024.4](../invision/changelog/changelog24_4.md)
 - [Change Log 2024.3](../invision/changelog/changelog24_3.md)
 - [Change Log 2024.2](../invision/changelog/changelog24_2.md)
@@ -28,11 +28,9 @@ Learn about the cool new features, updates, and bug fixes.
 - [Change Log 2022.3 pt 2](../invision/changelog/changelog22_3_2.md)
 - [Change Log 2022.3 pt 1](../invision/changelog/changelog22_3_1.md)
 - [Change Log 2022.2](../invision/changelog/changelog22_2.md)
+- [Change Log 2022.1](../invision/changelog/changelog22_1.md)
 - [Change Log 5.2](../invision/changelog/changelog52.md)
 - [Change Log 5.1](../invision/changelog/changelog51.md)
 - [Change Log 5.0](../invision/changelog/changelog5.md)
 - [Change Log 4.1](../invision/changelog/changelog41.md)
 - [Change Log 4.0](../invision/changelog/changelog40.md)
-
-
-- [Change Log 4.0](../invision/changelog/changelog22_3_2.md)

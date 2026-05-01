@@ -24,3 +24,7 @@ The example above illustrates how to import data from Hypergene Portfolios into 
 
 ## Returns
 Returns data as a [string](https://learn.microsoft.com/en-us/dotnet/api/system.string) in the specified format (JSON, CSV, XML, or HTML). If the specified format is not supported by the report, data will be returned in the report’s default format.  
+
+<br/>
+
+[!INCLUDE [](./__videos.md)]

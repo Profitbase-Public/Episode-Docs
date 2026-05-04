@@ -1,2 +1,4 @@
+- name: "Connection"
+  href: "connection.md"
 - name: "Publish Message"
   href: "publish-message.md"

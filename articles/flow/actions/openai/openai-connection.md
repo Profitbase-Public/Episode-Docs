@@ -9,7 +9,7 @@ The connection is part of the configuration of [OpenAI](https://platform.openai.
 When adding an OpenAI action (such as Agent Model or Chat Completion), you can select an **existing OpenAI connection** or **create a new one**:
 
 1. Click on an **OpenAI** action in order to open the Properties panel.
-2. Click on the Connection field in order to select or create a connection. In the popup that shows up click on the **New  connection** button.
+2. Click on the Connection field in order to select or create a connection. In the popup that shows up click on the **New connection** button.
 3. Fill out the required connection fields.
 
 <br/>

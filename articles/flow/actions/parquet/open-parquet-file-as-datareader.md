@@ -1,6 +1,6 @@
 # Open Parquet file as DataReader
 
-Provides a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) for reading a forward-only stream of rows form a Parquet file.
+Provides a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) for reading a forward-only stream of rows from a Parquet file.
 
 <br/>
 

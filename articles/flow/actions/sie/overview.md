@@ -1,3 +1,7 @@
-# SIE
+# SIE overview
 
-_This page is under construction._
+Flow includes built-in support for parsing [SIE (Standard Import Export)](https://sie.se/in-english/) files through the [Load SIE file](./load-file.md) action. SIE is a Swedish open, text-based standard for exchanging accounting data — balances, transactions, vouchers, accounts, dimensions — between different financial systems, used as a de facto standard among Swedish companies, accountants, and auditors. The format comes in several types (SIE 1 through 4) covering different levels of detail.
+
+The action accepts SIE content as a stream or byte array — typically obtained from a financial system's API, such as the [Fortnox Get SIE file stream](../fortnox/get-sie-file-stream.md) action — and returns a structured `SIEResultObject` containing a set of DataReaders for each part of the accounting data: opening and closing balances, period balances, transactions, vouchers, accounts, dimensions, financial years, and company information. A typical use case is reading a SIE file from a source system and inserting selected portions into a SQL Server table for analytics or downstream processing.
+
+Parsing behavior can be tuned through **Parser options** — including the source date format (default `yyyyMMdd`), encoding (default ISO-8859-1, common for Swedish text), maximum flatten depth, and tolerance flags such as **Allow Missing Date**, **Allow Unbalanced Voucher**, and **Throw Errors** (controlling whether parsing fails on issues or completes silently). The action doesn't use a connection.

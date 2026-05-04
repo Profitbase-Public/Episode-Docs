@@ -5,7 +5,7 @@ Defines an [OpenAI](https://platform.openai.com/docs) chat model that an AI Agen
 ![Open Aiagent Chat Model](../../../../images/flow/OpenAIagent-chat-model.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow uses an AI Agent powered by an OpenAi chat model to retrieve a list of blobs from Azure Blob Storage and store the results in a table.
+This flow uses an AI Agent powered by an OpenAI chat model to retrieve a list of blobs from Azure Blob Storage and store the results in a table.
 
 
 

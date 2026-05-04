@@ -26,7 +26,7 @@ The flow starts with a [Function](../built-in/function.md) that returns a list o
 | Description         | No | Additional notes or comments about the action configuration. |
 
 
-### Column mapping
+### Column mappings
 
 Column mappings define how columns from the Parquet file are interpreted when the file is read. A mapping lets you control the name and data type of the columns in the resulting table.
 

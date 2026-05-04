@@ -8,7 +8,7 @@
   href: "get-files-in-onedrive.md"
 - name: "Read file from OneDrive as stream"
   href: "read-file-from-onedrive-as-stream.md"
-- name: "Read file from OneDriveas byte array"
+- name: "Read file from OneDrive as byte array"
   href: "read-file-from-onedrive-as-byte-array.md"
 - name: "Upload file to OneDrive"
   href: "upload-file-to-onedrive.md"

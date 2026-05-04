@@ -1,6 +1,6 @@
 # Search vectors
 
-Performs a vector search agains a PostgreSQL database and returns an [IVectorSearchResult](../../api-reference/built-in-types/ai/i-vector-search-result.md) object that can be passed to a Chat completion action.
+Performs a vector search against a PostgreSQL database and returns an [IVectorSearchResult](../../api-reference/built-in-types/ai/i-vector-search-result.md) object that can be passed to a Chat completion action.
 
 
 ![Postgres Vector Search](../../../../images/flow/postgres-vector-search.png)

@@ -13,7 +13,7 @@ This flow uses an AI Agent powered by a Google Vertex AI chat model to retrieve 
 | Name                  | Required | Description |
 |-----------------------|-----------|-------------|
 | Title                 | No | The title of the model. |
-| Connection            | Yes | Defines the [connection](vertexai-connection.md) to **OpenAI**. |
+| Connection            | Yes | Defines the [connection](vertexai-connection.md) to **VertexAI**. |
 | Model Id       | Yes |	The identifier of the model to be used, such as gemini-2.5-pro, gemini-2.0-flash-lite-001, etc. This determines the capabilities and cost of the model. |
 | Temperature       | No |Controls the variability and creativity of generated text. Accepts values from 0.0 to 2.0 (default 1.0). Lower values result in focused, predictable output, while higher values (e.g., 1.5) produce more diverse and creative responses. |
 | Max Tokens | No | Sets a limit on the number of tokens (words, characters, or pieces of text) in the model’s response. |

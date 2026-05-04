@@ -17,7 +17,7 @@ This flow runs daily using a [schedule](../../triggers/schedule-trigger.md), [re
 | Name           | Required | Description                                      |
 |----------------|----------|--------------------------------------------------|
 | Title          | No | A descriptive label for the action.			   |
-| Connection     | Yes | Select the RabbitMQ connection. |
+| Connection     | Yes | Select the [RabbitMQ connection](connection.md). |
 | Exchange       | No | Name of the [Exchange](https://www.rabbitmq.com/docs/exchanges) to publish to. An exchange can e.g. be Direct, Fanout, Topic, or Headers. |
 | Routing Key    | No | Select or enter the routing key. This is a message attribute used by an exchange to determine how to route a message to queues (e.g. the queue name). |
 | Result variable name | No | The name of the variable in which the result will be stored. |

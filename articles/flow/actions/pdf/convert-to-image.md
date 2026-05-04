@@ -13,8 +13,8 @@ Its primary use case is extracting data from PDFs using OCR techniques, rather t
 | Name        | Required | Description                           |
 |-------------|--------------|---------------------------------------|
 | File data   | Yes | The PDF file (stream or byte array) to convert.  |
-| Output format | Yes | The format to convert to (png of jpg). |
-| Response mode | No | `Default` or `Zip`.<br/>`Default`: A single image is returned, regardless of whether the PDF has one or more pages.<br/> `Zip`: A zip file is returned. If the PDF has multiple pages, the zip file contains one image pr page. If the PDF has only one page, the zip file contains only a single image file.  | 
+| Output format | Yes | The format to convert to (png or jpg). |
+| Response mode | No | `Default` or `Zip`.<br/>`Default`: A single image is returned, regardless of whether the PDF has one or more pages.<br/> `Zip`: A zip file is returned. If the PDF has multiple pages, the zip file contains one image per page. If the PDF has only one page, the zip file contains only a single image file.  | 
 
 <br/>
 

@@ -1,0 +1,67 @@
+# Actions overview
+
+An **action** is a building block of a Flow — a unit of work that does one thing: read a file, write to a database, call an API, run a function, send an email. A Flow is composed of a [trigger](./../triggers/overview.md) followed by a sequence of actions wired together by their input and output ports. The trigger decides *when* the Flow starts; the actions decide *what* it does.
+
+Flow ships with a wide library of built-in actions, organized into categories below. Most categories integrate with an external system (a database, a cloud storage, an API), and require setting up a [connection](./../workspaces/workspace-objects.md) once before the actions can be used. Some categories don't need a connection at all — they operate on data already in memory.
+
+<br/>
+
+## Explore
+
+#### Built-in primitives
+[Built-in](./built-in/overview.md) contains the language primitives every Flow is built from — variables, functions, conditionals (`If`, `Case`), loops, error handling, sub-flow execution, and similar. These are the actions you reach for when shaping the logic between integrations.
+
+<br/>
+
+#### AI and machine learning
+For AI workloads, Flow integrates with the major LLM providers and supports building agents, embedding pipelines, and tool-using assistants. [Agents](./agents/overview.md) provides the chat agents and reusable AI components. [AI](./ai/overview.md) covers cross-cutting helpers such as text splitting and chat history management. [OpenAI](./openai/overview.md), [Anthropic AI](./anthropic/overview.md), [Azure AI](./azure-ai/overview.md), and [Google VertexAI](./google-vertexai/overview.md) provide chat completions, embeddings, and chat models for the respective providers. [Tavily](./tavily/overview.md) brings real-time web search into agents and flows. [Model Context Protocol (MCP)](./mcp/overview.md) lets Flow act as a client to external MCP servers, exposing their tools to agents. [Markdown](./markdown/overview.md) collects all conversion actions used to prepare documents for AI workflows. [Machine Learning](./machine-learning/overview.md) provides scoring against custom-trained models.
+
+<br/>
+
+#### Databases and data platforms
+Relational databases, analytical data platforms, and the data warehouse stack. [SQL Server / Azure SQL](./sql-server/overview.md) is the most extensive — covering schema management, reading/writing in many shapes, change tracking, transactions, vectors, and Power BI writeback. [PostgreSQL](./postgresql/overview.md) covers similar reading/writing operations and offers a strong vector store for RAG pipelines. [Snowflake](./snowflake/overview.md) targets analytics workloads, with stage-based bulk loading and Power BI writeback support. [Databricks](./databricks/overview.md) runs SQL queries against a Databricks warehouse. [Google BigQuery](./google-bigquery/overview.md) targets BigQuery datasets. [Microsoft Fabric](./microsoft-fabric/overview.md) provisions and operates Fabric workspaces, lakehouses, data pipelines, and semantic models.
+
+<br/>
+
+#### Files and document processing
+For reading, transforming, and producing documents in various formats. [CSV](./csv/overview.md), [Excel](./excel/overview.md), [JSON](./json/overview.md), and [Parquet](./parquet/overview.md) cover the standard tabular and structured data formats. [PDF](./pdf/overview.md) handles PDF conversion to Markdown, image rendering, and document splitting; [Adobe](./adobe/overview.md) extends this with the Adobe PDF Services API for higher-quality conversions and structured content extraction. [Word](./word/overview.md) and [PowerPoint](./powerpoint/overview.md) convert their respective formats to Markdown. [HTML](./html/overview.md) extracts and processes HTML content, primarily for AI workflows.
+
+<br/>
+
+#### Cloud storage and file systems
+For reading and writing files to remote storage. [Amazon S3](./amazon-s3/overview.md), [Azure Blob Storage](./azure-blob-storage/overview.md), [Azure Files](./azure-files/overview.md), [Azure Table Storage](./azure-table-storage/overview.md), and [OneDrive](./onedrive/overview.md) cover the cloud-based options. [FTP](./ftp/overview.md) supports the legacy file-transfer protocol for systems that still rely on it.
+
+<br/>
+
+#### Messaging and streaming
+For event-driven workloads — publishing messages to queues and topics, working with event streams. [Azure Service Bus](./azure-service-bus/overview.md) supports queues and topics. [Azure Event Hub](./azure-event-hub/overview.md) targets high-volume telemetry and event streams. [RabbitMQ](./rabbitmq/overview.md) publishes messages to a RabbitMQ broker. The matching [triggers](./../triggers/overview.md) consume messages from the same systems on the receiving side.
+
+<br/>
+
+#### Email and communication
+For delivering messages, notifications, and reports. [Microsoft 365 Outlook](./microsoft-365-outlook/overview.md) sends email from personal or shared mailboxes, reads inbox content, and processes attachments. [SendGrid](./sendgrid/overview.md) sends transactional and notification emails through SendGrid's API. [Microsoft Teams](./microsoft-teams/overview.md) sends messages to Teams users and channels.
+
+<br/>
+
+#### Web and HTTP APIs
+For integrating with HTTP-based APIs that don't have a dedicated category. [HTTP](./http/overview.md) makes generic HTTP requests, downloads/uploads files, returns files as HTTP responses, and converts web content. [GraphQL](./graphql/overview.md) calls GraphQL endpoints. [GitHub](./github/overview.md) integrates with GitHub repositories — fetching files, listing items, working with commits. [Dynamics 365](./dynamics365/overview.md) integrates with Dynamics 365 Business Central.
+
+<br/>
+
+#### Identity and security
+[Microsoft Entra ID](./microsoft-entra-id/overview.md) automates user lifecycle tasks (inviting guests, creating users, looking up existing ones) and monitors app registrations. [Security](./security/overview.md) provides AES encryption and decryption for content protected within a flow.
+
+<br/>
+
+#### Observability
+[Azure Application Insights](./azure-application-insights/overview.md) sends custom telemetry — traces, events, and exceptions — to Application Insights for monitoring flow execution.
+
+<br/>
+
+#### Hypergene products
+For automation against the Hypergene product family. [Hypergene InVision](./profitbase-invision/overview.md) covers the planning, budgeting, and forecasting platform — Calculation Flows, Dimensions, Data Stores, Work Process Versions, File Storage, and custom SQL/PowerShell scripts. [Hypergene Portfolios](./hypergene-portfolios/overview.md) integrates with Hypergene Portfolios.
+
+<br/>
+
+#### ERP and accounting integrations
+For business and accounting systems, primarily Nordic-region ERPs. [Fortnox](./fortnox/overview.md), [Hogia](./hogia/overview.md), and [Finago Office](./finago-office/overview.md) target Swedish accounting platforms. [PowerOffice Go](./poweroffice-go/overview.md), [Tripletex](./tripletex/overview.md), [Visma](./visma/overview.md) (Visma Business NXT and Visma.Net), and [Xledger](./xledger/overview.md) target Norwegian/Nordic accounting platforms. Most expose REST APIs through generic *REST API request* and *REST API request with paging* actions; Visma Business NXT and Xledger use GraphQL instead. [SIE](./sie/overview.md) parses SIE files — the open Swedish standard for exchanging accounting data between systems.

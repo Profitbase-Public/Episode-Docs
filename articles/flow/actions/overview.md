@@ -1,6 +1,6 @@
 # Actions overview
 
-An **action** is a building block of a Flow — a unit of work that does one thing: read a file, write to a database, call an API, run a function, send an email. A Flow is composed of a [trigger](./../triggers/overview.md) followed by a sequence of actions wired together by their input and output ports. The trigger decides *when* the Flow starts; the actions decide *what* it does.
+An **action** is a building block of a Flow — a unit of work that does one thing: read a file, write to a database, call an API, run a function, send an email. A Flow is a sequence of actions wired together by their input and output ports. The Flow may also begin with a [trigger](./../triggers/overview.md) that decides *when* it runs and *what data* it receives — but that's optional; a Flow can also be run manually from the Designer or called as a sub-flow from another Flow.
 
 Flow includes a wide library of built-in actions, organized into categories below. Most categories integrate with an external system (a database, cloud storage, an API), and require setting up a [connection](./../workspaces/workspace-objects.md) once before the actions can be used. Some categories don't need a connection at all — they operate on data already in memory.
 

@@ -1,6 +1,6 @@
 # Triggers overview
 
-A **trigger** defines the entry point of a Flow — *how* and *when* the Flow starts running, and *what data* it receives at startup. Every Flow has exactly one trigger, which determines whether it runs on a schedule, in response to an HTTP request, when a new message lands in a queue, when a user saves data in Power BI, when an AI agent decides to call it, or any of the other patterns supported below.
+A **trigger** defines the entry point of a Flow — *how* and *when* the Flow starts running, and *what data* it receives at startup. A Flow can have at most one trigger, which determines whether it runs on a schedule, in response to an HTTP request, when a new message lands in a queue, when a user saves data in Power BI, when an AI agent decides to call it, or any of the other patterns supported below. A Flow without a trigger can still be executed manually from the Designer or [called from another Flow](../actions/built-in/run-flow.md).
 
 Triggers are added the same way as actions — from the trigger library in the Flow Designer. Each trigger exposes its received data as one or more variables that the rest of the Flow can read and process.
 

@@ -1,0 +1,165 @@
+- name: Adobe
+  href: adobe/toc.yml
+  topicHref: adobe/overview.md
+- name: Agents
+  href: agents/toc.yml
+  topicHref: agents/overview.md
+- name: AI
+  href: ai/toc.yml
+  topicHref: ai/overview.md
+- name: Amazon S3
+  href: amazon-s3/toc.yml
+  topicHref: amazon-s3/overview.md
+- name: Anthropic AI
+  href: anthropic/toc.yml
+  topicHref: anthropic/overview.md
+- name: Azure AI
+  href: azure-ai/toc.yml
+  topicHref: azure-ai/overview.md
+- name: Azure Application Insights
+  href: azure-application-insights/toc.yml
+  topicHref: azure-application-insights/overview.md
+- name: Azure Blob Storage
+  href: azure-blob-storage/toc.yml
+  topicHref: azure-blob-storage/overview.md
+- name: Azure Event Hub
+  href: azure-event-hub/toc.yml
+  topicHref: azure-event-hub/overview.md
+- name: Azure Files
+  href: azure-files/toc.yml
+  topicHref: azure-files/overview.md
+- name: Azure Service Bus
+  href: azure-service-bus/toc.yml
+  topicHref: azure-service-bus/overview.md
+- name: Azure Table Storage
+  href: azure-table-storage/toc.yml
+  topicHref: azure-table-storage/overview.md
+- name: "Built-in (Flow)"
+  href: built-in/toc.yml
+  topicHref: built-in/overview.md
+- name: CSV
+  href: csv/toc.yml
+  topicHref: csv/overview.md
+- name: Databricks
+  href: databricks/toc.yml
+  topicHref: databricks/overview.md
+- name: Dynamics 365
+  href: dynamics365/toc.yml
+  topicHref: dynamics365/overview.md
+- name: Excel
+  href: excel/toc.yml
+  topicHref: excel/overview.md
+- name: Finago Office
+  href: finago-office/toc.yml
+  topicHref: finago-office/overview.md
+- name: Fortnox
+  href: fortnox/toc.yml
+  topicHref: fortnox/overview.md
+- name: FTP / SFTP
+  href: ftp/toc.yml
+  topicHref: ftp/overview.md
+- name: GitHub
+  href: github/toc.yml
+  topicHref: github/overview.md
+- name: Google BigQuery
+  href: google-bigquery/toc.yml
+  topicHref: google-bigquery/overview.md
+- name: Google VertexAI
+  href: google-vertexai/toc.yml
+  topicHref: google-vertexai/overview.md
+- name: GraphQL request
+  href: graphql/toc.yml
+  topicHref: graphql/overview.md
+- name: Hogia
+  href: hogia/toc.yml
+  topicHref: hogia/overview.md
+- name: HTML
+  href: html/toc.yml
+  topicHref: html/overview.md
+- name: HTTP
+  href: http/toc.yml
+  topicHref: http/overview.md
+- name: Hypergene InVision
+  href: profitbase-invision/toc.yml
+  topicHref: profitbase-invision/overview.md
+- name: Hypergene Portfolios
+  href: hypergene-portfolios/toc.yml
+  topicHref: hypergene-portfolios/overview.md
+- name: JSON
+  href: json/toc.yml
+  topicHref: json/overview.md
+- name: Machine Learning
+  href: machine-learning/toc.yml
+  topicHref: machine-learning/overview.md
+- name: Markdown
+  href: markdown/toc.yml
+  topicHref: markdown/overview.md
+- name: Microsoft Entra ID
+  href: microsoft-entra-id/toc.yml
+  topicHref: microsoft-entra-id/overview.md
+- name: Microsoft Fabric
+  href: microsoft-fabric/toc.yml
+  topicHref: microsoft-fabric/overview.md
+- name: Microsoft Teams
+  href: microsoft-teams/toc.yml
+  topicHref: microsoft-teams/overview.md
+- name: Model Context Protocol (MCP)
+  href: mcp/toc.yml
+  topicHref: mcp/overview.md
+- name: OneDrive
+  href: onedrive/toc.yml
+  topicHref: onedrive/overview.md
+- name: OpenAI
+  href: openai/toc.yml
+  topicHref: openai/overview.md
+- name: Outlook (Microsoft 365)
+  href: microsoft-365-outlook/toc.yml
+  topicHref: microsoft-365-outlook/overview.md
+- name: Parquet
+  href: parquet/toc.yml
+  topicHref: parquet/overview.md
+- name: PDF
+  href: pdf/toc.yml
+  topicHref: pdf/overview.md
+- name: PostgreSQL
+  href: postgresql/toc.yml
+  topicHref: postgresql/overview.md
+- name: PowerOffice Go
+  href: poweroffice-go/toc.yml
+  topicHref: poweroffice-go/overview.md
+- name: PowerPoint
+  href: powerpoint/toc.yml
+  topicHref: powerpoint/overview.md
+- name: RabbitMQ
+  href: rabbitmq/toc.yml
+  topicHref: rabbitmq/overview.md
+- name: Security
+  href: security/toc.yml
+  topicHref: security/overview.md
+- name: SendGrid
+  href: sendgrid/toc.yml
+  topicHref: sendgrid/overview.md
+- name: SIE
+  href: sie/toc.yml
+  topicHref: sie/overview.md
+- name: Snowflake
+  href: snowflake/toc.yml
+  topicHref: snowflake/overview.md
+- name: SQL Server / Azure SQL
+  href: sql-server/toc.yml
+  topicHref: sql-server/overview.md
+- name: Tavily
+  href: tavily/toc.yml
+  topicHref: tavily/overview.md
+- name: Tripletex
+  href: tripletex/toc.yml
+  topicHref: tripletex/overview.md
+- name: Visma
+  href: visma/toc.yml
+  topicHref: visma/overview.md
+- name: Word
+  href: word/toc.yml
+  topicHref: word/overview.md
+- name: Xledger
+  href: xledger/toc.yml
+  topicHref: xledger/overview.md

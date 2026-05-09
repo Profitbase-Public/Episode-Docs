@@ -262,6 +262,8 @@
 - name: Change log
   href: changelog.md
   items:
+    - name: May 2026
+      href: changelog/release-notes-may-2026.md
     - name: February 2026
       href: changelog/release-notes-feb-2026.md
     - name: December 2025

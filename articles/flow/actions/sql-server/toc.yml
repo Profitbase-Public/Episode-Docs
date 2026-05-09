@@ -48,3 +48,5 @@
   href: "truncate-table.md"
 - name: "Update entity"
   href: "update-entity.md"
+- name: Vector search tools
+  href: "vector-search-tools.md"

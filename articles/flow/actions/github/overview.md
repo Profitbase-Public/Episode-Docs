@@ -9,7 +9,7 @@ The actions in this category cover read operations only — Flow does not curren
 ## Explore
 
 #### Working with issues
-[Get issues](./get-issues.md) returns a list of issues from a repository, with options to filter by state (Open, Closed), date (**Issues since**), and to sort the result. Paging is configurable through **Number of pages to fetch** and **Issues per page** (1–200), and the issue body can be returned as Text, HTML, or Raw. [Get issue comments](./get-issue-comments.md) does the same for the comments on a specific issue. A typical pattern is to combine both — fetching all issues, then iterating through them to collect their comments and store everything in a SQL Server table for reporting.
+[Get issues](./get-issues.md) returns a list of issues from a repository, with options to filter by state (Open, Closed), date (**Issues since**), and to sort the result. Paging is configurable through **Number of pages to fetch** and **Issues per page** (1–200), and the issue body can be returned as Text, HTML, or Raw. [Get issue comments](./get-issue-comments.md) does the same for the comments on a specific issue. A typical pattern is to combine both — fetching all issues, then iterating through them to collect their comments and store everything in a SQL Server table for reporting.  [Get issue](./get-issue.md) gets a single issue based on an issue number.
 
 <br/>
 

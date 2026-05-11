@@ -3,11 +3,11 @@
 Gets a single issue from a GitHub repository by issue number.
 
 
-![Github Get Issue](../../../../images/flow/github-get-issue.png)
+![Github Get issue](../../../../images/flow/github-get-issue.png)
 
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow is [triggered](../../triggers/microsoft-365-outlook/when-new-email-arrives-trigger.md) by a mail notification. An issue number is extracted from the mail using a [function](../built-in/function.md). Having the issue number, the **Get Issue** action fetches the issue from a GitHub repository. Relevant issue information is then stored in a SQL Server table using the [Insert or Update row](../sql-server/insert-or-update-row.md) action.
+This flow is [triggered](../../triggers/microsoft-365-outlook/when-new-email-arrives-trigger.md) by a mail notification. An issue number is extracted from the mail using a [function](../built-in/function.md). Having the issue number, the **Get issue** action fetches the issue from a GitHub repository. Relevant issue information is then stored in a SQL Server table using the [Insert or Update row](../sql-server/insert-or-update-row.md) action.
 
 <br/>
 

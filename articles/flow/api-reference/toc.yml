@@ -18,8 +18,10 @@
   items:
     - name: "DeltaSet"
       href: "built-in-types/deltaset.md"
-    - name: HttpReponse
-      href: built-in-types/http-response.md
+    - name: "HttpResponse"
+      href: "built-in-types/http-response.md"
+    - name: "IVectorSearchResult"
+      href: "built-in-types/ai/i-vector-search-result.md"
 - name: Data Analysis
   href: data-analysis/toc.yml
   topicHref: data-analysis/overview.md

@@ -7,7 +7,7 @@ Gets a list of issues from a GitHub repository.
 
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow get a list of issues from in GitHub repository. For each issue, comments are read and stored in an SQL server table.
+This flow gets a list of issues from a GitHub repository. For each issue, comments are read and stored in a SQL Server table.
 
 
 ## Properties
@@ -22,7 +22,7 @@ This flow get a list of issues from in GitHub repository. For each issue, commen
 | Issues per page | No | Set the number of issues per page (1-200). |
 | Issues since | No | Set the start date to fetch issues from. |
 | Additional options | No | The configuration dialog contains settings for Issue state (Open, Closed), Sort options and Text format for the result (Text / HTML / Raw). |
-| Result variable name | No | Name of the variable containing the comment list. |
+| Result variable name | No | Name of the variable containing the issues list. |
 | Description | No | Additional notes or comments about the action or configuration. |
 
 

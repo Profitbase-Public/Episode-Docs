@@ -1,5 +1,7 @@
 - name: "Get issues"
   href: "get-issues.md"
+- name: "Get issue"
+  href: "get-issue.md"
 - name: "Get issue comments"
   href: "get-issue-comments.md"
 - name: "For each Content Information"

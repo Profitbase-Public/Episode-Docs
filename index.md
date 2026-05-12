@@ -3,13 +3,13 @@ _layout: landing
 _disableToc: true
 _disableBreadcrumb: true
 _disableAffix: true
-title: Profitbase Documentation
+title: Hypergene Profitbase Documentation
 ---
 
 <div class="landing-page">
 
 <div class="landing-hero">
-  <h1>Profitbase documentation</h1>
+  <h1>Hypergene Profitbase documentation</h1>
   <p>Financial planning, analysis, consolidation, low-code apps, and workflow automation</p>
 </div>
 

@@ -1,3 +1,5 @@
+- name: "Tripletex API Guide"
+  href: "tripletex-details.md"
 - name: "Connection"
   href: "tripletex-connection.md"  
 - name: "Create connection"

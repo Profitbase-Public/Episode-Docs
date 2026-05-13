@@ -12,4 +12,5 @@ Read more:
 [Add a Flow to a Solution](./how-to/add-flow-to-solution.md)  
 [Run Flows from a Form](./how-to/run-flow-from-form-schema.md)  
 [Run Flows from a Workbook](./how-to/run-flow-from-workbook.md)  
-[Run long-running Flows](./how-to/run-long-running-flow.md)
+[Run long-running Flows](./how-to/run-long-running-flow.md)  
+[Download file from Flow](./how-to/download-file-from-flow.md)

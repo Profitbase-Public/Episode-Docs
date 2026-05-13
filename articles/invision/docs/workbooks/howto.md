@@ -18,3 +18,4 @@ In this section, you will find a list of shortcuts to different subjects about W
 * [How To Set Up Interactions in Workbook](howto/interactions.md)
 * [How To Work with Components in Workbook](howto/components.md)
 * [How To Stack Components](howto/componentstacking.md)
+* [How To Initialize Workbook From URL](howto/initializing.md)

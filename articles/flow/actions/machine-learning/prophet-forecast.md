@@ -5,7 +5,7 @@ Use this action when you need to predict future values for metrics such as sales
 
 <br/>
 
-## When to use this
+## Use-cases
 
 - Forecasting monthly sales or demand when you have at least 2 years of history with clear seasonal patterns (e.g. retail with Q4 peaks)
 - Generating bottom-up forecasts per product, region, or cost center from a single historical dataset using **Grouping columns**
@@ -17,7 +17,7 @@ Use this action when you need to predict future values for metrics such as sales
 ![Prophet Forecast Example](../../../../images/flow/prophet-forecast.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow reads a historical time series from a [file in OneDrive](../onedrive/read-file-from-onedrive-as-stream.md), generates a forecast using **Prophet**, and writes the forecast results to a [database table](../postgresql/load-to-datatable.md).
+This flow reads a historical time series from a [file in OneDrive](../onedrive/read-file-from-onedrive-as-stream.md), generates a forecast using **Prophet**, and [inserts the forecast results into a database](../postgresql/insert-data.md).
 
 <br/>
 

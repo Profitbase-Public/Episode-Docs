@@ -11,7 +11,7 @@ This flow exposes a SQL Server **Vector search tool** to an Azure AI [Chat compl
 
 <br/>
 
-## When to use this
+## Use-cases
 
 - Building a finance assistant that answers questions like *"What is our policy on capex thresholds above 100k?"* by retrieving relevant policy records from a SQL Server table.
 - Letting an AI agent resolve business-language references (e.g. "travel expense", "consulting fees") to the correct account or cost center codes before querying actuals.

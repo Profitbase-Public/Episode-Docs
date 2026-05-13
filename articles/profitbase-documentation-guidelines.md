@@ -471,7 +471,7 @@ Add business context when it helps the reader understand *why* a feature is desi
 
 ---
 
-## When to use this
+## Use-cases
 
 [Concrete configuration or development scenarios:]
 

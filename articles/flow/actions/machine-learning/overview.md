@@ -1,0 +1,5 @@
+# Machine Learning overview
+
+Flow includes built-in support for time series forecasting through the [Prophet forecast](./prophet-forecast.md) action — based on the [Prophet](https://facebook.github.io/prophet/) algorithm developed by Meta. Use it to predict future values for business metrics that change over time, such as sales, demand, or operating costs. Prophet handles seasonal patterns, missing data, public holidays (by country code), custom events, and produces uncertainty bands alongside each forecast. It can also generate separate forecasts per product, region, or cost center from a single dataset.
+
+The action accepts the historical data as a `byte[]`, `Stream`, `DataTable`, or `IDataReader` — typically from a file read action (CSV or Parquet from [OneDrive](../onedrive/overview.md), [Azure Blob Storage](../azure-blob-storage/overview.md), or similar) or a database query — and returns the forecast as a file. For best results, provide at least one full seasonal cycle of history (for example, 24+ months when forecasting monthly figures).

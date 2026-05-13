@@ -9,7 +9,7 @@ Creates an Xledger connection at runtime using API keys supplied as variables or
 **Example** ![Example](../../../../images/strz.jpg)  
 This flow uses [Declare Variables](../built-in/declare-variables.md) to initialize the connection parameters, then Creates Xledger connection to dynamically use it in the next step. The connection is passed to [Get Xledger Data](./get-xledger-data.md) node, which retrieves account data via GraphQL. On success, the accounts are inserted into the database, while any failures are surfaced — both handled by [Functions](../built-in/function.md).
 
-## When to use this
+## Use-cases
 
 - Your organization manages multiple Xledger tenants and the target tenant is determined at runtime (e.g., per-entity consolidation Flows).
 - API keys are stored in a secrets manager and must be injected as variables rather than entered in a static connection dialog.

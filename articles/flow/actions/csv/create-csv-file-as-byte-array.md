@@ -33,7 +33,7 @@ Actions used in the flow are: SQL Server [Get DataReader](../sql-server/get-data
 
 ## Returns
 
-Returns the Excel file serialized as a [byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) [array](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays).
+Returns the CSV file serialized as a [byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte) [array](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays).
 
 <br/>
 

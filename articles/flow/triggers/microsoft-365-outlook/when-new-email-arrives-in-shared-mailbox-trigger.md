@@ -28,14 +28,14 @@ This flow is triggered whenever a new email arrives in the connected Outlook mai
 <!--prettier-ignore-->
 | Property            | Required | Description                                               |
 |---------------------|-----------------------------------------------------------------------|
-| Connection          | Required  | Specifies the [Microsoft 365 Outlook connection](../../actions/microsoft-365-outlook/outlook-connection.md) that the trigger should use to check for new emails. |
-| Polling interval    | Required  | Specifies how often to check for new emails.              |
-| Disabled            | Optional  | Specifies if the trigger should be disabled. You may want to disable the trigger in the Development and Test environment once you have published to Production. |
-| Shared email account| Required  | Specifies the email address of the shared email account to monitor, for example `support@corp.com`.   |
-| Filter              | Optional  | Specifies optional filters to restrict which emails to receive. See detailed description below. | 
-| Folder              | Optional  | Specifies the folder to monitor for new emails. If not specified, all folders are monitored. |
-| Include attachments | Optional  | Specifies whether or not to fetch the contents of all attachments when the trigger runs. [Read more about this option below](#attachments). |
-| Output name         | Required  | The name of the output variable that represents the received mail message. You can change it from the default `mailMessage` to something that more clearly describes the received mail, for example `customerFeedbackMessage`. |
+| Connection          | Yes       | Specifies the [Microsoft 365 Outlook connection](../../actions/microsoft-365-outlook/outlook-connection.md) that the trigger should use to check for new emails. |
+| Polling interval    | Yes       | Specifies how often to check for new emails.              |
+| Disabled            | No        | Specifies if the trigger should be disabled. You may want to disable the trigger in the Development and Test environment once you have published to Production. |
+| Shared email account| Yes       | Specifies the email address of the shared email account to monitor, for example `support@corp.com`.   |
+| Filter              | No        | Specifies optional filters to restrict which emails to receive. See detailed description below. | 
+| Folder              | No        | Specifies the folder to monitor for new emails. If not specified, all folders are monitored. |
+| Include attachments | No        | Specifies whether or not to fetch the contents of all attachments when the trigger runs. [Read more about this option below](#attachments). |
+| Output name         | Yes       | The name of the output variable that represents the received mail message. You can change it from the default `mailMessage` to something that more clearly describes the received mail, for example `customerFeedbackMessage`. |
 
 #### Filter
 

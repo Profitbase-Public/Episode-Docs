@@ -21,11 +21,11 @@ This flow is triggered by an incoming HTTP request. It first retrieves the total
 | Name                 | Required | Description                         |
 |----------------------|----------|-------------------------------------|
 | Title                |          |  |
-| Output data type           | Required |The type of data returned by the HTTP trigger after processing the request. |
-| Default data | Optional | Default input data used if no data is provided in the request; useful for testing with mock data. |
+| Output data type           | Yes      |The type of data returned by the HTTP trigger after processing the request. |
+| Default data | No       | Default input data used if no data is provided in the request; useful for testing with mock data. |
 | Show endpoints |  | Option to display HTTP trigger endpoints, providing the URL for external application calls.|
-| Data variable name          | Optional | Name of the variable containing the data. |
-| Description          | Optional |  Additional notes or comments about the trigger's purpose or configuration.   |
+| Data variable name          | No       | Name of the variable containing the data. |
+| Description          | No       |  Additional notes or comments about the trigger's purpose or configuration.   |
 
 <br/>
 

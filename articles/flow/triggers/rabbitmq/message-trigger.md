@@ -16,12 +16,12 @@ This flow receives a message containing a JSON text with log data from RabbitMQ 
 
 | Name           | Required | Description                                      |
 |----------------|----------|--------------------------------------------------|
-| Title          | Optional | A descriptive label for the trigger configuration. |
-| Connection     | Required | Select or add an **RabbitMQ connection**. |
-| Queue name     | Required | Select the RabbitMQ Queue name. | 
-| Output variable name | Required | Name of the variable containing the message body. |
-| Disabled       | Optional | Boolean value indicating whether the trigger is disabled (true/false). |
-| Description    | Optional | Additional notes or comments about the trigger's purpose or configuration.  |
+| Title          | No       | A descriptive label for the trigger configuration. |
+| Connection     | Yes      | Select or add an **RabbitMQ connection**. |
+| Queue name     | Yes      | Select the RabbitMQ Queue name. | 
+| Output variable name | Yes      | Name of the variable containing the message body. |
+| Disabled       | No       | Boolean value indicating whether the trigger is disabled (true/false). |
+| Description    | No       | Additional notes or comments about the trigger's purpose or configuration.  |
 
 <br/>
 

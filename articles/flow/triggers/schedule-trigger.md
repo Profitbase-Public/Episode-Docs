@@ -17,12 +17,12 @@ This flow runs on a scheduled basis and performs automated file cleanup on an FT
 | Name                 | Required | Description                         |
 |----------------------|----------|-------------------------------------|
 | Title                |          |                                     |
-| Schedule           | Required | Configure the frequency of the trigger.       |
-| Payload | Optional | Define available data when the flow starts.   |
-| Output data type | Optional | Select the datatype of the trigger output. |
-| Output variable name | Optional | Name of the variable containing the data. |
-| Disabled          | Optional | Boolean value indicating whether the trigger is disabled (true/false). |
-| Description          | Optional |  Additional notes or comments about the trigger's purpose or configuration. |
+| Schedule           | Yes      | Configure the frequency of the trigger.       |
+| Payload | No       | Define available data when the flow starts.   |
+| Output data type | No       | Select the datatype of the trigger output. |
+| Output variable name | No       | Name of the variable containing the data. |
+| Disabled          | No       | Boolean value indicating whether the trigger is disabled (true/false). |
+| Description          | No       |  Additional notes or comments about the trigger's purpose or configuration. |
 
 <br/>
 

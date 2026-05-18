@@ -30,13 +30,13 @@ This Flow listens for new or updated invoice files in Azure Blob Storage, [reads
 
 | Name               | Required | Description |
 |--------------------|----------|-------------|
-| Title              | Optional | A custom label for this trigger. This name will appear when selecting the trigger in a Flow. |
-| Connection         | Required | An [Azure Blob container connection](../../actions/azure-blob-storage/azure-blob-container-connection.md). |
-| Polling frequency  | Optional | Defines how often the container should be checked for new or modified blobs (e.g., every 5 minutes, hourly). |
-| Number of blobs    | Optional | Limits how many new or modified blobs should be processed per polling interval. Useful for large containers or throttling. |
-| Blob name          | Optional | A specific blob name to listen for. If set, the trigger will only run when this blob is updated. |
-| Disabled           | Optional | Boolean value indicating whether the trigger is disabled (`true`/`false`). |
-| Description        | Optional | Notes or comments about the trigger’s purpose or configuration. |
+| Title              | No       | A custom label for this trigger. This name will appear when selecting the trigger in a Flow. |
+| Connection         | Yes      | An [Azure Blob container connection](../../actions/azure-blob-storage/azure-blob-container-connection.md). |
+| Polling frequency  | No       | Defines how often the container should be checked for new or modified blobs (e.g., every 5 minutes, hourly). |
+| Number of blobs    | No       | Limits how many new or modified blobs should be processed per polling interval. Useful for large containers or throttling. |
+| Blob name          | No       | A specific blob name to listen for. If set, the trigger will only run when this blob is updated. |
+| Disabled           | No       | Boolean value indicating whether the trigger is disabled (`true`/`false`). |
+| Description        | No       | Notes or comments about the trigger’s purpose or configuration. |
 
 <br/>
 

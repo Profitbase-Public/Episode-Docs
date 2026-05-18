@@ -36,13 +36,13 @@ This Flow monitors for updated files in Azure Blob Storage. [If](../../actions/b
 
 | Name                   | Required | Description |
 |------------------------|----------|-------------|
-| Title              | Optional | A custom label for this trigger. This name will appear when selecting the trigger in a Flow. |
-| Connection         | Required | An [Azure Blob container connection](../../actions/azure-blob-storage/azure-blob-container-connection.md). |
-| Polling frequency  | Optional | Defines how often the container should be checked for blobs (e.g., every 5 minutes, hourly). |
-| Blob name prefix filter | Optional | Limits the trigger to only run for blobs with names starting with the specified prefix. |
-| Blob name          | Optional | A specific blob name to listen for. If set, the trigger will only run when this blob is present. |
-| Disabled           | Optional | Boolean value indicating whether the trigger is disabled (`true`/`false`). |
-| Description        | Optional | Notes or comments about the trigger’s purpose or configuration. |
+| Title              | No       | A custom label for this trigger. This name will appear when selecting the trigger in a Flow. |
+| Connection         | Yes      | An [Azure Blob container connection](../../actions/azure-blob-storage/azure-blob-container-connection.md). |
+| Polling frequency  | No       | Defines how often the container should be checked for blobs (e.g., every 5 minutes, hourly). |
+| Blob name prefix filter | No       | Limits the trigger to only run for blobs with names starting with the specified prefix. |
+| Blob name          | No       | A specific blob name to listen for. If set, the trigger will only run when this blob is present. |
+| Disabled           | No       | Boolean value indicating whether the trigger is disabled (`true`/`false`). |
+| Description        | No       | Notes or comments about the trigger’s purpose or configuration. |
 
 <br/>
 

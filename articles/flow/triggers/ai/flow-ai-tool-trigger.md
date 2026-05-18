@@ -20,12 +20,12 @@ The Flow receives input arguments from the AI agent, retrieves relevant context 
 
 | Name | Type | Description |
 |------|------|-------------|
-| Title | Optional | A descriptive label for the trigger. |
-| Tool name | Required | The name of the tool as exposed to the AI agent. Must match the tool definition used by the agent. |
-| Parameters | Optional | Defines the input schema for the tool. The AI agent will use this schema when constructing tool calls. |
-| Default argument(s) | Optional | Arguments provided when the tool is invoked without explicit parameters. |
-| Output variable name | Required | The name of the variable that will hold the tool request payload passed to the Flow. |
-| Description | Optional | A description of what the tool does. |
+| Title | No       | A descriptive label for the trigger. |
+| Tool name | Yes      | The name of the tool as exposed to the AI agent. Must match the tool definition used by the agent. |
+| Parameters | No       | Defines the input schema for the tool. The AI agent will use this schema when constructing tool calls. |
+| Default argument(s) | No       | Arguments provided when the tool is invoked without explicit parameters. |
+| Output variable name | Yes      | The name of the variable that will hold the tool request payload passed to the Flow. |
+| Description | No       | A description of what the tool does. |
 
 <!--### Returns  
 

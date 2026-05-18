@@ -1,6 +1,6 @@
 # Azure Service Bus Queue trigger
 
-Configures the flow to automatically run by checking periodically for new messages in an [Azure Service Bus Queue](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions#queues).
+Configures the flow to automatically run when a new message is received from an [Azure Service Bus Queue](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-queues-topics-subscriptions#queues). The trigger is push-based — the Flow runs as soon as a message arrives, processing one message at a time.
 
 ![topic](/images/flow/queue-trigger.png)
 
@@ -14,19 +14,19 @@ For each message, it validates that required customer fields are present and, if
 
 | Name           | Required | Description                                      |
 |----------------|----------|--------------------------------------------------|
-| Title          |  Optional | A descriptive label for the trigger configuration.|
-| Connection     | Required | [Azure Service Bus connection](../../actions/azure-service-bus/connecting-to-azure-service-bus.md). |
-| Polling frequency| Required | Interval or schedule for how often the trigger checks for new messages in the topic. |
-| Output data type | Optional | Specifies the format of the trigger's output data (e.g., JSON, XML). |
-| Output variable name | Required | Name of the variable where the trigger's output data will be stored. |
-| Disabled       | Optional | Boolean value indicating whether the trigger is disabled (true/false). |
-| Description    | Optional | Additional notes or comments about the trigger's purpose or configuration.  |
+| Title          | No | A descriptive label for the trigger configuration. |
+| Service Bus Connection | Yes | [Azure Service Bus connection](../../actions/azure-service-bus/connecting-to-azure-service-bus.md). |
+| Default data   | No | Default input data used if no message data is available; useful for testing the Flow with mock data. |
+| Output data type | No | Specifies the format of the trigger's output data (e.g., string, JSON, XML). |
+| Output variable name | Yes | Name of the variable where the trigger's output data will be stored. |
+| Disabled       | No | Boolean value indicating whether the trigger is disabled (true/false). |
+| Description    | No | Additional notes or comments about the trigger's purpose or configuration. |
 
 <br/>
 
 ## Returns
 
-This trigger returns a single variable with the specified name and Output data type. 
+This trigger returns a single message stored in the variable with the specified name and Output data type. Each trigger execution processes one message at a time, not a batch.
 
 ![Schedule Trigger Output Type](../../../../images/flow/schedule-trigger-output-type.png)
 <br/>

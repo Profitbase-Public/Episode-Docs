@@ -82,6 +82,9 @@
 - name: Hypergene InVision
   href: profitbase-invision/toc.yml
   topicHref: profitbase-invision/overview.md
+- name: Hypergene DevOps
+  href: hypergene-devops/toc.yml
+  topicHref: hypergene-devops/overview.md
 - name: Hypergene Portfolios
   href: hypergene-portfolios/toc.yml
   topicHref: hypergene-portfolios/overview.md

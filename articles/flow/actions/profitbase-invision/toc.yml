@@ -51,6 +51,10 @@
   href: "deploy-stored-procedure.md"
 - name: "Deploy View"
   href: "deploy-view.md"
+- name: "Deploy package"
+  href: "deploy-package.md"
+- name: "Upgrade package"
+  href: "upgrade-package.md"
 - name: Data pool
   items:
     - name: "Apply synonym configurations"

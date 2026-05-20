@@ -42,3 +42,5 @@ A `DeleteDeploymentResult` object with the following property:
 
 <br/>
 
+> [!IMPORTANT]
+> If the deleted Hypergene InVision deployment has a connected (cloned) Flow deployment, that Flow deployment is deleted as well.

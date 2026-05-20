@@ -1,2 +1,4 @@
+- name: Anomaly detection
+  href: anomaly-detection.md
 - name: Prophet forecast
   href: prophet-forecast.md

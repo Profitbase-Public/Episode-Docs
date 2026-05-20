@@ -39,6 +39,12 @@ These actions automate the lifecycle of a planning cycle. [Create Work Process V
 
 <br/>
 
+## Package management
+
+[Deploy package](./deploy-package.md) installs a Profitbase Store package (a `.pbpck` file) into a folder in an InVision instance — typically used to roll out a new release of a customer solution. [Upgrade package](./upgrade-package.md) upgrades an already installed package to a newer version using a `.pckup` upgrade file, and can also upgrade the package inside any versioned solutions it has been deployed into. For operations on whole InVision deployments — cloning a customer environment to test a deploy or upgrade before touching production, or tearing down a clone afterwards — see the [Hypergene DevOps](../hypergene-devops/overview.md) category.
+
+<br/>
+
 ## Running custom scripts
 
 When the standard actions don't cover what you need, two action groups let you run custom code inside the InVision environment. [Execute SQL Script](./sql-script/execute-sql-script.md), [Execute long-running SQL Script](./sql-script/execute-long-running-sql-script.md), [returning a single value](./sql-script/execute-sql-script-returning-single-value.md), or [returning a DataPackage](./sql-script/execute-sql-script-returning-datapackage.md) — pick the variant matching the expected runtime and result shape. [Execute PowerShell script](./powershell/execute-powershell-script.md) and [Execute long-running PowerShell script](./powershell/execute-long-running-powershell-script.md) do the same for PowerShell.

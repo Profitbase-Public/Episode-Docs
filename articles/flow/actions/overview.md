@@ -14,7 +14,7 @@ Flow includes a wide library of built-in actions, organized into categories belo
 <br/>
 
 #### AI and machine learning
-Flow integrates with the major LLM providers and supports building AI agents, generating embeddings, and using AI tools. [Agents](./agents/overview.md) provides chat agents and reusable AI components. [AI](./ai/overview.md) covers shared helpers such as text splitting and chat history management. [OpenAI](./openai/overview.md), [Anthropic AI](./anthropic/overview.md), [Azure AI](./azure-ai/overview.md), and [Google VertexAI](./google-vertexai/overview.md) provide chat completions, embeddings, and chat models for the respective providers. [Tavily](./tavily/overview.md) brings real-time web search into agents and flows. [Model Context Protocol (MCP)](./mcp/overview.md) lets Flow connect to external MCP servers and use the tools they expose. [Markdown](./markdown/overview.md) collects all conversion actions used to prepare documents for AI workflows. [Machine Learning](./machine-learning/overview.md) provides time series forecasting through the Prophet algorithm.
+Flow integrates with the major LLM providers and supports building AI agents, generating embeddings, and using AI tools. [Agents](./agents/overview.md) provides chat agents and reusable AI components. [AI](./ai/overview.md) covers shared helpers such as text splitting and chat history management. [OpenAI](./openai/overview.md), [Anthropic AI](./anthropic/overview.md), [Azure AI](./azure-ai/overview.md), and [Google VertexAI](./google-vertexai/overview.md) provide chat completions, embeddings, and chat models for the respective providers. [Tavily](./tavily/overview.md) brings real-time web search into agents and flows. [Model Context Protocol (MCP)](./mcp/overview.md) lets Flow connect to external MCP servers and use the tools they expose. [Markdown](./markdown/overview.md) collects all conversion actions used to prepare documents for AI workflows. [Machine Learning](./machine-learning/overview.md) provides time series forecasting through the Prophet algorithm and anomaly detection through Isolation Forest.
 
 <br/>
 
@@ -59,7 +59,7 @@ For integrating with HTTP-based APIs that don't have a dedicated category. [HTTP
 <br/>
 
 #### Hypergene products
-[Hypergene InVision](./profitbase-invision/overview.md) covers the planning, budgeting, and forecasting platform — Calculation Flows, Dimensions, Data Stores, Work Process Versions, File Storage, and custom SQL/PowerShell scripts. [Hypergene Portfolios](./hypergene-portfolios/overview.md) integrates with Hypergene Portfolios.
+[Hypergene InVision](./profitbase-invision/overview.md) covers the planning, budgeting, and forecasting platform — Calculation Flows, Dimensions, Data Stores, Work Process Versions, File Storage, package deployment and upgrades, and custom SQL/PowerShell scripts. [Hypergene DevOps](./hypergene-devops/overview.md) manages whole InVision deployments through the AllSpark API — cloning customer environments for testing, or tearing them down when they're no longer needed. [Hypergene Portfolios](./hypergene-portfolios/overview.md) integrates with Hypergene Portfolios.
 
 <br/>
 

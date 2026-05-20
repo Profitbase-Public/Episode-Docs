@@ -37,3 +37,6 @@ A `CloneDeploymentResult` object with the following properties:
 > Cloning a deployment is a long-running operation. The Flow containing this action must be configured to run in long-running mode.
 
 <br/>
+
+> [!NOTE]
+> If the source Hypergene InVision deployment has a connected Flow deployment, that Flow deployment is cloned as well and automatically connected to the new InVision clone.

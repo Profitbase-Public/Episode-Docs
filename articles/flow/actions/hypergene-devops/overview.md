@@ -14,5 +14,10 @@ To use any Hypergene DevOps action, you first need an [AllSpark connection](./co
 
 <br/>
 
+> [!IMPORTANT]
+> Both actions cascade to connected Flow deployments. If the Hypergene InVision deployment has a Flow deployment connected to it, that Flow deployment is cloned alongside the InVision instance, or deleted together with it. The cloned Flow deployment is automatically connected to the cloned InVision instance.
+
+<br/>
+
 > [!NOTE]
 > Both actions are long-running. The Flow containing them must be configured to run in long-running mode.

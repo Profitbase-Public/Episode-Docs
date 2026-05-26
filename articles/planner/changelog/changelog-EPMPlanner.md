@@ -6,6 +6,7 @@ This package provide the financial planning function and can be organized in pro
 
 ## EPM Planner Versions
 
+- [EPM Planner 6.2.4](#epm-planner-624) - Released 2026.05.26
 - [EPM Planner 6.2.3](#epm-planner-623) - Released 2026.04.22
 - [EPM Planner 6.2.2](#epm-planner-622) - Released 2026.04.08
 - [EPM Planner 6.2.1](#epm-planner-621) - Released 2026.03.16
@@ -23,7 +24,19 @@ This package provide the financial planning function and can be organized in pro
 
 ## Unreleased
 
-**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/90)
+**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/92)
+
+## EPM Planner 6.2.4
+
+**Fixes:**
+
+- Driver based
+   - not able to test on attribute values in sql (button-click) formulae (#2270)
+   - Incorrect historical reference data (#2298)
+   - Account details - drill to details. Incorrect in certain situations (social cost data) (#2279)
+- Deviation2 calculations does not work in plan overview, input modules and account detail reports (#2279)
+- Version deployment fails in certain situations (#2277)
+- Operations - certain planner operations may have steps that will be flagged as "Object not found" (#2288)
 
 ## EPM Planner 6.2.3
 

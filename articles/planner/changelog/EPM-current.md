@@ -1,12 +1,12 @@
 # Profitbase EPM - current version
 
-**Last updated:** April 22nd 2026
+**Last updated:** May 26th 2026
 
-## Planner 6.2.3
+## Planner 6.2.4
 
 **Content:**
 
-- [EPM Planner 6.2.3](changelog-EPMPlanner.md) provides the financial planning function and can be organized in processes (e.g. Forecast) and one or more versions.
+- [EPM Planner 6.2.4](changelog-EPMPlanner.md) provides the financial planning function and can be organized in processes (e.g. Forecast) and one or more versions.
 - [EPM Reporting 1.2.4](changelog-EPMReporting.md) provides central management of dimensions, report setup and group account mapping.
 - [EPM Finance Report 1.3.0](changelog-EPMFinanceReports.md) provides financial reporting capabilities. Extends EPM Reporting (central reporting) and EPM Planner (version specific reporting).
 - [EPM Common 6.1.2](changelog-EPMCommon.md) provides the users and access management, work process and tasks capabilities and operations management and scheduling operations.

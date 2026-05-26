@@ -2,6 +2,7 @@
 
 ## Upgrade notes
 
+- [EPM Planner 6.2.4](#epm-planner-624)
 - [EPM Planner 6.2.3](#epm-planner-623)
 - [EPM Planner 6.2.2](#epm-planner-622)
 - [EPM Planner 6.2.1](#epm-planner-621)
@@ -12,6 +13,10 @@
 - [EPM Planner 6.0.0](#epm-planner-600)
 - [EPM Planner 5.5.0](#epm-planner-550)
 - [EPM Planner 5.4.1](#epm-planner-541)
+
+## EPM PLanner 6.2.4
+
+See [EPM Planner 6.2.1](#epm-planner-621)
 
 ## EPM PLanner 6.2.3
 

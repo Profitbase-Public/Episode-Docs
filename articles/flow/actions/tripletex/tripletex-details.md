@@ -12,7 +12,7 @@ To process the data effectively:
 1. Store the raw response in a data repository (e.g., database or cloud storage).  
 2. Transform the stored data using tools like SQL, Python, or data transformation pipelines.  
 
----
+
 
 ## Configuration  
 
@@ -33,7 +33,7 @@ Requests to the Tripletex API can be defined manually or by using predefined tem
 
 For endpoint-specific details, refer to the [Tripletex API documentation](https://tripletex.no/v2-docs/).  
 
----
+
 
 ## Response paging  
 
@@ -45,7 +45,7 @@ To handle paging:
 
 Ensure your API client or workflow can handle this iterative process effectively.  
 
----
+
 
 ## API Limits  
 

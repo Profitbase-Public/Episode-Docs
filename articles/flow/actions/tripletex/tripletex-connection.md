@@ -1,49 +1,77 @@
-# Connecting to Tripletex
+# Tripletex Connection
 
-To perform actions with [Tripletex](https://tripletex.no/viktig-informasjon/api/) in Hypergene Flow, you need to configure a connection. You can either select an **existing connection** or create a new one at the action level.
+A workspace object that holds the credentials Flow uses to call the [Tripletex REST API](https://developer.tripletex.no/): a consumer token, an employee token, and the target company. Configure it once, then select it from the **Connection** dropdown on any Tripletex action.
 
-This connection allows Flow to authenticate and interact with the Tripletex API on your behalf using consumer and employee tokens.
+Use this static connection when the same credentials apply to every run of the Flow. If credentials must be supplied per execution — for example from a secrets store or because the Flow targets a different Tripletex subscription on each run — use the [Create Tripletex Connection](./create-connection.md) action instead.
 
-<br/>
+![Tripletex Connection dialog showing Name, Consumer token, Employee token, Default Company Id, Use Tripletex test environment checkbox, and Test connection button](../../../../images/flow/tripletex-connection.png)
 
-## Connection properties
+## Prerequisites
 
-A Tripletex connection requires the following fields:
+- A Tripletex account with API access enabled.
+- A **consumer token** registered for the integrating application. The consumer token is issued by Tripletex when an integration is registered.
+- An **employee token** identifying the Tripletex user the connection acts on behalf of. The employee's entitlements set the upper bound of what this connection can do.
+- For accountant integrations: client access established and entitlements assigned to the employee, per the [Tripletex authentication documentation](https://developer.tripletex.no/docs/documentation/authentication-and-tokens/).
 
-| Property                          | Description |
-|----------------------------------|-------------|
-| Connection Name                  | A custom name for the connection object. |
-| Consumer token                   | A token that authenticates the registered API consumer. |
-| Employee token                   | A token that identifies the employee on whose behalf the API calls are made. |
-| Default company Id               (optional) | The ID of the company to use by default in requests. |
-| Use Tripletex test environment   (optional) | Enable this to use the Tripletex sandbox environment for testing. |
+> [!IMPORTANT]
+> The **Employee token** determines what the connection can read and write. If the Tripletex user has restricted permissions (e.g. read-only on customers, no access to ledger), request actions using this connection will return 403 for forbidden endpoints. The error surfaces on the request action, not on the connection itself.
 
-<br/>
+## Properties
 
-## How to Create a Connection
+| Property | Required | Description |
+|---|---|---|
+| **Name** | Yes | Display name of the connection. Appears in the **Connection** dropdown on Tripletex actions and in logs. |
+| **Consumer token** | Yes | Token identifying the integrating application. Issued by Tripletex when the integration is registered. Stored as a protected secret (shown as `##protected:****` in the dialog). |
+| **Employee token** | Yes | Token identifying the Tripletex user the connection acts on behalf of. Its entitlements determine what the connection can read and write. Stored as a protected secret. |
+| **Default Company Id** | No | Tripletex company ID applied to requests that do not specify one. Leave empty to default to `0`, which resolves to the company the employee token belongs to. Set explicitly only in multi-company setups where accountant access spans tenants. |
+| **Use Tripletex test environment** | No | Routes requests to the Tripletex test environment (`api-test.tripletex.tech`) instead of production (`tripletex.no`). Test-environment tokens only work with this enabled; production tokens only work with it disabled. |
 
-1. Add a Tripletex action to your Flow.
-2. In the **Connection** dropdown, click **Create new connection**.
-3. Fill in the required fields (tokens can be obtained from the Tripletex developer portal).
-4. (Optional) Check the test environment box for sandbox testing.
-5. Click **OK** to save the connection.
+## Configuration
 
-<br/>
+### Creating a connection
 
-## Screenshot
+Either:
 
-![Tripletex Connection](../../../../images/flow/tripletex-connection.png)
+- **From a Tripletex action:** add any Tripletex action to a Flow, open the **Connection** dropdown in its property panel, and click **Create new connection**.
+- **From Workspace Objects:** in the Designer top bar, go to **Resources** → **Workspace Objects** and create a new Tripletex Connection. Connections created this way are available to every Flow in the workspace.
 
-<br/>
+Both routes open the same dialog.
 
-## Dynamic Connection
+### Testing the connection
 
-A [Dynamic Connection](./create-connection.md) can override this default configuration at runtime.  
-Use this when credentials or company contexts are retrieved dynamically from other sources during flow execution.
+The **Test connection** button calls the Tripletex authentication endpoint with the supplied tokens and reports the result without saving the connection. Use it to verify that:
 
-<br/>
+- The consumer and employee tokens are valid.
+- The token pair matches the selected environment (production vs. test).
+- The employee user has API access enabled.
 
-## Related Resources
+A failed test does not block saving — the connection can still be created with invalid tokens, but downstream request actions will fail at runtime.
 
-- [Tripletex API documentation](https://tripletex.no/viktig-informasjon/api/)
-- [Create Dynamic Tripletex Connection](./create-connection.md)
+### Use Tripletex test environment
+
+| Token type | Use Tripletex test environment | Result |
+|---|---|---|
+| Production (`tripletex.no`) | Disabled | Works. Requests go to production. |
+| Production | Enabled | 401 from the test environment — production tokens are not valid there. |
+| Test (`api-test.tripletex.tech`) | Enabled | Works. Requests go to the test environment. |
+| Test | Disabled | 401 from production — test tokens are not valid there. |
+
+A connection targets one environment for its entire lifetime. To switch environments, either edit this connection and re-test, or create a separate connection for each environment and select the appropriate one on each Flow.
+
+### Editing a connection
+
+To edit an existing Tripletex Connection, go to **Resources** → **Workspace Objects** in the Designer top bar and locate the connection. Changes apply to every Flow that references it. See [Workspace Objects](../../workspaces/workspace-objects.md) for details.
+
+## See also
+
+- [Create Tripletex Connection](./create-connection.md) — the runtime counterpart: builds a `Connection` from credentials supplied as inputs, overrides the static connection per execution.
+- [REST API Request with paging](./paged-rest-api-request.md) — the most common consumer of Tripletex connections.
+- [Tripletex authentication documentation](https://developer.tripletex.no/docs/documentation/authentication-and-tokens/) — how to obtain consumer and employee tokens, including the accountant-token flow.
+
+
+
+<!-- TODO: Confirm that empty Default Company Id resolves to `0` / employee's company. The placeholder text says so but worth verifying in the product. -->
+
+<!-- TODO: Confirm the exact behavior of Test connection — does it call /token/session/:create, does it verify employee entitlements, does it surface 401 vs 403 distinctly? -->
+
+<!-- TODO: Confirm path `../../workspaces/workspace-objects.md` matches the actual file. The BC connection page links to `articles/flow/workspaces/workspace-objects.md` so the relative path should be ../../workspaces/workspace-objects.md from articles/flow/actions/tripletex/. -->

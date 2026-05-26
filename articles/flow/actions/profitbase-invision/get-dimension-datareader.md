@@ -30,7 +30,7 @@ It retrieves the selected dimension in either wide or parent-child format, expos
 
 [IDataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader)
 
-## When to use this action
+## Use cases action
 
 Use **Get Dimension DataReader** when you need to read large sets of dimension data efficiently and pass them to downstream actions without loading everything into memory at once.
 

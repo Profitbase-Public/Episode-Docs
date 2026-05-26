@@ -5,7 +5,7 @@ This trigger is useful for automating processes that should only act on **freshl
 
 <br/>
 
-## When to use this trigger vs. the standard Blob trigger
+## Use cases trigger vs. the standard Blob trigger
 
 - Use **Incremental Blob Trigger** when:
   - You only want to process **new or modified** files since the last run.

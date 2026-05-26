@@ -16,7 +16,7 @@
 
 - [Read this before upgrading](readme-EPMPlanner.md)
 
-**Known issues:**
+**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/92)
 
 ## Risk 1.1.1
 

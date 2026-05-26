@@ -5,7 +5,7 @@ This trigger is useful for automating processes that depend on new or updated fi
 
 <br/>
 
-## When to use this trigger vs. the Incremental Blob trigger
+## Use cases trigger vs. the Incremental Blob trigger
 
 - Use **Azure Blob Trigger** when:
   - You need to regularly **list all blobs** in a container or within a specific prefix.

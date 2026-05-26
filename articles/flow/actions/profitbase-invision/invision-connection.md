@@ -5,7 +5,7 @@ The **InVision connection** defines how a flow authenticates and communicates wi
 A connection is required by most InVision-related flow actions, including read, write, and delete operations.
 
 
-## When to use this connection
+## Use cases connection
 
 Use an InVision connection when your flow needs to:
 

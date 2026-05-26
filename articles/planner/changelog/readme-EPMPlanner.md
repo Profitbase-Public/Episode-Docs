@@ -14,17 +14,17 @@
 - [EPM Planner 5.5.0](#epm-planner-550)
 - [EPM Planner 5.4.1](#epm-planner-541)
 
-## EPM PLanner 6.2.4
+## EPM Planner 6.2.4
 
 See [EPM Planner 6.2.1](#epm-planner-621)
 
-## EPM PLanner 6.2.3
+## EPM Planner 6.2.3
 
 See [EPM Planner 6.2.1](#epm-planner-621)
 
 **Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/90)
 
-## EPM PLanner 6.2.2
+## EPM Planner 6.2.2
 
 See [EPM Planner 6.2.1](#epm-planner-621)
 

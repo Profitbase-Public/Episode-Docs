@@ -29,6 +29,9 @@
 - name: Directives
   href: directives/toc.yml
   topicHref: directives.md
+- name: Eaze
+  href: eaze/toc.yml
+  topicHref: eaze/index.md
 - name: File Storage
   href: filestorage/toc.yml
   topicHref: filestorage.md

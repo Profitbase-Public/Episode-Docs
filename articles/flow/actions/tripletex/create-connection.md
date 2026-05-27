@@ -45,7 +45,7 @@ When `Dynamic connection` is set on a Tripletex request action, the request acti
 |---|---|---|
 | **Title** | No | Display name of the action node on the Flowchart. Defaults to `Create Tripletex Connection`. Does not affect runtime behavior. |
 | **Company ID** | Yes | Tripletex company ID the connection targets. Selectable from a dropdown, or entered directly when the value comes from an upstream action. |
-| **Consumer Token** | No | Token identifying the calling application. Leave empty to use the consumer token configured on the static Tripletex Connection at workspace level; set it here to override per execution (for example when one Flow integrates with two registered applications). |
+| **Consumer Token** | No |  A token used to authenticate the consumer. |
 | **Employee Token** | Yes | Token identifying the Tripletex employee the action acts on behalf of. Its entitlements set the upper bound of what the connection can read and write. |
 | **Connection variable name** | No | Variable name under which the resulting `Connection` object is exposed to downstream actions. Defaults to `connection`. Change it only when the Flow creates multiple connections and needs distinct names. |
 | **Use demo URL's** | No | Routes requests to the Tripletex test environment (`api-test.tripletex.tech`) instead of production (`tripletex.no`). Test-environment tokens only work with this enabled; production tokens only work with it disabled. |
@@ -62,11 +62,6 @@ Builds a `Connection` object scoped to the supplied credentials and assigns it t
 
 ## Configuration
 
-### Consumer Token
-
-Leave this empty in most setups. The static [Tripletex Connection](./tripletex-connection.md) at workspace level holds the consumer token issued to the integrating application, and this action inherits it.
-
-Set the field here only when one Flow needs to act on behalf of two different registered applications (rare, typically only when running a migration between two consumer registrations).
 
 ### Use demo URL's
 

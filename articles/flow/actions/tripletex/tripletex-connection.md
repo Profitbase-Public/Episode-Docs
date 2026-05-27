@@ -47,16 +47,6 @@ The **Test connection** button calls the Tripletex authentication endpoint with 
 
 A failed test does not block saving — the connection can still be created with invalid tokens, but downstream request actions will fail at runtime.
 
-### Use Tripletex test environment
-
-| Token type | Use Tripletex test environment | Result |
-|---|---|---|
-| Production (`tripletex.no`) | Disabled | Works. Requests go to production. |
-| Production | Enabled | 401 from the test environment — production tokens are not valid there. |
-| Test (`api-test.tripletex.tech`) | Enabled | Works. Requests go to the test environment. |
-| Test | Disabled | 401 from production — test tokens are not valid there. |
-
-A connection targets one environment for its entire lifetime. To switch environments, either edit this connection and re-test, or create a separate connection for each environment and select the appropriate one on each Flow.
 
 ### Editing a connection
 

@@ -1,7 +1,8 @@
-- name: REST API request with paging
-  href: business-central/rest-api-request-with-paging.md
-- name: Create Business Central API v2 connection
-  href: business-central/create-api-connection.md
 - name: About Business Central API v2 Connection
   href: business-central/dynamics365-business-central-api-v2-connection.md
-
+- name: Create Business Central API v2 connection
+  href: business-central/create-api-connection.md
+- name: REST API request
+  href: business-central/rest-api-request.md
+- name: REST API request with paging
+  href: business-central/rest-api-request-with-paging.md

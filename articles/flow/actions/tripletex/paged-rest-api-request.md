@@ -25,15 +25,17 @@ For single-record reads or non-list endpoints, use [REST API Request](./rest-api
 | Property | Required | Description |
 |---|---|---|
 | **Title** | No | Display name of the action node on the Flowchart. Defaults to `REST API Request with paging`. The current value is appended to the label of the **Edit configuration** field (`Edit configuration - {Title}`). |
-| **Connection** | No | The [Tripletex Connection](./tripletex-connection.md) used at runtime, unless **Enable dynamic connection** is on. When the toggle is on, **Connection** is used at design time only — for endpoint autocomplete and request validation — and is greyed out in the property panel. One of **Connection** or **Dynamic connection** must be set for the action to run. |
+| **Connection** | No* | The [Tripletex Connection](./tripletex-connection.md) used at runtime, unless **Enable dynamic connection** is on. When the toggle is on, **Connection** is used at design time only — for endpoint autocomplete and request validation — and is greyed out in the property panel. One of **Connection** or **Dynamic connection** must be set for the action to run. |
 | **Enable dynamic connection** | No | Toggle that switches the action between static and dynamic connection mode. Off: the action uses **Connection**. On: **Connection** becomes design-time only and **Dynamic connection** controls the runtime connection. |
-| **Dynamic connection** | Conditional | Visible only when **Enable dynamic connection** is on. Bind it to a `Connection` variable produced by the [Create Tripletex Connection](./create-connection.md) action. |
+| **Dynamic connection** | No* | Visible only when **Enable dynamic connection** is on. Bind it to a `Connection` variable produced by the [Create Tripletex Connection](./create-connection.md) action. |
 | **Edit configuration - {Title}** | Yes | The HTTP request to send — method (always `GET` for paged endpoints), URI, parameters, response type. Click the field to open the request editor; pick a template from **New Request** or define the request manually. The summary in the property panel shows the HTTP method and `Configured (edit for details)` once set; an empty configuration shows `Define configuration`. |
 | **Start index (from)** | No | Zero-based index of the first record to retrieve. Maps to the Tripletex `from` query parameter. Defaults to `0`. Set this when resuming a partially-completed extract or when skipping a known prefix of the result set. |
 | **Items per page (count)** | No | Number of records per page. Maps to the Tripletex `count` query parameter. Defaults to `5000`. Higher values reduce the number of HTTP round-trips but increase per-page memory usage and risk Tripletex timeouts on slow endpoints. |
 | **Max page count** | No | Hard limit on the number of pages fetched. Defaults to `9999`. The action stops after this many pages even if Tripletex has more — set higher than your expected page count to avoid silent truncation. |
 | **Disabled** | No | When checked, the action is skipped at runtime and execution flows straight to the Continue output. Use during development to bypass a step without removing it from the canvas. |
 | **Description** | No | Free-text notes about the action. Not used at runtime. |
+
+*At least one of **Connection** or **Dynamic connection** must be configured.
 
 ## Output ports
 

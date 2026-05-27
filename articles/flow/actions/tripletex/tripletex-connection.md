@@ -21,7 +21,7 @@ Use this static connection when the same credentials apply to every run of the F
 | Property | Required | Description |
 |---|---|---|
 | **Name** | Yes | Display name of the connection. Appears in the **Connection** dropdown on Tripletex actions and in logs. |
-| **Consumer token** | Yes | Token identifying the integrating application. Issued by Tripletex when the integration is registered. Stored as a protected secret (shown as `##protected:****` in the dialog). |
+| **Consumer token** | Yes |  A token used to authenticate the consumer. |
 | **Employee token** | Yes | Token identifying the Tripletex user the connection acts on behalf of. Its entitlements determine what the connection can read and write. Stored as a protected secret. |
 | **Default Company Id** | No | Tripletex company ID applied to requests that do not specify one. Leave empty to default to `0`, which resolves to the company the employee token belongs to. Set explicitly only in multi-company setups where accountant access spans tenants. |
 | **Use Tripletex test environment** | No | Routes requests to the Tripletex test environment (`api-test.tripletex.tech`) instead of production (`tripletex.no`). Test-environment tokens only work with this enabled; production tokens only work with it disabled. |
@@ -30,12 +30,7 @@ Use this static connection when the same credentials apply to every run of the F
 
 ### Creating a connection
 
-Either:
-
 - **From a Tripletex action:** add any Tripletex action to a Flow, open the **Connection** dropdown in its property panel, and click **Create new connection**.
-- **From Workspace Objects:** in the Designer top bar, go to **Resources** → **Workspace Objects** and create a new Tripletex Connection. Connections created this way are available to every Flow in the workspace.
-
-Both routes open the same dialog.
 
 ### Testing the connection
 
@@ -50,7 +45,7 @@ A failed test does not block saving — the connection can still be created with
 
 ### Editing a connection
 
-To edit an existing Tripletex Connection, go to **Resources** → **Workspace Objects** in the Designer top bar and locate the connection. Changes apply to every Flow that references it. See [Workspace Objects](../../workspaces/workspace-objects.md) for details.
+To edit an existing Tripletex Connection, click on the **action** -> **connection** and select edit, or go to **Resources** → **Workspace Objects** in the Designer top bar and locate the connection. Changes apply to every Flow that references it. See [Workspace Objects](../../workspaces/workspace-objects.md) for details.
 
 ## See also
 
@@ -58,10 +53,3 @@ To edit an existing Tripletex Connection, go to **Resources** → **Workspace Ob
 - [REST API Request with paging](./paged-rest-api-request.md) — the most common consumer of Tripletex connections.
 - [Tripletex authentication documentation](https://developer.tripletex.no/docs/documentation/authentication-and-tokens/) — how to obtain consumer and employee tokens, including the accountant-token flow.
 
-
-
-<!-- TODO: Confirm that empty Default Company Id resolves to `0` / employee's company. The placeholder text says so but worth verifying in the product. -->
-
-<!-- TODO: Confirm the exact behavior of Test connection — does it call /token/session/:create, does it verify employee entitlements, does it surface 401 vs 403 distinctly? -->
-
-<!-- TODO: Confirm path `../../workspaces/workspace-objects.md` matches the actual file. The BC connection page links to `articles/flow/workspaces/workspace-objects.md` so the relative path should be ../../workspaces/workspace-objects.md from articles/flow/actions/tripletex/. -->

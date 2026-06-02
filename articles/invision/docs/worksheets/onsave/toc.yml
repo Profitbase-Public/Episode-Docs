@@ -1,4 +1,4 @@
 - name: API references
   href: apireferences.md
-- name: Sql script service
+- name: SQL script service
   href: sqlscriptservice.md

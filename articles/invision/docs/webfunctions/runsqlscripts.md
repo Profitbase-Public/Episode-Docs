@@ -1,5 +1,5 @@
 
-# Run Sql Scripts from Web Functions
+# Run SQL Scripts from Web Functions
 
 ## WebFunction base class APIs
 

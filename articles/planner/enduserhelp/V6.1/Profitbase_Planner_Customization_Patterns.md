@@ -400,7 +400,7 @@ Click the sql script node and select the script and define arguments as shown:
 
 ![customizationPatterns6_1_23](../../../../images/enduserhelp/customizationPatterns6_1_23.png)
 
-The custom sql script is selected from the drop-down “Sql script”.
+The custom sql script is selected from the drop-down “SQL script”.
 
 The sql script parameters are set in the “Parameters” selection like this:
 

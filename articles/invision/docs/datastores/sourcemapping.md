@@ -9,7 +9,7 @@ In this **Example** we use Data Store that we created [here](creatingschema.md).
 
 **Notice** that the data in the HistProductSales table is not in the same format as the data store we just created. One alternative is to use the SQL Transform field to write SQL code that transform your data. Another option is to create a view and use the view as your data source. 
 
-You can copy the SQL statement below into the Sql Transform window. We do this to create a column with margin % based on the data in the fact table. 
+You can copy the SQL statement below into the SQL Transform window. We do this to create a column with margin % based on the data in the fact table. 
 
 ```
 SELECT 

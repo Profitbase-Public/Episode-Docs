@@ -1,5 +1,5 @@
 
-# Sql Script Service
+# SQL Script Service
 
 Use the SqlScriptService to run a SQL Script when a Worksheet or Table is saved.
 

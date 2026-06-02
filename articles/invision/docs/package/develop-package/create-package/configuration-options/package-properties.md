@@ -39,14 +39,14 @@ The default value is the returned value if the solution is not part of a version
 
 
 
-## Use PackageProperty in a Sql script
+## Use PackageProperty in a SQL script
 
 <br/>
 
-**@PackageProperty[PropertyName] in a Sql script** 
+**@PackageProperty[PropertyName] in a SQL script** 
 
  
-A package property value can be used inside a Sql script.  
+A package property value can be used inside a SQL script.  
 The returned value is a string representation of the data type. Example of use can be:
 
 ```

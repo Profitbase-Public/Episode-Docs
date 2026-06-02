@@ -26,7 +26,7 @@ Specifies the column(s) to process. For each source row passing the Relationship
 >Specifies whether no rows should be generated for the column by the Spawner component. 
 
 ``Value Expression (SQL)``  
->Sql expression for computing the value of the column when it's read from the database, for example Amount \* 0.3. The resulting expression will be 
+>SQL expression for computing the value of the column when it's read from the database, for example Amount \* 0.3. The resulting expression will be 
 **SELECT [Expression] AS [Column Name],…**  
 >**Example**
 ```
@@ -66,7 +66,7 @@ Additional columns defines a list of columns that can be included in the output 
 >Allows specifying a custom column which does not exist in the source. When this feature is enabled, the Expression property must have a valid SQL statement which provides the value for the computed column.
 
 ``SQL Value Expression``  
->Sql expression for computing the value of the column when it's read from the database, for example substring (AccountID,0,2) The resulting expression will be **SELECT [expression] AS [Column Name],…**  
+>SQL expression for computing the value of the column when it's read from the database, for example substring (AccountID,0,2) The resulting expression will be **SELECT [expression] AS [Column Name],…**  
 >Example 
 ```
 SELECT (Amount * 0.3) AS Amount, …

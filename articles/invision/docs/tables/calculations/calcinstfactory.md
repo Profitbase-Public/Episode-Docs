@@ -36,7 +36,7 @@ This will create an Xml configuration like the one below:
 
 *	``<Instance FactoryFunction="factory function name"/>`` specifies the name of the function called by InVision to create an instance of the calculation service. The factory function must be available on the (browser) window object, and it must return a new instance of a the calculation service. The factory function can take 0 or many arguments, which can be defined in the FactoryFunctionArguments section.
 
-*	``<SqlScript id="id|@Object[<name>].Id"/>`` specifies a Sql Script in the Solution that returns some data. The Sql Scripts in the FactoryFunctionArguments section is passed as arguments to the  FactoryFunction in the order they are defined.
+*	``<SqlScript id="id|@Object[<name>].Id"/>`` specifies a SQL Script in the Solution that returns some data. The SQL Scripts in the FactoryFunctionArguments section is passed as arguments to the  FactoryFunction in the order they are defined.
 At the moment, only SQL Scripts that returns data are supported.  
 You can specify the Id of the SQL Script either using the actual object id, or using the ``@Object[<name>].Id`` syntax.
 

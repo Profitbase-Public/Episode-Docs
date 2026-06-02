@@ -81,6 +81,6 @@ $reader.Close()
 
 - [PowerShell](../../../videos/powershell.md)
 - [PowerShell - Profitbase.Data.SqlCommand function example](https://profitbasedocs.blob.core.windows.net/videos/powershell%20-%20SQL%20Command.mp4)
-- [PowerShell - SqlCommand API with Sql parameters and the dictionary API](https://profitbasedocs.blob.core.windows.net/videos/PS%20-%20SQLCommand.mp4)
+- [PowerShell - SqlCommand API with SQL parameters and the dictionary API](https://profitbasedocs.blob.core.windows.net/videos/PS%20-%20SQLCommand.mp4)
 
 <br/>

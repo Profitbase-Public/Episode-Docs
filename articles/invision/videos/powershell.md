@@ -30,7 +30,7 @@
 
 <br/>
 
-## SqlCommand API with Sql parameters and the dictionary API
+## SqlCommand API with SQL parameters and the dictionary API
 [Documentation](../docs/powershell/functiondoc/function3.md)
 
 > [!Video https://profitbasedocs.blob.core.windows.net/videos/PS%20-%20SQLCommand.mp4]

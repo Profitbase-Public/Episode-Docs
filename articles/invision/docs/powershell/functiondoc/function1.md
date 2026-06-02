@@ -33,7 +33,7 @@ We call this script ``Pb. Example Excel``.
 
 <br/>
 
-``Excel Impl`` has the reference to Sql Server. 
+``Excel Impl`` has the reference to SQL Server. 
 
 <br/>
 
@@ -72,7 +72,7 @@ Finally We use ``Pb. Excel Functions`` to enable use of the ``PbImport-Excel`` f
 
 
 
-We have a SQL Script called ``Sql w macro``. 
+We have a SQL Script called ``SQL w macro``. 
 <br/>
 
 ![dot-sourcing](https://profitbasedocs.blob.core.windows.net/images/function1a2.png "dot-sourcing")
@@ -92,7 +92,7 @@ In this script we add a reference to the NuGet Package *Microsoft.Data.SqlClient
 
 <br/>
 
-We add the following script where I use ``Pb. 'Sql w macro'`` to embed the SQL Script called ``Sql w macro``. 
+We add the following script where I use ``Pb. 'SQL w macro'`` to embed the SQL Script called ``SQL w macro``. 
 <br/>
 
 ![dot-sourcing](https://profitbasedocs.blob.core.windows.net/images/function1d2.png "dot-sourcing")

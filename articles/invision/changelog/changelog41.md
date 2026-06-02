@@ -100,7 +100,7 @@ We have increased the height of the header bar and font size and added rounded c
 
 ## Enhancements
 
-#### Spreadsheet (Worksheet, Sql Report and Table) - Raise events from custom cell renderer.
+#### Spreadsheet (Worksheet, SQL Report and Table) - Raise events from custom cell renderer.
 
 This feature makes it possible to raise events from custom [cell renderers](../docs/worksheets/columnproperties/cellrenderer.md) so that actions performed by users (for example clicking a button or link) can be acted upon in the Workbook.  
 <br/>

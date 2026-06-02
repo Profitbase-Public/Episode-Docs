@@ -13,12 +13,12 @@ InVision has a number of built-in Tasks that can be used out of the box by addin
 ![pic](https://profitbasedocs.blob.core.windows.net/images/DataFlowItemTasks%20(2).png)
 
 
-## Generic Sql Tasks
+## Generic SQL Tasks
 <br/>
 
-### Generic Sql Script
+### Generic SQL Script
 
-Executes a T-Sql script which does not return a value.  
+Executes a T-SQL script which does not return a value.  
 **Return value** : None
 <br/>
 

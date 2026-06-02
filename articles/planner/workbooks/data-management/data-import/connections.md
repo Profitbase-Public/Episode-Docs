@@ -12,7 +12,7 @@ When upgrading from a previous version, all existing connections will be created
 
 Required Fields:
 <br/>
-- Sql Server: The name or the IP used to connect.
+- SQL Server: The name or the IP used to connect.
 <br/>
 - Database: The name of the database within the server.
 <br/>

@@ -86,7 +86,7 @@ The second column of the grid to update when a value is selected in the Dropdown
 
 ### Custom Display Column Expression
 
-  A Sql expression that returns the value to display in the Dropdown column.  
+  A SQL expression that returns the value to display in the Dropdown column.  
 
 **Note** 
 *When you apply a Custom Display Column Expression to a Dropdown column editor, you need to use Custom Query and apply the same expression to the corresponding column in the custom query.*
@@ -123,7 +123,7 @@ Suppose you have a Worksheet with a linked dimension column and want to enable D
 
 ### Filter
 
-A Sql expression used in a WHERE clause to filter the values of the Dropdown editor.
+A SQL expression used in a WHERE clause to filter the values of the Dropdown editor.
 
 **Example**
   

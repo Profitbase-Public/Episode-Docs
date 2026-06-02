@@ -14,13 +14,13 @@ By using JavaScript in InVision you can add interactivity and behaviors to stati
 - [Calculations](worksheets/calculations.md) - [Calculation Instance Factory](worksheets/calculations/calcinstfactory.md)
 - [Calculations](worksheets/calculations.md) - [System Functions](worksheets/calculations/sysfunc.md)
 - [Calculations](worksheets/calculations.md) - [Keywords](worksheets/calculations/keywords.md)
-- [Sql Reports](sqlreports.md)
+- [SQL Reports](sqlreports.md)
 - [Scripts](workbooks/components/script.md)
 - [Reports](workbooks/components/reports.md)
 
 ## Videos
 
 - [Worksheets](../videos/worksheet.md)
-- [Sql Reports](../videos/sqlreports.md)
+- [SQL Reports](../videos/sqlreports.md)
 - [Workbooks](../videos/workbooks.md)
 - [Modifying Spreadsheets With Custom JavaScript](https://profitbasedocs.blob.core.windows.net/videos/Spreadsheet%20-%20Modifying%20Spreadsheets%20With%20Custom%20JS.mp4)

@@ -11,7 +11,7 @@ Under [this link](https://profitbasedocs.blob.core.windows.net/videos/SQL%20Scri
 ## Step by step
 
 
-1.  Create a Sql Script:
+1.  Create a SQL Script:
 
 ![pic](https://profitbasedocs.blob.core.windows.net/images/HTsqlS%20(1).png)
 

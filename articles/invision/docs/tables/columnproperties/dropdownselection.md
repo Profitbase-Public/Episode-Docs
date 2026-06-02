@@ -91,7 +91,7 @@ When setting up Dropdown editing of a standard column, you need to specify where
 
 ## Custom Display Column Expression
 
-  A Sql expression that returns the value to display in the Dropdown column.  
+  A SQL expression that returns the value to display in the Dropdown column.  
 
 >**Note** 
 >
@@ -129,7 +129,7 @@ Suppose you have a Worksheet with a linked dimension column and want to enable D
 
 ## Filter
 
-  A Sql expression used in a WHERE clause to filter the values of the Dropdown editor.
+  A SQL expression used in a WHERE clause to filter the values of the Dropdown editor.
 
   >**Example**
   >

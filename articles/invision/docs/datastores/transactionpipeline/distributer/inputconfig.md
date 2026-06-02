@@ -42,7 +42,7 @@ Specifies if no output row should be generated for the column by the Distributer
 If this option is enabled, the Distributer will apply an even distribution to create transactions if no distribution key is found for the source row based on the Relationship, Type Id and Distribution Key Name configuration. The default value for this option is false.
 
 ``Value Expression (SQL)``  
-Sql expression for computing the value of the column when it's read from the database. The resulting expression will be **SELECT [expression] AS [Column Name],…**  
+SQL expression for computing the value of the column when it's read from the database. The resulting expression will be **SELECT [expression] AS [Column Name],…**  
 **Example** 
 ```sql
 SELECT (Amount * 0.3) AS Amount,…

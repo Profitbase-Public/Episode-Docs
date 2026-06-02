@@ -1,3 +1,3 @@
 
 
-# How To use The SqlCommand API With Sql Parameters
+# How To use The SqlCommand API With SQL Parameters

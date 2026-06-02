@@ -34,7 +34,7 @@ This function executes one time when the all the changes have been saved to the 
 
 #### Executing SQL Scripts from the main pipeline
 
-SQL Scripts can be executed from the pipeline by calling <span style="color: blue;">Sql Execute functions</span>, passing the name of the <span style="color: blue;">name of the Sql scriptet</span> to execute. Any aruments to the script can be passed as the second parameter to the function. 
+SQL Scripts can be executed from the pipeline by calling <span style="color: blue;">SQL Execute functions</span>, passing the name of the <span style="color: blue;">name of the SQL scriptet</span> to execute. Any aruments to the script can be passed as the second parameter to the function. 
 
 
 
@@ -63,7 +63,7 @@ SQL Scripts can be executed from the pipeline by calling <span style="color: blu
 
 #### Named SQL Scripts
 
-If you want to execute sql scripts in the save pipeline, it is recommended to create Named Sql Scripts to keep the code in the main pipeline cleaner. When creating a Named Sql Script, you simply create a SQL script and assign a name to it. When you want to execute that script in the save pipeline, you simply provide the name of the script to the execute function instead of inlining the sql statement in the function. Named Sql Scripts are created using standard T-Sql syntax and optionally InVision <span style="color: blue;">direktives</span>. 
+If you want to execute sql scripts in the save pipeline, it is recommended to create Named SQL Scripts to keep the code in the main pipeline cleaner. When creating a Named SQL Script, you simply create a SQL script and assign a name to it. When you want to execute that script in the save pipeline, you simply provide the name of the script to the execute function instead of inlining the sql statement in the function. Named SQL Scripts are created using standard T-SQL syntax and optionally InVision <span style="color: blue;">direktives</span>. 
 
 #### Executing business logic before save
 
@@ -169,7 +169,7 @@ protected override void OnAfterSave(IEnumerable<CudRecord> rows,   TableOperatio
 
 ```
 
-#### Sql Execute functions
+#### SQL Execute functions
 
 ___
 
@@ -265,5 +265,5 @@ Optional, but must be provided if there is more than one object in the Solution 
 ### See Also
 
 - [API References](onsave/apireferences.md)
-- [Sql Script Service](onsave/sqlscriptservice.md)
+- [SQL Script Service](onsave/sqlscriptservice.md)
 <br/>

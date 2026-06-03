@@ -51,6 +51,7 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
+            az extension add --name cdn --upgrade -y
             az afd endpoint purge \
               --resource-group "${{ secrets.CDN_RESOURCE_GROUP }}" \
               --profile-name "${{ secrets.CDN_PROFILE_NAME }}" \

@@ -45,13 +45,13 @@ jobs:
               --account-name "${{ secrets.STORAGE_ACCOUNT_NAME }}" \
               --auth-mode login \
               --overwrite true
-      
+            
       - name: Purge CDN
         uses: azure/CLI@v2
         with:
           azcliversion: latest
           inlineScript: |
-            az afdx endpoint purge \
+            az afd endpoint purge \
               --resource-group "${{ secrets.CDN_RESOURCE_GROUP }}" \
               --profile-name "${{ secrets.CDN_PROFILE_NAME }}" \
               --endpoint-name "${{ secrets.CDN_ENDPOINT_NAME }}" \

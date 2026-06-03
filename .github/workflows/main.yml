@@ -51,9 +51,9 @@ jobs:
         with:
           azcliversion: latest
           inlineScript: |
-            az cdn endpoint purge \
-                    --resource-group "${{ secrets.CDN_RESOURCE_GROUP }}" \
-                    --profile-name "${{ secrets.CDN_PROFILE_NAME }}" \
-                    --name "${{ secrets.CDN_ENDPOINT_NAME }}" \
-                    --content-paths '/*' \
-                    --no-wait
+            az afdx endpoint purge \
+              --resource-group "${{ secrets.CDN_RESOURCE_GROUP }}" \
+              --profile-name "${{ secrets.CDN_PROFILE_NAME }}" \
+              --endpoint-name "${{ secrets.CDN_ENDPOINT_NAME }}" \
+              --content-paths '/*' \
+              --no-wait

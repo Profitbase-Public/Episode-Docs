@@ -1,20 +1,15 @@
 name: Build and Deploy DocFX Site
- 
 on:
   push:
     branches:
       - main
   workflow_dispatch:
- 
 permissions:
   contents: read
- 
 env:
-  # Set this to the path of your docfx.json (relative to repo root)
   DOCFX_CONFIG: "docfx.json"
-  # Output folder defined in your docfx.json "dest" field
   DOCFX_OUTPUT: "_site"
- 
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

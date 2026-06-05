@@ -4,3 +4,5 @@
   href: create-connection.md
 - name: "REST API Request"
   href: "rest-api-request.md"
+- name: "Paged REST API Request"
+  href: "paged-rest-api-request.md"

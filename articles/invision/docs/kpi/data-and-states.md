@@ -13,49 +13,60 @@ row. The same result feeds every component on the card. (If the query returns mo
 only the first row is used.)
 
 ```sql
-SELECT SUM(Amount) AS VALUE, 'Revenue YTD' AS TEXT FROM FactSales
+SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales
 ```
 
-The query runs in the signed-in user's security context, with the current Workbook filter and
-parameter context applied.
+The query runs with the current Workbook filter and parameter context applied.
 
 <br/>
 
-## Reserved columns: VALUE and TEXT
+## The card's value and text
 
-Two column names are reserved:
+From the result row the card resolves a single **value** (the primary number) and an optional
+**text** label, which the components display:
 
-- **`VALUE`** — the card's primary number. Components that show a number read this column.
-- **`TEXT`** — an optional text label.
+- **Value** — if a component sets `ValueColumn`, that named column is used; otherwise, if the result
+  has exactly one numeric column that column is used, and failing that the first column is used.
+- **Text** — if a component sets `TextColumn`, that named column is used; otherwise, if the result
+  has exactly one non-numeric column (other than the value column) that column is used, and failing
+  that the first column that is not the value column is used.
 
-If your result set already contains columns named `VALUE` and `TEXT`, those are used directly.
-Otherwise, the card resolves them by convention:
+See [Mapping columns to components](#mapping-columns-to-components-valuecolumn-and-textcolumn) below
+for the per-component overrides.
 
-- **VALUE** resolves to the named column if one exists; if not, and the result has exactly one
-  numeric column, that column is used; otherwise the first column is used.
-- **TEXT** resolves to the named column if one exists; if not, and the result has exactly one
-  non-numeric column (other than the value column), that column is used; otherwise the first column
-  that is not the value column is used.
+## Reserved columns in conditions: NumericValue and TextValue
+
+State conditions can reference two reserved columns in addition to the result-set columns:
+
+- **`NumericValue`** — the resolved value, as a number.
+- **`TextValue`** — the resolved text.
+
+These let a condition test the card's value/text without knowing the underlying column name. If your
+result set already contains a column named `NumericValue` or `TextValue`, that column is used
+directly instead of the resolved value/text.
 
 <br/>
 
 ## Mapping columns to components: ValueColumn and TextColumn
 
-Every component can override which result column it reads:
+Components that display card data can override which result column they read. The components that
+show a number read `ValueColumn` (Metric, TrendDirection, TrendBadge); the components that show text
+read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image, and
+TrafficLight — render from the resolved state and ignore both.
 
 <br/>
 
 **ValueColumn**
 
-> The name of the column this component should read as its value, instead of the resolved `VALUE`
-> column. If the named column does not exist in the result set, the card reports an error.
+> The name of the column this component should read as its value, instead of the resolved value.
+> If the named column does not exist in the result set, the card reports an error.
 
 <br/>
 
 **TextColumn**
 
-> The name of the column this component should read as its text, instead of the resolved `TEXT`
-> column. If the named column does not exist in the result set, the card reports an error.
+> The name of the column this component should read as its text, instead of the resolved text.
+> If the named column does not exist in the result set, the card reports an error.
 
 <br/>
 
@@ -77,50 +88,52 @@ SELECT 1200000 AS Revenue, 0.18 AS Margin, 'North' AS Region
 
 <br/>
 
-## States: conditional color, image, and angle
+## States: conditional color, image, and status
 
-A card has one shared list of **states**. A state is a condition plus the visual outcome to apply
-when that condition is the first to match:
+A card has one shared list of **states** — which is optional; a card with no states simply renders
+without a state-driven color, image, or status. A state is a condition plus the visual outcome to
+apply when that condition is the first to match:
 
 <br/>
 
 **Condition**
 
-> A boolean expression evaluated against the card's result row. Uses `DataTable.Select` syntax (the
-> same expression syntax used elsewhere in InVision). The reserved columns `VALUE` and `TEXT` are
-> available, and so is any other column in the result set, referenced by name.
+> A boolean filter expression evaluated against the card's single result row. It supports
+> comparisons (`>`, `>=`, `=`, `<>`), the logical operators `AND` / `OR` / `NOT`, and operators such
+> as `LIKE` and `IN (…)`. The reserved columns `NumericValue` and `TextValue` are available, and so
+> is any other column in the result set, referenced by name.
 
 <br/>
 
 **Color**
 
 > The color applied when this state matches. Any CSS color works — a named color (`green`, `red`,
-> `yellow`) or a hex value (`#1a9c4f`). It drives the color of components such as Metric, Text,
-> TrendArrow, StatusBlock, TrafficLight, TrendText, and TrendIndicator.
+> `yellow`) or a hex value (`#1a9c4f`). It drives the color of the Metric, StatusBlock, and TrendText
+> components, and the card's state border.
 
 <br/>
 
 **Image**
 
-> An image applied when this state matches, used by the Image component and state-driven icons. The
-> value is an **Image Library** reference of the form `@images/<image-name>.png` (see
+> An image applied when this state matches, used by the Image component. The value is either an
+> **Image Library** reference of the form `@images/<image-name>.png` or a raw image URL (see
 > [Images and the Image Library](#images-and-the-image-library) below).
 
 <br/>
 
-**Angle**
+**Status**
 
-> An integer rotation in degrees (for example `45`, `135`, `270`), applied to rotatable visuals such
-> as the TrendArrow and TrendIndicator. Defaults to `0`.
+> A status token applied when this state matches, consumed by the TrafficLight component to choose
+> its status icon. Allowed values are `Complete`, `HalfWay`, and `EarlyStages`.
 
 <br/>
 
 ### First-match-wins evaluation
 
 States are evaluated **in declared order**, and the **first** state whose condition matches the
-card's result row wins. Its `Color`, `Image`, and `Angle` become the card's resolved state and are
+card's result row wins. Its `Color`, `Image`, and `Status` become the card's resolved state and are
 shared by every component that consumes them. If no state matches, the card renders without a
-state-driven color, image, or angle.
+state-driven color, image, or status.
 
 A malformed condition — or one that references a column that doesn't exist — is **skipped silently**
 (it simply doesn't match) and evaluation continues with the next state. This means a typo in one
@@ -128,11 +141,11 @@ condition won't break the card; it just never matches.
 
 ```xml
 <States>
-  <State Color="green" Angle="45" Image="@images/trend-up.png">
-    <Condition><![CDATA[VALUE > 25]]></Condition>
+  <State Color="green" Status="Complete" Image="@images/trend-up.png">
+    <Condition><![CDATA[NumericValue > 25]]></Condition>
   </State>
-  <State Color="red" Angle="135" Image="@images/trend-down.png">
-    <Condition><![CDATA[VALUE <= 25]]></Condition>
+  <State Color="red" Status="EarlyStages" Image="@images/trend-down.png">
+    <Condition><![CDATA[NumericValue <= 25]]></Condition>
   </State>
 </States>
 ```
@@ -141,7 +154,7 @@ Conditions can reference other result columns too:
 
 ```xml
 <State Color="orange">
-  <Condition><![CDATA[VALUE < Target AND Region = 'North']]></Condition>
+  <Condition><![CDATA[NumericValue < Target AND Region = 'North']]></Condition>
 </State>
 ```
 
@@ -149,8 +162,8 @@ Conditions can reference other result columns too:
 
 ## Images and the Image Library
 
-The state `Image` value (and the Image component) uses an **Image Library** reference, not a raw
-URL. The form is:
+The state `Image` value (rendered by the Image component) is most often an **Image Library**
+reference of the form:
 
 ```
 @images/<image-name>.png
@@ -161,12 +174,14 @@ time the `@images` prefix is resolved to the deployed image path, so the named i
 the Image Library for it to display. For example, `@images/trend-up.png` resolves to the
 `trend-up.png` image in the library.
 
-To use an image: add it to the Image Library, then reference it by name as `@images/<image-name>.png`
-in the state's `Image` attribute.
+To use a library image: add it to the Image Library, then reference it by name as
+`@images/<image-name>.png` in the state's `Image` attribute.
 
-> **Raw URLs are not supported** for KPI images. Use an `@images/<image-name>.png` reference. (This
-> matches how the [Button](../forms/formschemas/controls/button.md) control's `Image` property
-> works.)
+> A **raw image URL** is also accepted. Any value that does not start with `@images` is used as-is,
+> so you can point at an external or absolute image URL directly. Using an `@images/` reference is
+> recommended where possible, since it keeps the image inside the solution and travels with it on
+> import/export. (The `@images/` convention matches the
+> [Button](../forms/formschemas/controls/button.md) control's `Image` property.)
 
 <br/>
 

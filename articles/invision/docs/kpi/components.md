@@ -13,26 +13,41 @@ In the configuration XML, the element name equals the component name (for exampl
 
 ## Properties shared by all components
 
-Every component supports these properties:
+Every component supports `HorizontalAlignment`:
 
 <br/>
 
 | Property | Allowed values |
 |----------|----------------|
-| `HorizontalAlignment` | `left`, `center`, `right`. Omit to use the default alignment. |
-| `ValueColumn` | The result column this component reads as its value, overriding the resolved `VALUE` column. The named column must exist in the result set. |
-| `TextColumn` | The result column this component reads as its text, overriding the resolved `TEXT` column. The named column must exist in the result set. |
+| `HorizontalAlignment` | `left`, `center`, `right`. When omitted, the component flows at the start of the row (left) at its natural width; `left`, `center`, and `right` give it a cell that fills its share of the row and justifies its content accordingly. |
 
 <br/>
 
-The text components (**Metric**, **Text**, **TrendText**, **TrendIndicator**) additionally support:
+Components that display card data also bind to a result column. Numeric components read
+`ValueColumn`; text components read `TextColumn`:
+
+<br/>
+
+| Property | Allowed values |
+|----------|----------------|
+| `ValueColumn` | The result column read as the value, overriding the resolved value. Used by Metric, TrendDirection, and TrendBadge — and by Chart, to pick a column of its own series result. The named column must exist in the result set. |
+| `TextColumn` | The result column read as the text, overriding the resolved text. Used by Text and TrendText. The named column must exist in the result set. |
+
+<br/>
+
+The purely state-driven components — **StatusBlock**, **Image**, and **TrafficLight** — render from
+the card's resolved state and ignore `ValueColumn` / `TextColumn`.
+
+<br/>
+
+The text components **Metric** and **Text** additionally support:
 
 <br/>
 
 | Property | Allowed values |
 |----------|----------------|
 | `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3` |
-| `Weight` | `normal`, `bold` |
+| `Weight` | `normal`, `semibold`, `bold` |
 
 <br/>
 
@@ -42,16 +57,16 @@ The text components (**Metric**, **Text**, **TrendText**, **TrendIndicator**) ad
 
 ### Metric
 
-Displays the card's numeric value, formatted. Reads the `VALUE` column (or its `ValueColumn`
+Displays the card's numeric value, formatted. Reads the card's resolved value (or its `ValueColumn`
 override) and takes its color from the card's resolved state.
 
 | Property | Allowed values |
 |----------|----------------|
-| `FormatString` | A .NET numeric format string, for example `N0`, `P0`, `#,##0.00`. |
-| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3` |
-| `Weight` | `normal`, `bold` |
+| `FormatString` | A .NET numeric format string, for example `N0`, `P0`, `#,##0.00`. Defaults to `#,##0`. |
+| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3`. Defaults to `heading1`. |
+| `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
+| `ValueColumn` | a column name from the card's result set |
 
 ```xml
 <Metric ValueColumn="Revenue" FormatString="N0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
@@ -61,36 +76,106 @@ override) and takes its color from the card's resolved state.
 
 ### Text
 
-Displays a text value. Reads the `VALUE` column (or its `ValueColumn` override) and renders it as
+Displays a text value. Reads the card's resolved text (or its `TextColumn` override) and renders it as
 text. Unlike the other components, `Text` has its **own** `Color` property rather than taking the
 card's state color.
 
 | Property | Allowed values |
 |----------|----------------|
 | `Color` | Any CSS color — a named color (`green`, `red`) or a hex value (`#333`). |
-| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3` |
-| `Weight` | `normal`, `bold` |
+| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3`. Defaults to `heading3`. |
+| `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
+| `TextColumn` | a column name from the card's result set |
 
 ```xml
-<Text ValueColumn="Region" Color="#555" Size="sub" />
+<Text TextColumn="Region" Color="#555" Size="sub" />
 ```
 
 <br/>
 
-### TrendArrow
+### TrendText
 
-A directional arrow icon whose **color** comes from the card's resolved state and whose **rotation**
-comes from the state's `Angle`. Use states to point the arrow up, down, or sideways and to color it.
+Displays the card's text, colored by the card's resolved state. Use it when you want the value
+itself to carry the state color. Its size and weight come from the card theme's defaults and are not
+set on the component.
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
+| `TextColumn` | a column name from the card's result set |
 
 ```xml
-<TrendArrow HorizontalAlignment="left" />
+<TrendText TextColumn="TrendSince" HorizontalAlignment="left" />
+```
+
+<br/>
+
+### Chart
+
+Renders a sparkline. Unlike the other components, the Chart runs its **own** SQL query — set in its
+`SeriesSource` element — which returns the whole series (one value per row) to plot. This query is
+separate from the card's `DataSource`, so each Chart on a card adds one more query.
+
+| Property | Allowed values |
+|----------|----------------|
+| `SeriesSource` | A SQL query (child element) returning the series rows to plot. |
+| `HorizontalAlignment` | `left`, `center`, `right` |
+| `ValueColumn` | the column read from the `SeriesSource` result |
+
+```xml
+<Chart ValueColumn="Amount">
+  <SeriesSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></SeriesSource>
+</Chart>
+```
+
+<br/>
+
+### TrendDirection
+
+Shows an up or down arrow chosen purely from the **sign** of its value: a negative number shows the
+down arrow, anything else (zero, positive, non-numeric) shows the up arrow. The arrow colors are
+fixed in the icons and are not driven by state.
+
+The two icons:
+
+| Icon | Shown when |
+|------|------------|
+| ![Up trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-up.png) | the value is zero or positive |
+| ![Down trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-down.png) | the value is negative |
+
+| Property | Allowed values |
+|----------|----------------|
+| `HorizontalAlignment` | `left`, `center`, `right` |
+| `ValueColumn` | a column name from the card's result set |
+
+```xml
+<TrendDirection ValueColumn="Trend" HorizontalAlignment="left" />
+```
+
+<br/>
+
+### TrendBadge
+
+Shows a trend badge — increase, decrease, or "same". The bound column must contain one of the
+tokens `increase`, `decrease`, or `same` (matched case-insensitively); any other or empty value
+renders no icon. The data source owns the threshold logic that decides which token to emit.
+
+The badge per token:
+
+| Token | Icon |
+|-------|------|
+| `increase` | ![Increase badge](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-badge-increase.png) |
+| `decrease` | ![Decrease badge](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-badge-decrease.png) |
+| `same` | ![Same badge](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-badge-same.png) |
+
+| Property | Allowed values |
+|----------|----------------|
+| `HorizontalAlignment` | `left`, `center`, `right` |
+| `ValueColumn` | a column name from the card's result set; its value must be `increase`, `decrease`, or `same` |
+
+```xml
+<TrendBadge ValueColumn="TrendToken" HorizontalAlignment="left" />
 ```
 
 <br/>
@@ -103,7 +188,6 @@ text-free status indicator.
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
 
 ```xml
 <StatusBlock HorizontalAlignment="left" />
@@ -114,85 +198,63 @@ text-free status indicator.
 ### Image
 
 Displays the image from the card's resolved state. The state's `Image` value is resolved through the
-**Image Library**, so it must be an `@images/<image-name>.png` reference.
+**Image Library** when it is an `@images/<image-name>.png` reference; a raw image URL is also
+accepted.
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
 
-The image to show is set on the **state**, not the component. The value is an Image Library
+The image to show is set on the **state**, not the component. The value is usually an Image Library
 reference of the form `@images/<image-name>.png` (for example `@images/trend-up.png`):
 
 ```xml
 <States>
-  <State Color="green" Image="@images/trend-up.png"><Condition><![CDATA[VALUE > 25]]></Condition></State>
-  <State Color="red" Image="@images/trend-down.png"><Condition><![CDATA[VALUE <= 25]]></Condition></State>
+  <State Color="green" Image="@images/trend-up.png"><Condition><![CDATA[NumericValue > 25]]></Condition></State>
+  <State Color="red" Image="@images/trend-down.png"><Condition><![CDATA[NumericValue <= 25]]></Condition></State>
 </States>
 <row>
   <Image HorizontalAlignment="center" />
 </row>
 ```
 
-`@images/` references an image stored in your solution's **Image Library** (web assets). The named
-image must exist in the library for it to display. **Raw URLs are not supported** — use an
-`@images/<image-name>.png` reference. See
-[Data and states](data-and-states.md#images-and-the-image-library) for the full explanation, and the
-[Button](../forms/formschemas/controls/button.md) control for the same `@images/` convention
-elsewhere in InVision.
+`@images/` references an image stored in your solution's **Image Library** (web assets), which must
+exist in the library to display. A raw image URL also works — any value that does not start with
+`@images` is used as-is. Using an `@images/` reference is recommended so the image travels with the
+solution. See [Data and states](data-and-states.md#images-and-the-image-library) for the full
+explanation, and the [Button](../forms/formschemas/controls/button.md) control for the same
+`@images/` convention elsewhere in InVision.
 
 <br/>
 
 ### TrafficLight
 
-A colored indicator (traffic-light style) whose color comes from the card's resolved state. Use it
-for a compact green / amber / red status.
+A status icon (traffic-light style) chosen from the card's resolved state `Status`. Use it for a
+compact status indicator. The icon is selected by the state's `Status` token — `Complete`,
+`HalfWay`, or `EarlyStages`; if the resolved state has no (or an unrecognized) `Status`, no icon is
+shown.
+
+The icon per `Status` token:
+
+| `Status` | Icon |
+|----------|------|
+| `Complete` | ![Complete status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-complete.png) |
+| `HalfWay` | ![HalfWay status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-halfway.png) |
+| `EarlyStages` | ![EarlyStages status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-earlystages.png) |
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
 
 ```xml
-<TrafficLight />
-```
-
-<br/>
-
-### TrendText
-
-Displays the card's value as text, colored by the card's resolved state. Use it when you want the
-number itself to carry the state color.
-
-| Property | Allowed values |
-|----------|----------------|
-| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3` |
-| `Weight` | `normal`, `bold` |
-| `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
-
-```xml
-<TrendText Size="heading2" Weight="bold" />
-```
-
-<br/>
-
-### TrendIndicator
-
-Combines a trend arrow with a value/label. The arrow's color and rotation come from the card's
-resolved state (`Color` and `Angle`); the text shows the `TEXT` value if present, otherwise the
-`VALUE`. The arrow can be placed on either side of the text.
-
-| Property | Allowed values |
-|----------|----------------|
-| `ArrowPosition` | `left`, `right` (`right` places the arrow after the text) |
-| `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3` |
-| `Weight` | `normal`, `bold` |
-| `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` / `TextColumn` | a column name from the card's result set |
-
-```xml
-<TrendIndicator ArrowPosition="right" HorizontalAlignment="left" />
+<States>
+  <State Status="Complete"><Condition><![CDATA[NumericValue >= 100]]></Condition></State>
+  <State Status="HalfWay"><Condition><![CDATA[NumericValue >= 50]]></Condition></State>
+  <State Status="EarlyStages"><Condition><![CDATA[NumericValue < 50]]></Condition></State>
+</States>
+<row>
+  <TrafficLight />
+</row>
 ```
 
 <br/>

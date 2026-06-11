@@ -9,31 +9,33 @@ data endpoint, and import/export. For the conceptual model, start with the
 
 ## Configuration XML
 
-A KPI card is stored as a `KpiConfiguration`. It has one `DataSource`, a shared list of `States`,
-and one or more `row` elements holding components.
+A KPI card is stored as a `KpiConfiguration`. It has an optional `Theme` attribute, one
+`DataSource`, a shared list of `States`, and one or more `row` elements holding components.
 
 ```xml
-<KpiConfiguration>
-  <DataSource>SELECT 50 AS VALUE</DataSource>
+<KpiConfiguration Theme="theme1">
+  <DataSource><![CDATA[SELECT 50 AS NumericValue]]></DataSource>
   <States>
-    <State Color="green" Angle="45" Image="@images/trend-up.png"><Condition><![CDATA[VALUE > 25]]></Condition></State>
-    <State Color="red" Angle="135" Image="@images/trend-down.png"><Condition><![CDATA[VALUE <= 25]]></Condition></State>
+    <State Color="green" Status="Complete" Image="@images/trend-up.png"><Condition><![CDATA[NumericValue > 25]]></Condition></State>
+    <State Color="red" Status="EarlyStages" Image="@images/trend-down.png"><Condition><![CDATA[NumericValue <= 25]]></Condition></State>
   </States>
   <row>
-    <TrendArrow HorizontalAlignment="left" />
     <StatusBlock HorizontalAlignment="left" />
     <Image HorizontalAlignment="left" />
     <Metric HorizontalAlignment="left" Size="normal" Weight="normal" />
     <Text HorizontalAlignment="left" Size="normal" Weight="normal" />
+    <TrendText HorizontalAlignment="left" />
+    <TrendDirection HorizontalAlignment="left" />
+    <TrendBadge HorizontalAlignment="left" />
     <TrafficLight />
-    <TrendIndicator HorizontalAlignment="left" />
+    <Chart ValueColumn="Amount"><SeriesSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></SeriesSource></Chart>
   </row>
 </KpiConfiguration>
 ```
 
-The example above is a complete configuration — one `DataSource`, two `States`, and one `row` of
-components — showing every part of the format. A newly created card starts empty; you add these
-elements yourself.
+The example above is a complete configuration — an optional `Theme`, one `DataSource`, two `States`,
+and one `row` of components — showing every part of the format. A newly created card starts from a
+default template; you edit these elements yourself.
 
 ### Elements
 
@@ -41,16 +43,21 @@ elements yourself.
 |---------|---------|
 | `DataSource` | The single SQL query for the card. Runs once and returns one row. |
 | `States` | A list of `State` elements, evaluated first-match-wins. |
-| `State` | A `Condition` element plus `Color`, `Image`, and `Angle` attributes. |
+| `State` | A `Condition` element plus `Color`, `Image`, and `Status` attributes. |
 | `row` | A row of components. A configuration may contain one or more rows. |
-| component elements | `Metric`, `Text`, `TrendArrow`, `StatusBlock`, `Image`, `TrafficLight`, `TrendText`, `TrendIndicator`. The element name equals the component type. |
+| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `TrafficLight`, `StatusBlock`, `Image`. The element name equals the component type. |
 
-`State` carries `Condition` (a child element), and the attributes `Color`, `Image`, and `Angle`
-(integer, omitted when `0`). There is no `Type` attribute on a state.
+`KpiConfiguration` carries an optional `Theme` attribute (a type-scale theme name; omitted for the
+default theme).
 
-Component attributes are described in [Components](components.md). All components share
-`HorizontalAlignment`, `ValueColumn`, and `TextColumn`; `Metric` adds `FormatString`, `Size`,
-`Weight`; `Text` adds `Size`, `Weight`, `Color`; `TrendIndicator` adds `ArrowPosition`.
+`State` carries `Condition` (a child element), and the attributes `Color`, `Image`, and `Status`.
+
+Component attributes are described in [Components](components.md). Every component accepts
+`HorizontalAlignment`. The data components read a column binding — `ValueColumn` (Metric,
+TrendDirection, TrendBadge, and Chart's series column) or `TextColumn` (Text, TrendText) — while
+StatusBlock, Image, and TrafficLight render from the resolved state and ignore the column bindings.
+`Metric` adds `FormatString`, `Size`, `Weight`; `Text` adds `Size`, `Weight`, `Color`; `Chart` adds
+a `SeriesSource` query element.
 
 <br/>
 
@@ -58,13 +65,12 @@ Component attributes are described in [Components](components.md). All component
 
 The card runs its query once and resolves columns from the single result row:
 
-- **VALUE** — if a component sets `ValueColumn`, that named column is used (an error is raised if it
-  doesn't exist). Otherwise: a result column literally named `VALUE` is used; failing that, if there
-  is exactly one numeric column it is used; otherwise the first column is used.
-- **TEXT** — if a component sets `TextColumn`, that named column is used (error if missing).
-  Otherwise: a result column literally named `TEXT` is used; failing that, if there is exactly one
-  non-numeric column (other than the value column) it is used; otherwise the first column that is
-  not the value column is used.
+- **Value** — if a component sets `ValueColumn`, that named column is used (an error is raised if it
+  doesn't exist). Otherwise, if there is exactly one numeric column it is used; otherwise the first
+  column is used.
+- **Text** — if a component sets `TextColumn`, that named column is used (error if missing).
+  Otherwise, if there is exactly one non-numeric column (other than the value column) it is used;
+  otherwise the first column that is not the value column is used.
 
 Numeric detection covers the standard numeric types (`byte`, `int`, `long`, `decimal`, `double`,
 `float`, and their variants).
@@ -75,10 +81,12 @@ Numeric detection covers the standard numeric types (`byte`, `int`, `long`, `dec
 
 States are resolved **once per card** against the result row:
 
-1. A single-row table is built containing every result column, plus the reserved `VALUE` (numeric)
-   and `TEXT` (string) columns. Columns already named `VALUE`/`TEXT` in the result take precedence.
-2. Each state's `Condition` is evaluated in order using `DataTable.Select`-style expression syntax.
-3. The **first** state whose condition matches wins; its `Color` / `Image` / `Angle` become the
+1. A single-row table is built containing every result column, plus the reserved `NumericValue`
+   (numeric) and `TextValue` (string) columns, which carry the resolved value/text. Columns already
+   named `NumericValue`/`TextValue` in the result take precedence.
+2. Each state's `Condition` is evaluated in order as a filter expression over that row (comparisons,
+   `AND` / `OR` / `NOT`, `LIKE`, `IN (…)`).
+3. The **first** state whose condition matches wins; its `Color` / `Image` / `Status` become the
    card's resolved state.
 4. A condition that throws (malformed expression, unknown column) is caught and treated as
    non-matching, so evaluation continues to the next state.
@@ -87,11 +95,13 @@ States are resolved **once per card** against the result row:
 
 ## Execution
 
-The card's query runs **once per card** (with a 60-second timeout), the card-level state is resolved
+The card's query runs **once per card**, the card-level state is resolved
 once, and then the per-component data is built. Each component type takes the state properties
-relevant to it (for example StatusBlock and TrafficLight take the color; TrendArrow and
-TrendIndicator take color and angle; Image takes the image). On the client, `@images/...` image
-values are resolved against the Image Library before rendering.
+relevant to it (for example Metric, StatusBlock, and TrendText take the color; TrafficLight takes
+the status; Image takes the image). The Chart component runs its own `SeriesSource` query in
+addition to the card query, so a card with charts issues one query per chart on top of the card
+query. On the client, `@images/...` image values are resolved against the Image Library before
+rendering; a raw image URL is used as-is.
 
 <br/>
 
@@ -105,13 +115,18 @@ serialized as XML (see above). Cards travel with the solution through the normal
 
 ## Limits and gotchas
 
+- A KPI card only loads when a **Load Data** action targets it from the Workbook page's events (the
+  same [interaction model](../workbooks/programmingmodel/interactionmodel.md) used by every other
+  component). Without it, the card renders empty.
 - The query returns **one row**; only the first row is used. Aggregate in SQL to produce a single
   value.
-- The query runs in the signed-in user's security context, so data-access permissions apply.
 - A malformed or non-matching state condition is silently skipped — if no state matches, the card
-  renders without a state color, image, or angle.
-- `Image` values must be Image Library references (`@images/<image-name>.png`); **raw URLs are not
-  supported**, and the referenced image must exist in the library.
+  renders without a state color, image, or status.
+- `Image` values are usually Image Library references (`@images/<image-name>.png`), which must exist
+  in the library; a raw image URL is also accepted (any value not starting with `@images` is used
+  as-is).
+- Each `Chart` component runs its own `SeriesSource` query in addition to the card's `DataSource`,
+  so a card with multiple charts issues multiple queries.
 - A component's `ValueColumn` / `TextColumn` must name a column that the query actually returns, or
   the card reports an error.
 

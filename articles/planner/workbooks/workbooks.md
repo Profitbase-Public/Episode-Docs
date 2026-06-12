@@ -11,6 +11,8 @@ The full set of workbook groups and workbooks are:
 ## Financial Planning
 Here you find workbooks related to Forecast and Budget input and settings for finance simulation.
 
+- **[Plan overview](financial-planning/plan-overview.md)**<br/>
+Plan overview and launch site for plan input modules.
 - **[CapEx](financial-planning/capex.md)**<br/>
 Input for planned investments.
 - **[Loan](financial-planning/loan.md)**<br/>
@@ -21,18 +23,6 @@ Finance reports to review simulated plan based on input and settings.
 Scale scales income, purchase, payroll, and expenses to simulate the "Worst" and "Best" scenario.
 - **[Opening Balance](financial-planning/opening-balance.md)**<br/>
 Adjust opening balances to improve accuracy on simulated cash effect from payments due from opening balance.
-
-**Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 5 or later
-
-- **[Plan overview](financial-planning/plan-overview.md)**<br/>
-Plan overview and launch site for plan input modules.
-
-**Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 4.x
-
-- **[Budget](financial-planning/budget.md)**<br/>
-Plan input to Budget.
-- **[Forecast](financial-planning/forecast.md)**<br/>
-Plan input to rolling Forecast.
 
 ## Process and tasks
 Here you find workbooks for setting up a work process and manage process tasks and ad-hoc tasks.
@@ -97,8 +87,4 @@ Here you find workbooks for user access, system setup, and data process flow for
    - **[Access Control](administration/access-control.md)**<br/>
    Manage users and access to workbooks and data.
 
- **Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 4.x
-
-   - **[Sales forecast setup](administration/sales-forecast-setup.md)**<br/>
-   Setup the sales driver-based forecast. This includes defining the calculation model.
 

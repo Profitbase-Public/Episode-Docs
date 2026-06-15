@@ -6,6 +6,7 @@ This package provide the financial planning function and can be organized in pro
 
 ## EPM Planner Versions
 
+- [EPM Planner 6.2.5](#epm-planner-625) - Released 2026.06.15
 - [EPM Planner 6.2.4](#epm-planner-624) - Released 2026.05.26
 - [EPM Planner 6.2.3](#epm-planner-623) - Released 2026.04.22
 - [EPM Planner 6.2.2](#epm-planner-622) - Released 2026.04.08
@@ -24,7 +25,34 @@ This package provide the financial planning function and can be organized in pro
 
 ## Unreleased
 
-**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/92)
+**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/93)
+
+Salary Accounts: setting EPTaxOnPension (Employer Tax On Pension) is currently not supported (#2343)
+
+## EPM Planner 6.2.5
+
+**Fixes:**
+
+- Driver based modelling
+   - assumption data not saved when changing assumptions and navigating away "quickly" (#2338)
+   - processing driver based model - historical data updated even though check box is unchecked (#2337)
+ 
+- Driver based plan proposal showing column 2037 (#2346)
+
+- Account module / plan overview:
+   - Account details from account module does not display historical reference content (#2326)
+   - Plan overview not same as account details at aggregate levels in multi currency setting (#2334)
+ 
+- Personnel - salary not redistributed/recalculated "on the fly" when keys and settings defined by attributes (#2327)
+
+- Loan module - Errormessage on override principal (#2319)
+
+- Finance settings- Misc visibility (#2316)
+
+- Version deployment:
+   - Version deployment (start fresh) and publish of AccountSrc dimension will fail if group account mapping is used and the Name field is null (#2314)
+   - Roll forward error when rolling forward 10-12 months (#2336)
+
 
 ## EPM Planner 6.2.4
 

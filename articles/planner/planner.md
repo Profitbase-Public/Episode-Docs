@@ -32,8 +32,6 @@ The success of a rolling forecast solution depends on how easy it is for users t
 - [CapEx](workbooks/financial-planning/capex.md) — investment planning
 - [Loan](workbooks/financial-planning/loan.md) — loan planning including ongoing loans
 - [Driver Based](modules/driver-based.md) — model income and costs from a single driver such as quantity sold *(Planner 5+)*
-- [Sales Forecast](modules/sales-forecast.md) — driver-based forecast input *(Planner 4.x)*
-- [Sales Gross Margin](modules/sales-gm.md) — sales and gross margin budget input *(Planner 4.x)*
 
 All input modules are optional, configurable, and can be launched from the profit and loss summary report.
 

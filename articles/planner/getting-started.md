@@ -21,22 +21,11 @@ Planner modules are operational input modules that contributors to the work proc
 
 - [Driver based module](modules/driver-based.md)
 
-**Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 4.x
-
-- [Sales by GM Module](modules/sales-gm.md)
-- [Sales Forecast Module](modules/sales-forecast.md)
-
 The modules are typically accessed from the:
 
 **Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 5 or later
 
 [Plan overview](workbooks/financial-planning/plan-overview.md)
-
-or
-
-**Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 4.x
-
-[Budget](workbooks/financial-planning/budget.md) and [Forecast](workbooks/financial-planning/forecast.md) summary workbooks
 
 and the input provided by the contributors are transformed into P&L transactions and fed back to the summary workbooks resulting in a P&L work-in-progress report summary.
 

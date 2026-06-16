@@ -40,23 +40,3 @@
     href: finance-native/report.md
   - name: Setup
     href: finance-native/setup.md
-- name: Sales Forecast
-  href: sales-forecast.md
-  items:
-  - name: Sales details
-    href: sales-forecast/sales-forecast-details.md 
-  - name: Sales main driver
-    href: sales-forecast/sales-forecast-driver.md 
-  - name: Distribution
-    href: sales-forecast/distribution.md
-  - name: Assumption
-    href: sales-forecast/assumption.md
-  - name: Formula
-    href: sales-forecast/formula.md
-- name: Sales GM
-  href: sales-gm.md
-  items:
-  - name: Sales details
-    href: sales-gm/sales-gm-details.md
-  - name: GM% periodic override
-    href: sales-gm/gm-ovr.md

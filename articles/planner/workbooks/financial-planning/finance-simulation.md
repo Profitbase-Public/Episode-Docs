@@ -7,8 +7,6 @@ Finance Simulation provide the ability to do scenario simulation. This is done b
 -  [Scenario Simulation](finance-simulation/simulation.md)
 
 ## See also
--  [Budget](../../workbooks/financial-planning/budget.md) is used to provide input.
--  [Forecast](../../workbooks/financial-planning/forecast.md) is used to provide input.
 -  [Finance Settings](../../workbooks/financial-planning/finance-settings.md) is used to set parameters for simulation.
 -  [Finance Reports](../../workbooks/financial-planning/finance-reports.md) is used to view results from scenario simulation; applying the scenario filter.
 

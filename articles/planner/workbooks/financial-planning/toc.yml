@@ -1,16 +1,5 @@
 - name: Financial Planning
   href: financial-planning.md
-- name: Budget
-  href: budget.md
-  items:
-  - name: Account Details Report
-    href: budget/account-details-report.md
-  - name: Status
-    href: budget/status.md
-  - name: Summary
-    href: budget/summary.md
-  - name: Trend
-    href: budget/trend.md
 - name: CapEx
   href: capex.md
   items:
@@ -99,17 +88,6 @@
   items:
   - name: Simulation
     href: finance-simulation/simulation.md
-- name: Forecast
-  href: forecast.md
-  items:
-  - name: Account Details Report
-    href: forecast/account-details-report.md
-  - name: Status
-    href: forecast/status.md
-  - name: Summary
-    href: forecast/summary.md
-  - name: Trend
-    href: forecast/trend.md
 - name: Loan
   href: loan.md
   items:

@@ -22,9 +22,3 @@ Plan input overview and links to input modules.
 
 <br/>
 
-**Applies to:** ![img](https://profitbasedocs.blob.core.windows.net/icons/yes-icon.png) Planner 4.x
-
-- **[Budget](../../workbooks/financial-planning/budget.md)**<br/>
-Plan input to Budget. 
-- **[Forecast](../../workbooks/financial-planning/forecast.md)**<br/>
-Plan input to rolling Forecast. 

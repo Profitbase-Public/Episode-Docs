@@ -52,6 +52,9 @@
   topicHref: homepage.md
 - name: Javascript
   href: javascript.md
+- name: KPI cards
+  href: kpi/toc.yml
+  topicHref: kpi/index.md
 - name: Macros
   href: macros/toc.yml
   topicHref: macros.md

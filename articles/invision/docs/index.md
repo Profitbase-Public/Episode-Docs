@@ -37,6 +37,7 @@ Read about the **key features** of **Hypergene InVision**. Check out the followi
             <li><a href="forms.md">Forms</a></li>
             <li><a href="homepage.md">Home Page</a></li>
             <li><a href="javascript.md">JavaScript</a></li>
+            <li><a href="kpi/index.md">KPI Cards</a></li>
             <li><a href="macros.md">Macros</a></li>
             <li><a href="package.md">Packages</a></li>
         </ul>

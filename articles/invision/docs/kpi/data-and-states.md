@@ -1,20 +1,26 @@
 
 # Data and states
 
-A KPI card has a single data source and a single, shared set of states. This article explains how
-the query result is mapped to components and how states drive the card's appearance.
+A KPI card has a card-level data source and per-component states. This article explains how the
+query result is mapped to components and how each component's states drive its appearance.
 
 <br/>
 
 ## The data source
 
-Each card has **one** `DataSource` — a single SQL query that runs **once per card** and returns one
-row. The same result feeds every component on the card. (If the query returns more than one row,
-only the first row is used.)
+A card has a card-level `DataSource` — a SQL query that runs **once per card** and returns one row —
+which is the **default** result for every component. (If the query returns more than one row, only
+the first row is used.)
 
 ```sql
 SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales
 ```
+
+A component can override this by declaring its **own** `DataSource` child element; when it does, that
+component resolves its value, text, and states from its own result instead of the card's. When a
+component leaves `DataSource` blank, it falls back to the card-level result. (The `Chart` component
+is the exception: its `DataSource` returns the whole series and has no card-level fallback — see
+[Components](components.md#chart).)
 
 The query runs with the current Workbook filter and parameter context applied.
 
@@ -51,8 +57,8 @@ directly instead of the resolved value/text.
 
 Components that display card data can override which result column they read. The components that
 show a number read `ValueColumn` (Metric, TrendDirection, TrendBadge); the components that show text
-read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image, and
-TrafficLight — render from the resolved state and ignore both.
+read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image,
+TrafficLight, and CardBorder — are driven by their own states and ignore both.
 
 <br/>
 
@@ -90,30 +96,42 @@ SELECT 1200000 AS Revenue, 0.18 AS Margin, 'North' AS Region
 
 ## States: conditional color, image, and status
 
-A card has one shared list of **states** — which is optional; a card with no states simply renders
-without a state-driven color, image, or status. A state is a condition plus the visual outcome to
-apply when that condition is the first to match:
+Each component can carry its **own** `States` — a list nested inside the component element, which is
+optional; a component with no states simply renders without a state-driven color, image, or status.
+A state is a condition plus the visual outcome to apply when that condition matches. The outcome
+values are written as `Property` elements (`<Property name="Color" value="green" />`) inside a
+`Properties` element, a sibling of `Condition`:
 
 <br/>
 
 **Condition**
 
-> A boolean filter expression evaluated against the card's single result row. It supports
-> comparisons (`>`, `>=`, `=`, `<>`), the logical operators `AND` / `OR` / `NOT`, and operators such
-> as `LIKE` and `IN (…)`. The reserved columns `NumericValue` and `TextValue` are available, and so
-> is any other column in the result set, referenced by name.
+> A boolean **JavaScript** expression evaluated against the component's single result row. The
+> result columns are exposed on `Event.Data`, including the reserved `Event.Data.NumericValue` and
+> `Event.Data.TextValue` values, plus any other column referenced by name
+> (`Event.Data.<column>`). Use JavaScript operators — `>`, `>=`, `===`, `!==`, `&&`, `||`, `!` —
+> for example `Event.Data.NumericValue > 25`. A state with no (or an empty) `Condition` always
+> applies as a base (see [evaluation](#two-layered-evaluation) below).
+>
+> The `<Condition>` element accepts an optional **`Async`** attribute. With `Async="true"` the
+> condition runs as an asynchronous function and may `await` HTTP calls — `HttpGet(url)`,
+> `HttpPost(url, { data })`, `HttpPut(url, { data })`, `HttpDelete(url)` — to derive its result, for
+> example `Async="true"` with `Event.Data.NumericValue > (await HttpGet('/api/target')).value`.
+> Without the attribute (the default) the condition runs synchronously and has no network access.
+> Either way the condition must still produce a **boolean** — it decides which state matches; it
+> cannot set the displayed value, color, image, or status (those remain the `Property` values).
 
 <br/>
 
-**Color**
+**Color** *(`<Property name="Color" value="…" />`)*
 
 > The color applied when this state matches. Any CSS color works — a named color (`green`, `red`,
-> `yellow`) or a hex value (`#1a9c4f`). It drives the color of the Metric, StatusBlock, and TrendText
-> components, and the card's state border.
+> `yellow`) or a hex value (`#1a9c4f`). It colors the component that owns the state (for example
+> Metric, StatusBlock, or TrendText); on a `CardBorder` component it drives the card's border color.
 
 <br/>
 
-**Image**
+**Image** *(`<Property name="Image" value="…" />`)*
 
 > An image applied when this state matches, used by the Image component. The value is either an
 > **Image Library** reference of the form `@images/<image-name>.png` or a raw image URL (see
@@ -121,41 +139,83 @@ apply when that condition is the first to match:
 
 <br/>
 
-**Status**
+**Status** *(`<Property name="Status" value="…" />`)*
 
 > A status token applied when this state matches, consumed by the TrafficLight component to choose
 > its status icon. Allowed values are `Complete`, `HalfWay`, and `EarlyStages`.
 
 <br/>
 
-### First-match-wins evaluation
+### Two-layered evaluation
 
-States are evaluated **in declared order**, and the **first** state whose condition matches the
-card's result row wins. Its `Color`, `Image`, and `Status` become the card's resolved state and are
-shared by every component that consumes them. If no state matches, the card renders without a
-state-driven color, image, or status.
+Each component resolves its own states on the client, against its own result row, in two layers:
 
-A malformed condition — or one that references a column that doesn't exist — is **skipped silently**
-(it simply doesn't match) and evaluation continues with the next state. This means a typo in one
-condition won't break the card; it just never matches.
+- **Base layer** — every state with no (or an empty) `Condition` **always applies**. Their `Color`,
+  `Image`, and `Status` form a base; when several condition-less states exist, the first-declared
+  value wins for each property independently.
+- **Conditional overlay** — the **first** state whose condition is truthy overlays the base: each
+  property it sets overrides the base, and any property it leaves unset falls through to the base.
+
+If no conditional state matches, the base alone applies; if there is no condition-less state either,
+the component renders without a state-driven color, image, or status.
+
+Conditional states are evaluated **in declared order and short-circuit at the first match** — so an
+`Async="true"` condition only issues its HTTP request if no earlier conditional state has
+already matched. A malformed condition, a missing reference, or a failed/rejected async request is
+**skipped silently** (it simply doesn't match) and evaluation continues with the next state. This
+means a typo or a flaky endpoint won't break the card; that state just never matches.
 
 ```xml
 <States>
-  <State Color="green" Status="Complete" Image="@images/trend-up.png">
-    <Condition><![CDATA[NumericValue > 25]]></Condition>
+  <State>
+    <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+    <Properties>
+      <Property name="Color" value="green" />
+      <Property name="Status" value="Complete" />
+      <Property name="Image" value="@images/trend-up.png" />
+    </Properties>
   </State>
-  <State Color="red" Status="EarlyStages" Image="@images/trend-down.png">
-    <Condition><![CDATA[NumericValue <= 25]]></Condition>
+  <State>
+    <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+    <Properties>
+      <Property name="Color" value="red" />
+      <Property name="Status" value="EarlyStages" />
+      <Property name="Image" value="@images/trend-down.png" />
+    </Properties>
   </State>
 </States>
 ```
 
-Conditions can reference other result columns too:
+A condition-less state can supply defaults that a matching state then overrides — here the base
+color is grey, and the conditional state turns it orange when it matches:
 
 ```xml
-<State Color="orange">
-  <Condition><![CDATA[NumericValue < Target AND Region = 'North']]></Condition>
-</State>
+<States>
+  <State>
+    <Properties>
+      <Property name="Color" value="grey" />
+    </Properties>
+  </State>
+  <State>
+    <Condition><![CDATA[Event.Data.NumericValue < Event.Data.Target && Event.Data.Region === 'North']]></Condition>
+    <Properties>
+      <Property name="Color" value="orange" />
+    </Properties>
+  </State>
+</States>
+```
+
+An `Async="true"` condition can compare the value against data fetched from an API at render time:
+
+```xml
+<States>
+  <State>
+    <Condition Async="true"><![CDATA[Event.Data.NumericValue >= (await HttpGet('/api/targets/current')).target]]></Condition>
+    <Properties>
+      <Property name="Color" value="green" />
+    </Properties>
+  </State>
+</States>
 ```
 
 <br/>
@@ -175,7 +235,7 @@ the Image Library for it to display. For example, `@images/trend-up.png` resolve
 `trend-up.png` image in the library.
 
 To use a library image: add it to the Image Library, then reference it by name as
-`@images/<image-name>.png` in the state's `Image` attribute.
+`@images/<image-name>.png` in the state's `Image` property.
 
 > A **raw image URL** is also accepted. Any value that does not start with `@images` is used as-is,
 > so you can point at an external or absolute image URL directly. Using an `@images/` reference is

@@ -13,20 +13,38 @@ KPI cards are solution objects. Create one from the Solution Explorer the same w
 objects, then open it to edit its configuration.
 
 The card is edited as **XML** in the Designer — you author the card's `KpiConfiguration` directly:
-its data source, its states, and the row of components. A new KPI card starts from a **default
-template** that you edit to fit your needs — or you can replace it with one of the
+its data source and the row of components, each with its own optional states. A new KPI card starts
+from a **default template** that you edit to fit your needs — or you can replace it with one of the
 [starter templates](#starter-templates) below. A simple card looks like this:
 
 ```xml
 <KpiConfiguration>
   <DataSource><![CDATA[SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales]]></DataSource>
-  <States>
-    <State Color="green" Status="Complete"><Condition><![CDATA[NumericValue > 0]]></Condition></State>
-    <State Color="red" Status="EarlyStages"><Condition><![CDATA[NumericValue <= 0]]></Condition></State>
-  </States>
   <row>
-    <Metric Size="heading1" Weight="bold" />
-    <TrafficLight />
+    <Metric Size="heading1" Weight="bold">
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+          <Properties><Property name="Color" value="green" /></Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+          <Properties><Property name="Color" value="red" /></Properties>
+        </State>
+      </States>
+    </Metric>
+    <TrafficLight>
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+          <Properties><Property name="Status" value="Complete" /></Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+          <Properties><Property name="Status" value="EarlyStages" /></Properties>
+        </State>
+      </States>
+    </TrafficLight>
   </row>
 </KpiConfiguration>
 ```
@@ -34,8 +52,8 @@ template** that you edit to fit your needs — or you can replace it with one of
 From here you:
 
 - set the card's [data source](data-and-states.md),
-- add the [states](data-and-states.md#states-conditional-color-image-and-status) that drive its
-  color, icon image, and status,
+- add, on each component, the [states](data-and-states.md#states-conditional-color-image-and-status)
+  that drive its color, icon image, or status,
 - add the [components](components.md) that present the data.
 
 For the complete XML format, see the [Developer reference](developer-reference.md).
@@ -77,9 +95,9 @@ SELECT
   <row>
     <Metric ValueColumn="TotalIncome" />
     <Chart ValueColumn="Amount">
-      <SeriesSource><![CDATA[
+      <DataSource><![CDATA[
 SELECT Amount FROM (VALUES (1,10),(2,14),(3,9),(4,18),(5,22)) AS t(Id, Amount) ORDER BY Id
-]]></SeriesSource>
+]]></DataSource>
     </Chart>
   </row>
   <row>
@@ -94,7 +112,7 @@ SELECT Amount FROM (VALUES (1,10),(2,14),(3,9),(4,18),(5,22)) AS t(Id, Amount) O
 ### Status design (theme2)
 
 The `theme2` design: a title, a metric with a traffic-light status icon and a trend badge, and a
-muted caption. The `States` evaluate `TotalRevenue` and drive the traffic light's status icon.
+muted caption. The `TrafficLight`'s own `States` evaluate `TotalRevenue` and drive its status icon.
 
 <br/>
 
@@ -121,23 +139,27 @@ FROM (
     WHERE rn <= 2
 ) last2;
 ]]></DataSource>
-  <States>
-    <State Status="Complete">
-      <Condition><![CDATA[TotalRevenue >= 50000]]></Condition>
-    </State>
-    <State Status="HalfWay">
-      <Condition><![CDATA[TotalRevenue > 10000 AND TotalRevenue < 50000]]></Condition>
-    </State>
-    <State Status="EarlyStages">
-      <Condition><![CDATA[TotalRevenue <= 10000]]></Condition>
-    </State>
-  </States>
   <row>
     <Text TextColumn="Title" />
   </row>
   <row>
     <Metric ValueColumn="TotalRevenue" />
-    <TrafficLight />
+    <TrafficLight>
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.TotalRevenue >= 50000]]></Condition>
+          <Properties><Property name="Status" value="Complete" /></Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.TotalRevenue > 10000 && Event.Data.TotalRevenue < 50000]]></Condition>
+          <Properties><Property name="Status" value="HalfWay" /></Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.TotalRevenue <= 10000]]></Condition>
+          <Properties><Property name="Status" value="EarlyStages" /></Properties>
+        </State>
+      </States>
+    </TrafficLight>
     <TrendBadge ValueColumn="Trend" />
   </row>
   <row>
@@ -150,8 +172,9 @@ FROM (
 
 ## Set the card's data source
 
-A KPI card has **one data source** — a single SQL query that runs once and returns one row. Every
-component on the card reads from this one result.
+A KPI card has a card-level **data source** — a single SQL query that runs once and returns one row.
+It is the default result for every component; a component can also declare its own `DataSource` to
+read from a different query (see [Data and states](data-and-states.md#the-data-source)).
 
 Edit the `DataSource` to return the value(s) you want to show. The query should return the metric in
 a column named `NumericValue` and, optionally, a label in a column named `TextValue`:
@@ -160,9 +183,9 @@ a column named `NumericValue` and, optionally, a label in a column named `TextVa
 SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales
 ```
 
-You can return additional columns and reference them by name in state conditions, or point a
-component at a specific column with `ValueColumn` / `TextColumn`. See
-[Data and states](data-and-states.md) for how columns are resolved.
+You can return additional columns and reference them by name in a component's state conditions (as
+`Event.Data.<column>`), or point a component at a specific column with `ValueColumn` / `TextColumn`.
+See [Data and states](data-and-states.md) for how columns are resolved.
 
 > Only the first row of the result set is used.
 
@@ -210,7 +233,9 @@ Card-level styling is set on the Workbook page part:
 
 **Border**
 
-> Controls whether a border is drawn around the card. The border is enabled by default.
+> Controls whether a border is drawn around the card. The border is enabled by default. To drive the
+> border **color** from a condition, add a [`CardBorder`](components.md#cardborder) component whose
+> state resolves a `Color`; this setting still controls whether the border is drawn at all.
 
 <br/>
 

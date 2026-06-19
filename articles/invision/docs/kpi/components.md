@@ -2,12 +2,14 @@
 # Components
 
 Components are the presentation elements that make up a KPI card. They are arranged in a row and
-each renders some part of the card's resolved data and state. Components are **presentation only** —
-they do not run their own query or carry their own states. They read from the card's single result
-and the card's resolved state (see [Data and states](data-and-states.md)).
+each renders some part of the card's data and its own resolved state. Each component can carry its
+own optional `DataSource` and `States`: when a component leaves `DataSource` blank it falls back to
+the card-level `DataSource` result, and each component resolves its own states independently (see
+[Data and states](data-and-states.md)).
 
 In the configuration XML, the element name equals the component name (for example `<Metric />`,
-`<TrafficLight />`).
+`<TrafficLight />`). A component's `DataSource` and `States` are child elements; all other settings
+are attributes.
 
 <br/>
 
@@ -35,8 +37,8 @@ Components that display card data also bind to a result column. Numeric componen
 
 <br/>
 
-The purely state-driven components — **StatusBlock**, **Image**, and **TrafficLight** — render from
-the card's resolved state and ignore `ValueColumn` / `TextColumn`.
+The purely state-driven components — **StatusBlock**, **Image**, **TrafficLight**, and
+**CardBorder** — render from their own resolved state and ignore `ValueColumn` / `TextColumn`.
 
 <br/>
 
@@ -57,8 +59,8 @@ The text components **Metric** and **Text** additionally support:
 
 ### Metric
 
-Displays the card's numeric value, formatted. Reads the card's resolved value (or its `ValueColumn`
-override) and takes its color from the card's resolved state.
+Displays the card's numeric value, formatted. Reads the resolved value (or its `ValueColumn`
+override) and takes its color from its own resolved state.
 
 | Property | Allowed values |
 |----------|----------------|
@@ -76,9 +78,9 @@ override) and takes its color from the card's resolved state.
 
 ### Text
 
-Displays a text value. Reads the card's resolved text (or its `TextColumn` override) and renders it as
-text. Unlike the other components, `Text` has its **own** `Color` property rather than taking the
-card's state color.
+Displays a text value. Reads the resolved text (or its `TextColumn` override) and renders it as
+text. Unlike the other components, `Text` has its **own** `Color` attribute rather than taking a
+state color.
 
 | Property | Allowed values |
 |----------|----------------|
@@ -96,7 +98,7 @@ card's state color.
 
 ### TrendText
 
-Displays the card's text, colored by the card's resolved state. Use it when you want the value
+Displays the card's text, colored by its own resolved state. Use it when you want the value
 itself to carry the state color. Its size and weight come from the card theme's defaults and are not
 set on the component.
 
@@ -113,19 +115,20 @@ set on the component.
 
 ### Chart
 
-Renders a sparkline. Unlike the other components, the Chart runs its **own** SQL query — set in its
-`SeriesSource` element — which returns the whole series (one value per row) to plot. This query is
-separate from the card's `DataSource`, so each Chart on a card adds one more query.
+Renders a sparkline. The Chart's `DataSource` returns the whole series (one value per row) to plot,
+rather than a single row. Unlike the scalar components, the Chart does **not** fall back to the
+card-level `DataSource` — a blank `DataSource` yields no series — so each Chart on a card adds one
+more query.
 
 | Property | Allowed values |
 |----------|----------------|
-| `SeriesSource` | A SQL query (child element) returning the series rows to plot. |
+| `DataSource` | A SQL query (child element) returning the series rows to plot. No card-level fallback. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `ValueColumn` | the column read from the `SeriesSource` result |
+| `ValueColumn` | the column read from the `DataSource` series result |
 
 ```xml
 <Chart ValueColumn="Amount">
-  <SeriesSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></SeriesSource>
+  <DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource>
 </Chart>
 ```
 
@@ -182,22 +185,33 @@ The badge per token:
 
 ### StatusBlock
 
-A solid colored block whose background color comes from the card's resolved state. Use it as a bold,
-text-free status indicator.
+A solid colored block whose background color comes from its own resolved state `Color`. Use it as a
+bold, text-free status indicator.
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 
 ```xml
-<StatusBlock HorizontalAlignment="left" />
+<StatusBlock HorizontalAlignment="left">
+  <States>
+    <State>
+      <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+      <Properties><Property name="Color" value="green" /></Properties>
+    </State>
+    <State>
+      <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+      <Properties><Property name="Color" value="red" /></Properties>
+    </State>
+  </States>
+</StatusBlock>
 ```
 
 <br/>
 
 ### Image
 
-Displays the image from the card's resolved state. The state's `Image` value is resolved through the
+Displays the image from its own resolved state. The state's `Image` value is resolved through the
 **Image Library** when it is an `@images/<image-name>.png` reference; a raw image URL is also
 accepted.
 
@@ -205,16 +219,23 @@ accepted.
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 
-The image to show is set on the **state**, not the component. The value is usually an Image Library
-reference of the form `@images/<image-name>.png` (for example `@images/trend-up.png`):
+The image to show is set on the component's **states**, via an `Image` property. The value is usually
+an Image Library reference of the form `@images/<image-name>.png` (for example `@images/trend-up.png`):
 
 ```xml
-<States>
-  <State Color="green" Image="@images/trend-up.png"><Condition><![CDATA[NumericValue > 25]]></Condition></State>
-  <State Color="red" Image="@images/trend-down.png"><Condition><![CDATA[NumericValue <= 25]]></Condition></State>
-</States>
 <row>
-  <Image HorizontalAlignment="center" />
+  <Image HorizontalAlignment="center">
+    <States>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+        <Properties><Property name="Image" value="@images/trend-up.png" /></Properties>
+      </State>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+        <Properties><Property name="Image" value="@images/trend-down.png" /></Properties>
+      </State>
+    </States>
+  </Image>
 </row>
 ```
 
@@ -229,7 +250,7 @@ explanation, and the [Button](../forms/formschemas/controls/button.md) control f
 
 ### TrafficLight
 
-A status icon (traffic-light style) chosen from the card's resolved state `Status`. Use it for a
+A status icon (traffic-light style) chosen from its own resolved state `Status`. Use it for a
 compact status indicator. The icon is selected by the state's `Status` token — `Complete`,
 `HalfWay`, or `EarlyStages`; if the resolved state has no (or an unrecognized) `Status`, no icon is
 shown.
@@ -247,13 +268,53 @@ The icon per `Status` token:
 | `HorizontalAlignment` | `left`, `center`, `right` |
 
 ```xml
-<States>
-  <State Status="Complete"><Condition><![CDATA[NumericValue >= 100]]></Condition></State>
-  <State Status="HalfWay"><Condition><![CDATA[NumericValue >= 50]]></Condition></State>
-  <State Status="EarlyStages"><Condition><![CDATA[NumericValue < 50]]></Condition></State>
-</States>
 <row>
-  <TrafficLight />
+  <TrafficLight>
+    <States>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue >= 100]]></Condition>
+        <Properties><Property name="Status" value="Complete" /></Properties>
+      </State>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue >= 50]]></Condition>
+        <Properties><Property name="Status" value="HalfWay" /></Properties>
+      </State>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue < 50]]></Condition>
+        <Properties><Property name="Status" value="EarlyStages" /></Properties>
+      </State>
+    </States>
+  </TrafficLight>
+</row>
+```
+
+<br/>
+
+### CardBorder
+
+A non-visual component: it renders nothing of its own, but its resolved state `Color` sets the
+card's **border color**. Add it to a row to drive the border from a condition. The page part's
+**Border** setting still controls whether a border is drawn at all; `CardBorder` only changes its
+color when a state resolves a `Color`.
+
+| Property | Allowed values |
+|----------|----------------|
+| `HorizontalAlignment` | `left`, `center`, `right` (has no visual effect, since the component renders nothing) |
+
+```xml
+<row>
+  <CardBorder>
+    <States>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+        <Properties><Property name="Color" value="green" /></Properties>
+      </State>
+      <State>
+        <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+        <Properties><Property name="Color" value="red" /></Properties>
+      </State>
+    </States>
+  </CardBorder>
 </row>
 ```
 

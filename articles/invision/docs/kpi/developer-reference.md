@@ -9,61 +9,115 @@ data endpoint, and import/export. For the conceptual model, start with the
 
 ## Configuration XML
 
-A KPI card is stored as a `KpiConfiguration`. It has an optional `Theme` attribute, one
-`DataSource`, a shared list of `States`, and one or more `row` elements holding components.
+A KPI card is stored as a `KpiConfiguration`. It has an optional `Theme` attribute, an optional
+card-level `DataSource` (the fallback query for components that don't declare their own), and one or
+more `row` elements holding components. States are not declared at the top level — each component
+carries its own optional `DataSource` and `States`.
 
 ```xml
 <KpiConfiguration Theme="theme1">
   <DataSource><![CDATA[SELECT 50 AS NumericValue]]></DataSource>
-  <States>
-    <State Color="green" Status="Complete" Image="@images/trend-up.png"><Condition><![CDATA[NumericValue > 25]]></Condition></State>
-    <State Color="red" Status="EarlyStages" Image="@images/trend-down.png"><Condition><![CDATA[NumericValue <= 25]]></Condition></State>
-  </States>
   <row>
-    <StatusBlock HorizontalAlignment="left" />
-    <Image HorizontalAlignment="left" />
+    <StatusBlock HorizontalAlignment="left">
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Properties>
+            <Property name="Color" value="green" />
+          </Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+          <Properties>
+            <Property name="Color" value="red" />
+          </Properties>
+        </State>
+      </States>
+    </StatusBlock>
+    <Image HorizontalAlignment="left">
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Properties>
+            <Property name="Image" value="@images/trend-up.png" />
+          </Properties>
+        </State>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+          <Properties>
+            <Property name="Image" value="@images/trend-down.png" />
+          </Properties>
+        </State>
+      </States>
+    </Image>
     <Metric HorizontalAlignment="left" Size="normal" Weight="normal" />
     <Text HorizontalAlignment="left" Size="normal" Weight="normal" />
     <TrendText HorizontalAlignment="left" />
     <TrendDirection HorizontalAlignment="left" />
     <TrendBadge HorizontalAlignment="left" />
-    <TrafficLight />
-    <Chart ValueColumn="Amount"><SeriesSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></SeriesSource></Chart>
+    <TrafficLight>
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Properties>
+            <Property name="Status" value="Complete" />
+          </Properties>
+        </State>
+      </States>
+    </TrafficLight>
+    <Chart ValueColumn="Amount"><DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource></Chart>
+    <CardBorder>
+      <States>
+        <State>
+          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Properties>
+            <Property name="Color" value="green" />
+          </Properties>
+        </State>
+      </States>
+    </CardBorder>
   </row>
 </KpiConfiguration>
 ```
 
-The example above is a complete configuration — an optional `Theme`, one `DataSource`, two `States`,
-and one `row` of components — showing every part of the format. A newly created card starts from a
-default template; you edit these elements yourself.
+The example above is a complete configuration — an optional `Theme`, a card-level `DataSource`, and
+one `row` of components, several of which carry their own `States` — showing every part of the
+format. A newly created card starts from a default template; you edit these elements yourself.
 
 ### Elements
 
 | Element | Meaning |
 |---------|---------|
-| `DataSource` | The single SQL query for the card. Runs once and returns one row. |
-| `States` | A list of `State` elements, evaluated first-match-wins. |
-| `State` | A `Condition` element plus `Color`, `Image`, and `Status` attributes. |
+| `DataSource` | A SQL query. At card level it is the fallback query for components that don't declare their own; inside a component it is that component's own query. A scalar query runs once and returns one row. |
+| `States` | A per-component list of `State` elements, resolved on the client (see [State resolution](#state-resolution)). Declared inside the component element, not at the top level. |
+| `State` | A `Condition` child element plus a `Properties` element. A state with no (or empty) `Condition` always applies as a base. |
+| `Condition` | The state's boolean JavaScript expression. Optional `Async="true"` attribute makes it an awaited async function with HTTP access (default `false`). |
+| `Properties` | Holds the state's `Property` elements. Only emitted when at least one property is set. |
+| `Property` | A `name`/`value` pair. `name` is one of `Color`, `Image`, `Status` (matched case-insensitively). |
 | `row` | A row of components. A configuration may contain one or more rows. |
-| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `TrafficLight`, `StatusBlock`, `Image`. The element name equals the component type. |
+| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `TrafficLight`, `StatusBlock`, `Image`, `CardBorder`. The element name equals the component type. |
 
 `KpiConfiguration` carries an optional `Theme` attribute (a type-scale theme name; omitted for the
 default theme).
 
-`State` carries `Condition` (a child element), and the attributes `Color`, `Image`, and `Status`.
+`State` carries a `Condition` child element and a `Properties` child element; `Color`, `Image`, and
+`Status` are `Property` elements (`<Property name="Color" value="green" />`).
 
 Component attributes are described in [Components](components.md). Every component accepts
 `HorizontalAlignment`. The data components read a column binding — `ValueColumn` (Metric,
 TrendDirection, TrendBadge, and Chart's series column) or `TextColumn` (Text, TrendText) — while
-StatusBlock, Image, and TrafficLight render from the resolved state and ignore the column bindings.
-`Metric` adds `FormatString`, `Size`, `Weight`; `Text` adds `Size`, `Weight`, `Color`; `Chart` adds
-a `SeriesSource` query element.
+StatusBlock, Image, TrafficLight, and CardBorder are driven by their own `States` and ignore the
+column bindings. `Metric` adds `FormatString`, `Size`, `Weight`; `Text` adds `Size`, `Weight`,
+`Color`. Every component may also carry its own `DataSource` child element; for `Chart` the
+`DataSource` returns the series rows to plot (and has no card-level fallback).
 
 <br/>
 
 ## Column resolution
 
-The card runs its query once and resolves columns from the single result row:
+Each component resolves its value and text from its own result set — its own `DataSource` result if
+it declares one, otherwise the card-level `DataSource` result. The card-level query runs once and is
+the shared default; the resolution rules are the same in both cases:
 
 - **Value** — if a component sets `ValueColumn`, that named column is used (an error is raised if it
   doesn't exist). Otherwise, if there is exactly one numeric column it is used; otherwise the first
@@ -77,30 +131,46 @@ Numeric detection covers the standard numeric types (`byte`, `int`, `long`, `dec
 
 <br/>
 
-## State evaluation
+## State resolution
 
-States are resolved **once per card** against the result row:
+Each component resolves its **own** states on the client, against its own result row — there is no
+single card-level resolved state. Conditions are evaluated as **JavaScript** expressions; the
+result columns are exposed on `Event.Data`, including the reserved `NumericValue` (numeric) and
+`TextValue` (string) values (for example `Event.Data.NumericValue > 25`). Columns already named
+`NumericValue`/`TextValue` in the result take precedence.
 
-1. A single-row table is built containing every result column, plus the reserved `NumericValue`
-   (numeric) and `TextValue` (string) columns, which carry the resolved value/text. Columns already
-   named `NumericValue`/`TextValue` in the result take precedence.
-2. Each state's `Condition` is evaluated in order as a filter expression over that row (comparisons,
-   `AND` / `OR` / `NOT`, `LIKE`, `IN (…)`).
-3. The **first** state whose condition matches wins; its `Color` / `Image` / `Status` become the
-   card's resolved state.
-4. A condition that throws (malformed expression, unknown column) is caught and treated as
+Resolution is two-layered:
+
+1. **Base layer** — every state with no (or an empty) `Condition` **always applies**. Their
+   `Color` / `Image` / `Status` form a base; when several condition-less states exist, the
+   first-declared value wins for each property independently.
+2. **Conditional overlay** — the **first** state whose `Condition` evaluates truthy overlays the
+   base: each property it sets overrides the base, and any property it leaves unset falls through to
+   the base.
+3. If no conditional state matches, the base alone applies. If there is no condition-less state
+   either, the component renders without a state-driven color, image, or status.
+4. A condition that throws (malformed expression, unknown reference) is caught and treated as
    non-matching, so evaluation continues to the next state.
+
+Conditional states are evaluated **in declared order and short-circuit at the first match**. By
+default a condition runs synchronously with no network access. Setting `Async="true"` on the
+`<Condition>` builds it as an awaited async function over an HTTP-capable library, so it may `await`
+`HttpGet(url)`, `HttpPost(url, { data })`, `HttpPut(url, { data })`, or `HttpDelete(url)` to derive
+its result. Because evaluation short-circuits, an async state only issues its request if no earlier
+conditional state matched; a rejected or throwing request is caught and treated as non-matching. In
+all cases the condition's outcome is just the **boolean** match — it never sets the rendered value,
+color, image, or status (those stay the static `Property` values).
 
 <br/>
 
 ## Execution
 
-The card's query runs **once per card**, the card-level state is resolved
-once, and then the per-component data is built. Each component type takes the state properties
-relevant to it (for example Metric, StatusBlock, and TrendText take the color; TrafficLight takes
-the status; Image takes the image). The Chart component runs its own `SeriesSource` query in
-addition to the card query, so a card with charts issues one query per chart on top of the card
-query. On the client, `@images/...` image values are resolved against the Image Library before
+The card-level query runs **once per card** as the shared default. Each component then builds its
+own data: a component with its own `DataSource` runs an additional query (each `Chart` always runs
+its own series `DataSource`, with no card fallback), and every component resolves its own states on
+the client. There is no single card-level resolved state — each component applies the color, image,
+or status from its own resolved state (the `CardBorder` component's resolved color drives the card
+border). On the client, `@images/...` image values are resolved against the Image Library before
 rendering; a raw image URL is used as-is.
 
 <br/>
@@ -118,17 +188,22 @@ serialized as XML (see above). Cards travel with the solution through the normal
 - A KPI card only loads when a **Load Data** action targets it from the Workbook page's events (the
   same [interaction model](../workbooks/programmingmodel/interactionmodel.md) used by every other
   component). Without it, the card renders empty.
-- The query returns **one row**; only the first row is used. Aggregate in SQL to produce a single
-  value.
-- A malformed or non-matching state condition is silently skipped — if no state matches, the card
-  renders without a state color, image, or status.
+- A scalar query returns **one row**; only the first row is used. Aggregate in SQL to produce a
+  single value.
+- A malformed or non-matching state condition is silently skipped — if a component has no matching
+  conditional state (and no condition-less base state), it renders without a state-driven color,
+  image, or status.
 - `Image` values are usually Image Library references (`@images/<image-name>.png`), which must exist
   in the library; a raw image URL is also accepted (any value not starting with `@images` is used
   as-is).
-- Each `Chart` component runs its own `SeriesSource` query in addition to the card's `DataSource`,
-  so a card with multiple charts issues multiple queries.
+- Each component with its own `DataSource` runs an extra query, and each `Chart` always runs its own
+  series `DataSource` (in addition to the card's `DataSource`), so a card with several such
+  components issues multiple queries.
 - A component's `ValueColumn` / `TextColumn` must name a column that the query actually returns, or
   the card reports an error.
+- `Async="true"` conditions issue HTTP requests during client-side render. Use them sparingly and
+  rely on the first-match short-circuit to bound the calls; a slow or failing endpoint just makes
+  that state non-matching (it never blocks the rest of the card).
 
 <br/>
 

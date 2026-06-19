@@ -18,23 +18,25 @@ KPI cards are designed and configured in the **Designer**, and rendered for end 
 
 A KPI card is built from three things:
 
-- **One data source** — a single SQL query that runs once per card and returns one row.
-- **One shared set of states** *(optional)* — conditional rules, evaluated top to bottom, where the
-  first match decides the card's color, icon image, and status. A card may have no states at all.
+- **A data source** — a card-level SQL query that runs once and returns one row, used as the default
+  result for every component. A component may also declare its own query.
+- **Per-component states** *(optional)* — conditional rules carried by each component, where a
+  condition-less rule always applies and the first matching condition overlays it, deciding that
+  component's color, icon image, or status. A component may have no states at all.
 - **A row of presentation components** — small visual elements (metric, text, sparkline, traffic
-  light, etc.) that render the card's resolved data and state.
+  light, status block, icon, card border, etc.) that render the card's data and their own state.
 
-The query runs **once for the whole card**. Its result feeds every component on the card, and the
-card's states are evaluated once to produce a single resolved color / image / status that the
-components share. Components are **presentation elements only** — they don't carry their own states,
-and (apart from the Chart sparkline, which runs its own small series query) they don't carry their
-own query either. Each component simply chooses which result column to display (via `ValueColumn` /
-`TextColumn`) and how to render it.
+The card-level query runs **once** as the shared default; a component with its own `DataSource` runs
+an additional query (and the Chart sparkline always runs its own series query). Each component then
+resolves its **own** state on the client — there is no single resolved state shared across the card.
+A component chooses which result column to display (via `ValueColumn` / `TextColumn`) and applies
+the color / image / status from its own matching state. The card's border color is driven by a
+dedicated `CardBorder` component.
 
-By default a component shows the card's resolved value or text; a component can override which
-result column it reads (via `ValueColumn` / `TextColumn`), and any column in the result set — plus
-the reserved `NumericValue` / `TextValue` columns — can be referenced by name in a state condition.
-See [Data and states](data-and-states.md) for the full model.
+By default a component shows the resolved value or text; a component can override which result
+column it reads (via `ValueColumn` / `TextColumn`), and any column in the result set — plus the
+reserved `NumericValue` / `TextValue` values — can be referenced (as `Event.Data.<column>`) in that
+component's state conditions. See [Data and states](data-and-states.md) for the full model.
 
 <br/>
 
@@ -42,9 +44,10 @@ See [Data and states](data-and-states.md) for the full model.
 
 - **[Creating KPI cards](creating-kpi-cards.md)** — create a card in the Designer, set its data
   source, add it to a Workbook page, and style it.
-- **[Data and states](data-and-states.md)** — the single data source, column resolution, and the
-  shared conditional states that drive the card's appearance.
-- **[Components](components.md)** — reference for the nine presentation component types and the
+- **[Data and states](data-and-states.md)** — the card-level data source, per-component data
+  overrides, column resolution, and the per-component conditional states that drive each component's
+  appearance.
+- **[Components](components.md)** — reference for the ten presentation component types and the
   allowed values for every property.
 - **[Developer reference](developer-reference.md)** — the XML configuration format, the data
   endpoint, import/export, and limits.

@@ -1,3 +1,5 @@
+- name: "Await semaphore drained"
+  href: "await-semaphore-drained.md"
 - name: "Break"
   href: "break.md"
 - name: "Continue"

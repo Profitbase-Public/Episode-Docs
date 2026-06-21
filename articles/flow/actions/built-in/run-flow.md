@@ -17,13 +17,13 @@ This flow uses Run Flow to trigger another Flow as a sub-process. The parent flo
 
 ## Properties
 
-| Name              | Type               | Description                                                    |
+| Name              | Required               | Description                                                    |
 |-------------------|--------------------|----------------------------------------------------------------|
 | Workspace         | No | To run a Flow in a _different_ Workspace than the host Flow, specify the Workspace here. Note that if you point to a variable, the Flow selector will not display any options as the actual Workspace ID is only available at runtime. |
 | Flow              | Yes | The Flow to run. |
 | Input             | No | The argument to pass to the Flow you want to run.              |
 | Output data type  | No | Specifies the data type of the value returned by the selected Flow. <br/><br/>You must specify the data type if you want to use the returned value as input data to other actions in the main Flow. If you don't, the main Flow will assume that the data type is [System.Object](https://learn.microsoft.com/en-us/dotnet/api/system.object), which will prevent you from using the returned value as input to most actions.<br/><br/> If the selected Flow returns a custom data type, you must toggle `Use custom type(s)` on, and specify the type definition(s) of the custom objects. The easiest way to get the custom type definitions is to open the selected Flow and copy the configuration of the custom types from there. |
-| Output variable name | Yes | The name of the variable that contains the value returned value (if any) from the selected Flow. |
+| Output variable name | No | The name of the variable that contains the value returned value (if any) from the selected Flow. |
 
 ### Example
 

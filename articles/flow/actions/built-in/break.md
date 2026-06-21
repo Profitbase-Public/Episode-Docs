@@ -10,7 +10,7 @@ This flow continuously checks if the system is in maintenance mode, and immediat
 
 ## Properties
 
-| Name                      | Type | Description                                                                       |
+| Name                      | Required | Description                                                                       |
 | ------------------------- | --------- | --------------------------------------------------------------------------------- |
 | Title                     | No | The title or name of the action.                                                 |
 | Description               | No | Additional notes or comments about the action or configuration.                   |

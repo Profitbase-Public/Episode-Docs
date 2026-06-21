@@ -13,7 +13,7 @@ This flow can be used to read and process customer orders from a [CSV file](../c
 
 ## Properties
 
-| Name                      | Type | Description                                                                       |
+| Name                      | Required | Description                                                                       |
 | ------------------------- | --------- | --------------------------------------------------------------------------------- |
 | Title                     | No | The title or name of the action.                                                 |
 | Data reader               | Yes | Select the source DataReader.                   |

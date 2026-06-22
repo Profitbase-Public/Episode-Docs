@@ -107,16 +107,15 @@ values are written as `Property` elements (`<Property name="Color" value="green"
 **Condition**
 
 > A boolean **JavaScript** expression evaluated against the component's single result row. The
-> result columns are exposed on `Event.Data`, including the reserved `Event.Data.NumericValue` and
-> `Event.Data.TextValue` values, plus any other column referenced by name
-> (`Event.Data.<column>`). Use JavaScript operators — `>`, `>=`, `===`, `!==`, `&&`, `||`, `!` —
-> for example `Event.Data.NumericValue > 25`. A state with no (or an empty) `Condition` always
-> applies as a base (see [evaluation](#two-layered-evaluation) below).
+> result columns are available by name, including the reserved `NumericValue` and `TextValue`
+> values, plus any other column in the result set. Use JavaScript operators — `>`, `>=`, `===`,
+> `!==`, `&&`, `||`, `!` — for example `NumericValue > 25`. A state with no (or an empty)
+> `Condition` always applies as a base (see [evaluation](#two-layered-evaluation) below).
 >
 > The `<Condition>` element accepts an optional **`Async`** attribute. With `Async="true"` the
 > condition runs as an asynchronous function and may `await` HTTP calls — `HttpGet(url)`,
 > `HttpPost(url, { data })`, `HttpPut(url, { data })`, `HttpDelete(url)` — to derive its result, for
-> example `Async="true"` with `Event.Data.NumericValue > (await HttpGet('/api/target')).value`.
+> example `Async="true"` with `NumericValue > (await HttpGet('/api/target')).value`.
 > Without the attribute (the default) the condition runs synchronously and has no network access.
 > Either way the condition must still produce a **boolean** — it decides which state matches; it
 > cannot set the displayed value, color, image, or status (those remain the `Property` values).
@@ -161,14 +160,15 @@ the component renders without a state-driven color, image, or status.
 
 Conditional states are evaluated **in declared order and short-circuit at the first match** — so an
 `Async="true"` condition only issues its HTTP request if no earlier conditional state has
-already matched. A malformed condition, a missing reference, or a failed/rejected async request is
-**skipped silently** (it simply doesn't match) and evaluation continues with the next state. This
-means a typo or a flaky endpoint won't break the card; that state just never matches.
+already matched. If a condition fails — a malformed expression, an invalid column name, or a
+failed/rejected async request — the error **surfaces to the user and halts the card's state
+evaluation**, rather than passing unnoticed. Write conditions that reference valid columns and
+produce a boolean.
 
 ```xml
 <States>
   <State>
-    <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+    <Condition><![CDATA[NumericValue > 25]]></Condition>
     <Properties>
       <Property name="Color" value="green" />
       <Property name="Status" value="Complete" />
@@ -176,7 +176,7 @@ means a typo or a flaky endpoint won't break the card; that state just never mat
     </Properties>
   </State>
   <State>
-    <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+    <Condition><![CDATA[NumericValue <= 25]]></Condition>
     <Properties>
       <Property name="Color" value="red" />
       <Property name="Status" value="EarlyStages" />
@@ -197,7 +197,7 @@ color is grey, and the conditional state turns it orange when it matches:
     </Properties>
   </State>
   <State>
-    <Condition><![CDATA[Event.Data.NumericValue < Event.Data.Target && Event.Data.Region === 'North']]></Condition>
+    <Condition><![CDATA[NumericValue < Target && Region === 'North']]></Condition>
     <Properties>
       <Property name="Color" value="orange" />
     </Properties>
@@ -210,7 +210,7 @@ An `Async="true"` condition can compare the value against data fetched from an A
 ```xml
 <States>
   <State>
-    <Condition Async="true"><![CDATA[Event.Data.NumericValue >= (await HttpGet('/api/targets/current')).target]]></Condition>
+    <Condition Async="true"><![CDATA[NumericValue >= (await HttpGet('/api/targets/current')).target]]></Condition>
     <Properties>
       <Property name="Color" value="green" />
     </Properties>

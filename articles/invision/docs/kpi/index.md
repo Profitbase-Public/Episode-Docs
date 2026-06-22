@@ -35,7 +35,7 @@ dedicated `CardBorder` component.
 
 By default a component shows the resolved value or text; a component can override which result
 column it reads (via `ValueColumn` / `TextColumn`), and any column in the result set — plus the
-reserved `NumericValue` / `TextValue` values — can be referenced (as `Event.Data.<column>`) in that
+reserved `NumericValue` / `TextValue` values — can be referenced by name in that
 component's state conditions. See [Data and states](data-and-states.md) for the full model.
 
 <br/>

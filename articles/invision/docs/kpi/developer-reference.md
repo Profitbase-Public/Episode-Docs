@@ -21,13 +21,13 @@ carries its own optional `DataSource` and `States`.
     <StatusBlock HorizontalAlignment="left">
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
             <Property name="Color" value="green" />
           </Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+          <Condition><![CDATA[NumericValue <= 25]]></Condition>
           <Properties>
             <Property name="Color" value="red" />
           </Properties>
@@ -37,13 +37,13 @@ carries its own optional `DataSource` and `States`.
     <Image HorizontalAlignment="left">
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
             <Property name="Image" value="@images/trend-up.png" />
           </Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+          <Condition><![CDATA[NumericValue <= 25]]></Condition>
           <Properties>
             <Property name="Image" value="@images/trend-down.png" />
           </Properties>
@@ -58,7 +58,7 @@ carries its own optional `DataSource` and `States`.
     <TrafficLight>
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
             <Property name="Status" value="Complete" />
           </Properties>
@@ -69,7 +69,7 @@ carries its own optional `DataSource` and `States`.
     <CardBorder>
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+          <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
             <Property name="Color" value="green" />
           </Properties>
@@ -135,8 +135,8 @@ Numeric detection covers the standard numeric types (`byte`, `int`, `long`, `dec
 
 Each component resolves its **own** states on the client, against its own result row — there is no
 single card-level resolved state. Conditions are evaluated as **JavaScript** expressions; the
-result columns are exposed on `Event.Data`, including the reserved `NumericValue` (numeric) and
-`TextValue` (string) values (for example `Event.Data.NumericValue > 25`). Columns already named
+result columns are available by name, including the reserved `NumericValue` (numeric) and
+`TextValue` (string) values (for example `NumericValue > 25`). Columns already named
 `NumericValue`/`TextValue` in the result take precedence.
 
 Resolution is two-layered:
@@ -149,16 +149,16 @@ Resolution is two-layered:
    the base.
 3. If no conditional state matches, the base alone applies. If there is no condition-less state
    either, the component renders without a state-driven color, image, or status.
-4. A condition that throws (malformed expression, unknown reference) is caught and treated as
-   non-matching, so evaluation continues to the next state.
+4. A condition that throws — a malformed expression, an invalid column name, or a rejected async
+   request — surfaces as an error and halts evaluation, rather than being treated as a non-match.
 
 Conditional states are evaluated **in declared order and short-circuit at the first match**. By
 default a condition runs synchronously with no network access. Setting `Async="true"` on the
 `<Condition>` builds it as an awaited async function over an HTTP-capable library, so it may `await`
 `HttpGet(url)`, `HttpPost(url, { data })`, `HttpPut(url, { data })`, or `HttpDelete(url)` to derive
 its result. Because evaluation short-circuits, an async state only issues its request if no earlier
-conditional state matched; a rejected or throwing request is caught and treated as non-matching. In
-all cases the condition's outcome is just the **boolean** match — it never sets the rendered value,
+conditional state matched; a rejected or throwing request surfaces as an error and halts evaluation.
+In all cases a successful condition's outcome is just the **boolean** match — it never sets the rendered value,
 color, image, or status (those stay the static `Property` values).
 
 <br/>
@@ -190,9 +190,10 @@ serialized as XML (see above). Cards travel with the solution through the normal
   component). Without it, the card renders empty.
 - A scalar query returns **one row**; only the first row is used. Aggregate in SQL to produce a
   single value.
-- A malformed or non-matching state condition is silently skipped — if a component has no matching
-  conditional state (and no condition-less base state), it renders without a state-driven color,
-  image, or status.
+- A non-matching state condition simply doesn't apply; if a component has no matching conditional
+  state (and no condition-less base state), it renders without a state-driven color, image, or status.
+- A malformed condition or an invalid column name raises an error that surfaces to the user, rather
+  than being silently ignored.
 - `Image` values are usually Image Library references (`@images/<image-name>.png`), which must exist
   in the library; a raw image URL is also accepted (any value not starting with `@images` is used
   as-is).

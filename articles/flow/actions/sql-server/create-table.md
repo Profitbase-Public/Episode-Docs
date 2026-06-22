@@ -53,19 +53,11 @@ Each column has four fields:
 
 ![Column definition dialog showing four columns — TransactionID, TransDate, Account, and Amount — with the Add column and Create from table options at the top](../../../../images/flow/create-table-column-definitions.png)
 
-#### Advanced
-
-Switch to the **Advanced** tab to define the table schema as a C# type definition instead of using the visual column editor. Set **Format** to `CSharp` and write the type definition in the code editor.
-
-
-
 <br/>
-
-
 
 ## Returns
 
-No return value. The action creates the table as a side effect. If the table already exists, the action completes successfully without changes.
+No return value. The action creates the table. If the table already exists, the action completes successfully without changes.
 
 ## See also
 

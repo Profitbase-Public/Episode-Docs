@@ -49,10 +49,41 @@ This flow runs a full staging cycle. [Create Table from Source](./create-table-f
 
 ### Merge configuration
 
-Click the edit icon next to **Merge configuration** to open the configuration editor.
+Click the edit icon next to **Merge configuration** to open the configuration editor. The editor has three tabs:
 
-<!-- TODO: Add screenshot of the Merge configuration dialog and document its fields (match keys, WHEN MATCHED action, WHEN NOT MATCHED BY TARGET action, WHEN NOT MATCHED BY SOURCE action). -->
+#### Conditions
 
+Defines how rows are matched between source and target. Each condition pairs a target column with a source column. Rows where all conditions match are considered the same record.
+
+Click **+ Add condition** to define match keys manually, or click **Create from target key columns** to generate conditions from the target table's primary key.
+
+![Merge configuration Conditions tab showing OrderId matched between target and source columns](../../../../images/flow/merge-configuration-conditions.png)
+
+#### Columns
+
+Defines which columns are included in the merge and which are updated when a match is found. Each entry maps a target column to a source column. The **Update** checkbox controls whether the column is overwritten when the row already exists in the target.
+
+Click **+ Add column** to define mappings manually, or click **Create from target table** to generate the column list from the target table schema.
+
+> [!TIP]
+> Leave **Update** unchecked for key columns — updating the column you match on causes unexpected results.
+
+![Merge configuration Columns tab showing OrderId, CustomerId, Amount, and OrderDate with Update checked on non-key columns](../../../../images/flow/merge-configuration-columns.png)
+
+#### Settings
+
+Controls what happens for each of the three merge cases:
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| **Insert when not in target table** | ☑ | Inserts source rows that have no match in the target. Corresponds to `WHEN NOT MATCHED BY TARGET THEN INSERT`. |
+| **Update when already in target table** | ☑ | Updates target rows that match a source row. Only columns with **Update** checked in the Columns tab are overwritten. Corresponds to `WHEN MATCHED THEN UPDATE`. |
+| **Delete when in target table, but not in source table/view** | ☐ | Deletes target rows that have no corresponding source row. Corresponds to `WHEN NOT MATCHED BY SOURCE THEN DELETE`. |
+
+> [!WARNING]
+> Enabling **Delete when in target table, but not in source table/view** removes target rows that are missing from the source. If the source contains only a partial data set, this deletes rows that should be kept. Use only when the source represents the complete data set.
+
+![Merge configuration Settings tab showing Insert and Update checked, Delete unchecked](../../../../images/flow/merge-configuration-settings.png)
 <br/>
 
 ## Returns

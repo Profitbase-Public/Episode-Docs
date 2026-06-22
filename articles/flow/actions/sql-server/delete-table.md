@@ -44,7 +44,7 @@ This flow runs a full staging cycle. [Create Table from Source](./create-table-f
 
 ## Returns
 
-No return value. The action drops the table as a side effect.
+No return value. The action drops the table.
 
 ## See also
 

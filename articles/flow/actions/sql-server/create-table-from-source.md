@@ -8,13 +8,13 @@ Use this to create staging, backup, or snapshot tables that match a source schem
 
 - To create a staging table that mirrors a production table's schema before loading data into it.
 - To set up empty archive or snapshot tables with the same structure as the source, so data can be inserted later.
-- To replicate a table schema across databases when combined with a dynamic connection.
+
 
 ## How it works
 
 - **Input**: A source table (or view) name and a target table name, both on the same connection.
 - **Processing**: Reads the schema of the source table and creates the target table with matching columns and types. Optionally copies the primary key, foreign keys, and indexes. If **Replace existing table** is checked and the target already exists, the existing table is dropped and recreated. If unchecked and the target exists, the action raises an error.
-- **Output**: No return value. The target table is created as a side effect.
+- **Output**: No return value. The target table is created.
 
 > [!WARNING]
 > When **Replace existing table** is checked, the existing target table and all its data are dropped before the new table is created. This is irreversible.
@@ -47,7 +47,7 @@ This flow runs a full staging cycle. **Create Orders_Staging from Orders** clone
 
 ## Returns
 
-No return value. The action creates the target table as a side effect.
+No return value. The action creates the target table.
 
 ## See also
 

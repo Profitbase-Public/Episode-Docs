@@ -1,3 +1,5 @@
+- name: "Acquire semaphore"
+  href: "acquire-semaphore.md"
 - name: "Await semaphore drained"
   href: "await-semaphore-drained.md"
 - name: "Break"

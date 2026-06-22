@@ -26,19 +26,21 @@ This flow receives order data, checks if it contains the necessary details, and 
 <br/>
 
 ### Using Semaphores to throttle and synchronize concurrent Flow executions
-Semaphores limit the number of concurrent Flow executions and act as a synchronization point — making it easy to fan out work across parallel Flows and wait for all of them to complete before continuing.
+Semaphores limit concurrent actions or Flow executions, acting as a synchronization point. Use them to:  
+- Fan out work across parallel Flows and wait for all of them to complete before continuing.
+- Throttle or synchronize work within a specific scope — such as a department, database, or business domain — to prevent race conditions or guard against resource exhaustion (memory, network I/O, disk).
 
-Multiple semaphores with different names can coexist in a Workspace, letting you create separate execution groups — such as one per Flow, or ones that span several Flows.
+Multiple semaphores with different names can coexist in a Workspace, letting you create separate execution groups — such as one per Flow, one pr business area, or ones that span several Flows.
 
 A semaphore has two properties:
 
-- **Name** — identifies the semaphore, scoped to the Workspace. All Flows in the same Workspace share a semaphore with the same name.
+- **Name** — identifies the semaphore, scoped to the Workspace. **All Flows in the same Workspace share a semaphore with the same name.**
 - **Max slots** — the maximum number of Flows that can execute concurrently.  
 
 The following rules apply:
 
 - **Name** is scoped to the Workspace — all Flows in the same Workspace share a semaphore with the same name.
-- The first `Start Flow` action to run creates the semaphore and sets its `max slots`.
+- The first action to run creates the semaphore and sets its `max slots`.
 - `Max slots` remains fixed until all leases have been released.
 - Once all leases are released, the next caller to acquire a lease sets the new `max slots`. 
 

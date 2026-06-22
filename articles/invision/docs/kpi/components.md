@@ -196,11 +196,11 @@ bold, text-free status indicator.
 <StatusBlock HorizontalAlignment="left">
   <States>
     <State>
-      <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+      <Condition><![CDATA[NumericValue > 25]]></Condition>
       <Properties><Property name="Color" value="green" /></Properties>
     </State>
     <State>
-      <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+      <Condition><![CDATA[NumericValue <= 25]]></Condition>
       <Properties><Property name="Color" value="red" /></Properties>
     </State>
   </States>
@@ -227,11 +227,11 @@ an Image Library reference of the form `@images/<image-name>.png` (for example `
   <Image HorizontalAlignment="center">
     <States>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue > 25]]></Condition>
+        <Condition><![CDATA[NumericValue > 25]]></Condition>
         <Properties><Property name="Image" value="@images/trend-up.png" /></Properties>
       </State>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue <= 25]]></Condition>
+        <Condition><![CDATA[NumericValue <= 25]]></Condition>
         <Properties><Property name="Image" value="@images/trend-down.png" /></Properties>
       </State>
     </States>
@@ -272,15 +272,15 @@ The icon per `Status` token:
   <TrafficLight>
     <States>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue >= 100]]></Condition>
+        <Condition><![CDATA[NumericValue >= 100]]></Condition>
         <Properties><Property name="Status" value="Complete" /></Properties>
       </State>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue >= 50]]></Condition>
+        <Condition><![CDATA[NumericValue >= 50]]></Condition>
         <Properties><Property name="Status" value="HalfWay" /></Properties>
       </State>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue < 50]]></Condition>
+        <Condition><![CDATA[NumericValue < 50]]></Condition>
         <Properties><Property name="Status" value="EarlyStages" /></Properties>
       </State>
     </States>
@@ -306,11 +306,11 @@ color when a state resolves a `Color`.
   <CardBorder>
     <States>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+        <Condition><![CDATA[NumericValue > 0]]></Condition>
         <Properties><Property name="Color" value="green" /></Properties>
       </State>
       <State>
-        <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+        <Condition><![CDATA[NumericValue <= 0]]></Condition>
         <Properties><Property name="Color" value="red" /></Properties>
       </State>
     </States>

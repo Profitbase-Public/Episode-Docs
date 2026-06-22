@@ -24,11 +24,11 @@ from a **default template** that you edit to fit your needs — or you can repla
     <Metric Size="heading1" Weight="bold">
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+          <Condition><![CDATA[NumericValue > 0]]></Condition>
           <Properties><Property name="Color" value="green" /></Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+          <Condition><![CDATA[NumericValue <= 0]]></Condition>
           <Properties><Property name="Color" value="red" /></Properties>
         </State>
       </States>
@@ -36,11 +36,11 @@ from a **default template** that you edit to fit your needs — or you can repla
     <TrafficLight>
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue > 0]]></Condition>
+          <Condition><![CDATA[NumericValue > 0]]></Condition>
           <Properties><Property name="Status" value="Complete" /></Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.NumericValue <= 0]]></Condition>
+          <Condition><![CDATA[NumericValue <= 0]]></Condition>
           <Properties><Property name="Status" value="EarlyStages" /></Properties>
         </State>
       </States>
@@ -147,15 +147,15 @@ FROM (
     <TrafficLight>
       <States>
         <State>
-          <Condition><![CDATA[Event.Data.TotalRevenue >= 50000]]></Condition>
+          <Condition><![CDATA[TotalRevenue >= 50000]]></Condition>
           <Properties><Property name="Status" value="Complete" /></Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.TotalRevenue > 10000 && Event.Data.TotalRevenue < 50000]]></Condition>
+          <Condition><![CDATA[TotalRevenue > 10000 && TotalRevenue < 50000]]></Condition>
           <Properties><Property name="Status" value="HalfWay" /></Properties>
         </State>
         <State>
-          <Condition><![CDATA[Event.Data.TotalRevenue <= 10000]]></Condition>
+          <Condition><![CDATA[TotalRevenue <= 10000]]></Condition>
           <Properties><Property name="Status" value="EarlyStages" /></Properties>
         </State>
       </States>
@@ -183,8 +183,8 @@ a column named `NumericValue` and, optionally, a label in a column named `TextVa
 SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales
 ```
 
-You can return additional columns and reference them by name in a component's state conditions (as
-`Event.Data.<column>`), or point a component at a specific column with `ValueColumn` / `TextColumn`.
+You can return additional columns and reference them by name in a component's state conditions, or
+point a component at a specific column with `ValueColumn` / `TextColumn`.
 See [Data and states](data-and-states.md) for how columns are resolved.
 
 > Only the first row of the result set is used.

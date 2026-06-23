@@ -9,6 +9,7 @@ In order to complete the setup on our side we need the following sent back to us
 - InVision Client Secret (make sure it's the Secret value and not the ID, it should not be a GUID)
 - Expiry Date for the Client Secret
 - InVision Designer App ID
+- API Scope from the Expose API Page. Need the full url including api:// and the /name at the end. 
 
 ## Hypergene InVision Client App Registration
 
@@ -40,9 +41,10 @@ In order to complete the setup on our side we need the following sent back to us
   - ID tokens
 ![Profitbase-InVision-Client-Authentication](https://profitbasedocs.blob.core.windows.net/images/invision/docs/systemsetup/howto/ProfitbaseClientAuthentication.png)
 - Go to Manifest and change the following two propeties
-  - groupMembershipClaims set to "All"
+  - groupMembershipClaims set to "None"
   - isFallbackPublicClient set to false
-![Profitbase-InVision-Client-Manifest](https://profitbasedocs.blob.core.windows.net/images/invision/docs/systemsetup/howto/ProfitbaseInVisionClientManifest.png)
+  - Under api set requestedAccessTokenVersion to 2
+
 
 ## Hypergene InVision Designer App Registration
 

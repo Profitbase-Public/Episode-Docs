@@ -2,7 +2,7 @@
 # KPI Cards
 
 A **KPI card** is a compact, data-driven dashboard element that turns a query result into a visual
-indicator — a metric, a sparkline, a trend indicator, a traffic light, a status block, an icon, or
+indicator — a metric, a sparkline, a trend indicator, a status indicator, a status block, an icon, or
 any combination of these.
 
 KPI cards are designed and configured in the **Designer**, and rendered for end users on
@@ -23,8 +23,8 @@ A KPI card is built from three things:
 - **Per-component states** *(optional)* — conditional rules carried by each component, where a
   condition-less rule always applies and the first matching condition overlays it, deciding that
   component's color, icon image, or status. A component may have no states at all.
-- **A row of presentation components** — small visual elements (metric, text, sparkline, traffic
-  light, status block, icon, card border, etc.) that render the card's data and their own state.
+- **A row of presentation components** — small visual elements (metric, text, sparkline, status
+  indicator, status block, icon, card border, etc.) that render the card's data and their own state.
 
 The card-level query runs **once** as the shared default; a component with its own `DataSource` runs
 an additional query (and the Chart sparkline always runs its own series query). Each component then

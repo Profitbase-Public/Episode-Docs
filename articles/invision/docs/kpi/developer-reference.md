@@ -9,15 +9,15 @@ data endpoint, and import/export. For the conceptual model, start with the
 
 ## Configuration XML
 
-A KPI card is stored as a `KpiConfiguration`. It has an optional `Theme` attribute, an optional
+A KPI card is stored as a `KpiConfiguration`. It has an optional `ClassName` attribute, an optional
 card-level `DataSource` (the fallback query for components that don't declare their own), and one or
-more `row` elements holding components. States are not declared at the top level — each component
+more `Row` elements holding components. States are not declared at the top level — each component
 carries its own optional `DataSource` and `States`.
 
 ```xml
-<KpiConfiguration Theme="theme1">
+<KpiConfiguration ClassName="kpi-theme-theme1">
   <DataSource><![CDATA[SELECT 50 AS NumericValue]]></DataSource>
-  <row>
+  <Row>
     <StatusBlock HorizontalAlignment="left">
       <States>
         <State>
@@ -55,7 +55,7 @@ carries its own optional `DataSource` and `States`.
     <TrendText HorizontalAlignment="left" />
     <TrendDirection HorizontalAlignment="left" />
     <TrendBadge HorizontalAlignment="left" />
-    <TrafficLight>
+    <StatusIndicator>
       <States>
         <State>
           <Condition><![CDATA[NumericValue > 25]]></Condition>
@@ -64,7 +64,7 @@ carries its own optional `DataSource` and `States`.
           </Properties>
         </State>
       </States>
-    </TrafficLight>
+    </StatusIndicator>
     <Chart ValueColumn="Amount"><DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource></Chart>
     <CardBorder>
       <States>
@@ -76,12 +76,12 @@ carries its own optional `DataSource` and `States`.
         </State>
       </States>
     </CardBorder>
-  </row>
+  </Row>
 </KpiConfiguration>
 ```
 
-The example above is a complete configuration — an optional `Theme`, a card-level `DataSource`, and
-one `row` of components, several of which carry their own `States` — showing every part of the
+The example above is a complete configuration — an optional `ClassName`, a card-level `DataSource`, and
+one `Row` of components, several of which carry their own `States` — showing every part of the
 format. A newly created card starts from a default template; you edit these elements yourself.
 
 ### Elements
@@ -94,11 +94,11 @@ format. A newly created card starts from a default template; you edit these elem
 | `Condition` | The state's boolean JavaScript expression. Optional `Async="true"` attribute makes it an awaited async function with HTTP access (default `false`). |
 | `Properties` | Holds the state's `Property` elements. Only emitted when at least one property is set. |
 | `Property` | A `name`/`value` pair. `name` is one of `Color`, `Image`, `Status` (matched case-insensitively). |
-| `row` | A row of components. A configuration may contain one or more rows. |
-| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `TrafficLight`, `StatusBlock`, `Image`, `CardBorder`. The element name equals the component type. |
+| `Row` | A row of components. A configuration may contain one or more rows. |
+| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `StatusIndicator`, `StatusBlock`, `Image`, `CardBorder`. The element name equals the component type. |
 
-`KpiConfiguration` carries an optional `Theme` attribute (a type-scale theme name; omitted for the
-default theme).
+`KpiConfiguration` carries an optional `ClassName` attribute (a complete CSS class name applied to
+the card; omitted for the default `kpi-theme-theme1`).
 
 `State` carries a `Condition` child element and a `Properties` child element; `Color`, `Image`, and
 `Status` are `Property` elements (`<Property name="Color" value="green" />`).
@@ -106,7 +106,7 @@ default theme).
 Component attributes are described in [Components](components.md). Every component accepts
 `HorizontalAlignment`. The data components read a column binding — `ValueColumn` (Metric,
 TrendDirection, TrendBadge, and Chart's series column) or `TextColumn` (Text, TrendText) — while
-StatusBlock, Image, TrafficLight, and CardBorder are driven by their own `States` and ignore the
+StatusBlock, Image, StatusIndicator, and CardBorder are driven by their own `States` and ignore the
 column bindings. `Metric` adds `FormatString`, `Size`, `Weight`; `Text` adds `Size`, `Weight`,
 `Color`. Every component may also carry its own `DataSource` child element; for `Chart` the
 `DataSource` returns the series rows to plot (and has no card-level fallback).

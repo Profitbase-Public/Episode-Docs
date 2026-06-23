@@ -20,7 +20,7 @@ from a **default template** that you edit to fit your needs — or you can repla
 ```xml
 <KpiConfiguration>
   <DataSource><![CDATA[SELECT SUM(Amount) AS NumericValue, 'Revenue YTD' AS TextValue FROM FactSales]]></DataSource>
-  <row>
+  <Row>
     <Metric Size="heading1" Weight="bold">
       <States>
         <State>
@@ -33,7 +33,7 @@ from a **default template** that you edit to fit your needs — or you can repla
         </State>
       </States>
     </Metric>
-    <TrafficLight>
+    <StatusIndicator>
       <States>
         <State>
           <Condition><![CDATA[NumericValue > 0]]></Condition>
@@ -41,11 +41,11 @@ from a **default template** that you edit to fit your needs — or you can repla
         </State>
         <State>
           <Condition><![CDATA[NumericValue <= 0]]></Condition>
-          <Properties><Property name="Status" value="EarlyStages" /></Properties>
+          <Properties><Property name="Status" value="Initial" /></Properties>
         </State>
       </States>
-    </TrafficLight>
-  </row>
+    </StatusIndicator>
+  </Row>
 </KpiConfiguration>
 ```
 
@@ -71,7 +71,7 @@ inline `VALUES` data so they render immediately, before you connect a real query
 
 ### Default design
 
-The default design (no `Theme`): a title, a metric with a sparkline chart, and a trend direction
+The default design (no `ClassName`): a title, a metric with a sparkline chart, and a trend direction
 arrow with a caption.
 
 <br/>
@@ -89,21 +89,21 @@ SELECT
     4 AS Trend,
     '4.0 since last period' AS TrendSince;
 ]]></DataSource>
-  <row>
+  <Row>
     <Text TextColumn="Title" />
-  </row>
-  <row>
+  </Row>
+  <Row>
     <Metric ValueColumn="TotalIncome" />
     <Chart ValueColumn="Amount">
       <DataSource><![CDATA[
 SELECT Amount FROM (VALUES (1,10),(2,14),(3,9),(4,18),(5,22)) AS t(Id, Amount) ORDER BY Id
 ]]></DataSource>
     </Chart>
-  </row>
-  <row>
+  </Row>
+  <Row>
     <TrendDirection ValueColumn="Trend" />
     <Text TextColumn="TrendSince" />
-  </row>
+  </Row>
 </KpiConfiguration>
 ```
 
@@ -111,8 +111,8 @@ SELECT Amount FROM (VALUES (1,10),(2,14),(3,9),(4,18),(5,22)) AS t(Id, Amount) O
 
 ### Status design (theme2)
 
-The `theme2` design: a title, a metric with a traffic-light status icon and a trend badge, and a
-muted caption. The `TrafficLight`'s own `States` evaluate `TotalRevenue` and drive its status icon.
+The `theme2` design: a title, a metric with a status icon and a trend badge, and a
+muted caption. The `StatusIndicator`'s own `States` evaluate `TotalRevenue` and drive its status icon.
 
 <br/>
 
@@ -121,7 +121,7 @@ muted caption. The `TrafficLight`'s own `States` evaluate `TotalRevenue` and dri
 <br/>
 
 ```xml
-<KpiConfiguration Theme="theme2">
+<KpiConfiguration ClassName="kpi-theme-theme2">
   <DataSource><![CDATA[
 SELECT
     'Revenue, NOK' AS Title,
@@ -139,12 +139,12 @@ FROM (
     WHERE rn <= 2
 ) last2;
 ]]></DataSource>
-  <row>
+  <Row>
     <Text TextColumn="Title" />
-  </row>
-  <row>
+  </Row>
+  <Row>
     <Metric ValueColumn="TotalRevenue" />
-    <TrafficLight>
+    <StatusIndicator>
       <States>
         <State>
           <Condition><![CDATA[TotalRevenue >= 50000]]></Condition>
@@ -156,15 +156,15 @@ FROM (
         </State>
         <State>
           <Condition><![CDATA[TotalRevenue <= 10000]]></Condition>
-          <Properties><Property name="Status" value="EarlyStages" /></Properties>
+          <Properties><Property name="Status" value="Initial" /></Properties>
         </State>
       </States>
-    </TrafficLight>
+    </StatusIndicator>
     <TrendBadge ValueColumn="Trend" />
-  </row>
-  <row>
+  </Row>
+  <Row>
     <Text Color="#02080D80" TextColumn="TrendSince" />
-  </row>
+  </Row>
 </KpiConfiguration>
 ```
 
@@ -191,14 +191,16 @@ See [Data and states](data-and-states.md) for how columns are resolved.
 
 <br/>
 
-## Choose a theme (optional)
+## Choose a class (optional)
 
-A card can opt into a named type-scale **theme** with the optional `Theme` attribute on
-`<KpiConfiguration>`. The theme name maps to a `.kpi-theme-*` CSS class that sets the card's font
-sizes and weights. When omitted, the card uses the default theme.
+A card can opt into a type-scale style with the optional `ClassName` attribute on
+`<KpiConfiguration>`. The value is a **complete CSS class name** applied verbatim to the card, which
+sets the card's font sizes and weights. Two classes are built in — `kpi-theme-theme1` and
+`kpi-theme-theme2` — and you can add your own to the stylesheet, reusing the predefined `--kpi-*`
+variables. When omitted, the card defaults to `kpi-theme-theme1`.
 
 ```xml
-<KpiConfiguration Theme="theme1">
+<KpiConfiguration ClassName="kpi-theme-theme1">
   ...
 </KpiConfiguration>
 ```

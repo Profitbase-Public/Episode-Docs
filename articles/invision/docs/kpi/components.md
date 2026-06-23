@@ -8,7 +8,7 @@ the card-level `DataSource` result, and each component resolves its own states i
 [Data and states](data-and-states.md)).
 
 In the configuration XML, the element name equals the component name (for example `<Metric />`,
-`<TrafficLight />`). A component's `DataSource` and `States` are child elements; all other settings
+`<StatusIndicator />`). A component's `DataSource` and `States` are child elements; all other settings
 are attributes.
 
 <br/>
@@ -37,7 +37,7 @@ Components that display card data also bind to a result column. Numeric componen
 
 <br/>
 
-The purely state-driven components — **StatusBlock**, **Image**, **TrafficLight**, and
+The purely state-driven components — **StatusBlock**, **Image**, **StatusIndicator**, and
 **CardBorder** — render from their own resolved state and ignore `ValueColumn` / `TextColumn`.
 
 <br/>
@@ -99,8 +99,8 @@ state color.
 ### TrendText
 
 Displays the card's text, colored by its own resolved state. Use it when you want the value
-itself to carry the state color. Its size and weight come from the card theme's defaults and are not
-set on the component.
+itself to carry the state color. Its size and weight come from the card's type-scale class defaults
+and are not set on the component.
 
 | Property | Allowed values |
 |----------|----------------|
@@ -223,7 +223,7 @@ The image to show is set on the component's **states**, via an `Image` property.
 an Image Library reference of the form `@images/<image-name>.png` (for example `@images/trend-up.png`):
 
 ```xml
-<row>
+<Row>
   <Image HorizontalAlignment="center">
     <States>
       <State>
@@ -236,7 +236,7 @@ an Image Library reference of the form `@images/<image-name>.png` (for example `
       </State>
     </States>
   </Image>
-</row>
+</Row>
 ```
 
 `@images/` references an image stored in your solution's **Image Library** (web assets), which must
@@ -248,12 +248,11 @@ explanation, and the [Button](../forms/formschemas/controls/button.md) control f
 
 <br/>
 
-### TrafficLight
+### StatusIndicator
 
-A status icon (traffic-light style) chosen from its own resolved state `Status`. Use it for a
-compact status indicator. The icon is selected by the state's `Status` token — `Complete`,
-`HalfWay`, or `EarlyStages`; if the resolved state has no (or an unrecognized) `Status`, no icon is
-shown.
+A status icon chosen from its own resolved state `Status`. Use it for a compact status indicator.
+The icon is selected by the state's `Status` token — `Complete`, `HalfWay`, or `Initial`; if the
+resolved state has no (or an unrecognized) `Status`, no icon is shown.
 
 The icon per `Status` token:
 
@@ -261,15 +260,15 @@ The icon per `Status` token:
 |----------|------|
 | `Complete` | ![Complete status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-complete.png) |
 | `HalfWay` | ![HalfWay status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-halfway.png) |
-| `EarlyStages` | ![EarlyStages status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-earlystages.png) |
+| `Initial` | ![Initial status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-earlystages.png) |
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 
 ```xml
-<row>
-  <TrafficLight>
+<Row>
+  <StatusIndicator>
     <States>
       <State>
         <Condition><![CDATA[NumericValue >= 100]]></Condition>
@@ -281,11 +280,11 @@ The icon per `Status` token:
       </State>
       <State>
         <Condition><![CDATA[NumericValue < 50]]></Condition>
-        <Properties><Property name="Status" value="EarlyStages" /></Properties>
+        <Properties><Property name="Status" value="Initial" /></Properties>
       </State>
     </States>
-  </TrafficLight>
-</row>
+  </StatusIndicator>
+</Row>
 ```
 
 <br/>
@@ -302,7 +301,7 @@ color when a state resolves a `Color`.
 | `HorizontalAlignment` | `left`, `center`, `right` (has no visual effect, since the component renders nothing) |
 
 ```xml
-<row>
+<Row>
   <CardBorder>
     <States>
       <State>
@@ -315,7 +314,7 @@ color when a state resolves a `Color`.
       </State>
     </States>
   </CardBorder>
-</row>
+</Row>
 ```
 
 <br/>

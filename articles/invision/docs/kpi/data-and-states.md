@@ -58,7 +58,7 @@ directly instead of the resolved value/text.
 Components that display card data can override which result column they read. The components that
 show a number read `ValueColumn` (Metric, TrendDirection, TrendBadge); the components that show text
 read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image,
-TrafficLight, and CardBorder — are driven by their own states and ignore both.
+StatusIndicator, and CardBorder — are driven by their own states and ignore both.
 
 <br/>
 
@@ -85,11 +85,11 @@ SELECT 1200000 AS Revenue, 0.18 AS Margin, 'North' AS Region
 ```
 
 ```xml
-<row>
+<Row>
   <Metric ValueColumn="Revenue" FormatString="N0" />
   <Metric ValueColumn="Margin" FormatString="P0" />
   <Text ValueColumn="Region" />
-</row>
+</Row>
 ```
 
 <br/>
@@ -140,8 +140,8 @@ values are written as `Property` elements (`<Property name="Color" value="green"
 
 **Status** *(`<Property name="Status" value="…" />`)*
 
-> A status token applied when this state matches, consumed by the TrafficLight component to choose
-> its status icon. Allowed values are `Complete`, `HalfWay`, and `EarlyStages`.
+> A status token applied when this state matches, consumed by the StatusIndicator component to choose
+> its status icon. Allowed values are `Complete`, `HalfWay`, and `Initial`.
 
 <br/>
 
@@ -179,7 +179,7 @@ produce a boolean.
     <Condition><![CDATA[NumericValue <= 25]]></Condition>
     <Properties>
       <Property name="Color" value="red" />
-      <Property name="Status" value="EarlyStages" />
+      <Property name="Status" value="Initial" />
       <Property name="Image" value="@images/trend-down.png" />
     </Properties>
   </State>

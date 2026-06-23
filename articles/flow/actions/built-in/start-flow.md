@@ -34,8 +34,11 @@ Multiple semaphores with different names can coexist in a Workspace, letting you
 
 A semaphore has two properties:
 
-- **Name** — identifies the semaphore, scoped to the Workspace. **All Flows in the same Workspace share a semaphore with the same name.**
+- **Name** — identifies the semaphore, scoped to the Workspace. All Flows in the same Workspace share a semaphore with the same name.
 - **Max slots** — the maximum number of Flows that can execute concurrently.  
+
+>[!NOTE]
+>All Flows in the same Workspace share a semaphore with the same name.
 
 The following rules apply:
 

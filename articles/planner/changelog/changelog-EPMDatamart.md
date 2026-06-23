@@ -35,11 +35,28 @@ This package provide a datamart to share data between EPM applications and exter
 
 - Invision 2026.2+
 
+**Fixes:**
+
+- Critical fixes for import caused by 6.2.0
+- 6.2.0 optimization skipped CPV built in columns ( https://github.com/Profitbase-Public/Planner/issues/2304 )
+- Upgrade error, when coming from datamart version < 6, caused by reference to synonym in Common ( https://github.com/Profitbase-Public/Planner/issues/2352 )
+
 ## EPM Datamart 6.2.0
 
 **Notes:**
 
 - Invision 2026.2+
+
+**Fixes:**
+
+- "System out of memory" error on large CPV View export. ( https://github.com/Profitbase-Public/Planner/issues/2283 )
+- SQL export only follows "append" merge logic. ( https://github.com/Profitbase-Public/Planner/issues/2294 )
+- Finance report and financial periodes when fiscal periods is not following calendar months, the actual periods will appear in wrong period ( https://github.com/Profitbase-Public/Planner/issues/2311 )
+
+**New:**
+
+- New connection type for import & export, SQL connection string. ( https://github.com/Profitbase-Public/Planner/issues/2308 )
+- Optimize import & export ( https://github.com/Profitbase-Public/Planner/issues/2308 )
 
 ## EPM Datamart 6.1.2
 

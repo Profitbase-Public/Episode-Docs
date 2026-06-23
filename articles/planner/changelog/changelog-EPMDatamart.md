@@ -34,6 +34,7 @@ This package provide a datamart to share data between EPM applications and exter
 **Notes:**
 
 - Invision 2026.2+
+- Upgrade ASAP if using Datamart version above 6.
 
 **Fixes:**
 

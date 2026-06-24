@@ -25,11 +25,11 @@ from a **default template** that you edit to fit your needs — or you can repla
       <States>
         <State>
           <Condition><![CDATA[NumericValue > 0]]></Condition>
-          <Properties><Property name="Color" value="green" /></Properties>
+          <Properties><Property Name="Color" Value="green" /></Properties>
         </State>
         <State>
           <Condition><![CDATA[NumericValue <= 0]]></Condition>
-          <Properties><Property name="Color" value="red" /></Properties>
+          <Properties><Property Name="Color" Value="red" /></Properties>
         </State>
       </States>
     </Metric>
@@ -37,11 +37,11 @@ from a **default template** that you edit to fit your needs — or you can repla
       <States>
         <State>
           <Condition><![CDATA[NumericValue > 0]]></Condition>
-          <Properties><Property name="Status" value="Complete" /></Properties>
+          <Properties><Property Name="Status" Value="Complete" /></Properties>
         </State>
         <State>
           <Condition><![CDATA[NumericValue <= 0]]></Condition>
-          <Properties><Property name="Status" value="Initial" /></Properties>
+          <Properties><Property Name="Status" Value="Initial" /></Properties>
         </State>
       </States>
     </StatusIndicator>
@@ -148,15 +148,15 @@ FROM (
       <States>
         <State>
           <Condition><![CDATA[TotalRevenue >= 50000]]></Condition>
-          <Properties><Property name="Status" value="Complete" /></Properties>
+          <Properties><Property Name="Status" Value="Complete" /></Properties>
         </State>
         <State>
           <Condition><![CDATA[TotalRevenue > 10000 && TotalRevenue < 50000]]></Condition>
-          <Properties><Property name="Status" value="HalfWay" /></Properties>
+          <Properties><Property Name="Status" Value="HalfWay" /></Properties>
         </State>
         <State>
           <Condition><![CDATA[TotalRevenue <= 10000]]></Condition>
-          <Properties><Property name="Status" value="Initial" /></Properties>
+          <Properties><Property Name="Status" Value="Initial" /></Properties>
         </State>
       </States>
     </StatusIndicator>
@@ -236,8 +236,9 @@ Card-level styling is set on the Workbook page part:
 **Border**
 
 > Controls whether a border is drawn around the card. The border is enabled by default. To drive the
-> border **color** from a condition, add a [`CardBorder`](components.md#cardborder) component whose
-> state resolves a `Color`; this setting still controls whether the border is drawn at all.
+> border **color** from a condition, add a card-level
+> [`CardBorder`](developer-reference.md#cardborder) element whose state resolves a `Color`; this
+> setting still controls whether the border is drawn at all.
 
 <br/>
 

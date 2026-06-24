@@ -10,26 +10,37 @@ data endpoint, and import/export. For the conceptual model, start with the
 ## Configuration XML
 
 A KPI card is stored as a `KpiConfiguration`. It has an optional `ClassName` attribute, an optional
-card-level `DataSource` (the fallback query for components that don't declare their own), and one or
-more `Row` elements holding components. States are not declared at the top level — each component
-carries its own optional `DataSource` and `States`.
+card-level `DataSource` (the fallback query for components that don't declare their own), an optional
+card-level `CardBorder` element (a sibling of `DataSource`, driving the card's border color), and one
+or more `Row` elements holding components. States are not declared at the top level — each component
+(and the card-level `CardBorder`) carries its own optional `DataSource` and `States`.
 
 ```xml
 <KpiConfiguration ClassName="kpi-theme-theme1">
   <DataSource><![CDATA[SELECT 50 AS NumericValue]]></DataSource>
+  <CardBorder>
+    <States>
+      <State>
+        <Condition><![CDATA[NumericValue > 25]]></Condition>
+        <Properties>
+          <Property Name="Color" Value="green" />
+        </Properties>
+      </State>
+    </States>
+  </CardBorder>
   <Row>
     <StatusBlock HorizontalAlignment="left">
       <States>
         <State>
           <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
-            <Property name="Color" value="green" />
+            <Property Name="Color" Value="green" />
           </Properties>
         </State>
         <State>
           <Condition><![CDATA[NumericValue <= 25]]></Condition>
           <Properties>
-            <Property name="Color" value="red" />
+            <Property Name="Color" Value="red" />
           </Properties>
         </State>
       </States>
@@ -39,13 +50,13 @@ carries its own optional `DataSource` and `States`.
         <State>
           <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
-            <Property name="Image" value="@images/trend-up.png" />
+            <Property Name="Image" Value="@images/trend-up.png" />
           </Properties>
         </State>
         <State>
           <Condition><![CDATA[NumericValue <= 25]]></Condition>
           <Properties>
-            <Property name="Image" value="@images/trend-down.png" />
+            <Property Name="Image" Value="@images/trend-down.png" />
           </Properties>
         </State>
       </States>
@@ -60,29 +71,20 @@ carries its own optional `DataSource` and `States`.
         <State>
           <Condition><![CDATA[NumericValue > 25]]></Condition>
           <Properties>
-            <Property name="Status" value="Complete" />
+            <Property Name="Status" Value="Complete" />
           </Properties>
         </State>
       </States>
     </StatusIndicator>
     <Chart ValueColumn="Amount"><DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource></Chart>
-    <CardBorder>
-      <States>
-        <State>
-          <Condition><![CDATA[NumericValue > 25]]></Condition>
-          <Properties>
-            <Property name="Color" value="green" />
-          </Properties>
-        </State>
-      </States>
-    </CardBorder>
   </Row>
 </KpiConfiguration>
 ```
 
-The example above is a complete configuration — an optional `ClassName`, a card-level `DataSource`, and
-one `Row` of components, several of which carry their own `States` — showing every part of the
-format. A newly created card starts from a default template; you edit these elements yourself.
+The example above is a complete configuration — an optional `ClassName`, a card-level `DataSource`, a
+card-level `CardBorder`, and one `Row` of components, several of which carry their own `States` —
+showing every part of the format. A newly created card starts from a default template; you edit these
+elements yourself.
 
 ### Elements
 
@@ -93,23 +95,39 @@ format. A newly created card starts from a default template; you edit these elem
 | `State` | A `Condition` child element plus a `Properties` element. A state with no (or empty) `Condition` always applies as a base. |
 | `Condition` | The state's boolean JavaScript expression. Optional `Async="true"` attribute makes it an awaited async function with HTTP access (default `false`). |
 | `Properties` | Holds the state's `Property` elements. Only emitted when at least one property is set. |
-| `Property` | A `name`/`value` pair. `name` is one of `Color`, `Image`, `Status` (matched case-insensitively). |
+| `Property` | A `Name`/`Value` pair. `Name` is one of `Color`, `Image`, `Status` (matched case-insensitively). |
 | `Row` | A row of components. A configuration may contain one or more rows. |
-| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `StatusIndicator`, `StatusBlock`, `Image`, `CardBorder`. The element name equals the component type. |
+| `CardBorder` | An optional card-level element (a sibling of `DataSource`, not a row component). Carries its own `States`; the resolved `Color` sets the card's border color. See [CardBorder](#cardborder). |
+| component elements | `Metric`, `Text`, `TrendText`, `Chart`, `TrendDirection`, `TrendBadge`, `StatusIndicator`, `StatusBlock`, `Image`. The element name equals the component type. |
 
 `KpiConfiguration` carries an optional `ClassName` attribute (a complete CSS class name applied to
 the card; omitted for the default `kpi-theme-theme1`).
 
 `State` carries a `Condition` child element and a `Properties` child element; `Color`, `Image`, and
-`Status` are `Property` elements (`<Property name="Color" value="green" />`).
+`Status` are `Property` elements (`<Property Name="Color" Value="green" />`).
 
 Component attributes are described in [Components](components.md). Every component accepts
 `HorizontalAlignment`. The data components read a column binding — `ValueColumn` (Metric,
 TrendDirection, TrendBadge, and Chart's series column) or `TextColumn` (Text, TrendText) — while
-StatusBlock, Image, StatusIndicator, and CardBorder are driven by their own `States` and ignore the
+StatusBlock, Image, and StatusIndicator are driven by their own `States` and ignore the
 column bindings. `Metric` adds `FormatString`, `Size`, `Weight`; `Text` adds `Size`, `Weight`,
 `Color`. Every component may also carry its own `DataSource` child element; for `Chart` the
 `DataSource` returns the series rows to plot (and has no card-level fallback).
+
+<br/>
+
+### CardBorder
+
+`CardBorder` is an optional **card-level** element — a direct child of `KpiConfiguration` and a
+sibling of `DataSource`, declared before the `Row` elements. It is **not** a row component: a
+`<CardBorder>` placed inside a `<Row>` is ignored.
+
+It renders nothing of its own. Like a component, it carries an optional `DataSource` and a `States`
+block; its resolved state `Color` sets the card's **border color**. The page part's **Border**
+setting still controls whether a border is drawn at all (see
+[Creating KPI cards](creating-kpi-cards.md#style-the-card)); `CardBorder` only changes the border
+color when a state resolves a `Color`. `HorizontalAlignment` may be set but has no visual effect,
+since the element renders nothing.
 
 <br/>
 
@@ -169,9 +187,18 @@ The card-level query runs **once per card** as the shared default. Each componen
 own data: a component with its own `DataSource` runs an additional query (each `Chart` always runs
 its own series `DataSource`, with no card fallback), and every component resolves its own states on
 the client. There is no single card-level resolved state — each component applies the color, image,
-or status from its own resolved state (the `CardBorder` component's resolved color drives the card
-border). On the client, `@images/...` image values are resolved against the Image Library before
+or status from its own resolved state (the card-level `CardBorder` element's resolved color drives the
+card border). On the client, `@images/...` image values are resolved against the Image Library before
 rendering; a raw image URL is used as-is.
+
+<br/>
+
+While a card is loading for the **first time**, the whole card shows a **loading skeleton** — a
+shimmer placeholder in the card's footprint — instead of an empty box. The skeleton covers the entire
+initial load: the card-level `DataSource` query and the client-side state resolution, including any
+`Async="true"` condition's awaited HTTP calls. It clears once that load completes. It is a first-load
+placeholder, not a per-component or per-condition indicator, and does not reappear when states
+re-evaluate on later reloads.
 
 <br/>
 

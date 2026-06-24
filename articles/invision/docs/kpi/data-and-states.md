@@ -57,8 +57,8 @@ directly instead of the resolved value/text.
 
 Components that display card data can override which result column they read. The components that
 show a number read `ValueColumn` (Metric, TrendDirection, TrendBadge); the components that show text
-read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image,
-StatusIndicator, and CardBorder — are driven by their own states and ignore both.
+read `TextColumn` (Text, TrendText). The purely state-driven components — StatusBlock, Image, and
+StatusIndicator — are driven by their own states and ignore both.
 
 <br/>
 
@@ -99,7 +99,7 @@ SELECT 1200000 AS Revenue, 0.18 AS Margin, 'North' AS Region
 Each component can carry its **own** `States` — a list nested inside the component element, which is
 optional; a component with no states simply renders without a state-driven color, image, or status.
 A state is a condition plus the visual outcome to apply when that condition matches. The outcome
-values are written as `Property` elements (`<Property name="Color" value="green" />`) inside a
+values are written as `Property` elements (`<Property Name="Color" Value="green" />`) inside a
 `Properties` element, a sibling of `Condition`:
 
 <br/>
@@ -122,15 +122,16 @@ values are written as `Property` elements (`<Property name="Color" value="green"
 
 <br/>
 
-**Color** *(`<Property name="Color" value="…" />`)*
+**Color** *(`<Property Name="Color" Value="…" />`)*
 
 > The color applied when this state matches. Any CSS color works — a named color (`green`, `red`,
 > `yellow`) or a hex value (`#1a9c4f`). It colors the component that owns the state (for example
-> Metric, StatusBlock, or TrendText); on a `CardBorder` component it drives the card's border color.
+> Metric, StatusBlock, or TrendText); on the card-level `CardBorder` element it drives the card's
+> border color.
 
 <br/>
 
-**Image** *(`<Property name="Image" value="…" />`)*
+**Image** *(`<Property Name="Image" Value="…" />`)*
 
 > An image applied when this state matches, used by the Image component. The value is either an
 > **Image Library** reference of the form `@images/<image-name>.png` or a raw image URL (see
@@ -138,7 +139,7 @@ values are written as `Property` elements (`<Property name="Color" value="green"
 
 <br/>
 
-**Status** *(`<Property name="Status" value="…" />`)*
+**Status** *(`<Property Name="Status" Value="…" />`)*
 
 > A status token applied when this state matches, consumed by the StatusIndicator component to choose
 > its status icon. Allowed values are `Complete`, `HalfWay`, and `Initial`.
@@ -165,22 +166,26 @@ failed/rejected async request — the error **surfaces to the user and halts the
 evaluation**, rather than passing unnoticed. Write conditions that reference valid columns and
 produce a boolean.
 
+Because an `Async="true"` condition's HTTP request runs as part of the card's first load, the card's
+loading skeleton stays visible until that request resolves (see
+[Execution](developer-reference.md#execution)).
+
 ```xml
 <States>
   <State>
     <Condition><![CDATA[NumericValue > 25]]></Condition>
     <Properties>
-      <Property name="Color" value="green" />
-      <Property name="Status" value="Complete" />
-      <Property name="Image" value="@images/trend-up.png" />
+      <Property Name="Color" Value="green" />
+      <Property Name="Status" Value="Complete" />
+      <Property Name="Image" Value="@images/trend-up.png" />
     </Properties>
   </State>
   <State>
     <Condition><![CDATA[NumericValue <= 25]]></Condition>
     <Properties>
-      <Property name="Color" value="red" />
-      <Property name="Status" value="Initial" />
-      <Property name="Image" value="@images/trend-down.png" />
+      <Property Name="Color" Value="red" />
+      <Property Name="Status" Value="Initial" />
+      <Property Name="Image" Value="@images/trend-down.png" />
     </Properties>
   </State>
 </States>
@@ -193,13 +198,13 @@ color is grey, and the conditional state turns it orange when it matches:
 <States>
   <State>
     <Properties>
-      <Property name="Color" value="grey" />
+      <Property Name="Color" Value="grey" />
     </Properties>
   </State>
   <State>
     <Condition><![CDATA[NumericValue < Target && Region === 'North']]></Condition>
     <Properties>
-      <Property name="Color" value="orange" />
+      <Property Name="Color" Value="orange" />
     </Properties>
   </State>
 </States>
@@ -212,7 +217,7 @@ An `Async="true"` condition can compare the value against data fetched from an A
   <State>
     <Condition Async="true"><![CDATA[NumericValue >= (await HttpGet('/api/targets/current')).target]]></Condition>
     <Properties>
-      <Property name="Color" value="green" />
+      <Property Name="Color" Value="green" />
     </Properties>
   </State>
 </States>

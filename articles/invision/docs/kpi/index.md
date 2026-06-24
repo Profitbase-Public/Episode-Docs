@@ -24,14 +24,14 @@ A KPI card is built from three things:
   condition-less rule always applies and the first matching condition overlays it, deciding that
   component's color, icon image, or status. A component may have no states at all.
 - **A row of presentation components** — small visual elements (metric, text, sparkline, status
-  indicator, status block, icon, card border, etc.) that render the card's data and their own state.
+  indicator, status block, icon, etc.) that render the card's data and their own state.
 
 The card-level query runs **once** as the shared default; a component with its own `DataSource` runs
 an additional query (and the Chart sparkline always runs its own series query). Each component then
 resolves its **own** state on the client — there is no single resolved state shared across the card.
 A component chooses which result column to display (via `ValueColumn` / `TextColumn`) and applies
 the color / image / status from its own matching state. The card's border color is driven by a
-dedicated `CardBorder` component.
+dedicated card-level `CardBorder` element.
 
 By default a component shows the resolved value or text; a component can override which result
 column it reads (via `ValueColumn` / `TextColumn`), and any column in the result set — plus the
@@ -47,7 +47,7 @@ component's state conditions. See [Data and states](data-and-states.md) for the 
 - **[Data and states](data-and-states.md)** — the card-level data source, per-component data
   overrides, column resolution, and the per-component conditional states that drive each component's
   appearance.
-- **[Components](components.md)** — reference for the ten presentation component types and the
+- **[Components](components.md)** — reference for the nine presentation component types and the
   allowed values for every property.
 - **[Developer reference](developer-reference.md)** — the XML configuration format, the data
   endpoint, import/export, and limits.

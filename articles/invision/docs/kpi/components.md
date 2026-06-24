@@ -37,8 +37,8 @@ Components that display card data also bind to a result column. Numeric componen
 
 <br/>
 
-The purely state-driven components — **StatusBlock**, **Image**, **StatusIndicator**, and
-**CardBorder** — render from their own resolved state and ignore `ValueColumn` / `TextColumn`.
+The purely state-driven components — **StatusBlock**, **Image**, and **StatusIndicator** — render
+from their own resolved state and ignore `ValueColumn` / `TextColumn`.
 
 <br/>
 
@@ -134,6 +134,12 @@ more query.
 
 <br/>
 
+![Chart sparkline rendered in a KPI card](https://profitbasedocs.blob.core.windows.net/images/kpi-card-chart-sparkline.png)
+
+*Example chart*
+
+<br/>
+
 ### TrendDirection
 
 Shows an up or down arrow chosen purely from the **sign** of its value: a negative number shows the
@@ -142,10 +148,10 @@ fixed in the icons and are not driven by state.
 
 The two icons:
 
-| Icon | Shown when |
-|------|------------|
-| ![Up trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-up.png) | the value is zero or positive |
-| ![Down trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-down.png) | the value is negative |
+| Shown when | Icon |
+|------------|------|
+| the value is zero or positive | ![Up trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-up.png) |
+| the value is negative | ![Down trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-down.png) |
 
 | Property | Allowed values |
 |----------|----------------|
@@ -197,15 +203,22 @@ bold, text-free status indicator.
   <States>
     <State>
       <Condition><![CDATA[NumericValue > 25]]></Condition>
-      <Properties><Property name="Color" value="green" /></Properties>
+      <Properties><Property Name="Color" Value="green" /></Properties>
     </State>
     <State>
       <Condition><![CDATA[NumericValue <= 25]]></Condition>
-      <Properties><Property name="Color" value="red" /></Properties>
+      <Properties><Property Name="Color" Value="red" /></Properties>
     </State>
   </States>
 </StatusBlock>
 ```
+
+<br/>
+
+| Description | Image |
+|-------------|-------|
+| With no resolved `Color`, the block renders in its default neutral fill | ![StatusBlock — default render](https://profitbasedocs.blob.core.windows.net/images/kpi-statusblock-default.png) |
+| When a state resolves a `Color`, that color fills the block | ![StatusBlock — state-colored](https://profitbasedocs.blob.core.windows.net/images/kpi-statusblock-state-colored.png) |
 
 <br/>
 
@@ -228,11 +241,11 @@ an Image Library reference of the form `@images/<image-name>.png` (for example `
     <States>
       <State>
         <Condition><![CDATA[NumericValue > 25]]></Condition>
-        <Properties><Property name="Image" value="@images/trend-up.png" /></Properties>
+        <Properties><Property Name="Image" Value="@images/trend-up.png" /></Properties>
       </State>
       <State>
         <Condition><![CDATA[NumericValue <= 25]]></Condition>
-        <Properties><Property name="Image" value="@images/trend-down.png" /></Properties>
+        <Properties><Property Name="Image" Value="@images/trend-down.png" /></Properties>
       </State>
     </States>
   </Image>
@@ -256,8 +269,8 @@ resolved state has no (or an unrecognized) `Status`, no icon is shown.
 
 The icon per `Status` token:
 
-| `Status` | Icon |
-|----------|------|
+| Status | Icon |
+|--------|------|
 | `Complete` | ![Complete status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-complete.png) |
 | `HalfWay` | ![HalfWay status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-halfway.png) |
 | `Initial` | ![Initial status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-earlystages.png) |
@@ -272,48 +285,18 @@ The icon per `Status` token:
     <States>
       <State>
         <Condition><![CDATA[NumericValue >= 100]]></Condition>
-        <Properties><Property name="Status" value="Complete" /></Properties>
+        <Properties><Property Name="Status" Value="Complete" /></Properties>
       </State>
       <State>
         <Condition><![CDATA[NumericValue >= 50]]></Condition>
-        <Properties><Property name="Status" value="HalfWay" /></Properties>
+        <Properties><Property Name="Status" Value="HalfWay" /></Properties>
       </State>
       <State>
         <Condition><![CDATA[NumericValue < 50]]></Condition>
-        <Properties><Property name="Status" value="Initial" /></Properties>
+        <Properties><Property Name="Status" Value="Initial" /></Properties>
       </State>
     </States>
   </StatusIndicator>
-</Row>
-```
-
-<br/>
-
-### CardBorder
-
-A non-visual component: it renders nothing of its own, but its resolved state `Color` sets the
-card's **border color**. Add it to a row to drive the border from a condition. The page part's
-**Border** setting still controls whether a border is drawn at all; `CardBorder` only changes its
-color when a state resolves a `Color`.
-
-| Property | Allowed values |
-|----------|----------------|
-| `HorizontalAlignment` | `left`, `center`, `right` (has no visual effect, since the component renders nothing) |
-
-```xml
-<Row>
-  <CardBorder>
-    <States>
-      <State>
-        <Condition><![CDATA[NumericValue > 0]]></Condition>
-        <Properties><Property name="Color" value="green" /></Properties>
-      </State>
-      <State>
-        <Condition><![CDATA[NumericValue <= 0]]></Condition>
-        <Properties><Property name="Color" value="red" /></Properties>
-      </State>
-    </States>
-  </CardBorder>
 </Row>
 ```
 

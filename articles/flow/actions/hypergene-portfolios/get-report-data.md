@@ -1,6 +1,6 @@
 # Get report data
 
-Gets the raw data for a Hypergene Porfolios report in the specified supported format (JSON, CSV, XML or HTML).
+Gets the raw data for a Hypergene Portfolios report in the specified supported format (JSON, CSV, XML or HTML).
 
 > [!NOTE]
 > If you request a format not supported by the report, the data will be returned in the report’s default format. For example, if you request CSV but the report only supports JSON, the data will be returned as JSON.

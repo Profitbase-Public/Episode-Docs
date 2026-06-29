@@ -64,14 +64,14 @@ override) and takes its color from its own resolved state.
 
 | Property | Allowed values |
 |----------|----------------|
-| `FormatString` | A .NET numeric format string, for example `N0`, `P0`, `#,##0.00`. Defaults to `#,##0`. |
+| `FormatString` | One of InVision's number format strings (numbro-style), for example `0,0`, `0.[00]`, `0,0.00`, `0%`, `0a`. When omitted, the value uses the locale's default number formatting. |
 | `Size` | `sub`, `normal`, `heading1`, `heading2`, `heading3`. Defaults to `heading1`. |
 | `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set |
 
 ```xml
-<Metric ValueColumn="Revenue" FormatString="N0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
+<Metric ValueColumn="Revenue" FormatString="0,0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
 ```
 
 <br/>

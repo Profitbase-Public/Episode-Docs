@@ -86,8 +86,8 @@ SELECT 1200000 AS Revenue, 0.18 AS Margin, 'North' AS Region
 
 ```xml
 <Row>
-  <Metric ValueColumn="Revenue" FormatString="N0" />
-  <Metric ValueColumn="Margin" FormatString="P0" />
+  <Metric ValueColumn="Revenue" FormatString="0,0" />
+  <Metric ValueColumn="Margin" FormatString="0%" />
   <Text ValueColumn="Region" />
 </Row>
 ```

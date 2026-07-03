@@ -14,3 +14,12 @@ Member users can only access the Workspace(s) they have been granted access to b
 To grant a Member user permissions to a Workspace, go to the Workspace and [grant permissions to the user from access control screen](../workspaces/workspace-access-control.md).  
  
 ![Tenant Users](../../../images/flow/tenant-users.png)
+
+<br/>
+
+### Users with readonly access
+If you want a user to only be able to read (view) and execute Flows, check the `Read and execute only` checkbox in the `Tenant` -> `Users` screen. 
+Select the user, then check the `Read and execute only` checkbox.  
+You'd typically want to enable this for people in customer support that should be able to inspect logs and re-run jobs, but not make any changes to existing setup. 
+
+![img](/images/flow/user-readonly.png)

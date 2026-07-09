@@ -109,6 +109,9 @@
 - name: Model Context Protocol (MCP)
   href: mcp/toc.yml
   topicHref: mcp/overview.md
+- name: NetSuite
+  href: netsuite/toc.yml
+  topicHref: netsuite/overview.md
 - name: OneDrive
   href: onedrive/toc.yml
   topicHref: onedrive/overview.md

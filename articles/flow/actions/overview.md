@@ -44,7 +44,7 @@ For event-driven flows that publish messages to queues, topics, or event streams
 <br/>
 
 #### Web and HTTP APIs
-For integrating with HTTP-based APIs that don't have a dedicated category. [HTTP](./http/overview.md) makes generic HTTP requests, downloads and uploads files, returns files as HTTP responses, and converts web content. [GraphQL](./graphql/overview.md) calls GraphQL endpoints. [GitHub](./github/overview.md) integrates with GitHub repositories — fetching files, listing items, working with commits. [Dynamics 365](./dynamics365/overview.md) integrates with Dynamics 365 Business Central.
+For integrating with HTTP-based APIs that don't have a dedicated category. [HTTP](./http/overview.md) makes generic HTTP requests, downloads and uploads files, returns files as HTTP responses, and converts web content. [GraphQL](./graphql/overview.md) calls GraphQL endpoints. [GitHub](./github/overview.md) integrates with GitHub repositories — fetching files, listing items, working with commits.
 
 <br/>
 
@@ -64,4 +64,6 @@ For integrating with HTTP-based APIs that don't have a dedicated category. [HTTP
 <br/>
 
 #### ERP and accounting integrations
-Connectors for Nordic accounting and ERP systems. [Fortnox](./fortnox/overview.md), [Hogia](./hogia/overview.md), and [Finago Office](./finago-office/overview.md) target Swedish platforms. [PowerOffice Go](./poweroffice-go/overview.md), [Tripletex](./tripletex/overview.md), [Visma](./visma/overview.md) (Visma Business NXT and Visma.Net), and [Xledger](./xledger/overview.md) target Norwegian and other Nordic platforms. Most expose REST APIs through generic *REST API request* and *REST API request with paging* actions; Visma Business NXT and Xledger use GraphQL instead. [SIE](./sie/overview.md) parses SIE files — the open Swedish standard for exchanging accounting data between systems.
+[Dynamics 365](./dynamics365/overview.md) integrates with Dynamics 365 Business Central. 
+[Fortnox](./fortnox/overview.md) and [Hogia](./hogia/overview.md) target Swedish platforms allong with [SIE](./sie/overview.md) file parsing. 
+[Finago Office](./finago-office/overview.md), [NetSuite](./netsuite/overview.md), [PowerOffice Go](./poweroffice-go/overview.md), [Tripletex](./tripletex/overview.md), [Visma](./visma/overview.md) (Visma Business NXT and Visma.Net), and [Xledger](./xledger/overview.md) target Nordic platforms. Most expose REST APIs through generic *REST API request* and *REST API request with paging* actions; Visma Business NXT and Xledger use GraphQL instead.

@@ -1,8 +1,8 @@
 # NetSuite REST API Request
 
-The **REST API Request** action allows you to interact with the [NetSuite REST API](https://starapi.hogia.se) to read or write data. 
+The **REST API Request** action allows you to interact with the [NetSuite REST API](https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2024.2/index.html) to read or write data. 
 
-As described in the [overview](./overview.md), use **Record API** to create, read, updae or delete single records (CRUD operations). You can also use the **SuiteQL** to read smaler amount of data.
+As described in the [overview](./overview.md), use **Record API** to create, read, update or delete single records (CRUD operations). You can also use **SuiteQL** to read smaler amount of data.
 
 
 ![NetSuite REST API](../../../../images/flow/netsuite-rest-api.png)  

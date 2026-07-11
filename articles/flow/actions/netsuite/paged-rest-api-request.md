@@ -1,8 +1,8 @@
 # NetSuite REST API Request with paging
 
-Use the [NetSuite REST API](https://starapi.hogia.se) to retrieve paginated data.
+Use the [NetSuite REST API](https://starapi.hogia.sehttps://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2024.2/index.html) to retrieve paginated data.
 
-The **REST API request with paging** action enables you to interact with the [NetSuite REST API](https://starapi.hogia.se) to retrieve large, paginated datasets. This action simplifies working with endpoints that return multiple pages of data, such as vouchers, invoices, or accounts. Pagination is managed automatically, allowing you to focus on processing the data.
+The **REST API request with paging** action enables you to interact with the [NetSuite REST API](https://system.netsuite.com/help/helpcenter/en_US/APIs/REST_API_Browser/record/v1/2024.2/index.html) to retrieve large, paginated datasets. This action simplifies working with endpoints that return multiple pages of data, such as vouchers, invoices, or accounts. Pagination is managed automatically, allowing you to focus on processing the data.
 
 ![NetSuite REST API Paging](/images/flow/netsuite-rest-api-paging.png)  
 

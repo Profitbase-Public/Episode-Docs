@@ -35,21 +35,24 @@ To modify the properties of an existing Package, use the Edit button for the sel
 <br/>
 
 ## Install 
-Installing a Package is done under the "Installed Packages" tab in a Workspace. Press the Install button and select a file containing the Package export.
+Installing a Package is done under the "Installed Packages" tab in a Workspace. 
+Packages can be installed from two sources:
+- The Hypergene Store; Official and certified Packages from Hypergene, typically ERP system integrations.
+- Files; Custom or partner authored packages.
+
 A package cannot be installed in the same Workspace where it was created.
 
-![Packages Install](../../../images/packages-install.png)
+![Packages Install](/images/flow/packages-install.png)
 
-If the selected Package was created with a older Flow version, it will automatically be upgraded to the current Flow instance version.
+If the selected Package was created from an older version of Flow, it will automatically be upgraded to the current Flow version when installed.
 
 <br/>
 
 ## Upgrade 
-
-Upgrading a Package is done by selecting the upgrade functionality in the Installed Packages functionality and then choosing a file that contains an export of the selected Flow Package. The content of the upgrade file must contain a version property with a newer/higher version then the installed package.
+- To upgrade a Package that was installed from file, press `Ugrade from file` in the `Installed Packages` tab.
+- To upgrade a Package that was installed from the Hypergene Store, in the `Installed Packages` tab, select / hover the package, open the `...` menu on the right and press `Upgrade from Store`.
 
 <br/>
 
 ## Delete 
-
-To delete an installed package, access the delete functionality on the selected Package in the Installed Packages tab. To delete a package definition, access the delete functionality on the selected package definition in the Packages tab.
+To delete a Package, to to the `Installed Packages` tab, select / hover the package, open the `...` menu on the right and press `Delete`.

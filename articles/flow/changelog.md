@@ -4,6 +4,8 @@
 
 Learn about the cool new features, updates, and bug fixes.
 
+- [August 2026](changelog/release-notes-august-2026.md)  
+- [May 2026](changelog/release-notes-may-2026.md)  
 - [February 2026](changelog/release-notes-feb-2026.md)
 - [December 2025](changelog/release-notes-dec-2025.md)
 - [October 2025](changelog/changelog25_october.md)

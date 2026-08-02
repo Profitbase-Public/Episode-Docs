@@ -2,8 +2,6 @@
 
 Specifies a Flow that enables the [Tools AI Agent](../agents/tools-ai-agent.md) to use it as a tool.  
 
-
-
 ![Flow AI Tool](../../../../images/flow/flow-AI-tool.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  

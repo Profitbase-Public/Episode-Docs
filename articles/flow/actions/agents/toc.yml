@@ -2,3 +2,7 @@
   href: ai-agent.md
 - name: Tools AI Agent
   href: tools-ai-agent.md
+- name: Harness AI Agent
+  href: harness-ai-agent.md
+- name: AI Agent skill
+  href: ai-agent-skill.md

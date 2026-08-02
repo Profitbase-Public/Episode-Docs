@@ -1,6 +1,6 @@
 # Tools AI Agent
 
-Defines an AI Agent that can use tools to perform actions, for example fetching data or calling APIs.
+Defines an AI Agent that can use tools to perform actions and return a result, for example fetching data or calling APIs.
 
 ![Tools Agent Example1](/images/flow/tools-agent-example1.png)
 

@@ -18,9 +18,9 @@ This flow demonstrates how an AI agent uses the **Flow AI tool** to invoke anoth
 
 | Name                         | Required | Description                                                                 |
 |------------------------------|----------|-----------------------------------------------------------------------------|
-| Title                        | No | The name of the Flow AI tool as exposed to the AI agent. When a flow is selected from the list, the title is automatically set to the name of the flow.     |
+| Title                        | No | A descriptive title for the action. This value is not used by the system and serves only as a user-defined label to make the action easier to identify.  |
 | Flow                         | Yes | The flow that will be invoked by the AI agent when this tool is called.    |
 | Run a Flow in another Workspace | No | Allows invoking a flow from a different workspace.                         |
-| Tools group                  | No | Logical group name used to organize tools available to the AI agent.       |
+| Tools group                  | No | Logical group name used to organize tools available to the AI agent. This property should only be considered when using the [Tools AI agent](../agents/tools-ai-agent.md) with `Code mode` enabled and you pull in tools from different sources with conflicting names. |
 | Disabled                     | No | Disables the tool so it cannot be invoked by the AI agent.                 |
 | Description                  | No | Description of what the tool does, used by the AI agent to understand its purpose. |

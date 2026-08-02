@@ -2,9 +2,9 @@
   href: "connection.md"
 - name: AI chat history memory
   href: "agent-memory.md"
-- name: Agent file memory
+- name: AI agent file memory
   href: "agent-file-memory.md"
-- name: Agent file access
+- name: AI agent file access
   href: "agent-file-access.md"
 - name: "Create connection"
   href: "create-connection.md"

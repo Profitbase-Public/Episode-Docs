@@ -1,6 +1,11 @@
 # Flow August 2026 update
 
-The August 2026 release focuses on concurrency control, developer experience, and connector improvements. Highlights include distributed semaphores for orchestrating parallel Flow executions, animated execution progress in the Designer, and the ability to install and upgrade packages directly from the Hypergene Store. Access control gains a read-only permission option, and MCP server configuration is now available at the Workspace level for finer-grained scoping. On the connector side, we've added support for Oracle NetSuite, Finago adds paged REST API support, Dynamics 365 Business Central gets a general-purpose REST API Request action, and a new AI/ML Anomaly Detection node uses Isolation Forest with SHAP explanations to flag unusual rows in tabular data.
+The August 2026 release focuses on connector improvements, concurrency control, developer experience, and AI agent capabilities. On the connector side, we've added support for **Oracle NetSuite**, **Finago** adds paged REST API support, **Dynamics 365 Business Central** gets a general-purpose REST API Request action, and a new **AI/ML Anomaly Detection** node uses Isolation Forest with SHAP explanations to flag unusual rows in tabular data.  
+
+Other highlights include the new **Harness AI agent** for long-running, multi-step agentic tasks, **AI agent skills** for extending agents with domain-specific knowledge and executable workflows, and **AI agent file access and file memory** nodes that give agents a SQL Server-backed virtual file system for storing outputs, plans, and working state. 
+**Distributed semaphores** enable orchestration of parallel Flow executions, animated execution progress aids debugging in the Designer, and **packages can now be installed and upgraded directly from the Hypergene Store**. Access control gains a read-only permission option, and **MCP server configuration is now available at the Workspace level** for finer-grained scoping.
+
+<br/>
 
 ## Oracle NetSuite connector
 We've added support for building data integrations to Oracle NetSuite using the new [paged](../actions/netsuite/paged-rest-api-request.md) and [non-paged](../actions/netsuite/rest-api-request.md) actions for the NetSuite REST API.  
@@ -67,6 +72,38 @@ Flow now supports distributed semaphores for throttling and synchronizing concur
 
 <br/>
 
+## Harness AI agent
+
+The new [Harness AI agent](../actions/agents/harness-ai-agent.md) defines an AI agent capable of performing long-running, complex, multi-step tasks using tools, skills, and external services such as file systems and APIs. Unlike the Tools AI agent, it is designed for open-ended, interactive workflows where the agent reasons through a task, uses tools to act, and writes its output to a backing store such as a SQL Server file access node for retrieval by downstream nodes. It supports two types of memory — conversation history for ongoing sessions with a user, and internal working memory for storing plans, notes, and intermediate files — and can stream its progress back to the client as it works.
+
+![img](/images/flow/harness-ai-agent.png)
+
+<br/>
+
+## AI agent skill
+
+The new [AI agent skill](../actions/agents/ai-agent-skill.md) lets you teach AI agents specialized knowledge and workflows — domain-specific processes, rules, and reference material that the model would not otherwise know. A skill consists of a name and description (always visible to the agent as a routing signal), plus instructions, scripts, and resources that are loaded into context only when the agent decides the skill is relevant to the current task. This progressive, on-demand loading is a key mechanism for keeping token usage and cost low: skills that aren't needed in a given run consume no tokens. Scripts are executable Flow functions the agent can invoke mid-task, while resources are named reference content (lookup tables, schemas, style guides) the agent can pull in on demand.
+
+![img](/images/flow/ai-agent-skill.png)
+
+<br/>
+
+## AI agent file memory for SQL Server (virtual file system)
+
+[AI agent file memory](../actions/sql-server/agent-file-memory.md) for SQL Server gives the [Harness AI agent](../actions/agents/harness-ai-agent.md) a SQL Server-backed store for working memory — notes, plans, intermediate state, and temporary files. This is separate from conversation history: it captures what the agent is *doing*, not what it has *said*. A practical benefit is that the agent can pause mid-task to ask the user for clarification or confirmation, then pick up exactly where it left off once the user responds. The backing table is created automatically on first use; no upfront schema setup is required.
+
+![img](/images/flow/sql-server-agent-file-memory.png)
+
+<br/>
+
+## AI agent file access for SQL Server (virtual file system)
+
+Use the [AI agent file access](../actions/sql-server/agent-file-access.md) node to expose a SQL Server table as a virtual file system where AI agents can create, read, write, search, and delete files and folders. Attach it to the `Context providers` port of a [Harness AI agent](../actions/agents/harness-ai-agent.md) to let the agent write its output to files — such as JSON or CSV — for retrieval by downstream nodes like [Load to DataTable](../actions/sql-server/load-to-datatable.md). You can also pre-populate the table with input files before running the agent, giving it structured context through a familiar file system API. As with the file memory node, the backing table is created automatically if it does not already exist.
+
+![img](/images/flow/sql-server-agent-file-access.png)
+
+<br/>
+
 ## Animated Flow execution progress
 To improve the developer experience in the Designer, nodes are now adorned by an animation while executing, and flagged with an `execution completed` icon when they have executed at least once (nodes in loop bodies are executed multiple times). This makes it easy to track the execution progress of Flows during development and testing.
 
@@ -79,5 +116,5 @@ To improve the developer experience in the Designer, nodes are now adorned by an
 - [Feature] CSV nodes: Create column mappings from clipboard
 - [Feature] [Run Flow](../actions/built-in/run-flow.md) / [Start Flow](../actions/built-in/start-flow.md) nodes: Open the selected Flow in a new browser tab. Improves developer experience by easily allowing the developer to inspect the Flow that will be executed.
 - [Bug fix] Fixed an issue where you could not select a Workspace in the Portal unless there were at least two Workspaces in the tenant
-- [Bug fix] [Load Delta Table](../actions/sql-server/load-deltatable.md) handles square brackest in the db schema properly
+- [Bug fix] [Load Delta Table](../actions/sql-server/load-deltatable.md) handles square brackest in the db schema properly. It also contains other improvements such as handling joins (compare) on NULL columns and fixes a potential issue with hash signatures.
 - [Bug fix] Default heights for some nodes were incorrect (too short)

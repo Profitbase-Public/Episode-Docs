@@ -55,7 +55,7 @@ Triggers run Flows in response to events from external systems — such as incom
 
 ### Actions
 
-Actions define the business logic of a Flow. Each action performs a single task. Most actions can take data as input and return data as output. Output from one action can be used as input to subsequent actions, provided the data formats are compatible.
+Actions define the business logic of a Flow. Each action performs a single task. Most actions can take data as input and return data as output. Output from one action can be used as input to downstream actions, provided the data formats are compatible.
 
 ## Architecture overview
 
@@ -63,10 +63,12 @@ Actions define the business logic of a Flow. Each action performs a single task.
 flowchart TD
     Tenant --> Workspaces
     Tenant --> Users
-    Tenant --> API_Keys[API keys]
+    Tenant --> API_Keys[API keys]    
     Workspaces --> Workspace_Objects[Workspace objects]
     Workspaces --> Workspace_Variables[Workspace variables]
     Workspaces --> Environments
+    Workspaces --> Workspace_MCP_Endpoints[MCP]
+    Workspaces --> Workspace_API_Keys[API keys <br/> pr Workspace]
     Environments --> Flows
     Flows --> Triggers
     Flows --> Actions

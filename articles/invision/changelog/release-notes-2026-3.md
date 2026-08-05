@@ -8,7 +8,7 @@ The new [KPI](../docs/kpi/index.md) component makes it easy for developers to ad
 <br/>
 
 ## Toolbars for Worksheets and Tables
-A long-awaited feature has finally arrived; built-in toolbars for Worksheets and Tables. This feature simplifies the job of creating Workbook pages with input tables because you no longer have to manually add a `Save` button the the page just to save data in a table. 
+A long-awaited feature has finally arrived; built-in toolbars for Worksheets and Tables. This feature simplifies the job of creating Workbook pages with input tables because you no longer have to manually add a `Save` button to the page just to save data in a table. 
 The toolbar also contains buttons for refreshing / reloading data, adding a new row, and exporting to Excel. 
 Whether you want to enable the Toolbar, and which buttons to show, is configured in the Workbook Designer.
 
@@ -16,6 +16,8 @@ Whether you want to enable the Toolbar, and which buttons to show, is configured
 
 ## Workflow status report
 We've replaced the old Workflow progress report with a new, modern dashboard containing KPIs and charts to show the current status of a Workflow.
+
+![img](/images/invision/workflow-standard-report.png)
 
 <br/>
 

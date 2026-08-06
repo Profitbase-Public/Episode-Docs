@@ -1,5 +1,7 @@
 # Hypergene Flow
 
+_For business processes that doesn't fit in a standard system._  
+
 Hypergene Flow is a low-code platform for building AI agents, data integrations, and automating workflows.
 
 ![Hypergene Flow — build workflow automations using drag-and-drop](/images/What-is-Flow.PNG)

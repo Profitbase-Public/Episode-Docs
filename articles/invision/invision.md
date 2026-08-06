@@ -1,4 +1,6 @@
-# Hypergene InVision
+# Hypergene InVision 
+
+_For business processes that doesn't fit in a standard system._  
 
 Hypergene InVision is a low-code platform for building adaptable business applications on a modern technology stack. Users can leverage standard components to develop user interfaces and back-end services, significantly reducing both cost and time when implementing projects.
 

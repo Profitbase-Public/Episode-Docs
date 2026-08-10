@@ -34,13 +34,15 @@ Do NOT wrap the response in Markdown annotation.
 ## Properties
 
 | Name                  | Required | Description |
-|-----------------------|-----------|-------------|
-| Title                 | No | The title of the model. |
-| Connection            | Yes | Defines the [connection](azure-ai-connection.md) to **Microsoft Foundry** resource. |
+|-----------------------|----------|-------------|
+| Title                 | No       | The title of the model. |
+| Connection            | Yes      | Defines the [connection](azure-ai-connection.md) to **Microsoft Foundry** resource. |
 | Enable dynamic connection   | No |    A [Dynamic Connection](create-connection.md) will override the [connection](azure-ai-connection.md) on flow execution.   |
-| Model                 | Yes | Specifies the model deployment name, which corresponds to the **Name** (not the model id) of the deployed model in [Microsoft Foundry](https://ai.azure.com) See [below](#models). |
-| Temperature       | No |Temperature in models controls the randomness and creativity of the generated responses. Lower temperatures (e.g., 0.2) produce more focused, predictable text, ideal for tasks that require precision. Higher temperatures (e.g., 1.5) increase creativity and variability, but may risk generating less coherent or relevant content, making it important to adjust based on your desired outcome. |
-| Max Tokens | No | Sets a limit on the number of tokens (words, characters, or pieces of text) in the model’s response. |
+| Model                 | Yes      | Specifies the model deployment name, which corresponds to the **Name** (not the model id) of the deployed model in [Microsoft Foundry](https://ai.azure.com) See [below](#models).|
+| Temperature           | No       |Temperature in models controls the randomness and creativity of the generated responses. Lower temperatures (e.g., 0.2) produce more focused, predictable text, ideal for tasks that require precision. Higher temperatures (e.g., 1.5) increase creativity and variability, but may risk generating less coherent or relevant content, making it important to adjust based on your desired outcome. |
+| Max Tokens            | No       | Sets a limit on the number of tokens (words, characters, or pieces of text) in the model’s response. |
+| Reasoning effort      | No       | Guides the model on how much to think when performing a task.  |
+| API type              | No       | Specifies which API type to use for the selected AI model. Valid values are `Completions`, `Responses` and `Messages`. You should **not** specify this property unless you want to change the default. You also need to refer to the documentation of the model in Microsoft Foundry to check which API types are supported by the model. OpenAI (gpt-) models will use the `Responses` API and Anthropic models will use the `Messages` API by default. All other models will use the `Completions` API by default.  |
 
 <br/>
 

@@ -1,6 +1,6 @@
 # Create SQL Server Connection
 
-Builds a SQL Server connection at runtime from values you supply as inputs. Use this action when the target server, database, or credentials are not 
+Builds a SQL Server connection string at runtime from values you supply as inputs. Use this action when the target server, database, or credentials are not 
 known at design time — for example, a multi-tenant Flow that runs against a different customer database on each execution, or an environment selector that switches between Dev, Test, and Prod.
 
 The resulting connection is consumed by setting the **Dynamic connection** property of other SQL Server actions. **Dynamic connection** overrides the static **Connection** for the current execution.
@@ -39,6 +39,7 @@ A connection type (also called authentication type) must be selected before ente
 | **Username** | Yes | The username (or Entra ID/email) used to authenticate the connection. |
 | **Password** | Yes | The password associated with the user to authenticate the connection. |
 | **Enable Multiple Active Result Sets** | No | This setting allows a single database connection to run multiple queries at the same time, without waiting for one to finish before starting another. [Read more](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/enable-multiple-active-result-sets?view=sql-server-ver16) |
+| **Timeout** | No | Connection timeout in seconds (default 30 seconds) |
 
 #### Microsoft Entra Service Principal authentication
 
@@ -49,12 +50,15 @@ A connection type (also called authentication type) must be selected before ente
 | **Client ID** | Yes | The Client ID of the Microsoft Entra service principal (also known as an app registration). |
 | **Client secret** | Yes | The client secret (application secret) associated with the service principal in Microsoft Entra. |
 | **Enable Multiple Active Result Sets** | No | This setting allows a single database connection to run multiple queries at the same time, without waiting for one to finish before starting another. [Read more](https://learn.microsoft.com/en-us/sql/connect/ado-net/sql/enable-multiple-active-result-sets?view=sql-server-ver16) |
+| **Timeout** | No | Connection timeout in seconds (default 30 seconds) |
 
 #### User Connection String
 
 | Name | Required | Description |
 |---|---|---|
 | **Connection String** | Yes | A full connection string that can be used to establish a SQL Server connection. |
+| **Username** | No | The username used to authenticate the connection (if not in the connection string). |
+| **Password** | No | The password associated with the user to authenticate the connection. If kept out of the Connection String, it will be encrypted and stored safely. |
 
 ## Returns
 

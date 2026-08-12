@@ -28,9 +28,7 @@ See [Output summary - final response](#output-summary---final-response)
 <br/>
 
 ## Providing (input) data and additional context to the agent
-In addition to the `User prompt`, `AI contents`, `Tools` and `Skills`, you can also use the `Context providers` property to give the AI agent access to a virtual file system. Suppose you have a CSV file you want the agent to analyse, you can add the file to the file system manually (using a compatible Flow node) and then instruct the agent to read the file(s) as input.  
-
-Please refer to [Reading and writing data to the file access table](../sql-server/agent-file-access.md#manually-reading-and-writing-data-to-the-file-access-table) for a detailed explanation of how this can be done.
+In addition to the `User prompt`, `AI contents`, `Tools` and `Skills`, you can also use the `Context providers` property to give the AI agent access to a virtual file system. Suppose you have a CSV file you want the agent to analyse, you can add the file to the file system manually (using a compatible Flow node) and then instruct the agent to read the file(s) as input. Compatible context providers include [AI agent file access for Azure Blob Storage](../azure-blob-storage/agent-file-access.md) and [AI agent file access for SQL Server](../sql-server/agent-file-access.md). See the documentation for the selected context provider for details about adding input files and retrieving output.
 
 
 <br/>
@@ -45,7 +43,7 @@ The `Harness AI agent` is not designed to return a _result object_ like a file o
 By providing access to a virtual file system, you enable the agent to store its output as a file (for example JSON or CSV) so it can be retrieved by downstream nodes.   
 To enable file output, do the following:
 - Specify in the agent's `Instructions` that you want the output written to a file.
-- Attach a `file access` node like [AI agent file access for SQL Server](../sql-server/agent-file-access.md) to the `Context providers` property port.
+- Attach a file access node, such as [AI agent file access for Azure Blob Storage](../azure-blob-storage/agent-file-access.md) or [AI agent file access for SQL Server](../sql-server/agent-file-access.md), to the `Context providers` property port.
 
 To tell the agent to output the result to file, its instructions may contain something like:
 ```txt
@@ -54,7 +52,7 @@ To tell the agent to output the result to file, its instructions may contain som
 - Ensure that the folder exists
 ```
 
-To retrieve the output from a `Harness AI agent` in downstream nodes, simply use a node compatible with the `file access` system node used, for any SQL Server action for reading data if you've used [AI agent file access for SQL Server](../sql-server/agent-file-access.md) as a `Context provider`.
+To retrieve the output from a `Harness AI agent` in downstream nodes, use an action compatible with the selected file access provider. For Azure Blob Storage, use an action such as [Read Blob as stream](../azure-blob-storage/read-blob-as-stream.md). For SQL Server, query the file access table using a SQL Server action.
 
 **Example**  
 Retrieving the output of an AI agent from a SQL Server file access store.  

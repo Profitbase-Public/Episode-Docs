@@ -1,5 +1,7 @@
 - name: "Connection"
   href: "azure-blob-container-connection.md"
+- name: AI agent file access
+  href: agent-file-access.md
 - name: Agent Tool
   href: agent-tool.md
 - name: "Append to Blob"

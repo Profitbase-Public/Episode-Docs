@@ -7,7 +7,7 @@ Typical use cases for this node:
 - Provide files from Azure Blob Storage as input and context to an AI agent.
 - Give an agent temporary storage for plans, intermediate results, or other data that it does not need to keep in its context window.
 
-![AI agent file access connected to a Harness AI agent](/images/flow/sql-server-agent-file-access.png)
+![AI agent file access (SQL Server version shown) connected to a Harness AI agent](/images/flow/sql-server-agent-file-access.png)
 
 **Connection example**  
 The example shows a file access node connected to the `Context providers` port of a Harness AI agent. The screenshot uses the SQL Server version of the node; the Azure Blob Storage version connects to the same port and uses an Azure Blob container connection instead of a table.

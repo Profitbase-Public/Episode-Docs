@@ -24,7 +24,7 @@ This flow exports invoices from a customer's database to a CSV file in blob stor
 A connection type (also called authentication type) must be selected before entering the other properties.
 
 - **SQL Server Authentication** – Use a SQL Server username and password. *(Default)*
-- **Microsoft Entra Password** – Authenticate with a Microsoft Entra identity using a username and password.
+- **Microsoft Entra Password** – Authenticate with a Microsoft Entra identity using a username and password (MFA may be required).
 - **Microsoft Entra Service Principal** – Authenticate with a Microsoft Entra service principal using its client ID and secret.
 - **User Connection String** – Supply a full connection string.
 

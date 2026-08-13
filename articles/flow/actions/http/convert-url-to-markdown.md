@@ -1,4 +1,7 @@
-# Convert a URL address to Markdown
+# Convert a URL address to Markdown
+
+>[!NOTE]
+> This action will be removed from Hypergene Flow starting with version 1.14 (August 2026).
 
 
 Returns [Markdown](https://en.wikipedia.org/wiki/Markdown) text from a URL (HTML page address).
@@ -24,7 +27,7 @@ This Flow reads all URLs from a [website sitemap](get-sitemap.md), converts the 
 
 ## Returns
 
-This action returns a string/text in markdown format.
+This action returns a string/text in Markdown format.
 
 <br/>
 

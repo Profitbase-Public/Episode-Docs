@@ -4,8 +4,6 @@
   href: ../excel/convert-to-markdown.md
 - name: Convert HTML to Markdown
   href: ../http/convert-html-to-markdown.md
-- name: Convert a URL addresse to Markdown
-  href: ../http/convert-url-to-markdown.md
 - name: Convert a PDF file to Markdown
   href: ../pdf/convert-to-markdown.md
 - name: Convert a PowerPoint file to Markdown

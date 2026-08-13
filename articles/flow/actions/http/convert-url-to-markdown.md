@@ -1,7 +1,7 @@
-# Convert a URL address to Markdown 
+# Convert a URL address to Markdown
 
->[!NOTE] 
-> This Action will be removed from Hypergene Flow (from version 1.14, August 2026).
+>[!NOTE]
+> This action will be removed from Hypergene Flow starting with version 1.14 (August 2026).
 
 
 Returns [Markdown](https://en.wikipedia.org/wiki/Markdown) text from a URL (HTML page address).

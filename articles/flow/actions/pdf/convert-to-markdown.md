@@ -14,20 +14,29 @@ This Flow reads a contract (PDF file) from [OneDrive](../onedrive/read-file-from
 
 | Name                 | Required | Description                                                                                                   |
 | -------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
-| Title                | No |   The title of the action.                    |
-| File Data            | Yes | Specifies the source of the PDF file, which can either be a Stream or a Byte Array.                          |
+| Title                | No | The title of the action.  |
+| File data            | Yes | Specifies the source of the PDF file, which can be either a Stream or a Byte Array.   |
+| Conversion engine    | Yes | Select the engine to use in conversion, see below for details. |
 | Result variable name | Yes | The name of the variable in which the result will be stored. |
 | Description          | No | Additional notes or comments about the action or configuration. |
 
 <br/>
 
+## Conversion engines
+
+ - **Docling** provides the most comprehensive extraction and is best for complex PDFs (tables, mixed layouts, and images). It is the slowest option and can require significant resources for large documents. This is currently the only engine that supports image conversion.
+ - **Kreuzberg** is a balanced option for large documents. It is typically faster and more resource-efficient than Docling, but may produce less accurate results in complex layouts.
+ - **MarkItDown** is optimized for text-focused PDFs. It is a good choice when speed and clean text output are the priority, and it uses a custom fine-tuned model.
+
+<br/>
+
 ## Returns
 
-This action returns a string/text in markdown format.
+This action returns a string/text in Markdown format.
 
 <br/>
 
 >[!NOTE] 
-> For best results when converting PDFs with complex content (e.g., tables, images, or multi-column layouts), it is recommended to use [Adobe "Convert a PDF file to a non-PDF file"](../adobe/pdf-to-non-pdf-as-byte-array.md) instead of the "Convert a PDF file to Markdown" action.
+> For best results when converting PDFs with complex content (e.g., tables, images, or multi-column layouts), it is recommended to use either [Adobe "Convert a PDF file to a non-PDF file"](../adobe/pdf-to-non-pdf-as-byte-array.md), or ["Convert to image"](./convert-to-image.md) instead of the "Convert a PDF file to Markdown" action.
 
 

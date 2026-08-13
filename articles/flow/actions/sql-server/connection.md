@@ -9,7 +9,7 @@ To use SQL Server actions in **Hypergene Flow**, you need to configure a connect
 Before entering server details, select the appropriate **connection type** (authentication method). Available options:
 
 - **SQL Server Authentication** – Use a SQL Server username and password.
-- **Microsoft Entra Password** – Authenticate using a Microsoft Entra ID (formerly Azure AD) username and password.
+- **Microsoft Entra Password** – Authenticate using a Microsoft Entra ID (formerly Azure AD) username and password - not recomended du to MFA.
 - **Microsoft Entra Service Principal** – Authenticate using an Entra service principal with a client ID and secret.
 - **User Connection String** – Supply a full custom connection string manually.
 

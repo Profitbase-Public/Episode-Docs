@@ -3,7 +3,7 @@
 Creates an Xledger connection at runtime using API keys supplied as variables or secrets. Use this instead of a static connection when credentials need to be resolved dynamically — for example, when a single Flow connects to different Xledger tenants based on input parameters.
 
 
-![Flow: Create Xledger connection → Get data](../../../../images/flow/Xledger-dynamic-connection.png)
+![Flow: Create Xledger connection → Get data](../../../../images/flow/create-xledger-connection.png)
 
 
 **Example** ![Example](../../../../images/strz.jpg)  

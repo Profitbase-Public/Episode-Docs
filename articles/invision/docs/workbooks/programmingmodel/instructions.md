@@ -27,6 +27,7 @@ By using Instructions you can run tasks or extend the standard behavior of Actio
 * [Popup(...)](instructions/popup.md)
 * [Reload(...)](instructions/reload.md)
 * [ResetCaption(...)](instructions/resetcaption.md)
+* [Refilter(...)](instructions/refilter.md)
 * [Set(...)](instructions/set.md)
 * [SetAppTitle(...)](instructions/setapptitle.md)
 * [SetCaption(...)](instructions/setcaption.md)

@@ -74,7 +74,7 @@ Validate(terminateOnValidationFailed : boolean | Eaze expression)
 <br/>
 
 ### Recalc
-The Recalc action triggers the execution of the formulas script in the spreadsheet. You can call [SetDataModified(…)](../programmingmodel/instructions/setdatamodified.md) in Recalc actions.
+The Recalc action triggers the execution of the formulas script in the spreadsheet. You can call [SetDataModified(…)](../programmingmodel/instructions/setdatamodified.md) or [Refilter(...)](../programmingmodel/instructions/refilter.md) in Recalc actions.
 
 <br/>
 

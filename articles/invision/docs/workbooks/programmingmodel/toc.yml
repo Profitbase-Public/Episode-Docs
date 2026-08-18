@@ -45,6 +45,8 @@
     href: instructions/reload.md
   - name: ResetCaption
     href: instructions/resetcaption.md
+  - name: Refilter
+    href: instructions/refilter.md
   - name: Set
     href: instructions/set.md
   - name: SetAppTitle

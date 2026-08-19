@@ -37,7 +37,7 @@ No network call is made at this step — the connection is validated when a down
 | Property | Required | Description |
 |----------|----------|-------------|
 | **Title** | No | Display label for this action in the Flow editor. Does not affect execution. |
-| **Environment** | Yes | Xledger enviroment that will be used by the connection. |
+| **Environment** | Yes | Xledger enviroment that will be used by the connection. Values are: Production(0), Test(1), Demo(2) |
 | **Production API key** | Yes | API key for the live Xledger environment. Select a Flow or Workspace variable, or enter a value directly (e.g., `{{secrets.xledger_prod_key}}`). |
 | **Test API key** | No | API key for the Xledger test enviroment. Select a Flow or Workspace variable, or enter a value directly. |
 | **Demo API key** | No | API key for the Xledger demo enviroment. Select a Flow or Workspace variable, or enter a value directly. |

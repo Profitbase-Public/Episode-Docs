@@ -98,9 +98,16 @@ The new [AI agent skill](../actions/agents/ai-agent-skill.md) lets you teach AI 
 
 ## AI agent file access for SQL Server (virtual file system)
 
-Use the [AI agent file access](../actions/sql-server/agent-file-access.md) node to expose a SQL Server table as a virtual file system where AI agents can create, read, write, search, and delete files and folders. Attach it to the `Context providers` port of a [Harness AI agent](../actions/agents/harness-ai-agent.md) to let the agent write its output to files — such as JSON or CSV — for retrieval by downstream nodes like [Load to DataTable](../actions/sql-server/load-to-datatable.md). You can also pre-populate the table with input files before running the agent, giving it structured context through a familiar file system API. As with the file memory node, the backing table is created automatically if it does not already exist.
+Use the [AI agent file access for SQL Server](../actions/sql-server/agent-file-access.md) node to expose a SQL Server table as a virtual file system where AI agents can create, read, write, search, and delete files and folders. Attach it to the `Context providers` port of a [Harness AI agent](../actions/agents/harness-ai-agent.md) to let the agent write its output to files — such as JSON or CSV — for retrieval by downstream nodes like [Load to DataTable](../actions/sql-server/load-to-datatable.md). You can also pre-populate the table with input files before running the agent, giving it structured context through a familiar file system API. As with the file memory node, the backing table is created automatically if it does not already exist.
 
 ![img](/images/flow/sql-server-agent-file-access.png)
+
+<br/>
+
+## AI agent file access for Azure Blob (virtual file system)
+Use the [AI agent file access for Azure Blob](../actions/azure-blob-storage/agent-file-access.md) node to use an Azure Blob container as a virtual file system where AI agents can create, read, write, search, and delete files and folders. Attach it to the `Context providers` port of a [Harness AI agent](../actions/agents/harness-ai-agent.md) to let the agent write its output to files — such as JSON or CSV — for retrieval by downstream nodes like [Read blob as byte array](../actions/azure-blob-storage/read-blob-as-byte-array.md). You can also pre-populate the blob container with input files before running the agent, giving it structured context through a familiar file system API. As with the file memory node, the backing table is created automatically if it does not already exist.
+
+![AI agent file access connected to a Harness AI agent](/images/flow/azure-blob-agent-file-access.png)
 
 <br/>
 

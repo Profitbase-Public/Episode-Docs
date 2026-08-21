@@ -1,5 +1,7 @@
 # InVision 2026.3 release notes
 
+InVision 2026.3 focuses on richer out-of-the-box experiences for end users and less manual wiring for developers. The new KPI component gives developers a flexible building block for dashboard-style Workbooks, while built-in toolbars for Worksheets and Tables eliminate the need to manually assemble common controls like Save, Refresh, and Export. The Workflow status report has also been redesigned as a modern dashboard with KPIs and charts. Before upgrading, review the breaking changes below — this release updates the underlying datagrid library and drops support for LESS in custom styles.
+
 ## KPI component
 The new [KPI](../docs/kpi/index.md) component makes it easy for developers to add KPI visuals to Workbooks to create  dashboards with actionable insights. The KPI component has a flexible configuration system, which enables creating a wide range of different-looking KPI cards - from simple numeric values to KPIs with charts and images.
 

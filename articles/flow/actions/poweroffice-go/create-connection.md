@@ -8,9 +8,9 @@ If you store the credentials for PowerOffice Go outside Flow (for example, in yo
 
 ## Properties
 
-| Name               | Data Type  | Description                                                       |
-|--------------------|-----------|-------------------------------------------------------------------|
-| Application Key   | Yes | A unique identifier for the client application.                  |
-| Client Key        | Yes | A confidential key used to authenticate the client.              |
-| Subscription Key  | No | An API key to access specific PowerOffice services.              |
-| Use Demo URLs     | No | Enables testing in a sandbox environment when checked.          |
+| Name              | Description                                                      |
+|-------------------|------------------------------------------------------------------|
+| Application Key   | A unique identifier for the client application.                  |
+| Client Key        | A confidential key used to authenticate the client.              |
+| Subscription Key  | An API key to access specific PowerOffice services.              |
+| Use Demo URLs     | Enables testing in a sandbox environment when checked.           |

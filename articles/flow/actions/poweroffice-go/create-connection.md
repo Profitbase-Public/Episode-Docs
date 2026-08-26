@@ -10,7 +10,7 @@ If you store the credentials for PowerOffice Go outside Flow (for example, in yo
 
 | Name               | Data Type  | Description                                                       |
 |--------------------|-----------|-------------------------------------------------------------------|
-| Client Id         | Yes | A unique identifier for the client application.                  |
-| Client Secret     | Yes | A confidential key used to authenticate the client.              |
+| Application Key   | Yes | A unique identifier for the client application.                  |
+| Client Key        | Yes | A confidential key used to authenticate the client.              |
 | Subscription Key  | No | An API key to access specific PowerOffice services.              |
 | Use Demo URLs     | No | Enables testing in a sandbox environment when checked.          |

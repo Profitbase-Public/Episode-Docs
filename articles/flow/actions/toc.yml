@@ -109,6 +109,9 @@
 - name: Model Context Protocol (MCP)
   href: mcp/toc.yml
   topicHref: mcp/overview.md
+- name: Monitor ERP
+  href: monitor-erp/toc.yml
+  topicHref: monitor-erp/overview.md
 - name: NetSuite
   href: netsuite/toc.yml
   topicHref: netsuite/overview.md

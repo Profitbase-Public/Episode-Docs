@@ -6,6 +6,7 @@ This package provide a datamart to share data between EPM applications and exter
 
 ## EPM Datamart Versions
 
+- [EPM Datamart 6.2.2](#epm-datamart-622) - Released 2026.09.18
 - [EPM Datamart 6.2.1](#epm-datamart-621) - Released 2026.06.23
 - [EPM Datamart 6.2.0](#epm-datamart-620) - Released 2026.06.19
 - [EPM Datamart 6.1.2](#epm-datamart-612) - Released 2026.03.30
@@ -28,6 +29,14 @@ This package provide a datamart to share data between EPM applications and exter
 
 - Limit file upload size for Data Import/Export to 100 mb (#1804)
 - Limit number of files possible to upload and disable open option (#1826)
+
+## EPM Datamart 6.2.2
+
+**Notes:**
+
+- Invision 2026.3+
+
+**Fixes:**
 
 ## EPM Datamart 6.2.1
 

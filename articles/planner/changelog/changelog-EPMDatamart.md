@@ -35,8 +35,13 @@ This package provide a datamart to share data between EPM applications and exter
 **Notes:**
 
 - Invision 2026.3+
+- Upgrade strongly recommended.
 
 **Fixes:**
+
+- Ambiguous column name error in some exports ( [https://github.com/Profitbase-Public/Planner/issues/2351](https://github.com/Profitbase-Public/Planner/issues/2351) )
+- Timeout issues in import & export ( [https://github.com/Profitbase-Public/Planner/issues/2381](https://github.com/Profitbase-Public/Planner/issues/2381) )
+- Connection setup errors introduced by new connection type ( [https://github.com/Profitbase-Public/Planner/issues/2394](https://github.com/Profitbase-Public/Planner/issues/2394) )
 
 ## EPM Datamart 6.2.1
 

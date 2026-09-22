@@ -1,0 +1,8 @@
+- name: "Connection"
+  href: connection.md
+- name: "Create connection"
+  href: create-connection.md
+- name: "Create Stratsys KPI"
+  href: "create-kpi.md"
+- name: "Push data to Stratsys KPI API"
+  href: "push-kpi.md"

@@ -157,6 +157,9 @@
 - name: SQL Server / Azure SQL
   href: sql-server/toc.yml
   topicHref: sql-server/overview.md
+- name: Stratsys
+  href: stratsys/toc.yml
+  topicHref: stratsys/overview.md
 - name: Tavily
   href: tavily/toc.yml
   topicHref: tavily/overview.md

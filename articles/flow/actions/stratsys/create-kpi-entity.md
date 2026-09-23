@@ -9,6 +9,9 @@ Build one entity per KPI. To push several KPIs in one call, create each entity a
 
 ![Flow that loops over Excel files in blob storage, uses Create Stratsys KPI entity to build a KPI entity from each file, adds it to a list, and pushes the list with Push data to Stratsys KPI API](/images/flow/stratsys-create-kpi.png)
 
+**Example** ![Example](/images/strz.jpg)  
+This flow declares an empty `stratsysKpis` list variable and loops over the Excel files in blob storage with `For each Excel file`. For each file, it reads the file from blob storage, [loads it into a DataTable](../sql-server/load-to-datatable.md), uses `Create Stratsys KPI entity` to turn the table into a KPI entity (`kpi`), and adds the entity to the `stratsysKpis` list. After the loop finishes, the whole list is pushed to Stratsys with [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) in `Entities` mode. This builds one KPI entity per file and sends them all to Stratsys in a single call, instead of pushing each file separately.
+
 <br/>
 
 ## When to use this
@@ -31,12 +34,12 @@ Build one entity per KPI. To push several KPIs in one call, create each entity a
 <!--prettier-ignore-->
 | Name | Required | Description |
 |---|---|---|
-| **KPI ID** | Yes | The identifier of the Stratsys KPI the data belongs to (for example `revenue_forecast`). |
-| **Source** | Yes | The [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) containing the rows to convert. |
-| **Department ID column** | No | The name of the source column that holds the department ID. |
-| **Period date column** | No | The name of the source column that holds the period date. |
-| **KPI variable name** | No | The name used to reference the resulting KPI entity (the **kpi** output). |
-| **Description** | No | Free-text notes about the action. |
+| KPI ID | Yes | The identifier of the Stratsys KPI the data belongs to (for example `revenue_forecast`). |
+| Source | Yes | The [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) containing the rows to convert. |
+| Department ID column | No | The name of the source column that holds the department ID. |
+| Period date column | No | The name of the source column that holds the period date. |
+| KPI variable name | No | The name used to reference the resulting KPI entity (the **kpi** output). |
+| Description | No | Free-text notes about the action. |
 
 There is no separate property for the KPI value. All remaining columns in the **Source** (those not used as the Department ID or Period date column) are sent to Stratsys as value columns, using their column names as-is. These names must match the value names already defined for the KPI in Stratsys.
 
@@ -45,21 +48,6 @@ There is no separate property for the KPI value. All remaining columns in the **
 ## Returns
 
 A single Stratsys KPI entity, returned on the **kpi** output port. Pass it (or a list of such entities) to the **KPIs** input of [Push data to Stratsys KPI API](./push-data-to-kpi-api.md).
-
-<br/>
-
-## Example
-
-The screenshot above shows a Flow that:
-
-1. Declares an empty `stratsysKpis` list variable.
-2. Loops over the Excel files in blob storage with **For each Excel file**.
-3. For each file, reads it from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md).
-4. Uses **Create Stratsys KPI entity** to turn the table into a KPI entity (`kpi`).
-5. Adds the entity to the `stratsysKpis` list.
-6. After the loop finishes, pushes the whole list to Stratsys with [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) in **Entities** mode.
-
-This builds one KPI entity per file and sends them all to Stratsys in a single call, instead of pushing each file separately.
 
 <br/>
 

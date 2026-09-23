@@ -6,7 +6,7 @@ This action creates a connection for Stratsys and is intended for dynamically co
 
 A 'Dynamic Connection' will override the 'Connection' during flow execution.
 
-If you store the credentials outside Flow (for example, in your own Azure SQL or PostgreSQL database), use this action to *dynamically* create a connection. The connection returned from the action can be used as the input to the `Dynamic connection` property of the [Push data to Stratsys KPI API](./push-kpi.md) action.
+If you store the credentials outside Flow (for example, in your own Azure SQL or PostgreSQL database), use this action to *dynamically* create a connection. The connection returned from the action can be used as the input to the `Dynamic connection` property of the [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) action.
 
 <br/>
 
@@ -22,7 +22,7 @@ If you store the credentials outside Flow (for example, in your own Azure SQL or
 | Company code            | Yes | The Stratsys company code. |
 | Client ID               | Yes | The API client ID. |
 | Client secret           | Yes | The API client secret. |
-| Default external source | No | The default source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-kpi.md). |
+| Default external source | No | The default source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-data-to-kpi-api.md). |
 
 The connection is returned on the **connection** output port. Set the **Connection variable name** to reference it later — for example, as the **Dynamic connection** of a Stratsys action.
 

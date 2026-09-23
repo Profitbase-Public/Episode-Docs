@@ -5,4 +5,4 @@
 - name: "Create Stratsys KPI"
   href: "create-kpi.md"
 - name: "Push data to Stratsys KPI API"
-  href: "push-kpi.md"
+  href: "push-data-to-kpi-api.md"

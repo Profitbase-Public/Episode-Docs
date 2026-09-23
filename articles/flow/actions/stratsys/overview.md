@@ -19,4 +19,4 @@ Set up a static [Stratsys connection](./connection.md) using a Tenant ID, Compan
 <br/>
 
 #### Pushing data to Stratsys
-[Push data to Stratsys KPI API](./push-kpi.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI](./create-kpi.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) using the same column mappings — no separate build step required.
+[Push data to Stratsys KPI API](./push-data-to-kpi-api.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI](./create-kpi.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) using the same column mappings — no separate build step required.

@@ -15,7 +15,7 @@ Stratsys authenticates using OAuth 2.0 client credentials. Flow exchanges the Cl
 | Company code    | The Stratsys company code. |
 | Client ID       | The API client ID. |
 | Client secret   | The API client secret. |
-| External source | The default source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-kpi.md). |
+| External source | The default source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-data-to-kpi-api.md). |
 
 <br/>
 

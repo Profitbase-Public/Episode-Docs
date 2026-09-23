@@ -14,9 +14,9 @@ Set up a static [Stratsys connection](./connection.md) using a Tenant ID, Compan
 <br/>
 
 #### Building KPI data
-[Create Stratsys KPI](./create-kpi.md) turns a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) into a Stratsys KPI entity, mapping your source columns (department, period) onto the fields the KPI API expects. Build one entity per KPI and collect them into a list to push several at once.
+[Create Stratsys KPI entity](./create-kpi-entity.md) turns a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) into a Stratsys KPI entity, mapping your source columns (department, period) onto the fields the KPI API expects. Build one entity per KPI and collect them into a list to push several at once.
 
 <br/>
 
 #### Pushing data to Stratsys
-[Push data to Stratsys KPI API](./push-data-to-kpi-api.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI](./create-kpi.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) using the same column mappings — no separate build step required.
+[Push data to Stratsys KPI API](./push-data-to-kpi-api.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI entity](./create-kpi-entity.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) using the same column mappings — no separate build step required.

@@ -1,13 +1,13 @@
-# Create Stratsys KPI
+# Create Stratsys KPI entity
 
-The `Create Stratsys KPI` action turns a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) into a Stratsys KPI entity, mapping your source columns onto the fields the Stratsys KPI API expects. Use it to build the KPI data you then send with [Push data to Stratsys KPI API](./push-data-to-kpi-api.md).
+The `Create Stratsys KPI entity` action turns a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) into a Stratsys KPI entity, mapping your source columns onto the fields the Stratsys KPI API expects. Use it to build the KPI data you then send with [Push data to Stratsys KPI API](./push-data-to-kpi-api.md).
 
 Build one entity per KPI. To push several KPIs in one call, create each entity and collect them into a list (for example with an **Add to list** action), then pass the list to [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) in **Entities** mode.
 
 > [!TIP]
 > If your data is already in a single [DataTable](../sql-server/load-to-datatable.md) and you want to push it directly, you can skip this action and use [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) in **Tabular** mode, which takes the same mapping properties.
 
-![Create Stratsys KPI action showing KPI ID, Source, Department ID column, and Period date column properties](/images/flow/stratsys-create-kpi.png)
+![Flow that loops over Excel files in blob storage, uses Create Stratsys KPI entity to build a KPI entity from each file, adds it to a list, and pushes the list with Push data to Stratsys KPI API](/images/flow/stratsys-create-kpi.png)
 
 <br/>
 
@@ -45,6 +45,21 @@ There is no separate property for the KPI value. All remaining columns in the **
 ## Returns
 
 A single Stratsys KPI entity, returned on the **kpi** output port. Pass it (or a list of such entities) to the **KPIs** input of [Push data to Stratsys KPI API](./push-data-to-kpi-api.md).
+
+<br/>
+
+## Example
+
+The screenshot above shows a Flow that:
+
+1. Declares an empty `stratsysKpis` list variable.
+2. Loops over the Excel files in blob storage with **For each Excel file**.
+3. For each file, reads it from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md).
+4. Uses **Create Stratsys KPI entity** to turn the table into a KPI entity (`kpi`).
+5. Adds the entity to the `stratsysKpis` list.
+6. After the loop finishes, pushes the whole list to Stratsys with [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) in **Entities** mode.
+
+This builds one KPI entity per file and sends them all to Stratsys in a single call, instead of pushing each file separately.
 
 <br/>
 

@@ -4,10 +4,10 @@ The `Push data to Stratsys KPI API` action sends KPI data to the [Stratsys](http
 
 The action works in two modes:
 
-- **Entities** — push one or more prebuilt KPI entities. Build them first with [Create Stratsys KPI](./create-kpi.md) and pass them (or a list of them) to the **KPIs** input.
-- **Tabular** — push directly from a [DataTable](../sql-server/load-to-datatable.md), without a separate build step. You supply the same mapping properties as [Create Stratsys KPI](./create-kpi.md) (KPI ID, Source, Department ID column, Period date column) on the action itself.
+- **Entities** — push one or more prebuilt KPI entities. Build them first with [Create Stratsys KPI entity](./create-kpi-entity.md) and pass them (or a list of them) to the **KPIs** input.
+- **Tabular** — push directly from a [DataTable](../sql-server/load-to-datatable.md), without a separate build step. You supply the same mapping properties as [Create Stratsys KPI entity](./create-kpi-entity.md) (KPI ID, Source, Department ID column, Period date column) on the action itself.
 
-![Push data to Stratsys KPI API action showing Connection, Mode, KPIs, External source, and Version properties, with Success, Error, and Continue exit ports](/images/flow/stratsys-push-kpi.png)
+![Flow that reads an Excel file from blob storage, loads it into a DataTable, and pushes it directly with Push data to Stratsys KPI API in Tabular mode, with Success, Error, and Continue exit ports](/images/flow/stratsys-push-kpi.png)
 
 <br/>
 
@@ -51,7 +51,7 @@ The action works in two modes:
 | **Connection** | Yes | The [connection](./connection.md) used to authenticate requests to the Stratsys KPI API. |
 | **Dynamic connection** | No | When **Enable dynamic connection** is on, overrides the static **Connection** with a connection built at runtime by [Create Stratsys connection](./create-connection.md). |
 | **Mode** | Yes | `Entities` to push prebuilt KPI entities, or `Tabular` to push directly from a source table. See the mode descriptions above. |
-| **KPIs** | Entities mode | The KPI entity or list of entities to push. Typically the output of [Create Stratsys KPI](./create-kpi.md). |
+| **KPIs** | Entities mode | The KPI entity or list of entities to push. Typically the output of [Create Stratsys KPI entity](./create-kpi-entity.md). |
 | **KPI ID** | Tabular mode | The identifier of the Stratsys KPI the data belongs to. |
 | **Source** | Tabular mode | The [DataTable](../sql-server/load-to-datatable.md) containing the rows to push. |
 | **Department ID column** | No | (Tabular mode) The name of the source column that holds the department ID. |
@@ -114,17 +114,16 @@ A successful push (status 200) can still return warnings, for example about unre
 
 The screenshot above shows a Flow that:
 
-1. Declares a `stratsysKpis` list variable.
-2. Reads a KPI Excel file from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md).
-3. Uses [Create Stratsys KPI](./create-kpi.md) to turn the table into a KPI entity (`kpi`).
-4. Adds the entity to the `stratsysKpis` list.
-5. Pushes the list to Stratsys with **Push data to Stratsys KPI API** in **Entities** mode.
+1. Reads a KPI Excel file from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md).
+2. Pushes the table straight to Stratsys with **Push data to Stratsys KPI API** in **Tabular** mode, using **KPI ID** and **Source** to map the data — skipping a separate [Create Stratsys KPI entity](./create-kpi-entity.md) step.
+
+See [Create Stratsys KPI entity](./create-kpi-entity.md) for the **Entities** mode pattern, where you build KPI entities individually (for example one per file in a loop), collect them into a list, and push them all in a single call.
 
 <br/>
 
 ## See also
 
-- [Create Stratsys KPI](./create-kpi.md) — build KPI entities from a `DataTable` or `DataReader`.
+- [Create Stratsys KPI entity](./create-kpi-entity.md) — build KPI entities from a `DataTable` or `DataReader`.
 - [Stratsys connection](./connection.md) — set up a static connection to Stratsys.
 - [Create Stratsys connection](./create-connection.md) — create a connection dynamically at runtime.
 - [Load to DataTable](../sql-server/load-to-datatable.md) — run a SQL query and return the result as a `DataTable`.

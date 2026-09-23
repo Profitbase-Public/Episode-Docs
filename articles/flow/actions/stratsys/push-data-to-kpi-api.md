@@ -9,6 +9,9 @@ The action works in two modes:
 
 ![Flow that reads an Excel file from blob storage, loads it into a DataTable, and pushes it directly with Push data to Stratsys KPI API in Tabular mode, with Success, Error, and Continue exit ports](/images/flow/stratsys-push-kpi.png)
 
+**Example** ![Example](/images/strz.jpg)  
+This flow reads a KPI Excel file from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md), then pushes the table straight to Stratsys with `Push data to Stratsys KPI API` in `Tabular` mode, using `KPI ID` and `Source` to map the data — skipping a separate [Create Stratsys KPI entity](./create-kpi-entity.md) step. See [Create Stratsys KPI entity](./create-kpi-entity.md) for the `Entities` mode pattern, where you build KPI entities individually (for example one per file in a loop), collect them into a list, and push them all in a single call.
+
 <br/>
 
 ## When to use this
@@ -48,18 +51,18 @@ The action works in two modes:
 <!--prettier-ignore-->
 | Name | Required | Description |
 |---|---|---|
-| **Connection** | Yes | The [connection](./connection.md) used to authenticate requests to the Stratsys KPI API. |
-| **Dynamic connection** | No | When **Enable dynamic connection** is on, overrides the static **Connection** with a connection built at runtime by [Create Stratsys connection](./create-connection.md). |
-| **Mode** | Yes | `Entities` to push prebuilt KPI entities, or `Tabular` to push directly from a source table. See the mode descriptions above. |
-| **KPIs** | Entities mode | The KPI entity or list of entities to push. Typically the output of [Create Stratsys KPI entity](./create-kpi-entity.md). |
-| **KPI ID** | Tabular mode | The identifier of the Stratsys KPI the data belongs to. |
-| **Source** | Tabular mode | The [DataTable](../sql-server/load-to-datatable.md) containing the rows to push. |
-| **Department ID column** | No | (Tabular mode) The name of the source column that holds the department ID. |
-| **Period date column** | No | (Tabular mode) The name of the source column that holds the period date. |
-| **External source** | No | The source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Leave empty to use the default set in the connection. |
-| **Version** | No | The Stratsys version to write to: `Active` or `Planning`. Defaults to `Active`. |
-| **Responses variable name** | No | The name used to reference the API responses (the **responses** output). |
-| **Description** | No | Free-text notes about the action. |
+| Connection | Yes | The [connection](./connection.md) used to authenticate requests to the Stratsys KPI API. |
+| Dynamic connection | No | When **Enable dynamic connection** is on, overrides the static **Connection** with a connection built at runtime by [Create Stratsys connection](./create-connection.md). |
+| Mode | Yes | `Entities` to push prebuilt KPI entities, or `Tabular` to push directly from a source table. See the mode descriptions above. |
+| KPIs | Entities mode | The KPI entity or list of entities to push. Typically the output of [Create Stratsys KPI entity](./create-kpi-entity.md). |
+| KPI ID | Tabular mode | The identifier of the Stratsys KPI the data belongs to. |
+| Source | Tabular mode | The [DataTable](../sql-server/load-to-datatable.md) containing the rows to push. |
+| Department ID column | No | (Tabular mode) The name of the source column that holds the department ID. |
+| Period date column | No | (Tabular mode) The name of the source column that holds the period date. |
+| External source | No | The source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Leave empty to use the default set in the connection. |
+| Version | No | The Stratsys version to write to: `Active` or `Planning`. Defaults to `Active`. |
+| Responses variable name | No | The name used to reference the API responses (the **responses** output). |
+| Description | No | Free-text notes about the action. |
 
 <br/>
 
@@ -107,17 +110,6 @@ A successful push (status 200) can still return warnings, for example about unre
   "instance": "string"
 }
 ```
-
-<br/>
-
-## Example
-
-The screenshot above shows a Flow that:
-
-1. Reads a KPI Excel file from blob storage and [loads it into a DataTable](../sql-server/load-to-datatable.md).
-2. Pushes the table straight to Stratsys with **Push data to Stratsys KPI API** in **Tabular** mode, using **KPI ID** and **Source** to map the data — skipping a separate [Create Stratsys KPI entity](./create-kpi-entity.md) step.
-
-See [Create Stratsys KPI entity](./create-kpi-entity.md) for the **Entities** mode pattern, where you build KPI entities individually (for example one per file in a loop), collect them into a list, and push them all in a single call.
 
 <br/>
 

@@ -26,9 +26,8 @@ This package provide the users and access management, work process and tasks cap
 **Changes:**
 
 **Fixes:**
+- Changed theme for HelperContentWorkbook (#2445)
 
-- Limit file types allowed (.doc,.docx,.gif,.jpeg,.jpg,.pdf,.png,.ppt,.pptx,.txt,.xls,.xlsx) to upload and upload size to 100 mb (#1805)
-- Limit number of files possible to upload and disable open option (#1826)
 
 ## EPM Common 6.1.5
 
@@ -97,6 +96,8 @@ This package provide the users and access management, work process and tasks cap
 
 - Email Flow only sending 1 email for tasks.
 - GUI fixes, translations to Norwegian.
+- Limit file types allowed (.doc,.docx,.gif,.jpeg,.jpg,.pdf,.png,.ppt,.pptx,.txt,.xls,.xlsx) to upload and upload size to 100 mb (#1805)
+- Limit number of files possible to upload and disable open option (#1826)
 
 ## EPM Common 6.0.0
 

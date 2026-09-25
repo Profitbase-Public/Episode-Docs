@@ -27,9 +27,6 @@ This package provide a datamart to share data between EPM applications and exter
 
 **Fixes:**
 
-- Limit file upload size for Data Import/Export to 100 mb (#1804)
-- Limit number of files possible to upload and disable open option (#1826)
-
 ## EPM Datamart 6.2.2
 
 **Notes:**
@@ -104,6 +101,8 @@ This package provide a datamart to share data between EPM applications and exter
 
 - Data Import (no longer) needs file extension specified ( https://github.com/Profitbase/Planner/issues/2133 )
 - ReportAccountByMonthHistorical no longer write datasets to cache. ( https://github.com/Profitbase/Planner/issues/2135 )
+- Limit file upload size for Data Import/Export to 100 mb (#1804)
+- Limit number of files possible to upload and disable open option (#1826)
 
 ## EPM Datamart 6.0.0
 

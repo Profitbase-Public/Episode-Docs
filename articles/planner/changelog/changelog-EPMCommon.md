@@ -6,6 +6,7 @@ This package provide the users and access management, work process and tasks cap
 
 ## EPM Common Versions
 
+- [EPM Common 6.1.5](#epm-common-616) - Released 2026.01.10
 - [EPM Common 6.1.5](#epm-common-615) - Released 2026.09.07
 - [EPM Common 6.1.3](#epm-common-613) - Released 2026.04.20
 - [EPM Common 6.1.2](#epm-common-612) - Released 2026.03.30
@@ -27,6 +28,21 @@ This package provide the users and access management, work process and tasks cap
 
 **Fixes:**
 - Changed theme for HelperContentWorkbook (#2445)
+
+## EPM Common 6.1.6
+
+**Notes:**
+
+- Invision version 2026.3+
+
+**Fixes:**
+
+- Empty task description no longer throws an error ( [https://github.com/Profitbase-Public/Planner/issues/2411](https://github.com/Profitbase-Public/Planner/issues/2411) )
+- Operation types fix for FinanceAllBaselineFlow, Account pipeline, Salary pipeline, Driver based pipeline ( [https://github.com/Profitbase-Public/Planner/issues/2367](https://github.com/Profitbase-Public/Planner/issues/2367) )
+
+**Changes:**
+
+- Manual configuration of email services no longer required. ( [https://github.com/Profitbase-Public/Planner/issues/2411](https://github.com/Profitbase-Public/Planner/issues/2437) ) / Ref previous version notes
 
 
 ## EPM Common 6.1.5

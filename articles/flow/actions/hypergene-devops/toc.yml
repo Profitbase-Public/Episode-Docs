@@ -1,5 +1,7 @@
 - name: Connection
   href: connection.md
+- name: Get deployments
+  href: get-invision-deployments.md
 - name: Clone deployment
   href: clone-invision-deployment.md
 - name: Delete deployment

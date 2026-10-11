@@ -1,8 +1,8 @@
 # Execute Profitbase B&F Semantic Model operation
 
-Makes data or metadata from a **Profitbase Budgeting and Forecasting (B&F)** solution available to AI agents through the `Flow Semantic Model MCP server` by updating a semantic model using the specified `Operation` type.  
+Makes data or metadata from a **Profitbase Budgeting and Forecasting (B&F)** solution available to AI agents through the `Flow Semantic Model MCP server` by updating a [semantic model](../../../semantic-models/overview.md) using the specified `Operation` type.  
 
-The `Publish Report Lines data to semantic model`-operation makes the financial metrics defined by `Report Lines` in the Profitbase B&F solution available as a dataset to the semantic model, while the `Update semantic model configuration for Report Lines`-operation creates or updates the semantic model configuration to match the current `Report Lines` definition. 
+The `Publish Report Lines data to semantic model`-operation makes the financial metrics defined by `Report Lines` in the Profitbase B&F solution available as a dataset to the [semantic model](../../../semantic-models/overview.md), while the `Update semantic model configuration for Report Lines`-operation creates or updates the semantic model configuration to match the current `Report Lines` definition. 
 
 <br/>
 
@@ -31,4 +31,3 @@ Run this action in a Flow that is in the same Workspace as the semantic model yo
 **When**  
 - After financial planning data has been updated (typically after a driver or financial calculation completes), run `Publish Report Lines data to semantic model` to refresh the data.
 - When the `Report Lines` definition changes, run `Update semantic model configuration for Report Lines` to create the semantic model or update its configuration. This controls which metrics, dimensions and datasets are available to AI agents.
-

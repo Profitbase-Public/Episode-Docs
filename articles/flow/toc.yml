@@ -79,6 +79,9 @@
 - name: Triggers
   href: triggers/toc.yml
   topicHref: triggers/overview.md
+- name: Semantic Models
+  href: semantic-models/toc.yml
+  topicHref: semantic-models/overview.md
 - name: Packages
   href: packages/packages.md
 - name: Hosting

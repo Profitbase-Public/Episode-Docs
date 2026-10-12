@@ -2,24 +2,24 @@
 
 Flow includes built-in support for making generic HTTP requests, exchanging files over HTTP, and returning files in response to incoming HTTP calls — together with helpers for working with web content (sitemaps, HTML to Markdown conversion). Use these actions whenever you need to integrate with an HTTP API that doesn't have its own dedicated category, fetch resources from the web, or expose a flow as an HTTP-callable file generator.
 
-The actions in this category don't use a shared connection — authentication is configured per request, with [Basic Authentication and OAuth 2.0 Client Credentials](./http-authentication.md) supported out of the box.
+The actions in this category don't use a shared connection — authentication is configured per action, with [Basic Authentication, OAuth 2.0 Client Credentials and Bearer token](./http-authentication.md) supported out of the box. Authentication configurations are named and stored in the workspace, so they can be reused across actions and Flows.
 
 <br/>
 
 ## Explore
 
 #### Authentication
-[HTTP Authentication](./http-authentication.md) describes the supported authentication types — Basic Authentication for username/password, and OAuth 2.0 Client Credentials for server-to-server flows that exchange a client ID and secret for an access token. The same configuration is reused across the request actions below.
+[HTTP Authentication](./http-authentication.md) describes the supported authentication types — Basic Authentication for username/password, OAuth 2.0 Client Credentials for server-to-server flows that exchange a client ID and secret for an access token, and Bearer token for APIs that issue a static token. The same configuration is reused across the request actions below.
 
 <br/>
 
 #### Generic HTTP requests
-[HTTP request](./http-request.md) calls any HTTP API to run an operation or fetch data. Supports `GET`, `POST`, `PUT`, `DELETE`, dynamic URLs built from Flow or workspace variables, query parameters, headers, and request bodies defined either as a JSON object or from a variable. Use this whenever there is no dedicated category for the API you're integrating with.
+[HTTP request](./http-request.md) calls any HTTP API to run an operation or fetch data. Supports `GET`, `POST`, `PUT`, `PATCH`, `DELETE`, dynamic URLs built from Flow or workspace variables, query parameters, headers, and request bodies defined either as a JSON object or from a variable. Use this whenever there is no dedicated category for the API you're integrating with.
 
 <br/>
 
 #### Exchanging files over HTTP
-[HTTP get file](./http-get-file.md) downloads a file from an HTTP endpoint into a flow, and [HTTP send file](./http-send-file.md) uploads a file to one. Both support query parameters and headers for cases where the endpoint requires them.
+[HTTP get file](./http-get-file.md) downloads a file from an HTTP endpoint into a flow as a byte array, and [HTTP send file](./http-send-file.md) uploads a file to one as `multipart/form-data`, optionally with JSON metadata. Both support authentication, query parameters and headers.
 
 <br/>
 

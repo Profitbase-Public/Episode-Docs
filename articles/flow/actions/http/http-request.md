@@ -2,11 +2,44 @@
 
 Executes an HTTP request. Use this action to call an HTTP API to run an operation and/or get data.
 
+Use this action whenever you need to integrate with an API that doesn't have its own dedicated action category in Flow. It supports the `GET`, `POST`, `PUT`, `PATCH` and `DELETE` methods, query parameters, headers and request bodies, and returns the full HTTP response, including the status code and headers.
+
 ![HTTP Request](/images/flow/http-request.png)
+
+**Example** ![Example](../../../../images/strz.jpg)  
+This flow submits an order to an API and handles the result. The Submit order node sends the **HTTP request** to the configured URI. If the call succeeds, the Success output triggers a confirmation email. If it doesn’t, the Non-success output passes the response to a function that prints the error.
+
+<br/>
+
+## Properties
+
+| Name           | Required | Description |
+|----------------|----------|-------------|
+| Title          | No  | The title of the action. |
+| Authentication | No  | The [authentication](./http-authentication.md) configuration to use if the API requires it. Supports Basic Authentication, OAuth 2.0 Client Credentials and Bearer token. |
+| Configuration  | Yes | Defines the HTTP request and how to handle the response. See [Configuration](#configuration) below. |
+| Description    | No  | Additional notes or comments about the action or configuration. |
+
+<br/>
+
+## Configuration
+
+The **Configuration** dialog defines the request to send and how to handle the response.
+
+| Name             | Required | Description |
+|------------------|----------|-------------|
+| Method           | Yes | The HTTP method: `GET`, `POST`, `PUT`, `PATCH` or `DELETE`. |
+| URI              | Yes | The URI of the API endpoint. See [Dynamic URLs](#dynamic-urls). |
+| Query parameters | No  | Key/value pairs that are appended to the URI as a query string. |
+| Headers          | No  | Key/value pairs that are sent as HTTP request headers. |
+| Body             | No  | The request body, typically used with `POST`, `PUT` and `PATCH`. See [Defining the request Body](#defining-the-request-body). |
+| Response         | No  | Enable **Return a response from this HTTP request** to store the response in a variable, then specify the **Response variable name** and **Response content type**. See [Response](#response). |
+
+<br/>
 
 ### Authentication
 
-This request supports [Basic and OAuth2 Credential authentication](./http-authentication.md).
+This action supports [Basic Authentication, OAuth 2.0 Client Credentials and Bearer token authentication](./http-authentication.md).
 
 ### Dynamic URLs
 
@@ -16,7 +49,7 @@ You can use Flow variables or [Workspace Variables](../../workspaces/workspace-v
 
 ### Defining the request Body
 
-Usually, all APIs using the `POST` or `PUT` HTTP methods accepts a body payload.  
+Usually, all APIs using the `POST` or `PUT` HTTP methods accept a body payload.  
 The request body can be defined by either referencing a variable containing the entire body payload (for example an object returned from a [Function](../built-in/function.md)), or by defining the payload as a [JSON](https://en.wikipedia.org/wiki/JSON) object.
 
 ##### Defining the request body from a variable
@@ -39,17 +72,17 @@ You can manually construct the HTTP body by building a [JSON](https://en.wikiped
 When building the JSON object, you can combine hard-code values and variables as shown in the screenshot below.
 
 > [!NOTE]
-> You must remember to add quotes around `string` and `date` values, like shown with the `customerId`,`orderId`, and `productId` propperties below. Flow does not know which data type a property expects, so you will have to add quotes manually.
+> You must remember to add quotes around `string` and `date` values, like shown with the `customerId`,`orderId`, and `productId` properties below. Flow does not know which data type a property expects, so you will have to add quotes manually.
 
 ![HTTP Request Body JSON](/images/flow/http-request-body-json.png)
 
 <br/>
 
-### Response
+## Response
 
 An HTTP API can return information in multiple parts of a response. A HTTP response always has a [status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and one or more [headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers). When an HTTP API returns data, it is usually returned in the body, also known as the response `Content`. In some situations, APIs will return data in headers in addition to, or instead of, the body.
 
-To this purpose, the `HTTP Request` action returns an HttpResponse&lt;T&gt; object which contains the information that an HTTP API might return. It is up to you to decide what to do with this information.
+To this purpose, the `HTTP Request` action returns an [HttpResponse&lt;T&gt;](../../api-reference/built-in-types/http-response.md) object which contains the information that an HTTP API might return. It is up to you to decide what to do with this information.
 
 The HTTP Request action returns a HttpResponse object with the following properties:
 
@@ -75,7 +108,7 @@ public sealed class HttpResponse<T> where T : class
 
 When calling an HTTP API, you must read the documentation for the API to learn how it replies to requests. Specifically, you need to understand the format of the response body (Content) so you can convert it to usable information on the receiving end, whether it be a Customer business object, a PDF file, or something else.
 
-In the response tab, you can choose from the following respones types:
+In the response tab, you can choose from the following response types:
 
 | Content type                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -85,7 +118,7 @@ In the response tab, you can choose from the following respones types:
 
 To convert the response body from its raw format to data you can work with (known as "deserialization"), you need to pass it through the [Convert](../built-in/convert.md) action and specify the data type that you want to deserialize it to.
 
-#### Example
+## Example
 
 Suppose that an API returns a customer business object that you want to use in the business logic of your Flow.
 The customer information has the following JSON format.

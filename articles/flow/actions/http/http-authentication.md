@@ -1,17 +1,30 @@
 # HTTP Authentication
 
-We currently support the following HTTP Authentication types for making generic HTTP requests
+We currently support the following HTTP Authentication types for making generic HTTP requests:
 
-- Basic Authentication
-- OAuth2 Client Credentials
+- [Basic Authentication](#basic-authentication)
+- [OAuth2 Client Credentials](#oauth2-client-credentials)
+- [Bearer token](#bearer-token)
 
 When making requests to an API that requires authentication, you need to first learn which authentication types are supported by the API.
+
+Authentication is configured with the **Authentication** property of the [HTTP request](./http-request.md), [HTTP get file](./http-get-file.md), [HTTP send file](./http-send-file.md) and [Get sitemap](./get-sitemap.md) actions. Each authentication configuration is given a **Name** and stored in the workspace, so you can define it once and reuse it across actions and Flows. You can use [Workspace Variables](../../workspaces/workspace-variables.md) to avoid hard-coding credentials.
+
+The credentials are added to the `Authorization` header of the request. If you have already defined an `Authorization` header in the action's **Headers**, it is not overwritten.
 
 ## Basic Authentication
 
 Basic Authentication is a simple and widely-used method for enforcing access control on web resources. It is a part of the HTTP protocol and is often used to authenticate clients to servers. The key idea behind Basic Authentication is to send a user's credentials (username and password) in a straightforward manner to authenticate and authorize the client’s access to the requested resource.
 
 While easy to implement, it lacks the security features of more modern authentication methods, making it suitable only for specific, low-risk scenarios or when used with HTTPS to secure the credentials during transmission.
+
+<!--prettier-ignore-->
+| Property | Description |
+| -------- | ----------- |
+| Username | The username used to authenticate. |
+| Password | The password used to authenticate. |
+
+Flow encodes the credentials and sends them in the `Authorization: Basic <credentials>` header.
 
 ## OAuth2 Client Credentials
 
@@ -50,3 +63,19 @@ The values for Tenant Id, Client Id and Client secret below are totally fictiona
 
 **Example request**  
 GET `https://api.businesscentral.dynamics.com/v2.0/eddb6a53-c923-4422-bd4e-0b2117078dd3/test/api/v2.0/companies`
+
+<br/>
+
+## Bearer token
+
+Use Bearer token authentication when the API gives you a static access token or API token, for example a personal access token or a long-lived API key that must be sent as a bearer token.
+
+<!--prettier-ignore-->
+| Property     | Description |
+| ------------ | ----------- |
+| Bearer token | The token to send to the API. |
+
+Flow sends the token in the `Authorization: Bearer <token>` header.
+
+> [!NOTE]
+> If the API issues short-lived access tokens from a token endpoint using a client ID and client secret, use [OAuth2 Client Credentials](#oauth2-client-credentials) instead. Flow will then request, cache and renew the access token for you.

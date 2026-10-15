@@ -1,6 +1,8 @@
 # Get Sitemap
 
-Gets the sitemap from a URL.
+Gets the [sitemap](https://www.sitemaps.org/) from a URL and returns the list of pages it contains.
+
+Use this action as a starting point when you want to process all pages of a website, for example to [convert each page to Markdown](./convert-html-to-markdown.md) and index the content for use with AI.
 
 ![Get Sitemap](../../../../images/flow/get-sitemap.png)
 
@@ -14,11 +16,10 @@ This flow retrieves a **sitemap** from a specified URL, [validates](../built-in/
 | Name                 | Required | Description |
 |----------------------|----------|-------------|
 | Title           | No | The name of the operation for retrieving the sitemap. Default: "Get sitemap". |
-| Sitemap URL     | Required | The URL of the sitemap to be fetched. The user needs to provide a value. If the provided URL does not contain or end with an XML file containing the sitemap (e.g., `yourwebsite.com`), `"sitemap.xml"` is automatically appended. If the URL ends with `".xml"` (e.g., `yourwebsite.com/sitemap-file.xml), it is regarded as the sitemap.
- |
+| Authentication  | No | The [authentication](./http-authentication.md) configuration to use if the website requires it. |
+| Sitemap URL     | Yes | The URL of the sitemap to be fetched. If the URL does not end with an XML file (e.g., `yourwebsite.com`), `sitemap.xml` is automatically appended. If the URL ends with `.xml` (e.g., `yourwebsite.com/sitemap-file.xml`), it is regarded as the sitemap. |
 | Result variable name | No | The name of the variable where the retrieved sitemap will be stored. Default: "sitemap". |
-| Description     | No | A field for adding additional details about the operation. |
-| Authentication  | No | Specifies authentication details needed to access the sitemap, if applicable. |
+| Description     | No | Additional notes or comments about the action or configuration. |
 
 <br/>
 
@@ -38,7 +39,7 @@ SitemapEntry {
 }
 ```
 
-ChangeFrequency
+### `ChangeFrequency`
 
 Defines how frequently the content at the URL is likely to change.
 

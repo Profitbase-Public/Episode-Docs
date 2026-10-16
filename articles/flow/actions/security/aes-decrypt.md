@@ -18,7 +18,7 @@ This flow decrypts a stored secret and uses it when calling an external API. A S
 | Initialization vector  | Yes      | The vector used to decrypt the content. This must be the same vector that was used to encrypt the content.                        |
 | Input content          | Yes      | The content to be decrypted (string or byte array).                                                                               |
 | Output variable name   | Yes      | The name of the variable in which the result will be stored.                                                                      |
-| Output data type       | Yes      | The data type of the output variable. This can be either a string (Base64 encoded) or a byte array.                               |
+| Output data type       | Yes      | The data type of the output variable. This can be either a string or a byte array.                                                 |
 | Description            | No       | Additional notes or comments about the action or configuration.                                                                   |
 
 <br/>

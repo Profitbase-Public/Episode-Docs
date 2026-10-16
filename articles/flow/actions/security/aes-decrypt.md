@@ -5,7 +5,7 @@ Decrypts content using the [AES](https://en.wikipedia.org/wiki/Advanced_Encrypti
 ![AES Decrypt](../../../../images/flow/security-aes-decrypt.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow encrypts an original message using the [AES Encrypt](aes-encrypt.md) action, decrypts it again using the AES Decrypt action, and then uses the [Log](../built-in/log.md) action to log the original message.
+This flow decrypts a stored secret and uses it when calling an external API. A SQL Server [Get entity](../sql-server/get-entity.md) action reads the encrypted content from a database, the AES Decrypt action decrypts it using the same key and initialization vector that were used to [encrypt](aes-encrypt.md) it, and an [HTTP request](../http/http-request.md) action uses the decrypted content in its call to the API. 
 
 <br/>
 

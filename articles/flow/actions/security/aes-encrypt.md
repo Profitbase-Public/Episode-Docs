@@ -5,7 +5,7 @@ Encrypts content using the [AES](https://en.wikipedia.org/wiki/Advanced_Encrypti
 ![AES Encrypt](../../../../images/flow/security-aes-encrypt.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow encrypts an original message using the AES Encrypt action, decrypts it again using the [AES Decrypt](aes-decrypt.md) action, and then uses the [Log](../built-in/log.md) action to log the original message.
+This flow protects a customer's account number before it is stored. The AES Encrypt action encrypts the account number, a [Function](../built-in/function.md) action creates a customer record with the customer name and the encrypted account number, and a SQL Server [Insert Entity](../sql-server/insert-entity.md) action saves the record to a database table. Use the [AES Decrypt](aes-decrypt.md) action to read the account number back.
 
 <br/>
 

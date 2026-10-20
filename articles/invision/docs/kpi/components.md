@@ -1,7 +1,7 @@
 
 # Components
 
-Components are the presentation elements that make up a KPI card. They are arranged in a row and
+Components are the presentation elements that make up a KPI card. They are arranged in a row (a KPI card can have any number of rows) and
 each renders some part of the card's data and its own resolved state. Each component can carry its
 own optional `DataSource` and `States`: when a component leaves `DataSource` blank it falls back to
 the card-level `DataSource` result, and each component resolves its own states independently (see
@@ -22,7 +22,7 @@ Every component supports `HorizontalAlignment` and `Configuation function`:
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right`. When omitted, the component flows at the start of the row (left) at its natural width; `left`, `center`, and `right` give it a cell that fills its share of the row and justifies its content accordingly. |
-| `Configuration function` | An optional JavaScript function that returns an object with configuration options. Use this feature for advanced scenarios where you need KPI cards dynamically configured from metadata. See [Configuration function](#configuration-function-api) for details. | 
+| `Configuration function` | An optional JavaScript function that returns an object with configuration properties (data or formatting). Use this feature for advanced scenarios where you need KPI cards dynamically configured from metadata, or when you want to re-use data already loaded to tables in the Workbook. See [Configuration function](#configuration-function-api) for details. | 
 
 <br/>
 
@@ -63,6 +63,10 @@ The text components **Metric** and **Text** additionally support:
 Displays the card's numeric value, formatted. Reads the resolved value (or its `ValueColumn`
 override) and takes its color from its own resolved state.
 
+```xml
+<Metric ValueColumn="Revenue" FormatString="0,0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
+```
+
 | Property | Allowed values |
 |----------|----------------|
 | `FormatString` | One of InVision's number format strings (numbro-style), for example `0,0`, `0.[00]`, `0,0.00`, `0%`, `0a`. When omitted, the value uses the locale's default number formatting. |
@@ -83,8 +87,22 @@ override) and takes its color from its own resolved state.
 }
 ```
 
-```xml
-<Metric ValueColumn="Revenue" FormatString="0,0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
+**Example**
+```javascript
+function getConfigOverride(args, app){
+  // Use the app.datasets API to get a dataset already loaded to the Workbook.
+  // app.datasets.getAllNames() to list the names of all in-memory datasets in the Workbook.
+  const kpiDataTable = app.datasets.get('KPI Data');
+  let sum = 0;
+  for(const row of kpiDataTable){
+      sum += row.Amount;
+  }
+
+  return {
+      value: sum,
+      formatString: args.row.FormatString // Using a format string loaded from the database
+  }
+}
 ```
 
 <br/>
@@ -94,6 +112,10 @@ override) and takes its color from its own resolved state.
 Displays a text value. Reads the resolved text (or its `TextColumn` override) and renders it as
 text. Unlike the other components, `Text` has its **own** `Color` attribute rather than taking a
 state color.
+
+```xml
+<Text TextColumn="Region" Color="#555" Size="sub" />
+```
 
 | Property | Allowed values |
 |----------|----------------|
@@ -115,10 +137,6 @@ state color.
 }
 ```
 
-```xml
-<Text TextColumn="Region" Color="#555" Size="sub" />
-```
-
 <br/>
 
 ### TrendText
@@ -126,6 +144,10 @@ state color.
 Displays the card's text, colored by its own resolved state. Use it when you want the value
 itself to carry the state color. Its size and weight come from the card's type-scale class defaults
 and are not set on the component.
+
+```xml
+<TrendText TextColumn="TrendSince" HorizontalAlignment="left" />
+```
 
 | Property | Allowed values |
 |----------|----------------|
@@ -142,10 +164,6 @@ and are not set on the component.
 }
 ```
 
-```xml
-<TrendText TextColumn="TrendSince" HorizontalAlignment="left" />
-```
-
 <br/>
 
 ### Chart
@@ -154,6 +172,12 @@ Renders a sparkline. The Chart's `DataSource` returns the whole series (one valu
 rather than a single row. Unlike the scalar components, the Chart does **not** fall back to the
 card-level `DataSource` — a blank `DataSource` yields no series — so each Chart on a card adds one
 more query.
+
+```xml
+<Chart ValueColumn="Amount">
+  <DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource>
+</Chart>
+```
 
 | Property | Allowed values |
 |----------|----------------|
@@ -170,12 +194,6 @@ more query.
 }
 ```
 
-```xml
-<Chart ValueColumn="Amount">
-  <DataSource><![CDATA[SELECT Amount FROM FactSales ORDER BY PeriodId]]></DataSource>
-</Chart>
-```
-
 <br/>
 
 ![Chart sparkline rendered in a KPI card](https://profitbasedocs.blob.core.windows.net/images/kpi-card-chart-sparkline.png)
@@ -190,12 +208,16 @@ Shows an up or down arrow chosen purely from the **sign** of its value: a negati
 down arrow, anything else (zero, positive, non-numeric) shows the up arrow. By default, the arrow colors are
 are red for down arrows and green for up arrows. Use the `Configuration function` of the TrendDirection to customize the color.
 
+```xml
+<TrendDirection ValueColumn="Trend" HorizontalAlignment="left" />
+```
+
 The two icons:
 
 | Shown when | Icon |
 |------------|------|
-| the value is zero or positive | ![Up trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-up.png) |
-| the value is negative | ![Down trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-down.png) |
+| the value is zero or positive | ![Up trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-up.png) (Color can be customized by the [TrendDirection Configuration function](#trenddirection-configuration-function-return-object)) |
+| the value is negative | ![Down trend arrow](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-trend-down.png) (Color can be customized by the [TrendDirection Configuration function](#trenddirection-configuration-function-return-object))|
 
 | Property | Allowed values |
 |----------|----------------|
@@ -216,6 +238,7 @@ The two icons:
 **Example**
 ```javascript
 function getConfigOverride(args, app){
+  // Using the colorRole allows the system to pick the color from the current theme based on the role value.
   let colorRole = 'positive'
   if(args.row.Value === 0) {
     colorRole = 'neutral'
@@ -235,10 +258,6 @@ function getConfigOverride(args, app){
 }
 ```
 
-```xml
-<TrendDirection ValueColumn="Trend" HorizontalAlignment="left" />
-```
-
 <br/>
 
 ### TrendBadge
@@ -246,6 +265,10 @@ function getConfigOverride(args, app){
 Shows a trend badge — increase, decrease, or "same". The bound column must contain one of the
 tokens `increase`, `decrease`, or `same` (matched case-insensitively); any other or empty value
 renders no icon. The data source owns the threshold logic that decides which token to emit.
+
+```xml
+<TrendBadge ValueColumn="TrendToken" HorizontalAlignment="left" />
+```
 
 The badge per token:
 
@@ -281,10 +304,6 @@ function getConfigOverride(args, app){
     value
   }
 }
-```
-
-```xml
-<TrendBadge ValueColumn="TrendToken" HorizontalAlignment="left" />
 ```
 
 <br/>
@@ -437,7 +456,7 @@ function getConfigOverride(args, app){
 
 ## Configuration function API
 
-**Example - use in-memory dataset**
+**Example - use in-memory dataset**  
 This example shows how to use data from a Worksheet or SQL Report already loaded to a Workbook in a KPI Card.  
 This is useful when you wish to re-use data from an already loaded dataset in your KPI Cards instead of loading it from the server with a custom SQL query.
 
@@ -447,8 +466,8 @@ function getConfigOverride(args, app){
   // app.datasets.getAllNames() to list the names of all in-memory datasets in the Workbook.
   const kpiDataTable = app.datasets.get('KPI Data');
   let sum = 0;
-  for(let i = 0; i < kpiDataTable.length; i++){
-      sum += kpiDataTable[i].Amount;
+  for(const row of kpiDataTable.length){
+      sum += row.Amount;
   }
 
   return {

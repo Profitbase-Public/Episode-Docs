@@ -15,13 +15,14 @@ are attributes.
 
 ## Properties shared by all components
 
-Every component supports `HorizontalAlignment`:
+Every component supports `HorizontalAlignment` and `Configuation function`:
 
 <br/>
 
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right`. When omitted, the component flows at the start of the row (left) at its natural width; `left`, `center`, and `right` give it a cell that fills its share of the row and justifies its content accordingly. |
+| `Configuration function` | An optional JavaScript function that returns an object with configuration options. Use this feature for advanced scenarios where you need KPI cards dynamically configured from metadata. See [Configuration function](#configuration-function-api) for details. | 
 
 <br/>
 
@@ -69,6 +70,18 @@ override) and takes its color from its own resolved state.
 | `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set |
+| `Configuration function` | See [Metric Configuration function return object](#metric-configuration-function-returns)|
+
+##### Metric Configuration function return object
+```javascript
+{
+  formatString: "numeric format string",
+  size: "sub | normal | heading1 | heading2 | heading3",
+  weight: "normal | semibold | bold",
+  horizontalAlignment: "left | center | right",
+  value: number
+}
+```
 
 ```xml
 <Metric ValueColumn="Revenue" FormatString="0,0" Size="heading1" Weight="bold" HorizontalAlignment="center" />
@@ -89,6 +102,18 @@ state color.
 | `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `TextColumn` | a column name from the card's result set |
+| `Configuration function` | See [Text Configuration function return object](#text-configuration-function-returns)|
+
+##### Text Configuration function return object
+```javascript
+{
+  color: "Valid CSS color",
+  size: "sub | normal | heading1 | heading2 | heading3",
+  weight: "normal | semibold | bold",
+  horizontalAlignment: "left | center | right",
+  text: "text to display"
+}
+```
 
 ```xml
 <Text TextColumn="Region" Color="#555" Size="sub" />
@@ -106,6 +131,16 @@ and are not set on the component.
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `TextColumn` | a column name from the card's result set |
+| `Configuration function` | See [TrendText Configuration function return object](#trendtext-configuration-function-returns)|
+
+##### TrendText Configuration function return object
+```javascript
+{
+  color: "Valid CSS color",
+  horizontalAlignment: "left | center | right",
+  text: "text to display"
+}
+```
 
 ```xml
 <TrendText TextColumn="TrendSince" HorizontalAlignment="left" />
@@ -125,6 +160,15 @@ more query.
 | `DataSource` | A SQL query (child element) returning the series rows to plot. No card-level fallback. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | the column read from the `DataSource` series result |
+| `Configuration function` | See [Chart Configuration function return object](#chart-configuration-function-returns)|
+
+##### Chart Configuration function return object
+```javascript
+{  
+  horizontalAlignment: "left | center | right",
+  points: [] //(array of numbers)
+}
+```
 
 ```xml
 <Chart ValueColumn="Amount">
@@ -143,8 +187,8 @@ more query.
 ### TrendDirection
 
 Shows an up or down arrow chosen purely from the **sign** of its value: a negative number shows the
-down arrow, anything else (zero, positive, non-numeric) shows the up arrow. The arrow colors are
-fixed in the icons and are not driven by state.
+down arrow, anything else (zero, positive, non-numeric) shows the up arrow. By default, the arrow colors are
+are red for down arrows and green for up arrows. Use the `Configuration function` of the TrendDirection to customize the color.
 
 The two icons:
 
@@ -157,6 +201,39 @@ The two icons:
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set |
+| `Configuration function` | See [TrendDirection Configuration function return object](#trenddirection-configuration-function-returns)|
+
+##### TrendDirection Configuration function return object
+```javascript
+{  
+  horizontalAlignment: "left | center | right",
+  color: "CSS color",
+  colorRole: "positive | negative | neutral" // If both color and colorRule is specified, only color is applied.
+  value: number
+}
+```
+
+**Example**
+```javascript
+function getConfigOverride(args, app){
+  let colorRole = 'positive'
+  if(args.row.Value === 0) {
+    colorRole = 'neutral'
+  } else {
+    if(args.row.Value > 0){
+      colorRole = args.row.IsCost ? 'negative' : 'positive'
+    } else {
+      // Negative value, so negative cost is a 'positive' 
+      colorRole = args.row.IsCost ? 'positive' : 'negative'
+    }
+  }
+
+  // We only need to return the property that we want to override
+  return {
+    colorRole
+  }
+}
+```
 
 ```xml
 <TrendDirection ValueColumn="Trend" HorizontalAlignment="left" />
@@ -182,6 +259,29 @@ The badge per token:
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set; its value must be `increase`, `decrease`, or `same` |
+| `Configuration function` | Use when you need advanced, dynamic state configuration. See [TrendBadge Configuration function return object](#trendbadge-configuration-function-returns)|
+
+##### TrendBadge Configuration function return object
+```javascript
+{  
+  horizontalAlignment: "left | center | right",  
+  value: "increase | decrease | same"
+}
+```
+
+**Example**
+```javascript
+function getConfigOverride(args, app){
+  let diff = args.row.ThisYear - args.row.LastYear;
+  let value = diff > 0 ? 'increase' : 'decrease';
+  if(diff === 0){
+    value = 'same'    
+  }
+  return {
+    value
+  }
+}
+```
 
 ```xml
 <TrendBadge ValueColumn="TrendToken" HorizontalAlignment="left" />
@@ -275,9 +375,11 @@ The icon per `Status` token:
 | `HalfWay` | ![HalfWay status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-halfway.png) |
 | `Initial` | ![Initial status icon](https://profitbasedocs.blob.core.windows.net/images/kpi-icon-status-earlystages.png) |
 
+
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
+| `Configuration function` | Use when you need advanced, dynamic state configuration. See [StatusIndicator Configuration function return object](#statusindicator-configuration-function-returns)|
 
 ```xml
 <Row>
@@ -298,6 +400,61 @@ The icon per `Status` token:
     </States>
   </StatusIndicator>
 </Row>
+```
+
+##### StatusIndicator Configuration function return object
+For advanced scenarios, for example if you need to include Workbook variables to determine the status, use the `Configuration function`. 
+```javascript
+{  
+  horizontalAlignment: "left | center | right",  
+  status: "Complete | Halfway | Initial" // Case insensitive
+}
+```
+
+**Example**
+```javascript
+function getConfigOverride(args, app){
+  let pctComplete = args.row.PctComplete;
+  // In case we return a non-numeric value (string) from the database, convert it
+  if(!app.lib.numerics.isNumber(pctComplete)){
+    pctComplete = app.lib.numerics.convertToNumber(pctComplete);
+  }
+  const initialThreshold = app.variables.initialThreshold ?? 25;
+  let status = 'halfway'
+  if(pctComplete < initialThreshold){
+    status = 'initial'
+  }else if(pctComplete >= 95){
+    status = 'complete'
+  }
+
+  return {
+    status
+  }
+}
+```
+
+<br/>
+
+## Configuration function API
+
+**Example - use in-memory dataset**
+This example shows how to use data from a Worksheet or SQL Report already loaded to a Workbook in a KPI Card.  
+This is useful when you wish to re-use data from an already loaded dataset in your KPI Cards instead of loading it from the server with a custom SQL query.
+
+```javascript
+function getConfigOverride(args, app){
+  // Use the app.datasets API to get a dataset already loaded to the Workbook.
+  // app.datasets.getAllNames() to list the names of all in-memory datasets in the Workbook.
+  const kpiDataTable = app.datasets.get('KPI Data');
+  let sum = 0;
+  for(let i = 0; i < kpiDataTable.length; i++){
+      sum += kpiDataTable[i].Amount;
+  }
+
+  return {
+      value: sum
+  }
+}
 ```
 
 <br/>

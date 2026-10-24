@@ -99,21 +99,25 @@
   items:
     - name: Base APIs
       href: apis/base-apis.md
+    - name: Datasets APIs
+      href: apis/datasets-apis.md
     - name: Dialog Service APIs
-      href: apis/dialog-service-apis.md
-    - name: Toast notification APIs
-      href: apis/toast-notification-apis.md
+      href: apis/dialog-service-apis.md    
     - name: Filter APIs
       href: apis/filter-apis.md
     - name: Flow APIs
       href: apis/flow-apis.md
     - name: HTTP APIs
-      href: apis/http-apis.md
-    - name: Message Hub APIs
-      href: apis/message-hub-apis.md
+      href: apis/http-apis.md    
     - name: Localization APIs
       href: apis/localization-apis.md
+    - name: Message Hub APIs
+      href: apis/message-hub-apis.md
+    - name: Numerics APIs
+      href: apis/numerics-apis.md
     - name: Page APIs
       href: apis/page-apis.md
     - name: Section APIs
       href: apis/section-apis.md
+    - name: Toast notification APIs
+      href: apis/toast-notification-apis.md

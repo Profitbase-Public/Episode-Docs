@@ -9,20 +9,22 @@ Typical use cases include:
 - Building `PowerPoint` board reports with `M365 Copilot` or `Claude`.
 - Creating operational reports and dashboards.
 - AI-powered ad-hoc data analysis.
-- Conversational Q&A over your business data, where users get answers in plain language without writing queries.
+- Conversational Q&A over your business data, where users get answers in plain language without writing SQL queries.
 
 ```mermaid
 flowchart TD
+    MCPClient["Any MCP client (AI agent)"]
     Copilot["M365 Copilot (Excel, PowerPoint)"]
     HAI["Hypergene AI"]
     Claude["Claude"]
-    MCP["Flow MCP Server"]
-    SM["Semantic model<br/>(Datasets, dimensions, metrics, relationships)"]
-    Data["Business data"]
+    MCPServer["Hypergene Flow MCP Server for data analytics"]
+    SM["Semantic models 1..n<br/>(Datasets, dimensions, metrics, relationships)"]        
+    Data["SQL Server 1..n"]    
 
-    Copilot --> MCP
-    HAI --> MCP
-    Claude --> MCP
-    MCP <--> SM
+    MCPClient --> MCPServer
+    Copilot --> MCPServer
+    HAI --> MCPServer
+    Claude --> MCPServer
+    MCPServer <--> SM
     SM --> Data
 ```

@@ -10,9 +10,7 @@
     - name: Users
       href: tenants/users.md
     - name: API Keys
-      href: tenants/api-keys.md
-    - name: MCP Server Settings
-      href: tenants/mcp-server-settings.md
+      href: tenants/api-keys.md    
 - name: Workspaces
   href: workspaces.md
   items:
@@ -22,6 +20,8 @@
       href: workspaces/workspace-access-control.md
     - name: API Keys
       href: workspaces/api-keys.md
+    - name: MCP Server Settings
+      href: workspaces/mcp-server-settings.md
     - name: Workspace Variables
       href: workspaces/workspace-variables.md
     - name: Workspace Objects

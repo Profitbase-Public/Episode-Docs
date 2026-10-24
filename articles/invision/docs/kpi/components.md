@@ -463,7 +463,7 @@ This is useful when you wish to re-use data from an already loaded dataset in yo
 ```javascript
 function getConfigOverride(args, app){
   // Use the app.datasets API to get a dataset already loaded to the Workbook.
-  // app.datasets.getAllNames() to list the names of all in-memory datasets in the Workbook.
+  // app.datasets.getNames() to list the names of all in-memory datasets in the Workbook.
   const kpiDataTable = app.datasets.get('KPI Data');
   let sum = 0;
   for(const row of kpiDataTable.length){

@@ -1,1 +1,0 @@
-# Connect VS Code and GitHub Copilot to the Semantic Model MCP Server

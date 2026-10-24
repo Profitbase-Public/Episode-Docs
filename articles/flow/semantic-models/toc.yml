@@ -10,4 +10,8 @@
    href: "metrics.md"
  - name: "Security & Connecting MCP clients"
    href: "connect-mcp-clients.md"
+ - name: "Connect Claude Code"
+   href: "connect-claude-code.md"
+ - name: "Connect VS Code"
+   href: "connect-vscode.md"
     

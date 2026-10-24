@@ -32,6 +32,15 @@ The MCP tool trigger returns (outputs) the object defined by its `Parameters` pr
 ## How to use an MCP Flow from an (external) MCP Client
 Both external MCP clients (like Claude Desktop), and the [MCP Client Tool](../../actions/mcp/mcp-client-tool.md), can call MCP-enabled Flows via [MCP Server endpoints](../../flows/mcp-server-endpoints.md). You can view the MCP server endpoints from the `Resources` -> `Flow properties...` menu in the Designer, or by clicking the `Show endpoints` button in the `Property panel` of an `MCP tool trigger` node.  
 
+### Connect with OAuth
+If the Flow requires the logged-in` user id` (for example running a SQL query with RLS rule enforcement), clients must connect using the `Connect with OAuth` endpoint. 
+
+![img](/images/flow/mcp-connect-with-oauth.png)
+
+##### Note for using Microsoft Entra ID
+If you are using `Microsoft Entra ID` as Authorization Server, you must add the **MCP Server URL** (see example image above) to the `identifierUris` in the `Manifest` of the App Registration that the [MCP Server App in the Workspace](../../workspaces/mcp-server-settings.md#pre-registered-mcp-server-apps) references. This is the MCP Server App having the `Use for Flows with an MCP Tool Trigger` property enabled.  
+Read about [Entra ID App Registrations here](../../workspaces/mcp-server-settings.md#microsoft-entra-id-how-to-set-up-an-app-registration-for-an-mcp-server)
+
 <br/>
 
 ## Best practice for defining an MCP tool trigger 

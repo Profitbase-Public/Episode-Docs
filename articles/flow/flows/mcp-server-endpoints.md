@@ -32,7 +32,7 @@ Example url: `https://app.profitbase.biz/hypotesia/mcp/tenants/123/workspaces/45
 <br/>
 
 ### Connect with OAuth
-Before you can use this option, you must configure the [MCP Server Settings](../tenants/mcp-server-settings.md) for your tenant in the Portal.  
+Before you can use this option, you must configure the [MCP Server Settings](../workspaces/mcp-server-settings.md) for your tenant in the Portal.  
 <br/>
 OAuth 2.1 is the official authentication method supported by the MCP protocol. It requires obtaining an access token from an Authorization Server (such as Microsoft Entra ID, Auth0 or Scalekit) and including it as a bearer token in the `Authorization` header for all requests to the (Flow) MCP Server APIs.  
 

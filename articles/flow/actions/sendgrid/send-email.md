@@ -35,7 +35,7 @@ Refer to the official documentation for additional setup and best practices:
 | From name       | Yes | The display name for the sender (e.g., "Finance Department"). |
 | To              | Yes | One or more recipient email addresses, separated by semicolons. |
 | Subject         | Yes | The subject line of the email. |
-| Message         | Yes | The main message body. Can include dynamic content or expressions. |
+| Body         | Yes | The main message body. Can include dynamic content or expressions. |
 | Attachments     | No | Upload or select files to include as attachments. |
 | Description     | No | Internal documentation or notes for Flow designers. Not included in the email. |
 

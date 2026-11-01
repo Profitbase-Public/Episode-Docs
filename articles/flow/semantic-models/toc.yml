@@ -8,10 +8,18 @@
    href: "dimensions.md"
  - name: "Metrics"
    href: "metrics.md"
- - name: "Security & Connecting MCP clients"
-   href: "connect-mcp-clients.md"
- - name: "Connect Claude Code"
-   href: "connect-claude-code.md"
- - name: "Connect VS Code"
-   href: "connect-vscode.md"
+ - name: "MCP" 
+   items:
+    - name: "Security" 
+      href: "mcp/security.md" 
+    - name: "Configure MCP Security context"
+      href: "mcp/configure-mcp-security-context.md" 
+    - name: "Connecting MCP clients"
+      href: "mcp/connect-mcp-clients.md"
+    - name: "Connect Claude Code"
+      href: "mcp/connect-claude-code.md"
+    - name: "Connect VS Code"
+      href: "mcp/connect-vscode.md"
+ 
+ 
     

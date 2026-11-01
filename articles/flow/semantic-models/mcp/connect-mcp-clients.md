@@ -58,4 +58,21 @@ When the semantic model sits on top of SQL Server or Azure SQL, the MCP server s
 EXEC sp_set_session_context @key = N'user_id', @value = @user_id, @read_only = 1;
 ```
 
-You can now use the user ID in RLS predicates, for example with `SESSION_CONTEXT(N'user_id')`.
+The user ID can now be used in security predicate functions to apply RLS, for example;
+```sql
+CREATE OR ALTER FUNCTION epm.fn_access_predicate_department
+    (@DepartmentID varchar(50))
+RETURNS TABLE
+WITH SCHEMABINDING
+AS
+RETURN
+    SELECT 1 AS access_granted
+    FROM dbo.user_access_map AS m
+    WHERE m.UserID = CAST(SESSION_CONTEXT(N'user_id') AS varchar(50))
+      AND m.DepartmentID = @DepartmentID
+
+CREATE SECURITY POLICY dbo.forecast_finance_metrics_policy
+    ADD FILTER PREDICATE dbo.fn_access_predicate_department(DepartmentID)
+        ON [dbo.[forecast_finance_metrics]
+WITH (STATE = ON);
+```

@@ -28,3 +28,8 @@ flowchart TD
     MCPServer <--> SM
     SM --> Data
 ```
+
+#### Continue reading
+[Getting started](./getting-started.md)  
+[Connecting MCP Clients](./mcp/connect-mcp-clients.md)  
+[Security](./mcp/security.md)

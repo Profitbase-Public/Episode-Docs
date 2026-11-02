@@ -56,6 +56,7 @@ Salary Accounts: setting EPTaxOnPension (Employer Tax On Pension) is currently n
    - Error on moving reference dates in settings when deploying new versions (#2385)
    - Version deployment "start fresh from new strat date" - account module's reportlineid not updated during deployment (#2436)
    - Plan startstop table not removed from in memory cache after changing "Time start and range" (#2464)
+   - Concurrency - use semaphores to avoid concurrent delete/inserts in transaction pipelines (#2463)
 
 ## EPM Planner 6.2.5
 

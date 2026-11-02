@@ -6,6 +6,7 @@ This package provide the financial planning function and can be organized in pro
 
 ## EPM Planner Versions
 
+- [EPM Planner 6.2.6](#epm-planner-626) - Released 2026.11.02
 - [EPM Planner 6.2.5](#epm-planner-625) - Released 2026.06.15
 - [EPM Planner 6.2.4](#epm-planner-624) - Released 2026.05.26
 - [EPM Planner 6.2.3](#epm-planner-623) - Released 2026.04.22
@@ -25,9 +26,36 @@ This package provide the financial planning function and can be organized in pro
 
 ## Unreleased
 
-**Known issues:** [GitHub Milestone](https://github.com/Profitbase/Planner/milestone/93)
-
 Salary Accounts: setting EPTaxOnPension (Employer Tax On Pension) is currently not supported (#2343)
+
+## EPM Planner 6.2.6
+
+**Fixes:**
+
+- Account module / plan overview / finance reports:
+   - Differences between plan overview and finance reports due to members deleted from department dimension (#2361)
+   - Finance and preview dataset differ on pension and employer contribution (#2398)
+   - Duplicate numbers in Historic3 column in plan overview (#2420)
+   - ShortTermCash - wrong OB when using different source accounts (#2359)
+   - Account module - primary key error on roll forward when using dimensions supplier, product, market or employee (#2458)
+   - Change dimensionality does not function when input on foreign currency is enabled (#2470)
+
+- Driver based:
+   - Sign factor not applied correctly to long term plan data (#2460)
+   - Historical reference columns referring other versions fail to return data (#2439)
+   - Plan proposal in driver based does not generate all measures in model (#2345)
+   - Plan proposal - transaction pipeline executed outside of model context unless department filter set (#2418)
+   - Plan proposal - spinner on import stops before import is done (#2389)
+   - Intercompany and elimination - trade between units with differing functional currency results in counterpart and elimination transactions with incorrect functional currency (#2468)
+   - Distribution keys not possible to change (#2412)
+   - Fix to apply new measures to model when using attributes (#2451)
+ 
+- Miscellaneous:
+   - When max number of rows reached - change of workflow status should not enavle Save button (#2438)
+   - Invalid operation steps in Planner operatuions - Cache ReportLine.. (#2428)
+   - Error on moving reference dates in settings when deploying new versions (#2385)
+   - Version deployment "start fresh from new strat date" - account module's reportlineid not updated during deployment (#2436)
+   - Plan startstop table not removed from in memory cache after changing "Time start and range" (#2464)
 
 ## EPM Planner 6.2.5
 

@@ -51,6 +51,8 @@ The returned file contains the following columns:
 - **ID columns** cannot contain null values. Rows with null values will be ignored by the forecaster.
 - Timestamps cannot contain gaps. For example, you cannot provide a dataset with [January, March, April], skipping February.
 
+<br/>
+
 ## Chronos-2 Forecasting: Explained
 
 > **Source project:** [amazon-science/chronos-forecasting](https://github.com/amazon-science/chronos-forecasting) (Apache-2.0 licence)  

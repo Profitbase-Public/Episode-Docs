@@ -15,10 +15,12 @@ The MCP Server only validates that the request from the AI agent is authenticate
 > [!NOTE]
 > For row-level security to work, make sure the [MCP Security Context](./configure-mcp-security-context.md) is configured in the Semantic Model.
 
-## Description
+<br/>
+
+## How row-level security is enforced
 The sections below describe the prerequisite setup and how security is enforced, so users only see data they have access to.
 
-### Add MCP connector to AI tool
+#### Step 1: MCP connector is added to an AI tool (Claude, Copilot)
 As part of the setup required to connect any AI tool like Claude or Copilot to an MCP Server, the tool takes the user through an authentication process when the connection is set up. It typically follows this pattern:
 
 1. The user adds an MCP connection to the AI tool (for example, a custom connection in Claude).
@@ -28,7 +30,7 @@ As part of the setup required to connect any AI tool like Claude or Copilot to a
 
 <br/>
 
-### Request flow with access control enforcement
+#### Step 2: The user makes requests to the MCP server through an AI tool (Claude, Copilot)
 The following diagram shows how a user request flows through service layers, and what each layer is responsible for in enforcing security.
 
 ```mermaid

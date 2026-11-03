@@ -1,6 +1,6 @@
 # SQL Server Connection
 
-To use SQL Server actions in **Hypergene Flow**, you need to configure a connection by either selecting an **existing connection** or creating a new one.
+To use SQL Server actions in **Hypergene Flow**, you need to configure a connection by either selecting an **existing connection**, creating a new one, or using a [dynamic connection](./create-connection.md).
 
 <br/>
 
@@ -9,7 +9,8 @@ To use SQL Server actions in **Hypergene Flow**, you need to configure a connect
 Before entering server details, select the appropriate **connection type** (authentication method). Available options:
 
 - **SQL Server Authentication** – Use a SQL Server username and password.
-- **Microsoft Entra Password** – Authenticate using a Microsoft Entra ID (formerly Azure AD) username and password. Not recommended if MFA is required.
+- **Microsoft Entra Password** – Authenticate using a Microsoft Entra ID (formerly Azure AD) username and password. Not recommended if MFA is required.
+
 - **Microsoft Entra Service Principal** – Authenticate using an Entra service principal with a client ID and secret.
 - **User Connection String** – Supply a full custom connection string manually.
 
@@ -51,7 +52,7 @@ This method bypasses form-based input and should be used by advanced users who p
 
 ## Dynamic Connections
 
-A [Dynamic Connection](./create-connection.md) can override a static connection during Flow execution.  
+A [dynamic connection](./create-connection.md) can override a static connection during Flow execution.
 This is useful for scenarios where credentials or targets are determined at runtime (e.g., multi-tenant environments).
 
 <br/>

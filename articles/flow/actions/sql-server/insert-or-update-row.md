@@ -32,23 +32,23 @@ This flow syncs customer data from an external API into a SQL Server table. [HTT
 
 ## Properties
 
-| Name                  | Required | Description                                                                 |
-|-----------------------|----------|-----------------------------------------------------------------------------|
-| **Title**                 | No | A descriptive title for the action.                                         |
-| **Connection**            | Yes | The [SQL Server Connection](./connection.md) to the target database.        |
-| **Enable dynamic connection**    | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **Table name**            | Yes | The name of the table to insert or update the row in.                       |
-| **Column value mapping**  | Yes | Defines the columns, their values, and which columns are used as match keys. See [Column value mapping](#column-value-mapping) below. |
-| **Result variable name**  | No | The name of a Flow variable that receives the operation performed — either `INSERT` or `UPDATE`. Default is `operation`. Use this to branch downstream logic based on the result. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
-| **Disabled** | No | When checked, the action is skipped during Flow execution. |
-| **Description**           | No | Additional notes or comments about the action or configuration.              |
+| Name                 | Required | Description                                                                 |
+|----------------------|----------|-----------------------------------------------------------------------------|
+| **Title**            | No | A descriptive title for the action.                                         |
+| **Connection**       | Yes | The [SQL Server Connection](./connection.md) to the target database.        |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Table name**         | Yes | The name of the table to insert or update the row in.                       |
+| **Column value mapping** | Yes | Defines the columns, their values, and which columns are used as match keys. See [Column value mapping](#column-value-mapping) below. |
+| **Result variable name** | No | The name of a Flow variable that receives the operation performed — either `INSERT` or `UPDATE`. Default is `operation`. Use this to branch downstream logic based on the result. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Disabled**        | No | When checked, the action is skipped during Flow execution. |
+| **Description**     | No | Additional notes or comments about the action or configuration.              |
 
 <br/>
 
 ### Column value mapping
 
-Click the edit icon next to **Column value mapping** to open the mapping editor. You can define mappings manually with **+ Add column mapping**, or click **+ Add column mapping(s) from table definition** to generate the list from the target table schema.
+Click the edit icon next to **Column value mapping** to open the mapping editor. You can define mappings manually with **Add column mapping**, or click **Add column mapping(s) from table definition** to generate the list from the target table schema.
 
 Each entry has four fields:
 
@@ -69,6 +69,13 @@ Each entry has four fields:
 ## Returns
 
 A string value — either `INSERT` or `UPDATE` — indicating which database operation was performed. If **Result variable name** is set, the value is stored in the specified Flow variable.
+
+<br/>
+
+>[!NOTE]
+> The **Add column mapping(s) from table definition** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
 
 ## See also
 

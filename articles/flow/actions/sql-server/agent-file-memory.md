@@ -14,9 +14,9 @@ Enables AI agents to use file system based memory for notes, plans, session stat
 | Name               | Required | Description                  |
 |--------------------|---------------|------------------------------|
 | Connection         | Yes | The [SQL Server Connection](./connection.md). |
-| Dynamic connection | No | Use this option if you need to use a connection created by the [Create Connection](./create-connection.md) action. |
+| Dynamic connection | No | Use this option if you need to use a connection created by the [Create SQL Server Connection](./create-connection.md) action. |
 | Table              | Yes | The name of the table where the memory (file contents) is stored. If the table does not exist in the database, it will be created automatically by Flow. If you want to use an existing table, see the [description below](#table-definition). |
-| Command timeout (sec) | No | The time limit for command execution before it times out. Default is 120 seconds. |
+| Command timeout | No | The time limit for command execution before it times out. Default is 120 seconds. |
 
 <br/>
 
@@ -32,7 +32,7 @@ However, if you _want_ to use an existing table, please refer to the [Table defi
 
 ## Table definition
 
-When setting up the node and specifying the `Table` property, you **DO NOT** have to select and existing table. You can simply provide a name, and the system will automatically create the table if it does not already exist.  
+When setting up the node and specifying the `Table` property, you **DO NOT** have to select an existing table. You can simply provide a name, and the system will automatically create the table if it does not already exist.
 
 However, if you want to use an existing table, it **must** have the exact table schema as described below.  
 Replace `my_agent_files_table` with your name.
@@ -54,3 +54,10 @@ CREATE TABLE [my_agent_files_table](
 )WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 ```
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **Table name** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+

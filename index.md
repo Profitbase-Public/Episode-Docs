@@ -71,7 +71,7 @@ title: Hypergene Profitbase Documentation
         <img src="images/products/flow.svg" alt="Flow">
       </div>
       <div>
-        <h3>Flow <span class="badge-new">new</span></h3>
+        <h3>Flow</h3>
         <p>AI agents, data integrations, workflow automation</p>
       </div>
     </a>

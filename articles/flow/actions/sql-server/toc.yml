@@ -1,13 +1,13 @@
 - name: "Connection"
   href: "connection.md"
+- name: "Create SQL Server connection"
+  href: "create-connection.md"
 - name: AI chat history memory
   href: "agent-memory.md"
 - name: AI agent file memory
   href: "agent-file-memory.md"
 - name: AI agent file access
   href: "agent-file-access.md"
-- name: "Create connection"
-  href: "create-connection.md"
 - name: "Check if table exists"
   href: "check-if-table-exists.md"
 - name: "Create table"

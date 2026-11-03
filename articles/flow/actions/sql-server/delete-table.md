@@ -34,17 +34,22 @@ This flow runs a full staging cycle. [Create Table from Source](./create-table-f
 |-----------------|----------|---------------------------------------------------|
 | **Title**              | No | A descriptive title for the action.               |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the database containing the table.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **Table name**   | Yes | The name of the table to drop. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Table**   | Yes | The name of the table to drop. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
-
-<br/>
 
 ## Returns
 
 No return value. The action drops the table.
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **Table name** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
 
 ## See also
 

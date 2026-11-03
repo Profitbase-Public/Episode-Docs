@@ -32,11 +32,11 @@ This flow provides chat completions to a chat client with RAG and conversation m
 |--------------|----------|---------------------------------------------------|
 | **Title**              | No | A descriptive title for the action.               |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. The query should return a single value (first column of the first row). See [Execute Command — How to use parameters](./execute-command.md#how-to-use-parameters) for details on the SQL expression editor. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. The query should return a single value (first column of the first row). See [Execute Command — How to build expressions and using parameters](./execute-command.md#how-to-build-expressions-and-using-parameters) for details on the SQL expression editor. |
 | **Result variable name** | Yes | The name of the Flow variable that holds the returned value. Default is `value`. |
 | **Result variable type** | Yes | The .NET data type of the returned value (e.g. `String (Text)`, `Int 32`, `Decimal`). The query result is cast to this type. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -68,6 +68,13 @@ SELECT [Name] FROM {TableName} WHERE UserId = @UserId
 ```
 
 <br/>
+
+>[!NOTE]
+> - The **Object Explorer** can only be used with a valid **Connection** and not **Dynamic connection**.
+> - The **Object Explorer** cannot be used with a Hypergene Flow system database.
+
+<br/>
+
 
 ## See also
 

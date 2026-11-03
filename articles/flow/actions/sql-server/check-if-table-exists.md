@@ -22,28 +22,26 @@ This flow prepares a `Customer` table before loading data. **Check if table Cust
 
 <br/>
 
-
 ## Properties
 
 | Name            | Required | Description                                       |
 |-----------------|----------|---------------------------------------------------|
-| **Title**              | No | A descriptive title for the action.               |
-| **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **Table name**      | Yes | The name of the table to check for. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
-| **Disabled** | No | When checked, the action is skipped during Flow execution. |
-| **Description**      | No | Additional notes or comments about the action or configuration. |
+| **Title**       | No | A descriptive title for the action.               |
+| **Connection**  | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Table**       | Yes | The name of the table to check for. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Disabled**    | No | When checked, the action is skipped during Flow execution. |
+| **Description** | No | Additional notes or comments about the action or configuration. |
 
 <br/>
-
-
 
 ## Returns
 
 [Boolean](https://learn.microsoft.com/en-us/dotnet/api/system.boolean). `true` if the table exists, `false` otherwise. The result is routed to the **True** or **False** output port of the action node.
 
 <br/>
+
 ## See also
 
 - [Create Table](./create-table.md) — creates a new table in a SQL Server database.

@@ -18,9 +18,9 @@ Typical use cases for this node:
 | Name               | Required | Description                  |
 |--------------------|---------------|------------------------------|
 | Connection         | Yes | The [SQL Server Connection](./connection.md). |
-| Dynamic connection | No | Use this option if you need to use a connection created by the [Create Connection](./create-connection.md) action. |
-| Table              | Yes | The name of the table where the to use as file storage. If the table does not exist in the database, it will be created automatically by Flow. If you want to use an existing table, see the [description below](#table-definition). |
-| Command timeout (sec) | No | The time limit for SQL command execution before it times out. Default is 120 seconds. |
+| Dynamic connection | No | Use this option if you need to use a connection created by the [Create SQL Server Connection](./create-connection.md) action. |
+| Table              | Yes | The name of the table to use as file storage. If the table does not exist in the database, it will be created automatically by Flow. If you want to use an existing table, see the [description below](#table-definition). |
+| Command timeout | No | The time limit for SQL command execution before it times out. Default is 120 seconds. |
 
 <br/>
 
@@ -28,7 +28,7 @@ Typical use cases for this node:
 To use this node, attach it to the `Context providers` port of an AI agent action (e.g the [Harness AI agent](../agents/harness-ai-agent.md)) like shown in the example above.  
 Then go its `Properties` editor and specify the `Table` name. 
 
-When setting up the node and specifying the `Table` property, you **DO NOT** have to select and existing table. You can simply provide a name, and the system will automatically create the table if it does not already exist.  
+When setting up the node and specifying the `Table` property, you **DO NOT** have to select an existing table. You can simply provide a name, and the system will automatically create the table if it does not already exist.
 
 However, if you _want_ to use an existing table, please refer to the [Table definition description](#table-definition) below.
 
@@ -55,6 +55,12 @@ SELECT TOP 1 Content FROM my_agent_files WHERE Directory = '/root/MyDir' AND Ent
 > When adding entries to the files table, `Directory` must always start with `/root`. Otherwise, the AI agent will not be able to locate the file.
 
 <br/>
+
+>[!NOTE]
+> Selecting an existing **Table name** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
+
 
 ## Table definition
 

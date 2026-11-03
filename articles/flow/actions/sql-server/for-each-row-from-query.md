@@ -32,12 +32,12 @@ This flow reads overdue invoices and marks each one as reminded. **Read overdue 
 |--------------|----------|---------------------------------------------------|
 | **Title**           | No | A descriptive title for the action.     |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [Execute Command — How to use parameters](./execute-command.md#how-to-use-parameters) for syntax. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [Execute Command - How to build expressions and using parameters](./execute-command.md#how-to-build-expressions-and-using-parameters) for syntax. |
 | **Row to entity mapping** | Yes | Defines how result columns map to entity properties. Click the edit icon to open the mapping editor and configure each column's name, property name, and data type. |
 | **Row variable name** | No | The name of the Flow variable that holds the current row entity during each iteration. Default is `row`. Downstream actions reference this variable to access column values. |
 | **Row data type** | No | The name of the generated entity type. Default is `SQLServer_ReadRows_Row`. Change this if you need multiple For each row from query actions in the same Flow with different schemas. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -96,7 +96,9 @@ UPDATE Invoices SET Status = 'Reminded' WHERE InvoiceId = @InvoiceId
 ```
 
 > [!NOTE]
-> Parameter names in the downstream action must match the property names defined in **Row to entity mapping**. If the mapping defines `InvoiceId`, the parameter must be `@InvoiceId`.
+> - Parameter names in the downstream action must match the property names defined in **Row to entity mapping**. If the mapping defines `InvoiceId`, the parameter must be `@InvoiceId`.
+> - The **Object Explorer** and **Create from query** can only be used with a valid **Connection** and not **Dynamic connection**.
+> - The **Object Explorer** cannot be used with a Hypergene Flow system database.
 
 ## See also
 

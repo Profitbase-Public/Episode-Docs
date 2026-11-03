@@ -24,7 +24,7 @@ We've added support to the Finago connector for [Paged REST API request](../acti
 
 ## Dynamics 365 - Support for non-paged API requests (create / update / delete / read entities)
 
-We've added the [REST API Request](../actions/dynamics365/business-central/rest-api-request.md) action for the Dynamics 365 Business Central connector. Use it to call the Business Central v2 API with `GET`, `POST`, `PUT`, `PATCH`, or `DELETE` to create, update, delete, or read records. The action supports dynamic connections, returns an [`HttpResponse<T>`](../../api-reference/built-in-types/http-response.md) with status code and error details, and automatically retries on `429 Too Many Requests`. For large data sets that require paging, use the [REST API Request with paging](../actions/dynamics365/business-central/rest-api-request-with-paging.md) action instead.
+We've added the [REST API Request](../actions/dynamics365/business-central/rest-api-request.md) action for the Dynamics 365 Business Central connector. Use it to call the Business Central v2 API with `GET`, `POST`, `PUT`, `PATCH`, or `DELETE` to create, update, delete, or read records. The action supports dynamic connections, returns an [`HttpResponse<T>`](../api-reference/built-in-types/http-response.md) with status code and error details, and automatically retries on `429 Too Many Requests`. For large data sets that require paging, use the [REST API Request with paging](../actions/dynamics365/business-central/rest-api-request-with-paging.md) action instead.
 
 ![img](/images/flow/dynamics365-bc-api-request.png)
 

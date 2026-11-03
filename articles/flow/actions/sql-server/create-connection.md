@@ -9,7 +9,6 @@ If you store the credentials for the SQL Server outside Flow (for example in you
 
 ![The Create SQL Server Connection flow](../../../../images/flow/create-sql-server-connection-example.png)
 
-
 **Example** ![Example](../../../../images/strz.jpg)  
 This flow exports invoices from a customer's database to a CSV file in blob storage — a multi-tenant pattern where the source database is different for each Flow execution. **Create SQL Server Connection** builds the connection from the inputs and exposes the result on its `connection` output. [Get DataReader](./get-datareader.md) reads rows from the source table. [Split Invoices into Chunks](../built-in/datareader-chunker.md) divides the stream into smaller batches, and [Format Chunk as CSV](../csv/create-csv-file-as-byte-array.md) serializes each batch. [Append to Customer's Report File](../azure-blob-storage/append-to-blob.md) appends each chunk to a blob. Use this pattern whenever the target database is resolved at runtime — multi-tenant exports or environment selectors that run the same Flow against different databases.
 

@@ -1,6 +1,6 @@
 # Search vectors
 
-Performs a vector search agains a SQL Server / Azure SQL database and returns an [IVectorSearchResult](../../api-reference/built-in-types/ai/i-vector-search-result.md) object that can be passed to a Chat completion action.
+Performs a vector search against a SQL Server or Azure SQL database and returns an [IVectorSearchResult](../../api-reference/built-in-types/ai/i-vector-search-result.md) object that can be passed to a Chat completion action.
 
 
 ![SQL Vector Search](../../../../images/flow/sql-vector-search.png)
@@ -11,7 +11,7 @@ This flow processes a user's chat question by first receiving it through a [Chat
 
 </br>
 
-# Properties
+## Properties
 
 | Name                         | Required | Description                                                                                      | 
 |------------------------------|-----------|--------------------------------------------------------------------------------------------------|
@@ -27,7 +27,7 @@ This flow processes a user's chat question by first receiving it through a [Chat
 | Score limit | No |  A threshold value that limits results to those with a distance or similarity score at or below this value. The meaningful range depends on the selected **Distance function**. Tune by observing actual scores returned for your data. |
 | Prompt template              | No | The prompt template controls the output format for your search results. The system replaces placeholders, such as @[fieldName], with the corresponding data from your vector search fields. See example below. |
 | Search result variable name  | No | The name of the variable to store results, e.g. searchResult. |
-| Command timeout (seconds)    | No | The timeout duration for the SQL command (in seconds). |
+| Command timeout | No | The timeout duration for the SQL command (in seconds). |
 | Description                  | No | Additional notes or metadata for the action. |
 
 <br/>

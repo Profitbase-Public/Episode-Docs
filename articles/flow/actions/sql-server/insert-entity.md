@@ -41,11 +41,11 @@ This flow [reads employee data from an Excel file](../excel/for-each-row.md) and
 |--------------|----------|---------------------------------------------------|
 | **Title**              | No | A descriptive title for the action.               |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
 | **Entity** | Yes | The entity object to insert. Select from available Flow variables — typically an entity created by a Function or Get Entity action. |
 | **Table name** | Yes | The name of the table to insert the row into. |
 | **Result variable name** | No | The name of a Flow variable that receives the number of rows affected. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 

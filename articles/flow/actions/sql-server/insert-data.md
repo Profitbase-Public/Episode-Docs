@@ -36,12 +36,12 @@ This flow imports JSON data from file storage into a SQL Server table and cleans
 |-----------------------|----------|-----------------------------------------------------------------------------|
 | **Title**                 | No | A descriptive title for the action.                                         |
 | **Connection**            | Yes | The [SQL Server Connection](./connection.md) to the target database.                               |
-| **Enable dynamic connection**    | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Dynamic connection**    | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
 | **Source**                | Yes | The data to insert. Accepts a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) or a [DataTable](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable) from an upstream action.                |
 | **Destination table**     | Yes | The name of the table to insert data into.                  |
 | **Batch size**            | No | The number of rows inserted per batch. Default is 5000. Larger batches reduce round-trips but use more memory. The optimal value depends on row size and network latency. |
 | **Result variable name**  | No | The name of a Flow variable that receives the number of rows inserted. Use this to pass the count to downstream actions or conditions.     |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**           | No | Additional notes or comments about the action or configuration.              |
 
@@ -62,6 +62,13 @@ The target table must have a schema (columns and data types) that matches the sc
 ## Returns
 
 No direct return value. If **Result variable name** is set, the specified Flow variable receives the total number of rows inserted.
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **Destination table** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
 
 ## See also
 

@@ -28,11 +28,11 @@ This action allows saving a text as a list of records in a SQL server vector col
 |--------------------|-----------|-----------------------------------------------------------------------------|
 | Title              | No | The title or name of the action.                                           |
 | Connection         | Yes | Select or define your SQL server connection.                               |
-| Enable dynamic connection   | No |    A 'Dynamic Connection' will override the 'Connection' on flow execution.   |
+| Dynamic connection   | No | **Dynamic connection** overrides **Connection** during Flow execution. |
 | Input text         | Yes | Text to vectorize and save. Can be a variable or static string. |
 | Collection name    | Yes | The name of the table or collection in the database where vectors are saved. |
 | Record definition   | Yes | The definition of columns used in the vector search. Column names need to be alphanumeric and can contain underscore. Note: The vector column is not returned. |
-| Command timeout (seconds) | No | The time limit for command execution before it times out. Default is 120 seconds.  |
+| Command timeout | No | The time limit for command execution before it times out. Default is 120 seconds.  |
 | Description        | No | Explanation of what this action does.            |
 
 </br>

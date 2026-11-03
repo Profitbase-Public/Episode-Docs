@@ -32,14 +32,14 @@ This flow runs a full staging cycle. **Create Orders_Staging from Orders** clone
 |--------------|----------|---------------------------------------------------|
 | **Title**              | No | A descriptive title for the action.               |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the database containing the source table.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
 | **Source table** | Yes | The name of the existing table or view whose schema to copy. You can select from the table picker or enter a name manually. |
 | **Target table** | Yes | The name of the new table to create. |
 | **Replace existing table** | No | When checked, drops the target table if it already exists and recreates it. When unchecked, the action raises an error if the target table exists. Checked by default. |
 | **Copy primary key** | No | When checked, copies the primary key constraint from the source table to the target. |
 | **Copy foreign key(s)** | No | When checked, copies foreign key constraints from the source table to the target. |
 | **Copy index(es)** | No | When checked, copies indexes from the source table to the target. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -48,6 +48,13 @@ This flow runs a full staging cycle. **Create Orders_Staging from Orders** clone
 ## Returns
 
 No return value. The action creates the target table.
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **Source table** can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
 
 ## See also
 

@@ -15,7 +15,7 @@ Executes a SQL command against a SQL Server database and returns the number of r
 ## How it works
 
 - **Input**: A SQL command (with optional parameters) and a SQL Server connection.
-- **Processing**: Executes the command against the connected database. Supports parameterized queries and Flow variable interpolation in the command text (see [How to use parameters](#how-to-use-parameters) and [How to use Flow variables](#how-to-use-flow-variables-in-the-command-expression) below).
+- **Processing**: Executes the command against the connected database. Supports parameterized queries and Flow variable interpolation in the command text (see [How to build expression and using parameters](#how-to-build-expressions-and-using-parameters) and [How to use Flow variables](#how-to-use-flow-variables-in-the-command-expression) below).
 - **Output**: Returns the number of rows affected as an `Int32`. If **Result variable name** is set, the count is also stored in the specified Flow variable for use by downstream actions.
 
 
@@ -32,10 +32,10 @@ This flow archives and then removes completed orders. **Archive completed orders
 |--------------|----------|---------------------------------------------------|
 | **Title**           | No | A descriptive title for the action.        |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **SQL expression and parameters**   | Yes | The SQL command to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [How to use parameters](#how-to-use-parameters) and [How to use Flow variables](#how-to-use-flow-variables-in-the-command-expression) below. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **SQL expression and parameters**   | Yes | The SQL command to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [How to build expression and using parameters](#how-to-build-expressions-and-using-parameters) and [How to use Flow variables](#how-to-use-flow-variables-in-the-command-expression) below. |
 | **Result variable name** | No | The name of a Flow variable that receives the number of rows affected. Use this to pass the count to downstream actions or conditions. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -47,9 +47,9 @@ This flow archives and then removes completed orders. **Archive completed orders
 
 <br/>
 
-## How to use parameters
+## How to build expressions and using parameters
 
-Click the edit icon next to **SQL expression and parameters** to open the SQL expression editor. The editor has four tabs:
+Click **SQL expression and parameters** to open the SQL expression editor. The editor has four tabs:
 
 | Tab | Description |
 |-----|-------------|
@@ -58,9 +58,13 @@ Click the edit icon next to **SQL expression and parameters** to open the SQL ex
 | **Dynamic parameters** | Map parameters dynamically from upstream action outputs. |
 | **Test Parameters** | Provide test values to run the query in the editor with **Execute query** without affecting production data. |
 
+<br/>
+
 The **Object Explorer** on the right lists available database objects (Tables, Views, Synonyms, Stored Procedures, Functions) on the current connection.
 
 ![SQL expression editor showing the Expression tab with an UPDATE query using @Name and @UserId parameters, and the Object Explorer panel](../../../../images/flow/sql-expression-editor-expression.png)
+
+<br/>
 
 Declare parameters in the **Parameters** tab and reference them in the query with the `@` prefix.
 
@@ -131,6 +135,14 @@ Set **Result variable name** to `rowsAffected`. Downstream actions can reference
 ```
 rowsAffected > 0
 ```
+
+<br/>
+
+>[!NOTE]
+> - The **Object Explorer** can only be used with a valid **Connection** and not **Dynamic connection**.
+> - The **Object Explorer** cannot be used with a Hypergene Flow system database.
+
+<br/>
 
 ## See also
 

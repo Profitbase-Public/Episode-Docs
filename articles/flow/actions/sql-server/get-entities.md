@@ -47,19 +47,17 @@ This flow recalculates discounts for active customers. **Get active customers** 
 |--------------|----------|---------------------------------------------------|
 | **Title**           | No | A descriptive title for the action.     |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [Execute Command - How to build expressions and using parameters](./execute-command.md#how-to-build-expressions-and-using-parameters) for syntax. |
 | **Entity name** | No | The name of the generated entity type (e.g. `MyCustomerEntity`). This becomes the class name of the mapped .NET object. |
 | **Entity properties** | Yes | Defines how result columns map to entity properties. Click the edit icon to open the mapping editor. See [Entity properties](#entity-properties) below. |
 | **Result variable name** | Yes | The name of the Flow variable that holds the returned list. Default is `entities`. Downstream actions reference this variable to access the entity collection. |
 | **Result data type** | No | The generated type name for the list (e.g. `List<MyCustomerEntity>`). Derived automatically from **Entity name**. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
-
 <br/>
-
 
 ### Entity properties
 
@@ -81,6 +79,14 @@ Each property has two fields:
 ## Returns
 
 A [List\<T\>](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1) of typed entity objects with properties specified by the **Entity properties** configuration. If the query returns no rows, the list is empty (zero items, not null).
+
+<br/>
+
+>[!NOTE]
+> - The **Create from query** and the **Object Explorer** can only be used with a valid **Connection** and not **Dynamic connection**.
+> - The **Object Explorer** cannot be used with a Hypergene Flow system database.
+
+<br/>
 
 ## See also
 

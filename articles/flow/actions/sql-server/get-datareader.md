@@ -35,10 +35,10 @@ This flow exports database rows to a CSV file in cloud storage, processing the d
 |--------------|----------|---------------------------------------------------|
 | **Title**           | No | A descriptive title for the action.     |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the target database.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
-| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [Execute Command — How to use parameters](./execute-command.md#how-to-use-parameters) for syntax. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **SQL expression and parameters**   | Yes | The SQL query to execute, with optional parameters. Supports parameterized queries and Flow variable interpolation. See [Execute Command - How to build expressions and using parameters](./execute-command.md#how-to-build-expressions-and-using-parameters) for syntax. |
 | **Reader variable name** | No | The name of the Flow variable that holds the DataReader. Default is `reader`. Downstream actions reference this variable to consume the result stream. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -47,6 +47,14 @@ This flow exports database rows to a CSV file in cloud storage, processing the d
 ## Returns
 
 [IDataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader). A forward-only stream of rows from the executed query. The reader remains open while actions connected to the **Use reader** port execute, and is closed automatically when they complete. If the query returns no rows, the DataReader is empty (open but yields no records).
+
+<br/>
+
+>[!NOTE]
+> - The **Object Explorer** can only be used with a valid **Connection** and not **Dynamic connection**.
+> - The **Object Explorer** cannot be used with a Hypergene Flow system database.
+
+<br/>
 
 ## See also
 

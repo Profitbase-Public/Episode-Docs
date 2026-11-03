@@ -17,9 +17,9 @@ This example shows an agent using 3 [Flow AI tools](../ai/flow-ai-tool.md) for w
 | Name               | Required | Description                  |
 |--------------------|---------------|------------------------------|
 | Connection         | Yes | The [SQL Server Connection](./connection.md). |
-| Dynamic connection | No | Use this option if you need to use a connection created by the [Create Connection](./create-connection.md) action. |
+| Dynamic connection | No | Use this option if you need to use a connection created by the [Create SQL Server Connection](./create-connection.md) action. |
 | Table              | Yes | The name of the table where the memory is stored. If the table does not exist in the database, it will be created automatically by Flow. If you want to use an existing table, see the [description below](#agent-memory-table-schema). |
-| Command timeout (sec) | No | The time limit for command execution before it times out. Default is 120 seconds. |
+| Command timeout | No | The time limit for command execution before it times out. Default is 120 seconds. |
 
 <br/>
 
@@ -46,3 +46,9 @@ CREATE TABLE YOUR_TABLE_NAME (
     TS DATETIMEOFFSET(2) DEFAULT GETUTCDATE() NULL
 )
 ```
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **Table name** can only be used with a valid **Connection** and not **Dynamic connection**.
+

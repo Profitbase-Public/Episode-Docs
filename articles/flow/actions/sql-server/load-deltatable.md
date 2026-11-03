@@ -6,7 +6,7 @@ If **Incremental Historic mode** is selected, the **DeltaTable** will contain mu
 
 <br/>
 
-![SQL Server Load Deltatable](/images/flow/sql-server-load-deltatable.png)
+![SQL Server Load DeltaTable](/images/flow/sql-server-load-deltatable.png)
 
 **Example** ![Example](../../../../images/strz.jpg)  
 
@@ -14,25 +14,30 @@ This flow example shows a process that loads a DeltaTable by comparing a source 
 
 <br/>
 
-### Properties
+## Properties
 
-| Name         | Type            | Description                                       |
+| Name         | Required        | Description                                       |
 |--------------|-----------------|---------------------------------------------------|
 | Title        | No | A descriptive title for the action.               |
 | Connection   | Yes | The [SQL Server Connection](./connection.md).     |
-| Dynamic connection | No | Use this option if you need to use a connection created by the [Create Connection](./create-connection.md) action. |
-| Source table name  | Yes | Source table name to load from. |
-| Delta table name   | Yes | Delta table to fill with changes. Flow automatically creates this table. |
-| Target table name  | Yes | Target table to compare against.|
+| Dynamic connection | No | Use this option if you need to use a connection created by the [Create SQL Server Connection](./create-connection.md) action. |
+| Source table | Yes | Source table name to load from. |
+| Delta table  | Yes | Delta table to fill with changes. Flow automatically creates this table. |
+| Target table | Yes | Target table to compare against.|
 | Columns and load settings | Yes | List of columns to use in DeltaTable, and settings for historical mode. See below for details. |
 | Result variable name | No | The name of the variable returning the number of rows in the DeltaTable.  |
-| Command timeout (sec) | No | The time limit for command execution before it times out. Default is 120 seconds.|
+| Command timeout | No | The time limit for command execution before it times out. Default is 120 seconds.|
 | Description   | No | Additional notes or comments about the action or configuration. |
 
 <br/>
 
 ## Returns
 Returns the number of new rows loaded to the DeltaTable. 
+
+<br/>
+
+>[!NOTE]
+> Selecting an existing **table name** can only be used with a valid **Connection** and not **Dynamic connection**.
 
 <br/>
 
@@ -68,7 +73,7 @@ When the **Update target table** is checked, it will be merged with the DeltaTab
 
 ### Column Settings
 
-![SQL Server Load Deltatable Columns](/images/flow/sql-server-load-deltatable-columns.png)
+![SQL Server Load DeltaTable columns](/images/flow/sql-server-load-deltatable-columns.png)
 
 To use the columns from the Source Table, click on **Create from source table**. You can also define columns manually by using **Add**.
 The columns defined in the list will be added to the **DeltaTable**.
@@ -116,7 +121,7 @@ In order to compare source and target tables, each table will be scanned (once) 
 
 The following notes and recommendations apply:
 - If no **Keys** are checked, all columns will be used in join.
-- If no **Compare by** are checked, all columns are used for comparison.
+- If no **Compare by** options are checked, all columns are used for comparison.
 - If no unique column combinations exist for keys, the **DeltaTable** will only contain Deletes and Inserts. **Important:** Delete rows before inserting new rows.
 - Avoid use of collation if possible; collation casting costs resources and increases time spent.
 - If collation is not specified, collation differences are detected and handled.

@@ -36,12 +36,12 @@ This flow runs a full staging cycle. [Create Table from Source](./create-table-f
 |--------------|----------|---------------------------------------------------|
 | **Title**              | No | A descriptive title for the action.               |
 | **Connection**      | Yes | The [SQL Server Connection](./connection.md) to the database containing both tables.         |
-| **Enable dynamic connection** | No | When enabled, uses a connection created at runtime by [Create Connection](./create-connection.md). Use this when the target database varies between runs. |
+| **Dynamic connection** | No | When enabled, uses a connection created at runtime by [Create SQL Server Connection](./create-connection.md). Use this when the target database varies between runs. |
 | **Source**   | Yes | The name of the source table or view to merge from. |
 | **Target table** | Yes | The name of the target table to merge into. |
 | **Merge configuration** | Yes | Defines how rows are matched between source and target, and what happens on match, no match, and when a target row is missing from the source. See [Merge configuration](#merge-configuration) below. |
 | **Result variable name** | No | The name of a Flow variable that receives the number of rows affected by the merge. Use this to pass the count to downstream actions or conditions. |
-| **Command timeout (seconds)** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
+| **Command timeout** | No | Maximum execution time in seconds. The action fails with a timeout error if exceeded. Default is 120 seconds. |
 | **Disabled** | No | When checked, the action is skipped during Flow execution. |
 | **Description**   | No | Additional notes or comments about the action or configuration. |
 
@@ -55,7 +55,7 @@ Click the edit icon next to **Merge configuration** to open the configuration ed
 
 Defines how rows are matched between source and target. Each condition pairs a target column with a source column. Rows where all conditions match are considered the same record.
 
-Click **+ Add condition** to define match keys manually, or click **Create from target key columns** to generate conditions from the target table's primary key.
+Click **Add condition** to define match keys manually, or click **Create from target key columns** to generate conditions from the target table's primary key.
 
 ![Merge configuration Conditions tab showing OrderId matched between target and source columns](../../../../images/flow/merge-configuration-conditions.png)
 
@@ -63,7 +63,7 @@ Click **+ Add condition** to define match keys manually, or click **Create from 
 
 Defines which columns are included in the merge and which are updated when a match is found. Each entry maps a target column to a source column. The **Update** checkbox controls whether the column is overwritten when the row already exists in the target.
 
-Click **+ Add column** to define mappings manually, or click **Create from target table** to generate the column list from the target table schema.
+Click **Add column** to define mappings manually, or click **Create from target table** to generate the column list from the target table schema.
 
 > [!TIP]
 > Leave **Update** unchecked for key columns — updating the column you match on causes unexpected results.
@@ -89,6 +89,14 @@ Controls what happens for each of the three merge cases:
 ## Returns
 
 No direct return value. If **Result variable name** is set, the specified Flow variable receives the number of rows affected (inserted, updated, or deleted) by the merge.
+
+
+<br/>
+
+>[!NOTE]
+> Selecting existing **table names**, or clicking **Create from target table**, can only be used with a valid **Connection** and not **Dynamic connection**.
+
+<br/>
 
 ## See also
 

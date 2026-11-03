@@ -25,7 +25,7 @@ This flow exposes a SQL Server **Vector search tool** to an Azure AI [Chat compl
 |---|---|---|
 | Title | No | The title or name of the action. |
 | Connection | Yes | The SQL Server database connection used for the search. |
-| Enable dynamic connection | No | When on, the connection is resolved at runtime from an input port instead of being fixed at design time. |
+| Dynamic connection | No | When on, the connection is resolved at runtime from an input port instead of being fixed at design time. |
 | Tool name | No | The function name exposed to the LLM. Default: `rag_retrieve_context`. The LLM uses this name when deciding to call the tool. |
 | Tool description | No | Description the LLM reads to decide whether to invoke this tool. Default: `Use for questions about '{Table}'`. The single biggest factor in whether the LLM calls the tool at the right time — be specific about *when* it should be used. |
 | Table | Yes | The name of the table where the vector search will be performed. Must contain an embedding vector column. |
@@ -35,7 +35,7 @@ This flow exposes a SQL Server **Vector search tool** to an Azure AI [Chat compl
 | Skip | No | The number of top results to skip. Default: *0*. |
 | [Distance function](https://learn.microsoft.com/en-us/azure/cosmos-db/gen-ai/distance-functions) | No | The method for calculating vector similarity. One of *Cosine Distance* (default), *Cosine Similarity*, *Dot Product Similarity*, *Euclidean Distance*, or *Manhattan Distance*. Must match the metric used when the table's embeddings were generated. |
 | Score limit | No |  A threshold value that limits results to those with a distance or similarity score at or below this value. The meaningful range depends on the selected **Distance function**. Tune by observing actual scores returned for your data. |
-| Command timeout (seconds) | No | The time limit for command execution before it times out. |
+| Command timeout | No | The time limit for command execution before it times out. |
 | Disabled | No | When on, the tool is not exposed to the LLM. Useful for temporarily removing the tool without deleting the node. |
 | Description | No | Additional notes or comments about the action or configuration. |
 

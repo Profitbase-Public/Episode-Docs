@@ -44,6 +44,25 @@ This flow reads a historical time series from a [file in OneDrive](../onedrive/r
 
 <br/>
 
+### Returns
+
+A [byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte?view=net-10.0) [array](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays) representing the forecast results. The file contains all the standard Prophet forecast columns (`ds`, `yhat`, `yhat_lower`, `yhat_upper`) **plus** one column for each grouping column you specified. This lets you identify which forecast rows belong to which entity.
+
+**Example output (grouped by `region` and `product`):**
+
+| ds | region | product | yhat | yhat_lower | yhat_upper |
+|----|--------|---------|------|------------|------------|
+| 2025-01-01 | North | Widget A | 1240.5 | 1100.2 | 1380.8 |
+| 2025-01-01 | North | Widget B | 870.3 | 790.1 | 950.4 |
+| 2025-01-01 | South | Widget A | 530.0 | 480.5 | 579.5 |
+
+<br/>
+
+> [!NOTE]
+> Prophet trains a **separate model per group**. Groups with very few data points may produce less reliable forecasts. Ensure each group has sufficient historical data — Prophet generally works best with at least one full seasonal cycle of observations.
+
+<br/>
+
 ## Input contents
 
 > [!IMPORTANT]
@@ -194,19 +213,9 @@ When set to a positive integer (e.g. `300`), Prophet runs full Bayesian sampling
 
 <br/>
 
-### Returns
 
-A [byte](https://learn.microsoft.com/en-us/dotnet/api/system.byte?view=net-10.0) [array](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/arrays) representing the forecast results. The file contains all the standard Prophet forecast columns (`ds`, `yhat`, `yhat_lower`, `yhat_upper`) **plus** one column for each grouping column you specified. This lets you identify which forecast rows belong to which entity.
 
-**Example output (grouped by `region` and `product`):**
+## Chronos-2 vs Prophet 
+Need help deciding which forecasting model to use? Read the comparison between Chronos-2 and Prophet below.  
 
-| ds | region | product | yhat | yhat_lower | yhat_upper |
-|----|--------|---------|------|------------|------------|
-| 2025-01-01 | North | Widget A | 1240.5 | 1100.2 | 1380.8 |
-| 2025-01-01 | North | Widget B | 870.3 | 790.1 | 950.4 |
-| 2025-01-01 | South | Widget A | 530.0 | 480.5 | 579.5 |
-
-<br/>
-
-> [!NOTE]
-> Prophet trains a **separate model per group**. Groups with very few data points may produce less reliable forecasts. Ensure each group has sufficient historical data — Prophet generally works best with at least one full seasonal cycle of observations.
+[Chronos-2 vs Prophet](./chronos-2-vs-prophet.md)

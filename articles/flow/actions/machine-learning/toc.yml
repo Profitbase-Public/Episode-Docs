@@ -1,4 +1,8 @@
 - name: Anomaly detection
   href: anomaly-detection.md
+- name: Chronos-2 forecast
+  href: chronos-2-forecast.md
 - name: Prophet forecast
   href: prophet-forecast.md
+- name: Chronos-2 vs Prophet forecast
+  href: chronos-2-vs-prophet.md

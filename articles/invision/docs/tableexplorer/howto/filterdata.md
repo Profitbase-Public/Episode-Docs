@@ -115,3 +115,31 @@ SELECT DISTINCT tx.[Name],tx.[Id],tx.[Model]
  WHERE @Values_Equal(CF)
    AND @Values_Equal(MF)
 ```
+
+<br/>
+
+# Filtering tables by tag
+
+You can limit which tables the Table Explorer shows by tag, in addition to the [Context filter](context.md). Use the `SetTagFilter()` function in the **Load Data** action of the **Table Explorer** component. Only tables with at least one of the given tags are displayed.
+
+`SetTagFilter()` accepts either a single string or an array of strings:
+
+| Argument | Behavior |
+|----------|----------|
+| `string[]` | Tables having at least one of the tags are displayed. |
+| `string` | One tag, or several tags separated by semicolons (`;`). Whitespace around each tag is trimmed, so `"Forecast; HR"` is the same as `["Forecast", "HR"]`. |
+| `null`, empty or whitespace-only string | Clears the tag filter. All tables are displayed. |
+
+**Example**
+
+Show only tables tagged `Forecast` or `HR`:
+
+```
+SetTagFilter("Forecast; HR");
+```
+
+or, using an array:
+
+```
+SetTagFilter(["Forecast", "HR"]);
+```

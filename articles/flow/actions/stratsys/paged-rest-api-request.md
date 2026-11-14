@@ -6,6 +6,12 @@ The **REST API request with paging** action enables you to interact with the Str
 
 The action always uses the `GET` method.
 
+
+![Flow with Stratsys paged REST API Request node](/images/flow/stratsys-paged-rest-api-request.png)
+
+**Example** ![Example](/images/strz.jpg)  
+This flow reads Suppliers from Stratsys. Converts JSON to DataTable and creates and uploads a CSV file containing the data.
+
 <br/>
 
 ## Properties

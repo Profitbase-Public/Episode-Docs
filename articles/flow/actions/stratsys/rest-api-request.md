@@ -4,7 +4,14 @@ The **REST API Request** action allows you to interact with the Stratsys REST AP
 
 The action sends a single request and returns a single response. It does not aggregate paged data. For endpoints that return paginated collections, such as SCIM users and groups or due diligence data, use [REST API Request with paging](./paged-rest-api-request.md).
 
+![Flow with Stratsys REST API Request node](/images/flow/stratsys-rest-api-request.png)
+
+**Example** ![Example](/images/strz.jpg)  
+This flow reads Departments from Stratsys. Converts JSON to DataTable and creates a CSV file containing the data.
+
 <br/>
+
+
 
 ## Properties
 

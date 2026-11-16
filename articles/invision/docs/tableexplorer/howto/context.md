@@ -1,7 +1,7 @@
 
 # How to use the Context Filter
 
-Tables can be marked with a **context**, allowing the **Table Explorer** to filter and display only the relevant ones.
+Tables can be marked with a **context**, allowing the **Table Explorer** to display only the relevant ones in any given context. A context typically maps to a business domain like **ESG**, **Sales forecasting**, **Budget** etc.
 
 <br/>
 

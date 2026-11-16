@@ -23,36 +23,39 @@ To display a Table in a Table Explorer
 | Context                   | Optional | A filter property used to categorize the table, enabling the table to appear in only select Table Explorers. For example, you can add a context string, `Budgeting and forecasting`, which makes it possible to display this table in only Table Explores having a matching Context filter (`Budgeting and forecasting`).<br/>This keyword acts as a possible filter value for the [Context filter](../docs/workbooks/components/table-explorer.md#properties). [See also  Context and context filtering](./tableexplorer/howto/context.md) |
 | Short Description         | Optional | Shown as a subtitle for the table in the Table Explorer. This text can be localized using the associated "Text code". |
 | Tags                      | Required | At least one tag is required. Tags help categorize and filter tables. Each tag supports localization via the provided "Text code". A table can have multiple tags. |
+| Flags                     | Optional | When a user edits a cell in a table, a "Data Modified" event is raised on the Table Explorer. The event passes along the `Flags` property specified on Table. Developers can use this property to take conditional action in the Workbook when an edit occur. The name of the table is also passed along with the event, but the Flags property is often preferred as it can be used as a rule that spans multiple tables and not just one - similar to a policy.   |  
 
 <br/>
 
 <br/>
 
-## Display in a Workbook
+## How to's
+
+#### Display in a Workbook
 To display a Table Explorer in a Workbook, open the Workbook designer and drag - drop a Table Explorer component from the toolbox onto a page. <br/>
 [Read more](../docs/workbooks/components/table-explorer.md)  
 
 <br/>
 
-## Choosing which tables to display
+#### Choosing which tables to display
 Tables can be marked with a **context**, allowing the **Table Explorer** to filter and display only the relevant ones.<br/>
 [Read more](./tableexplorer/howto/context.md)
 
 <br/>
 
-## Searching for a table
+#### Searching for a table in a Table Explorer
 You can quickly find a table by searching its name, short description, or by using the 'Search by Tags' option to filter by specific tags.<br/>
 [Read more](./tableexplorer/howto/search.md)
 
 <br/>
 
-## Editing data
+#### Editing data
 You can edit the table data when it is opened. <br/>
 [Read more](./tableexplorer/howto/edit.md)
 
 <br/>
 
-## Filtering data
+#### Filtering data
 You can filter selected tables using the `SetParamValue()` function in the **Execute Expression** action for the **Table Explorer** component. <br/>
 [Read more](./tableexplorer/howto/filterdata.md)
 

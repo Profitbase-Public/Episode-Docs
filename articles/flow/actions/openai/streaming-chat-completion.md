@@ -33,7 +33,7 @@ The example above shows a Flow that provides chat completions to a chat client. 
 | Enable Grounding        | No | Enables web search to improve factual reliability by using external or structured context sources. |
 | History reducer   | No | Connect a [chat history reducer](../ai/chat-history-truncation-reducer.md) to limit the size of the conversation history sent to the model. |
 | <a id="memory"></a>Memory | No | Connect a memory action to store and retrieve previous messages in the conversation, allowing for an ongoing conversation with the AI. Note that memory requires a **Session ID**. |
-| Tools             | No | Connect one or more tools the model can call to perform tasks while generating the response, such as an [MCP client tool](../mcp/mcp-client-tool.md) or a [Flow AI tool](../ai/flow-ai-tool.md). |
+| Tools             | No | Connect one or more tools the model can call to perform tasks while generating the response. Supported tools are the [Vector search tool](../sql-server/vector-search-tool.md) and the [Web search tool](../tavily/web-search-tool.md). |
 | Disabled                | No | If enabled, the action will be skipped during flow execution. |
 | Description           | No | Additional details or notes regarding the chat completion setup. |
 

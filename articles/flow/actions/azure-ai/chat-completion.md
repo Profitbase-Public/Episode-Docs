@@ -26,6 +26,7 @@ This flow processes a user's chat question by first receiving it through a [Chat
 | Model             | Yes | Specifies the model deployment name, which corresponds to the custom name chosen during model deployment in the Azure portal or in [Microsoft Foundry](https://ai.azure.com) ([see below](#models--endpoints)). In the Azure Portal, the deployment name can be found under **Resource Management** > **Model Deployments**. |
 | User Prompt       | Yes | The input message from the user, which the model processes to generate a response. |
 | System Prompt     | No | A system-level instruction that guides the model’s behavior and response style. |
+| Session ID        | No | Identifies the conversation. A session ID is required if you want to use [memory](#memory), allowing for an ongoing conversation rather than every interaction starting fresh. The session ID is usually provided by the client, for example through the [Chat completion trigger](../../triggers/ai/chat-completion-trigger.md). |
 | History           | No | A record of past interactions that provides context to the conversation, helping the model maintain continuity. |
 | Context           | No | Typically used for RAG, and provides additional information or domain-specific knowledge to the chat model so it can make more accurate responses. The input can be a string (text) or a vector search result, such as the result from the PostgreSQL [Vector Search](../postgresql/vector-search.md) action. |
 | Prompt template   | No | Defines the structure of the prompt sent to the model. The system replaces the placeholders @@context and @@userPrompt with the relevant information. See example below. |
@@ -33,6 +34,9 @@ This flow processes a user's chat question by first receiving it through a [Chat
 | Max Completion Tokens | No | Sets a limit on the number of tokens (words, characters, or pieces of text) in the model’s response. |
 | Result Variable Name | No | Stores the generated AI response. Default: "response". |
 | Enable Grounding        | No | Enables grounding to improve factual accuracy using external or structured context. |
+| History reducer   | No | Connect a [chat history reducer](../ai/chat-history-truncation-reducer.md) to limit the size of the conversation history sent to the model. |
+| <a id="memory"></a>Memory | No | Connect a memory action to store and retrieve previous messages in the conversation, allowing for an ongoing conversation with the AI. Note that memory requires a **Session ID**. |
+| Tools             | No | Connect one or more tools the model can call to perform tasks while generating the response. Supported tools are the [Vector search tool](../sql-server/vector-search-tool.md) and the [Web search tool](../tavily/web-search-tool.md). |
 | Disabled                | No | If enabled, the action is skipped during flow execution. |
 | Description       | No | Additional details or notes regarding the chat completion setup. |
 

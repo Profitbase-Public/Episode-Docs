@@ -21,6 +21,7 @@ This flow processes a user's chat question by first receiving it through a [Chat
 | Model id   | Yes | Id of the chosen [Model](https://platform.openai.com/docs/models).|
 | User Prompt       | Yes | The input message from the user, which the model processes to generate a response. |
 | System Prompt     | No | A system-level instruction that guides the model’s behavior and response style. |
+| Session ID        | No | Identifies the conversation. A session ID is required if you want to use [memory](#memory), allowing for an ongoing conversation rather than every interaction starting fresh. The session ID is usually provided by the client, for example through the [Chat completion trigger](../../triggers/ai/chat-completion-trigger.md). |
 | History           | No | A record of past interactions that provides context to the conversation, helping the model maintain continuity. |
 | Context               | No | Additional context information to influence the response (if supported). |
 | Prompt template   | No | Defines the structure of the prompt sent to the model. The system replaces the placeholders @@context and @@userPrompt with the relevant information. See example below. |
@@ -28,6 +29,9 @@ This flow processes a user's chat question by first receiving it through a [Chat
 | Max Completion Tokens | No | Sets a limit on the number of tokens (words, characters, or pieces of text) in the model’s response. |
 | Result Variable Name | No | Stores the generated AI response. Default: "response". |
 | Enable Grounding        | No | Enables web search to improve factual reliability by using external or structured context sources. |
+| History reducer   | No | Connect a [chat history reducer](../ai/chat-history-truncation-reducer.md) to limit the size of the conversation history sent to the model. |
+| <a id="memory"></a>Memory | No | Connect a memory action to store and retrieve previous messages in the conversation, allowing for an ongoing conversation with the AI. Note that memory requires a **Session ID**. |
+| Tools             | No | Connect one or more tools the model can call to perform tasks while generating the response, such as an [MCP client tool](../mcp/mcp-client-tool.md) or a [Flow AI tool](../ai/flow-ai-tool.md). |
 | Disabled                | No | If enabled, the action will be skipped during flow execution. |
 | Description       | No | Additional details or notes regarding the chat completion setup. |
 

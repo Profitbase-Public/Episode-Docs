@@ -108,13 +108,13 @@ It is important that DepartmentIDs of the dimension corresponds to the IDs used 
 
 ## Ledger Fact
 
-***Mandatory columns***
-
+***Mandatory columns***  
+***Each dataset must be sent with different file name prefix. See SYS_DatasetID comment for details. *** 
 | Column Name | Description | Valid values | Comment |
 | :--- | :--- | :--- | :--- |
 | AccountID | Group Account | varchar(50) | Group Account that must correspond to a member in the Account Dimension. Either AccountID or AccountSrcID must be filled. |
 | AccountSrcID | AccountID used by the legal entity | varchar(50) | If transcations are already on group accounts this can be skipped |
-| SYS_DatasetID | Identitifier of the transaction dataset | Actual Budget Forecast | |
+| SYS_DatasetID | Identitifier of the transaction dataset | Actual Budget Forecast | In order to send different dataset a new file prefix must be used. For example budgetYYYYMM-LegalEntityID.csv for budget while using gltYYYYMM-LegalEntityID.csv for Actual |
 | LegalEntityID | Legal Entity ID | varchar(50) | |
 | DepartmentID | Department ID | varchar(50) | |
 | TransTypeID | Transaction Type |  1 or 0 | Should be 0 for Opening Balance, 1 for regular transactions |

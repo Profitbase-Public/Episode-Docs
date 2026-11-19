@@ -458,7 +458,7 @@ function getConfigOverride(args, app){
 
 **Example - use in-memory dataset**  
 This example shows how to use data from a Worksheet or SQL Report already loaded to a Workbook in a KPI Card.  
-This is useful when you wish to re-use data from an already loaded dataset in your KPI Cards instead of loading it from the server with a custom SQL query.
+This is useful when you want to re-use data from an already loaded dataset in your KPI Cards instead of loading it from the server with a custom SQL query.
 
 ```javascript
 function getConfigOverride(args, app){

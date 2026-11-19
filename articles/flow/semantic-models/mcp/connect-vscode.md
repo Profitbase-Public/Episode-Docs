@@ -20,13 +20,13 @@ This option is intended for MCP Clients like Claude or Copilot that operates on 
 ### Microsoft Entra ID as authorization server
 
 #### Step 1: Create an Entra ID app registration and a Flow MCP Server App
-1. Create an Entra ID app registration by following [these steps](../workspaces/mcp-server-settings.md#step-1-create-the-app-registration).
-2. Create an MCP Server App by following [these steps](../workspaces/mcp-server-settings.md#step-5-update-the-flow-mcp-server-app).
+1. Create an Entra ID app registration by following [these steps](../../workspaces/mcp-server-settings.md#step-1-create-the-app-registration).
+2. Create an MCP Server App by following [these steps](../../workspaces/mcp-server-settings.md#step-5-update-the-flow-mcp-server-app).
 
 #### Step 2: Enable VS Code sign-in
 1. Sign in to the [Azure portal](https://portal.azure.com).
 2. Go to **Entra ID** -> **App registrations** and open the app registration you created in step 1.
-3. Go to **Expose an API** and click **Add a client application**.
+3. Go to **Expose an API** and click **Add a client application**. (If the button is disabled, remember to add a Scope first.)  
 4. Enter `aebc6443-996d-45c2-90f0-388ff96faa56` as Client ID and select all listed scopes. Then click **Add application**. This authorizes VS Code to authenticate with you Entra App Registration.
 
 #### Step 3: Add the Semantic Model MCP service URL

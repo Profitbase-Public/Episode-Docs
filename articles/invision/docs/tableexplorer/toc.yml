@@ -3,6 +3,8 @@
   items:
   - name: How to use the Context filter
     href: ./howto/context.md
+  - name: How to use Flags
+    href: ./howto/flags.md
   - name: How to use Search
     href: ./howto/search.md
   - name: How to edit table contents

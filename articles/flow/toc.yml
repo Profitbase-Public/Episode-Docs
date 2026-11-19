@@ -101,6 +101,8 @@
 - name: Change log
   href: changelog.md
   items:
+    - name: November 2026
+      href: changelog/release-notes-nov-2026.md
     - name: August 2026
       href: changelog/release-notes-august-2026.md
     - name: May 2026

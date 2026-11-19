@@ -1,49 +1,46 @@
-
 # How to use the Context Filter
 
-Tables can be marked with a **context**, allowing the **Table Explorer** to display only the relevant ones in any given context. A context typically maps to a business domain like **ESG**, **Sales forecasting**, **Budget** etc.
+A **Context** is a tag you assign to a Table so the **Table Explorer** can show only the tables that are relevant in a given situation. A context typically maps to a business domain, such as **ESG**, **Sales forecasting** or **Budget**.
 
-<br/>
+Using the context filter takes two steps:
 
-## Example: Context "Budgeting and forecast"
+1. [Assign a context to your Tables](#step-1-assign-a-context-to-a-table).
+2. [Scope a Table Explorer to that context](#step-2-scope-a-table-explorer-to-a-context), either dynamically or statically.
 
-When adding a **Table Explorer** to a Workbook [Page](./../../workbooks/pages.md), setting the **Context filter** to `"Budgeting and forecasting"` will limit the view to only those tables that:
+## Step 1: Assign a context to a Table
 
-- Are marked as **Display in Table Explorer(s)**
-- Have been marked with the context **"Budgeting and forecasting"**
+1. Open a Table from the Solution Explorer and go to the **Listing** tab.
+2. Enable **Display in Table Explorer**.
+3. Enter a **Context**. This is a free-form tag, so use any name that makes sense for your business domain.
 
-As shown in ***Figure A***, tables such as **Customer Support**, **Facilities Managment**, **Finance & Accounting**, **HR** and **IT** have been assigned this context and are therefore visible.
+![Listing tab with the Context field](/images/invision/table-explorer-listing-context.png)
 
-![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_web_contextfilter_1.png)
-*Figure A: Tables filtered by context "Budgeting and forecasting"*
+## Step 2: Scope a Table Explorer to a context
 
-<br/>
+Choose the option that fits your scenario:
 
-## Example: Context "Tax"
+- **Dynamic**: the context is decided at runtime, for example from a Workbook variable.
+- **Static**: the Table Explorer always shows the same context.
 
-Similarly, configuring the **Context filter** to `"Tax"` will display only those tables that:
+### Option 1: Dynamic scope
 
-- Are enabled for **Display in Table Explorer(s)**
-- Are marked with the context **"Tax"**
+1. Open (or create) a Workbook from the Solution Explorer.
+2. Add a Table Explorer component to the Workbook if it doesn't have one.
+3. Open the event that loads the Table Explorer. For example, select the Page and click **Events** in the property editor on the right.
+4. Edit (or add) the event, for example the Page **Loading** event.
+5. Add the **Load Data** action from the Table Explorer component.
+6. In the **instructions** editor, call `SetContextFilter(...)`.
 
-In ***Figure B***, tables like **Tax Filing**, **Tax Forecast**, **Tax Liability** and **Tax Payment History** are shown, as they match the selected context.
+![Load Data action calling SetContextFilter](/images/invision/table-explorer-set-context-filter.png)
 
+> [!NOTE]
+> The context is only evaluated the first time Load Data runs. Calling Load Data with `SetContextFilter(...)` again has no effect.
 
-![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_web_contextfilter_2.png)
-*Figure B*
+### Option 2: Static scope
 
+1. Open (or create) a Workbook from the Solution Explorer.
+2. Add a Table Explorer component to the Workbook if it doesn't have one.
+3. Select the Table Explorer component.
+4. In the **property editor**, enter the context in the context filter field.
 
-<br/>
-
-## Example: Multiple contexts, e.g. "Budgeting and forecast" and "Tax"
-
-Table Explorers may filter multiple contexts to display relevant tables. To define the different scopes, use semicolon to separate multiple contexts in the "Context filter" property. E.g. for filtering "Budgeting and forecast" and "Tax":
-
-- Tables must be enabled for **Display in Table Explorer(s)**
-- Tables must be marked with either the context **"Tax"** or **"Budgeting and forecasting"**
-- Table Explorer placed on the Workbook Page must have a "context filter" of  **"Budgeting and forecasting;Tax"**
-
-Shown in ***Figure C*** will list tables from both **"Budgeting and forecasting"** and **"Tax"** scoped tables.
-
-![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_web_contextfilter_3.png)
-*Figure C*
+![Context filter in the Table Explorer property editor](/images/invision/table-explorer-context-filter.png)

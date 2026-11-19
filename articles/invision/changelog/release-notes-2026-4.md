@@ -74,7 +74,21 @@ function getConfigOverride(args, app){
 ## Table Explorer enhancements
 
 #### Flags and Data modified event
+Tables in the Table Explorer can now be annotated with **flags**: technical labels that describe the meaning or side effects of editing a table, for example `recalculate-forecast` or `affects-inventory`. Unlike table names and tags, which are for display, flags are for behavior. They let you define rules that span multiple tables, without depending on which tables are shown or how they are labeled.
 
+When a user edits a table, the Table Explorer raises the **Data modified** event. The event now includes the table's flags in `Event.Data.flags` as a semicolon-separated string, so your event handler can take conditional action in the Workbook, such as marking data as edited or triggering a recalculation.
+
+```javascript
+if (Event.Data.flags?.split(';')?.includes('affects-inventory')) {
+    this.app.variables._state.isInventoryEdited = true;
+}
+```
+
+![img](/images/invision/table-explorer-data-modified-event-handler.png)
+
+Read more in [How to use flags in the Table Explorer](../docs/tableexplorer/howto/flags.md).
+
+<br/>
 
 #### Other enhancements
 - **Dynamic context scoping**: You can now programatically set the context scope by calling `SetContextFilter(...)` in the Load Data action of the Table Explorer. You'd typically do this to show only tables that are related to a specific business domain or process, for example `Sales` or `Forecast`.
@@ -84,6 +98,40 @@ function getConfigOverride(args, app){
 
 ## APIs (Advanced)
 
+#### Datasets API
+The new Datasets API gives Workbook scripts access to the data that has been loaded into memory by Worksheets, SQL Reports and Tables. Use `this.app.datasets.getNames()` to list the names of all in-memory datasets, and `this.app.datasets.get(datasetName)` to retrieve a dataset as an array of objects.
+
+```javascript
+const rows = this.app.datasets.get('Customers');
+let sum = 0;
+for(const row of rows){
+    sum += row.Amount;
+}
+```
+
+Read more in [Datasets API](../docs/workbooks/programmingmodel/apis/datasets-apis.md).
+
+<br/>
+
+#### Flow service for OnSave handlers
+The new `FlowService` lets you run a Flow when a Worksheet or Table is saved. Call `this.FlowService.Execute(...)` from any of the `On*` methods of the OnSave handler, either by Flow name only or with a custom object as parameter, for example to pass along the `CustomerId` of the saved row.
+
+```csharp
+protected override void OnEndSave(CudDataPackage data)
+{
+    data.Params.TryGetValue("@CustomerId", out var customerId);
+    this.FlowService.Execute("Flow name", new () { Data = JsonSerialize(new { CustomerId = customerId })});
+}
+```
+
+Read more in [Flow service](../docs/worksheets/onsave/flowservice.md).
+
+<br/>
+
 
 ## Coming soon...
-For the past 4 months, we've been hard at work porting the InVision Designer from a legacy desktop application to a modern web application, meaning you soon don't have to install anything on your local computer to build InVision solutions and product extensions for the Budgeting and Forecasting solution. In addition to simplyfing our deployment model and shipping faster, the new browser-based tool is built on modern technologies that enables us to provide far better tooling for you to build solutions faster and maintain them more easily. Stay tuned!
+We've spent the past four months porting InVision Designer from a legacy desktop application to a modern web application. Soon you won't need to install anything on your computer to build InVision solutions and product extensions for the Budgeting and Forecasting solution.
+
+Moving to the browser simplifies deployment and lets us ship faster. It also gives us a modern foundation for better tooling, so you can build solutions faster and maintain them more easily.
+
+We're looking forward to a public reveal in the not so distant future. Stay tuned!

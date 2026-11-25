@@ -73,6 +73,22 @@ function(eventArgs, services){
 
 <br/>
 
+## How to show clickable icons in cells
+
+To show a built-in icon that works like a button, return a `<cell-icon>` element from the Renderer. Clicking the icon raises the **Cell Icon Clicked** event on the Table View.
+
+```javascript
+function(eventArgs, services){
+    const icon = document.createElement('cell-icon');
+    icon.setAttribute('name', 'popup');
+    return icon;
+}
+```
+
+See [Clickable Cell Icons](tables/columnproperties/cellicon.md) for the available icons, how to place them in the cell and how to handle the event.
+
+<br/>
+
 ## How to format cells
 
 You can format numeric and date/datetime cells using the **Format String** or **Formatter** property.

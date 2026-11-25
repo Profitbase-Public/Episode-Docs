@@ -1,7 +1,5 @@
 # Auth0 as Entra ID proxy for MCP servers
 
-Nov 18, 2026 · @Tore Senneseth
-
 ## Overview
 
 Auth0 acts as the OAuth authorization server for your MCP server, and Entra ID is only the login behind it. MCP clients (Claude, VS Code) talk to Auth0, which handles client registration and the `resource` parameter that Entra can't, then sends the user to Entra to sign in.
@@ -9,7 +7,7 @@ Auth0 acts as the OAuth authorization server for your MCP server, and Entra ID i
 **Before you start, have these ready:**
 
 - Auth0 tenant domain, e.g. `<tenant>.us.auth0.com` (called `<auth0-domain>` below).
-- The exact MCP server URL users will enter in the client. It becomes the Auth0 API identifier and the token audience.
+- The exact MCP server URL users will enter in the client. It becomes the Auth0 API identifier and the token audience. (Open the semantic model in Flow, go to **Model Settings** -> **MCP** -> **OAuth**)
 - Admin access to Auth0 and to the Entra tenant used for sign-in.
 - Note: the free Auth0 plan allows one enterprise connection, which is enough for this setup.
 

@@ -1,4 +1,7 @@
-# InVision 2026.3 release notes
+# InVision 2026.4 release notes
+
+InVision 2026.4 adds auto-generation of a semantic model for Budgeting and Forecasting so AI tools like Claude and Copilot can explore financial planning data through MCP, with existing security policies applied automatically. KPI cards can now be bound to filters and configured programmatically at runtime. The Table Explorer gains table flags and new events. For advanced scenarios, the new Datasets API and Flow service for OnSave handlers give Workbook and Worksheet scripts more control. We also give a sneak peek of the upcoming web-based InVision Designer.
+
 
 ## AI: Semantic model for Budgeting and Forecasting
 The InVision platform now ships with a built-in extension for the Budgeting and Forecasting solution that generates the semantic model for report data (KPIs) so AI tools like Claude and Copilot can talk to financal planning data through MCP for data exploration and analysis. The extension automatically applies the security policies already defined in the solution to the semantic model data, ensuring that AI tool users only see what they are allowed to.

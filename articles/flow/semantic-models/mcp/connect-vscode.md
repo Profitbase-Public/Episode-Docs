@@ -39,6 +39,23 @@ This option is intended for MCP Clients like Claude or Copilot that operates on 
 7. You may need to restart VS Code and then start the registered MCP Server if it does not automatically initiate a login session. 
     - Press **Ctrl + Shift + p** -> **MCP: List servers** -> select your MCP Server and select **Start server**
 
+### Auth0 as Entra ID proxy authorization server
+
+#### Step 1: Configure Auth0
+1. Set up Auth0 as a proxy server for Entra ID. [](./auth0-as-entra-id-proxy.md)
+2. Register VS Code as a client application [](./auth0-as-entra-id-proxy.md#step-8-add-vs-code-as-an-application)  
+
+
+#### Step 2: Add the Semantic Model MCP service URL
+1. In Flow, open a **Semantic Model**.
+2. Go to **Model Settings** -> **Connect MCP Client** and copy the url in the **Connect with server specific URL** tab.
+3. Open VS Code and press **Ctrl + Shift + p**.
+4. Select or enter **MCP: Add server...**
+5. Select **HTTP**
+6. Paste the url you copied in `step 2` above and complete the remaining steps. 
+7. You may need to restart VS Code and then start the registered MCP Server if it does not automatically initiate a login session. 
+    - Press **Ctrl + Shift + p** -> **MCP: List servers** -> select your MCP Server and select **Start server**
+
 >[!NOTE]
 > You may need to turn off the native MSAL broker in VS Code if you are running on Windows.  
 > 1. Press **Ctrl + Shift + P** -> **Preferences: Open User Settings (JSON)**  

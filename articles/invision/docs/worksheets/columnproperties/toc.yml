@@ -8,6 +8,8 @@
   href: captionformatter.md
 - name: Cell renderer
   href: cellrenderer.md
+- name: Clickable cell icons
+  href: ../../tables/columnproperties/cellicon.md
 - name: Custom action conditions
   href: customactionconditions.md
 - name: Dropdown selection

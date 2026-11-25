@@ -79,6 +79,12 @@ function(eventArgs, services){
 
 <br/>
 
+## Clickable cell icons
+
+A cell renderer can return a `<cell-icon>` element to show a built-in icon that works like a button and raises the **Cell Icon Clicked** event. See [Clickable Cell Icons](../../tables/columnproperties/cellicon.md).
+
+<br/>
+
 ## Videos
 * [Worksheet](../../../videos/worksheet.md)
 * [Custom Cell Rendering](https://profitbasedocs.blob.core.windows.net/videos/Spreadsheet%20-%20Column%20Properties%20-%20Custom%20Cell%20Renderer.mp4)

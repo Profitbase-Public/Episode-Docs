@@ -34,6 +34,10 @@ Enables changing the caption of the report dynamically by calling SetCaption(…
 
 This event is raised when an action link cell in a table report is clicked. The payload of the event is the name of the column that was clicked and the row object.
 
+### Cell Icon Clicked
+
+This event is raised when a [clickable cell icon](../../tables/columnproperties/cellicon.md) returned by a cell renderer is clicked. The payload of the event is the row object, the name of the column, the cell value and the name of the icon (`IconName`). See [The Cell Icon Clicked event](../../tables/columnproperties/cellicon.md#the-cell-icon-clicked-event) for how to read them in JavaScript and Eaze.
+
 ### Custom Context Menu Action Executed
 
 This event is raised when a custom context menu action is clicked. The payload of the event is the name of the action that was clicked, the column and the row object that the cell belongs to.

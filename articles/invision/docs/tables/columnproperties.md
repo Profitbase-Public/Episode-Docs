@@ -13,6 +13,8 @@ Clicking a cell in the Worksheet data grid, or a column in the Columns list open
 
 * [Cell Renderer](columnproperties/cellrenderer.md)
 
+* [Clickable Cell Icons](columnproperties/cellicon.md)
+
 * [Custom Action Conditions](columnproperties/customactionconditions.md)
 
 * [Dropdown Selection](columnproperties/dropdownselection.md)

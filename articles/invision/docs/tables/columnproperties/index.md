@@ -4,6 +4,7 @@
 * [Caption](./caption.md)
 * [Captionformatter](./captionformatter.md)
 * [Cellrenderer](./cellrenderer.md)
+* [Clickable cell icons](./cellicon.md)
 * [Customactionconditions](./customactionconditions.md)
 * [Dropdownselection](./dropdownselection.md)
 * [Formatter](./formatter.md)

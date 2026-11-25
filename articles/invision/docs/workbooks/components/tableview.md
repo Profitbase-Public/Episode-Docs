@@ -79,6 +79,48 @@ _state.columnClicked = @Event.Sender.ColumnName;
 ```
 ---
 
+#### Cell Icon Clicked
+
+This event is raised when the user clicks a [clickable cell icon](../../tables/columnproperties/cellicon.md) returned by a column Renderer. The event args has the following format:
+
+##### Event args format
+
+```json
+{
+    "Data": {
+        "Property1": "",
+        "Property2": "",
+        …
+    },
+    "Sender": {
+        "ColumnName": "name of the column of the clicked cell"
+    },
+    "CellValue": "value of the clicked cell",
+    "IconName": "name of the clicked icon, for example popup"
+}
+```
+
+##### Example
+
+# [JavaScript](#tab/cell-icon-clicked-javascript)
+```javascript
+// Get the customer id of the clicked row
+_state.customerId = Event.Data.CustomerId;
+
+// Check which icon was clicked
+_state.clickedIcon = Event.IconName;
+```
+# [Eaze](#tab/cell-icon-clicked-eaze)
+
+```javascript
+// Get the customer id of the clicked row
+_state.customerId = @Event.Data.CustomerId;
+
+// Check which icon was clicked
+_state.clickedIcon = @Event.IconName;
+```
+---
+
 #### Custom Context Menu Action Executed
 
 This event is raised when a user clicks a context menu item. The event args has the following format:

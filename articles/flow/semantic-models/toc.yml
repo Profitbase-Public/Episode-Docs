@@ -20,6 +20,8 @@
       href: "mcp/connect-claude-code.md"
     - name: "Connect VS Code"
       href: "mcp/connect-vscode.md"
+    - name: "Use Auth0 as Entra ID proxy"
+      href: "mcp/auth0-as-entra-id-proxy.md"
  
  
     

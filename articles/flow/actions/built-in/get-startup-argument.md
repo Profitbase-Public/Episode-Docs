@@ -12,7 +12,7 @@ Typical use cases:
 ![Get Startup Argument](../../../../images/flow/get-startup-argument.png) 
 
 **Example** ![Example](../../../../images/strz.jpg)  
-This flow is invoked via an [HTTP request](../http/http-request.md), reads the input payload using **Get startup argument**, [converts](convert.md) the received object to the required format, and [returns](return.md) the converted result back to the calling flow in the HTTP response.  The calling flow then inserts or updates the corresponding row in the database.
+This flow is invoked via an [HTTP request](../http/http-request.md), reads the input payload using **Get startup argument**, [converts](convert.md) the received object to the required format, and [returns](return.md) the converted result to the calling flow in the HTTP response. The calling flow then inserts or updates the corresponding row in the database.
 
 The calling flow uses an HTTP request action with the POST method to invoke another flow. The request URI points to the endpoint of the target flow. ![Example](../../../../images/strz2.jpg)
 
@@ -29,6 +29,12 @@ To call this flow from another flow:
 
 When the target flow starts, **Get startup argument** exposes the request body as `startupArgument`.  
 The flow uses this value to calculate the end date and the **Return** action sends the result back in the HTTP response.
+
+## Returns
+
+The result is a nullable object. Depending on what the caller sends, use the [Convert](./convert.md) action, for example, to get the data in the correct format.
+
+<br/>
 
 >[!NOTE]
 > This action can only be used in the Main flowchart.

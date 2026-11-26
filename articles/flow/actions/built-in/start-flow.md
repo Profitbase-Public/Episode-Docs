@@ -17,7 +17,7 @@ This flow receives order data, checks if it contains the necessary details, and 
 |------------|----------|-------------|
 | Title      | No | The title of the action. |
 | Workspace         | No | To run a Flow in a _different_ Workspace than the host Flow, specify the Workspace here. Note that if you point to a variable, the Flow selector will not display any options as the actual Workspace ID is only available at runtime. |
-| Flow       | Yes | The name of the flow to start, choose existing flow from the dropdown list. |
+| Flow       | Yes | The name of the flow to start. Select an existing flow from the dropdown list. |
 | Input      | No | The input data passed to the flow. |
 | Semaphore name | No | The name of the semaphore used to limit the number of simultaneous Flow executions and to serve as the completion synchronization point. |
 | Semaphore max slots | No | The maximum number of leases (simultaneous Flow executions) the semaphore allows. Default is 5. When this threshold is reached, no more Flows can be submitted until one completes. |
@@ -25,12 +25,18 @@ This flow receives order data, checks if it contains the necessary details, and 
 
 <br/>
 
+### Input (payload)
+
+The optional input is sent as a payload to the target flow. It must be a [built-in C# value type](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types), a string, or a byte array. Objects and records must be serialized, for example, using the [Convert](./convert.md) action.
+
+<br/>
+
 ### Using Semaphores to throttle and synchronize concurrent Flow executions
-Semaphores limit concurrent actions or Flow executions, acting as a synchronization point. Use them to:  
+Semaphores limit concurrent actions or Flow executions, acting as a synchronization point. Use them to:
 - Fan out work across parallel Flows and wait for all of them to complete before continuing.
 - Throttle or synchronize work within a specific scope — such as a department, database, or business domain — to prevent race conditions or guard against resource exhaustion (memory, network I/O, disk).
 
-Multiple semaphores with different names can coexist in a Workspace, letting you create separate execution groups — such as one per Flow, one pr business area, or ones that span several Flows.
+Multiple semaphores with different names can coexist in a Workspace, letting you create separate execution groups — such as one per Flow, one per business area, or one spanning several Flows.
 
 A semaphore has two properties:
 
@@ -51,7 +57,7 @@ The following rules apply:
 Suppose you want to run 30 data imports in parallel, but resource constraints (networking, memory) mean no more than `6` can run simultaneously. Once all imports finish, the Flow should continue to the next step.
 
 To set this up:
-- Use a [Declare variable](../built-in/declare-variable.md) to create a GUID.
+- Use a [Declare variable](../built-in/declare-variable.md) action to create a GUID.
 - Create a loop that kicks off multiple `Start Flow` actions.
 - Pass the GUID as the semaphore `name` in each `Start Flow` action. This creates a semaphore local to the current Flow.
 - Set `Max slots` to `6`.

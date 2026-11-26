@@ -2,10 +2,10 @@
 
 Provides a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) for reading a forward-only stream of rows from an Excel sheet.
 
-> [!NOTE]
-> This action was previously named **Open Excel file as DataReader**.
+![Flow where customer data is read from an Excel file with a DataReader, exported as a Parquet file and uploaded to Azure Blob Storage](https://profitbasedocs.blob.core.windows.net/flowimages/getDataReaderEx.png)
 
-![Get Data Reader Ex](https://profitbasedocs.blob.core.windows.net/flowimages/getDataReaderEx.png)
+**Example** ![Example](../../../../images/strz.jpg)  
+This Flow converts customer data from an Excel file to a Parquet file. **Read Customer data** takes the Excel file as `fileContents`, reads rows from the sheet given in `sheetName`, and provides them as a `reader`. The reader is used as `source` by **Export Customer data as Parquet** ([Create Parquet file as stream](../parquet/create-parquet-file-as-stream.md)), which writes the rows to the Parquet stream `parquetData`. In its **Use stream** branch, **Upload Customer Parquet File** ([Upload Blob](../azure-blob-storage/upload-blob.md)) uploads the stream to Azure Blob Storage. Because the DataReader reads one row at a time, this pattern also works for large Excel files.
 
 <br/>
 

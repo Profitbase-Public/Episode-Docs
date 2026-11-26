@@ -2,10 +2,10 @@
 
 Loads the contents of an Excel sheet into memory as a [DataTable](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable).
 
-> [!NOTE]
-> This action was previously named **Read Excel file as DataTable**.
+![Flow where order data is loaded from an Excel file into a DataTable, prepared in a Function and written to a new Excel file](https://profitbasedocs.blob.core.windows.net/flowimages/read-excel-file-as-datatable.png)
 
-![Read Excel File As Datatable](https://profitbasedocs.blob.core.windows.net/flowimages/read-excel-file-as-datatable.png)
+**Example** ![Example](../../../../images/strz.jpg)  
+This Flow reads order data from an Excel file, prepares it, and writes the result to a new Excel file. **Read order** takes the Excel file as `fileContents`, reads the sheet given in `sheetName`, and loads all rows into memory as the DataTable `TablesOrder`. **Prepare order** ([Function](../built-in/function.md)) receives `TablesOrder` and transforms the data into `orderUpForInsert`. **Insert order** ([Convert DataTable or DataReader to Excel file bytes](./create-excel-file-as-byte-array.md)) then uses the prepared data as `source` and creates a new Excel file as `byteArray`. Use a DataTable when you need all rows at once, for example to sort, filter, or look up values across rows before passing the data on.
 
 <br/>
 

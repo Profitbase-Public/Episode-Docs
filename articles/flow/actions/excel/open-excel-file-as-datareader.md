@@ -1,8 +1,11 @@
-# Open Excel file as DataReader
+# Convert Excel file to DataReader
 
 Provides a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) for reading a forward-only stream of rows from an Excel sheet.
 
-![Get Data Reader Ex](https://profitbasedocs.blob.core.windows.net/flowimages/getDataReaderEx.png)
+![Flow where customer data is read from an Excel file with a DataReader, exported as a Parquet file and uploaded to Azure Blob Storage](https://profitbasedocs.blob.core.windows.net/flowimages/getDataReaderEx.png)
+
+**Example** ![Example](../../../../images/strz.jpg)  
+This Flow converts customer data from an Excel file to a Parquet file. **Read Customer data** takes the Excel file as `fileContents`, reads rows from the sheet given in `sheetName`, and provides them as a `reader`. The reader is used as `source` by **Export Customer data as Parquet** ([Create Parquet file as stream](../parquet/create-parquet-file-as-stream.md)), which writes the rows to the Parquet stream `parquetData`. In its **Use stream** branch, **Upload Customer Parquet File** ([Upload Blob](../azure-blob-storage/upload-blob.md)) uploads the stream to Azure Blob Storage. Because the DataReader reads one row at a time, this pattern also works for large Excel files.
 
 <br/>
 
@@ -16,6 +19,14 @@ Provides a [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data
 | Data start row       | No | The row number of the first row to read. If the worksheet has a header row, `Data start row` is typically `2` |
 | Column mapping       | Yes | Defines the mapping between Excel column letters and business object property names.                          |
 | Reader variable name | No | The name of the variable you can use to reference the DataReader in other actions.                |
+| Disabled | No | When checked, the action is skipped during Flow execution. |
+| Description | No | Additional notes or comments about the action or configuration. |
+
+<br/>
+
+## Returns
+
+A [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) for reading the rows and columns specified by the `Data start row` and `Column mapping` properties.
 
 <br/>
 

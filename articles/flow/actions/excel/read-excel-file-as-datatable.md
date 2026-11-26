@@ -1,8 +1,11 @@
-# Read Excel file as DataTable
+# Convert Excel file to DataTable
 
 Loads the contents of an Excel sheet into memory as a [DataTable](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable).
 
-![Read Excel File As Datatable](https://profitbasedocs.blob.core.windows.net/flowimages/read-excel-file-as-datatable.png)
+![Flow where order data is loaded from an Excel file into a DataTable, prepared in a Function and written to a new Excel file](https://profitbasedocs.blob.core.windows.net/flowimages/read-excel-file-as-datatable.png)
+
+**Example** ![Example](../../../../images/strz.jpg)  
+This Flow reads order data from an Excel file, prepares it, and writes the result to a new Excel file. **Read order** takes the Excel file as `fileContents`, reads the sheet given in `sheetName`, and loads all rows into memory as the DataTable `TablesOrder`. **Prepare order** ([Function](../built-in/function.md)) receives `TablesOrder` and transforms the data into `orderUpForInsert`. **Insert order** ([Convert DataTable or DataReader to Excel file bytes](./create-excel-file-as-byte-array.md)) then uses the prepared data as `source` and creates a new Excel file as `byteArray`. Use a DataTable when you need all rows at once, for example to sort, filter, or look up values across rows before passing the data on.
 
 <br/>
 
@@ -16,6 +19,7 @@ Loads the contents of an Excel sheet into memory as a [DataTable](https://learn.
 | Data start row      | No | The row number of the first row to read. If the worksheet has a header row, `Data start row` is typically `2`.   |
 | Column mapping      | Yes | Defines the mapping between the `column letters` (A,B,C, etc) in a worksheet, and the `column names` (CustomerID, Amount, etc) in the target DataTable. |
 | Table variable name | No | The name of the DataTable variable returned from the action. |
+| Disabled | No | When checked, the action is skipped during Flow execution. |
 | Description | No | Additional notes or comments about the action or configuration. |
 
 <br/>

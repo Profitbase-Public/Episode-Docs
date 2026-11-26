@@ -1,6 +1,6 @@
 # Datasets
 
-A dataset is a projection of a database table or view. It describes the source's schema (columns, data types, relationships) and its metrics, so that an AI agent can query the data through the [MCP endpoint of the semantic model](./connect-mcp-clients.md).
+A dataset is a projection of a database table or view. It describes the source's schema (columns, data types, relationships) and its metrics, so that an AI agent can query the data through the [MCP endpoint of the semantic model](./mcp/connect-mcp-clients.md).
 
 Think of a dataset as a table wrapped in structured information that tells the AI agent how to query the table and use it for data analysis.
 

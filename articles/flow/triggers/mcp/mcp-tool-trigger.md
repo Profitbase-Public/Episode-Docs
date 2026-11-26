@@ -39,7 +39,7 @@ If the Flow requires the logged-in` user id` (for example running a SQL query wi
 
 ##### Note for using Microsoft Entra ID
 If you are using `Microsoft Entra ID` as Authorization Server, you must add the **MCP Server URL** (see example image above) to the `identifierUris` in the `Manifest` of the App Registration that the [MCP Server App in the Workspace](../../workspaces/mcp-server-settings.md#pre-registered-mcp-server-apps) references. This is the MCP Server App having the `Use for Flows with an MCP Tool Trigger` property enabled.  
-Read about [Entra ID App Registrations here](../../workspaces/mcp-server-settings.md#microsoft-entra-id-how-to-set-up-an-app-registration-for-an-mcp-server)
+Read about [Entra ID App Registrations here](../../workspaces/mcp-server-settings.md#set-up-an-entra-id-app-registration-for-a-flow-mcp-server-app)
 
 <br/>
 

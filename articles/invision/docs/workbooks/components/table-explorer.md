@@ -19,19 +19,20 @@ To display a Table in a Table Explorer
 | Name           |  Description                                     |
 |----------------|--------------------------------------------------|
 | Context filter  | Use this property to specify which Tables to display in the Table Explorer. Only Tables with at least one matching Context string is displayed. Use semicolons (;) to define multiple filter values. <br/>For example, `Forecast; HR` will display tables having a Context strings with `Forecast` OR `HR` tokens. You can also set the context filter in the Load Data action by calling the `SetContextFilter(...)` function. If no context filter is specified, all Tables marked as "Display in Table Explorer(s)" in the solution will be displayed. Read more about context filtering here: [Context and context filtering](../../tableexplorer/howto/context.md) |
+| Default grouping | Specifies whether the tables are listed or grouped by tags when the Table Explorer opens.<br/>- **Automatic** (default): groups by tags when there are more than 2 tags and more than 10 tables.<br/>- **None**: lists the tables.<br/>- **By tags**: groups the tables by tags. If none of the tables have tags, they are listed instead.<br/>Users can still switch between the two views with the **Group by Tags** toggle. This property is only available in the web-based InVision Designer. |
 
 <br/>
 
 ## Display in Workbook
-To display a Table Explorer in a Workbook, drag and drop it from the toolbox. By default, it will fill the entire page, but you can change this from the Properties panel if you want to.
+To display a Table Explorer in a Workbook, select it from the toolbox. By default, it will fill the entire page, but you can change this from the Properties panel if you want to.
 
-![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_workbook_page.png)
+![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_workbook_page_n.png)
 
 <br/>
 
 Run the **Load Data**-action of the Table Explorer to initialize the UI.
 
-![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_workbook_interaction.png)
+![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_workbook_interaction_n.png)
 
 <br/>
 

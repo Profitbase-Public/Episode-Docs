@@ -4,6 +4,8 @@ The Table Explorer automatically loads all tables matching the [context filter](
 
 You can quickly find a table by searching its name, short description, or by using the 'Search by Tags' option to filter by specific tags.
 
+Whether 'Search by Tags' is selected when the Table Explorer opens is set by the [Default grouping](../../workbooks/components/table-explorer.md#properties) property.
+
 <br/>
 
 ![pic](https://profitbasedocs.blob.core.windows.net/images/table_explorer_web_search_tables.png)

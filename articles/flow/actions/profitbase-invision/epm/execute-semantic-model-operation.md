@@ -1,6 +1,6 @@
 # Execute Profitbase B&F Semantic Model operation
 
-Makes data and metadata from a **Profitbase Budgeting and Forecasting (B&F)** solution available to AI agents through the [Flow Semantic Model MCP server](../../../semantic-models/connect-mcp-clients.md).  
+Makes data and metadata from a **Profitbase Budgeting and Forecasting (B&F)** solution available to AI agents through the [Flow Semantic Model MCP server](../../../semantic-models/mcp/connect-mcp-clients.md).  
 
 The action updates a [semantic model](../../../semantic-models/overview.md) using the specified [Operation](#operations).  
 

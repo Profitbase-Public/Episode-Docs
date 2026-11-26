@@ -30,7 +30,7 @@ Flow MCP servers now support OAuth authentication, the official protocol recomme
 
 By default, Microsoft Entra ID is used as the authorization server, but you can also configure your own, such as Keycloak, Auth0, or Okta.
 
-Read more about [MCP Server Settings here](../tenants/mcp-server-settings.md).
+Read more about [MCP Server Settings here](../workspaces/mcp-server-settings.md).
 
 ![Flow25 9 3](../../../images/changelogs/Flow25_9_3.png)
 

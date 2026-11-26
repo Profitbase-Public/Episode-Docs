@@ -26,8 +26,8 @@ This option is intended for MCP clients, such as Claude or Copilot, that operate
 ### Microsoft Entra ID as authorization server
 
 #### Step 1: Create an Entra ID app registration and a Flow MCP Server App
-1. Create an Entra ID app registration by following [these steps](../workspaces/mcp-server-settings.md#step-1-create-the-app-registration).
-2. Create an MCP Server App by following [these steps](../workspaces/mcp-server-settings.md#step-5-update-the-flow-mcp-server-app).
+1. Create an Entra ID app registration by following [these steps](../../workspaces/mcp-server-settings.md#step-1-create-the-app-registration).
+2. Create an MCP Server App by following [these steps](../../workspaces/mcp-server-settings.md#step-5-add-or-update-the-flow-mcp-server-app).
 
 #### Step 2: Enable Claude Code sign-in
 1. Sign in to the [Azure portal](https://portal.azure.com).

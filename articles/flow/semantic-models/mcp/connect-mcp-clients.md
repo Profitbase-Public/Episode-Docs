@@ -32,7 +32,7 @@ Use one of these options for admin users who should have access to all data in t
 - [Connect with VS Code](./connect-vscode.md#connect-with-a-server-specific-url-or-bearer-token)
 
 > [!NOTE]
-> To use these options, you must have created at least one [API key for the MCP policy](../workspaces/api-keys.md#policy-types).
+> To use these options, you must have created at least one [API key for the MCP policy](../../workspaces/api-keys.md#policy-types).
 
 <br/>
 

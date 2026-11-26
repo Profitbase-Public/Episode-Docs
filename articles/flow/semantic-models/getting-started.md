@@ -30,4 +30,4 @@ Add derived metrics to calculate new values from [dataset metrics](./datasets.md
 
 ## 5. Connect an MCP client
 
-[Connect an MCP client](./connect-mcp-clients.md), such as Claude or Microsoft 365 Copilot, to query the semantic model using natural language.
+[Connect an MCP client](./mcp/connect-mcp-clients.md), such as Claude or Microsoft 365 Copilot, to query the semantic model using natural language.

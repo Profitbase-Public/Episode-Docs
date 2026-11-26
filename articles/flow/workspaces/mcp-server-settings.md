@@ -1,6 +1,6 @@
 # MCP Server Settings
 
-To let MCP clients use OAuth to access Flow MCP Server APIs and [Semantic models](../semantic-models/connect-mcp-clients.md), you must configure the MCP Server Settings for the Workspace.
+To let MCP clients use OAuth to access Flow MCP Server APIs and [Semantic models](../semantic-models/mcp/connect-mcp-clients.md), you must configure the MCP Server Settings for the Workspace.
 For example, if you use the OAuth endpoint of an [MCP tool trigger](../triggers/mcp/mcp-tool-trigger.md) without configuring the MCP Server Settings, the API returns an `unauthorized` error.
 
 ![MCP Server Settings](/images/flow/mcp-server-settings.png)
@@ -60,7 +60,7 @@ Set the Application ID URI to the exact canonical URL of your MCP service endpoi
 
 1. In your app registration, select **Expose an API**.
 2. Next to **Application ID URI**, click **Add** (or **Edit**), and enter the MCP service URL.
-    - For a [Semantic model](../semantic-models/overview.md) MCP service, use its [Connect with OAuth URL](../semantic-models/connect-mcp-clients.md#connect-with-oauth).
+    - For a [Semantic model](../semantic-models/overview.md) MCP service, use its [Connect with OAuth URL](../semantic-models/mcp/connect-mcp-clients.md#connect-with-oauth).
     - For an MCP service provided by a Flow with an MCP tool trigger, use its [Connect with OAuth URL](../triggers/mcp/mcp-tool-trigger.md#connect-with-oauth).
 3. If your Workspace has multiple MCP endpoints (for example, several [semantic models](../semantic-models/overview.md), or both semantic models and Flows with [MCP tool triggers](../triggers/mcp/mcp-tool-trigger.md)), select **Manifest** and edit `identifierUris` to include all the endpoints:
 ```json

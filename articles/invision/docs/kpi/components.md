@@ -74,7 +74,7 @@ override) and takes its color from its own resolved state.
 | `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set |
-| `Configuration function` | See [Metric Configuration function return object](#metric-configuration-function-returns)|
+| `Configuration function` | See [Metric Configuration function return object](#metric-configuration-function-return-object)|
 
 ##### Metric Configuration function return object
 ```javascript
@@ -124,7 +124,7 @@ state color.
 | `Weight` | `normal`, `semibold`, `bold`. Defaults to `semibold`. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `TextColumn` | a column name from the card's result set |
-| `Configuration function` | See [Text Configuration function return object](#text-configuration-function-returns)|
+| `Configuration function` | See [Text Configuration function return object](#text-configuration-function-return-object)|
 
 ##### Text Configuration function return object
 ```javascript
@@ -153,7 +153,7 @@ and are not set on the component.
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `TextColumn` | a column name from the card's result set |
-| `Configuration function` | See [TrendText Configuration function return object](#trendtext-configuration-function-returns)|
+| `Configuration function` | See [TrendText Configuration function return object](#trendtext-configuration-function-return-object)|
 
 ##### TrendText Configuration function return object
 ```javascript
@@ -184,7 +184,7 @@ more query.
 | `DataSource` | A SQL query (child element) returning the series rows to plot. No card-level fallback. |
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | the column read from the `DataSource` series result |
-| `Configuration function` | See [Chart Configuration function return object](#chart-configuration-function-returns)|
+| `Configuration function` | See [Chart Configuration function return object](#chart-configuration-function-return-object)|
 
 ##### Chart Configuration function return object
 ```javascript
@@ -223,7 +223,7 @@ The two icons:
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set |
-| `Configuration function` | See [TrendDirection Configuration function return object](#trenddirection-configuration-function-returns)|
+| `Configuration function` | See [TrendDirection Configuration function return object](#trenddirection-configuration-function-return-object)|
 
 ##### TrendDirection Configuration function return object
 ```javascript
@@ -282,7 +282,7 @@ The badge per token:
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
 | `ValueColumn` | a column name from the card's result set; its value must be `increase`, `decrease`, or `same` |
-| `Configuration function` | Use when you need advanced, dynamic state configuration. See [TrendBadge Configuration function return object](#trendbadge-configuration-function-returns)|
+| `Configuration function` | Use when you need advanced, dynamic state configuration. See [TrendBadge Configuration function return object](#trendbadge-configuration-function-return-object)|
 
 ##### TrendBadge Configuration function return object
 ```javascript
@@ -398,7 +398,7 @@ The icon per `Status` token:
 | Property | Allowed values |
 |----------|----------------|
 | `HorizontalAlignment` | `left`, `center`, `right` |
-| `Configuration function` | Use when you need advanced, dynamic state configuration. See [StatusIndicator Configuration function return object](#statusindicator-configuration-function-returns)|
+| `Configuration function` | Use when you need advanced, dynamic state configuration. See [StatusIndicator Configuration function return object](#statusindicator-configuration-function-return-object)|
 
 ```xml
 <Row>

@@ -1,4 +1,4 @@
-# Convert an Excel file to Markdown
+# Convert Excel file to Markdown
 
 Converts an Excel file to [Markdown](https://en.wikipedia.org/wiki/Markdown).
 

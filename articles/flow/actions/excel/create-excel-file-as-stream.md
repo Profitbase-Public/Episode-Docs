@@ -1,6 +1,12 @@
-# Create Excel file as stream
+# Convert DataTable or DataReader to Excel file stream
 
 Creates an Excel file from a [DataTable](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable) or [DataReader](https://learn.microsoft.com/en-us/dotnet/api/system.data.idatareader) and returns the result as a [Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream).
+
+> [!NOTE]
+> This action was previously named **Create Excel file as stream**.
+
+> [!TIP]
+> This action creates a file with a single sheet. To create a file with multiple sheets, or to add sheets to an existing Excel file, use [Create or Open Excel workbook](./open-workbook.md) together with [Add sheet to Excel workbook](./add-sheet.md).
 
 
 ![Get Data Reader Ex1](../../../../images/flow/getDataReaderEx1.png)
@@ -19,7 +25,8 @@ This Flow [exports sales data](../sql-server/get-entities.md) for September 2024
 | Sheet name           | No | Specifies a worksheet name. |
 | Column mapping       | No | Defines the mapping between Excel column letters and business object property names.                          |
 | Worksheet formatting options | No | Specifies detailed formatting options.                                                                                                      |
-| Byte array variable name | No | The name of the variable you can use to reference the Stream in other actions.                |
+| Stream variable name | No | The name of the variable you can use to reference the Stream in other actions.                |
+| Disabled | No | When checked, the action is skipped during Flow execution. |
 | Description | No |  Additional notes or comments about the action or configuration. |
 
 <br/>
@@ -27,6 +34,15 @@ This Flow [exports sales data](../sql-server/get-entities.md) for September 2024
 ## Returns
 
 Returns the Excel file as a [Stream](https://learn.microsoft.com/en-us/dotnet/api/system.io.stream)
+
+<br/>
+
+## Output ports
+
+| Port           | Description |
+| -------------- | ----------- |
+| **Use stream** | Runs while the stream is available. Connect uploads and other actions that read the stream here. |
+| **Continue**   | Runs after the **Use stream** branch has completed and the stream has been closed. |
 
 <br/>
 

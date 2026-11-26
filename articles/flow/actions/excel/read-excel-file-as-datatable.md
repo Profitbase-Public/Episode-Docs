@@ -1,6 +1,9 @@
-# Read Excel file as DataTable
+# Convert Excel file to DataTable
 
 Loads the contents of an Excel sheet into memory as a [DataTable](https://learn.microsoft.com/en-us/dotnet/api/system.data.datatable).
+
+> [!NOTE]
+> This action was previously named **Read Excel file as DataTable**.
 
 ![Read Excel File As Datatable](https://profitbasedocs.blob.core.windows.net/flowimages/read-excel-file-as-datatable.png)
 
@@ -16,6 +19,7 @@ Loads the contents of an Excel sheet into memory as a [DataTable](https://learn.
 | Data start row      | No | The row number of the first row to read. If the worksheet has a header row, `Data start row` is typically `2`.   |
 | Column mapping      | Yes | Defines the mapping between the `column letters` (A,B,C, etc) in a worksheet, and the `column names` (CustomerID, Amount, etc) in the target DataTable. |
 | Table variable name | No | The name of the DataTable variable returned from the action. |
+| Disabled | No | When checked, the action is skipped during Flow execution. |
 | Description | No | Additional notes or comments about the action or configuration. |
 
 <br/>

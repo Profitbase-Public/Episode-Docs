@@ -4,14 +4,12 @@ The **REST API Request** action allows you to interact with the Stratsys REST AP
 
 The action sends a single request and returns a single response. It does not aggregate paged data. For endpoints that return paginated collections, such as SCIM users and groups or due diligence data, use [REST API Request with paging](./paged-rest-api-request.md).
 
-![Flow with Stratsys REST API Request node](/images/flow/stratsys-rest-api-request.png)
+![Flow where Stratsys REST API Request reads departments, converts the JSON response to a DataTable and creates a CSV file on Success, and throws an exception on Error](/images/flow/stratsys-rest-api-request.png)
 
 **Example** ![Example](/images/strz.jpg)  
-This flow reads Departments from Stratsys. Converts JSON to DataTable and creates a CSV file containing the data.
+This flow reads departments from Stratsys and saves them as a CSV file. **Stratsys REST API Request** calls the departments endpoint at the given `URI` and returns the response as `departments`. On **Success**, **Departments JSON to table** ([Convert JSON to DataTable](../json/get-json-datatable.md)) converts the JSON response to the DataTable `departmentsTable`, and **Create departments CSV** ([Create CSV file as byte array](../csv/create-csv-file-as-byte-array.md)) uses the table as `source` to create the CSV file. On **Error**, **Show Stratsys error** ([Throw exception](../built-in/throw-exception.md)) stops the Flow with an error message. Use this pattern to handle a failed API call in the Flow itself, instead of wrapping the action in a [Try-Catch](../built-in/try-catch.md) block.
 
 <br/>
-
-
 
 ## Properties
 
@@ -23,7 +21,7 @@ This flow reads Departments from Stratsys. Converts JSON to DataTable and create
 | Configuration | Yes | Define configuration as described below. |
 | Description | No | Additional notes or comments about the action or configuration. |
 
-<br>
+<br/>
 
 ## Returns
 
@@ -94,13 +92,9 @@ If the response from the Stratsys request is of type [HttpResponse&lt;T&gt;](../
 
 For other response types or severe errors, the action will raise an error that could terminate the Flow unless the **Error** port is connected or the action is wrapped in a [Try-Catch](../built-in/try-catch.md) block.
 
-<br>
+<br/>
 
 ## API Limits
 
 Stratsys enforces rate limits to maintain stable server performance. If you exceed these limits, the API will return a `429 Too Many Requests` error.
 For `GET` requests, the action handles this by delaying the call and retrying up to three attempts in total. If the retry limit is reached, an error is returned. Requests using other methods are not retried.
-
-<br/>
-
-By following these guidelines, you can integrate with the Stratsys API efficiently and avoid common pitfalls.

@@ -2,11 +2,11 @@
   href: connection.md
 - name: "Create connection"
   href: create-connection.md
-- name: "REST API Request"
-  href: rest-api-request.md
-- name: "REST API Request with paging"
-  href: paged-rest-api-request.md
 - name: "Create Stratsys KPI entity"
   href: "create-kpi-entity.md"
 - name: "Push data to Stratsys KPI API"
   href: "push-data-to-kpi-api.md"
+- name: "REST API Request"
+  href: rest-api-request.md
+- name: "REST API Request with paging"
+  href: paged-rest-api-request.md

@@ -24,8 +24,18 @@ This flow declares an empty `stratsysKpis` list variable and loops over the Exce
 ## How it works
 
 - **Input**: A [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md), plus the KPI identifier and the columns that hold the department and period.
-- **Processing**: The rows are turned into a KPI entity for the KPI named in **KPI ID**. Each row provides a data point for the department in the **Department ID column** and the period in the **Period date column**. Every other column in the source is sent to Stratsys as a value column, using the source column name — these names must match the value names already defined for the KPI in Stratsys.
+- **Processing**: The rows are turned into a KPI entity for the KPI named in **KPI ID**. Each row provides a data point for the department in the **Department ID column** and the period in the **Period date column**, and the data points are grouped by department. Every other column in the source is sent to Stratsys as a value column, using the source column name — these names must match the value names already defined for the KPI in Stratsys.
 - **Output**: A Stratsys KPI entity, returned on the **kpi** output port, ready to pass to [Push data to Stratsys KPI API](./push-data-to-kpi-api.md).
+
+### Source data requirements
+
+The action fails with an error if the source data does not meet these requirements:
+
+- The **Department ID column** and **Period date column** must exist in the source. Column names are case-sensitive.
+- The source must contain at least one value column in addition to the department ID and period date columns.
+- The department ID must not be empty in any row.
+- The period date must be a date, or a text value that can be read as a date. It is sent to Stratsys in the format `yyyy-MM-dd`.
+- Value columns must contain numbers, text values that are numbers (for example `"12.5"`), or empty (null) values.
 
 <br/>
 
@@ -34,12 +44,13 @@ This flow declares an empty `stratsysKpis` list variable and loops over the Exce
 <!--prettier-ignore-->
 | Name | Required | Description |
 |---|---|---|
+| Title | No | The title of the action. |
 | KPI ID | Yes | The identifier of the Stratsys KPI the data belongs to (for example `revenue_forecast`). |
 | Source | Yes | The [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) containing the rows to convert. |
-| Department ID column | No | The name of the source column that holds the department ID. |
-| Period date column | No | The name of the source column that holds the period date. |
+| Department ID column | Yes | The name of the source column that holds the department ID. |
+| Period date column | Yes | The name of the source column that holds the period date. |
 | KPI variable name | No | The name used to reference the resulting KPI entity (the **kpi** output). |
-| Description | No | Free-text notes about the action. |
+| Description | No | Additional notes or comments about the action or configuration. |
 
 There is no separate property for the KPI value. All remaining columns in the **Source** (those not used as the Department ID or Period date column) are sent to Stratsys as value columns, using their column names as-is. These names must match the value names already defined for the KPI in Stratsys.
 

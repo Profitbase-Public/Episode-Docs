@@ -5,7 +5,7 @@ The `Push data to Stratsys KPI API` action sends KPI data to the [Stratsys](http
 The action works in two modes:
 
 - **Entities** — push one or more prebuilt KPI entities. Build them first with [Create Stratsys KPI entity](./create-kpi-entity.md) and pass them (or a list of them) to the **KPIs** input.
-- **Tabular** — push directly from a [DataTable](../sql-server/load-to-datatable.md), without a separate build step. You supply the same mapping properties as [Create Stratsys KPI entity](./create-kpi-entity.md) (KPI ID, Source, Department ID column, Period date column) on the action itself.
+- **Tabular** (default) — push directly from a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md), without a separate build step. You supply the same mapping properties as [Create Stratsys KPI entity](./create-kpi-entity.md) (KPI ID, Source, Department ID column, Period date column) on the action itself.
 
 ![Flow that reads an Excel file from blob storage, loads it into a DataTable, and pushes it directly with Push data to Stratsys KPI API in Tabular mode, with Success, Error, and Continue exit ports](/images/flow/stratsys-push-kpi.png)
 
@@ -25,7 +25,7 @@ This flow reads a KPI Excel file from blob storage and [loads it into a DataTabl
 ## How it works
 
 - **Input**: The KPI data to push (either prebuilt entities in **Entities** mode, or a source table with column mappings in **Tabular** mode) and an authenticated [Connection](./connection.md) to Stratsys.
-- **Processing**: Flow authenticates against the Stratsys KPI API using OAuth client credentials and sends the KPI data. You do not need to manage tokens.
+- **Processing**: Flow authenticates against the Stratsys KPI API using OAuth client credentials and sends the KPI data in batches of up to 10 KPIs per request. If Stratsys responds with `429 Too Many Requests`, the request is delayed and retried, up to three attempts in total. You do not need to manage tokens.
 - **Output**: The API responses, returned on the **responses** output port. The action routes execution to the **Success**, **Error**, or **Continue** exit port depending on the result.
 
 ### Exit ports
@@ -51,24 +51,27 @@ This flow reads a KPI Excel file from blob storage and [loads it into a DataTabl
 <!--prettier-ignore-->
 | Name | Required | Description |
 |---|---|---|
+| Title | No | The title of the action. |
 | Connection | Yes | The [connection](./connection.md) used to authenticate requests to the Stratsys KPI API. |
 | Dynamic connection | No | When **Enable dynamic connection** is on, overrides the static **Connection** with a connection built at runtime by [Create Stratsys connection](./create-connection.md). |
-| Mode | Yes | `Entities` to push prebuilt KPI entities, or `Tabular` to push directly from a source table. See the mode descriptions above. |
+| Mode | Yes | `Entities` to push prebuilt KPI entities, or `Tabular` to push directly from a source table. Defaults to `Tabular`. See the mode descriptions above. |
 | KPIs | Entities mode | The KPI entity or list of entities to push. Typically the output of [Create Stratsys KPI entity](./create-kpi-entity.md). |
 | KPI ID | Tabular mode | The identifier of the Stratsys KPI the data belongs to. |
-| Source | Tabular mode | The [DataTable](../sql-server/load-to-datatable.md) containing the rows to push. |
-| Department ID column | No | (Tabular mode) The name of the source column that holds the department ID. |
-| Period date column | No | (Tabular mode) The name of the source column that holds the period date. |
-| External source | No | The source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Leave empty to use the default set in the connection. |
+| Source | Tabular mode | The [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) containing the rows to push. |
+| Department ID column | Tabular mode | The name of the source column that holds the department ID. |
+| Period date column | Tabular mode | The name of the source column that holds the period date. |
+| External source | No | The source system, as defined in Stratsys, to tag pushed data with. Type the value directly into this field. Leave empty to use the **Default external source** set in the connection. An external source is required, so the action fails if neither this property nor the connection has a value. |
 | Version | No | The Stratsys version to write to: `Active` or `Planning`. Defaults to `Active`. |
 | Responses variable name | No | The name used to reference the API responses (the **responses** output). |
-| Description | No | Free-text notes about the action. |
+| Description | No | Additional notes or comments about the action or configuration. |
+
+In **Tabular** mode, the source data must meet the same requirements as for [Create Stratsys KPI entity](./create-kpi-entity.md#source-data-requirements).
 
 <br/>
 
 ## Returns
 
-The API responses, returned on the **responses** output port as a `string` containing the raw response body from the Stratsys KPI API. Use this to inspect the outcome of the push — for example, to log which KPIs were accepted or to branch on errors.
+The API responses, returned on the **responses** output port as a list of strings (`List<string>`). KPIs are sent in batches of up to 10 per request, and the list contains the raw response body from the Stratsys KPI API for each request, in the order they were sent. Use this to inspect the outcome of the push — for example, to log which KPIs were accepted or to check for warnings.
 
 A successful push (status 200) can still return warnings, for example about unrecognized columns:
 

@@ -28,7 +28,7 @@ The properties you fill in depend on the selected mode.
 | Client ID       | OAuth | The API client ID. |
 | Client secret   | OAuth | The API client secret. |
 | SCIM key        | SCIM | The pre-generated SCIM key used as a bearer token. |
-| External source | Both | The default source system, as defined in Stratsys, to tag data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-data-to-kpi-api.md), and per request with the `Stratsys-ExternalSource` header on the [REST API Request](./rest-api-request.md) actions. |
+| Default external source | Both | The default source system, as defined in Stratsys, to tag data with. Type the value directly into this field. Can be overridden per action on [Push data to Stratsys KPI API](./push-data-to-kpi-api.md), and per request with the `Stratsys-ExternalSource` header on the [REST API Request](./rest-api-request.md) actions. An external source is required by [Push data to Stratsys KPI API](./push-data-to-kpi-api.md) and the `v1/external/...` endpoints, so set it here unless you always set it on the action or request. |
 
 Use the **Test connection** button to verify that the credentials work. For SCIM connections, the test calls the SCIM users endpoint, so the key must have access to it.
 

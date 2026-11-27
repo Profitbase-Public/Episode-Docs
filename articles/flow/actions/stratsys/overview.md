@@ -2,7 +2,7 @@
 
 Flow includes built-in support for [Stratsys](https://www.stratsys.com/) through its KPI API and REST API. You can push measurement data from a database, data platform, Excel file, or any other source supported by Flow into Stratsys — for example, reading KPI values from a SQL Server table or an Excel workbook and pushing them into Stratsys so plans and reports stay current without manual entry. You can also read data out of Stratsys, such as KPI data, departments, users, scorecards, SCIM users, and due diligence data.
 
-To use the Stratsys actions, you first need a [Stratsys connection](./connection.md) configured with a Company code and either OAuth client credentials (Tenant ID, Client ID, and Client Secret) or a SCIM key. The same connection is reused across actions, or you can build one dynamically with [Create Stratsys connection](./create-connection.md) when credentials live outside Flow. Flow handles the authentication for you; you do not need to manage access tokens.
+To use the Stratsys actions, you first need a [Stratsys connection](./connection.md). Flow handles the authentication for you; you do not need to manage access tokens.
 
 <br/>
 
@@ -19,8 +19,7 @@ Set up a static [Stratsys connection](./connection.md) using a Company code and 
 <br/>
 
 #### Pushing data to Stratsys
-[Push data to Stratsys KPI API](./push-data-to-kpi-api.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI entity](./create-kpi-entity.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) using the same column mappings — no separate build step required.
-
+[Push data to Stratsys KPI API](./push-data-to-kpi-api.md) sends KPI data to the Stratsys KPI API. It works in two modes: **Entities** pushes prebuilt entities from [Create Stratsys KPI entity](./create-kpi-entity.md), and **Tabular** pushes directly from a [DataTable](../sql-server/load-to-datatable.md) or [DataReader](../sql-server/get-datareader.md) using the same column mappings — no separate build step required.
 
 <br/>
 

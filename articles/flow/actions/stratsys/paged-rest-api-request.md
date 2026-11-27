@@ -1,16 +1,11 @@
 # Stratsys REST API Request with paging
 
-Use the Stratsys REST API to retrieve paginated data.
+The **REST API Request with paging** action retrieves large, paginated datasets from the Stratsys REST API, such as SCIM users and groups or due diligence suppliers, categories, groups, tags, and users. Pagination is managed automatically, allowing you to focus on processing the data. The action always uses the `GET` method.
 
-The **REST API request with paging** action enables you to interact with the Stratsys REST API to retrieve large, paginated datasets. This action simplifies working with endpoints that return multiple pages of data, such as SCIM users and groups or due diligence suppliers, categories, groups, tags, and users. Pagination is managed automatically, allowing you to focus on processing the data.
-
-The action always uses the `GET` method.
-
-
-![Flow with Stratsys paged REST API Request node](/images/flow/stratsys-paged-rest-api-request.png)
+![Flow where Stratsys REST API Request with paging reads due diligence suppliers page by page, converts each page to a DataTable, creates a CSV file and uploads it to Azure Blob Storage, and throws an exception on Error](/images/flow/stratsys-paged-rest-api-request.png)
 
 **Example** ![Example](/images/strz.jpg)  
-This flow reads Suppliers from Stratsys. Converts JSON to DataTable and creates and uploads a CSV file containing the data.
+This flow exports due diligence suppliers from Stratsys to CSV files in blob storage. **Stratsys suppliers paging request** calls the suppliers endpoint at the given `URI` and runs the **For each page** branch once for every page, with the current page available as `page`. Inside the branch, **Suppliers JSON to table** ([Convert JSON to DataTable](../json/get-json-datatable.md)) converts the page to the DataTable `suppliersTable`, **Create suppliers CSV** ([Create CSV file as byte array](../csv/create-csv-file-as-byte-array.md)) creates a CSV file from it, and **Upload CSV** ([Upload Blob](../azure-blob-storage/upload-blob.md)) uploads the file to Azure Blob Storage. Because these actions run once per page, give each file a unique blob name, for example by including a page counter. If a page request fails, the **Error** port runs **Show Stratsys error** ([Throw exception](../built-in/throw-exception.md)), which stops the Flow with an error message.
 
 <br/>
 
@@ -29,7 +24,7 @@ This flow reads Suppliers from Stratsys. Converts JSON to DataTable and creates 
 | Max page count  | No | The maximum number of pages to fetch. Defaults to `1000`. |
 | Description     | No | Additional notes or comments about the action or configuration. |
 
-<br>
+<br/>
 
 ## Paging modes
 
@@ -44,7 +39,7 @@ The paging query parameters are managed by the action. Do not add them yourself 
 
 When you select a template or enter a URI that contains `scim/`, the paging mode is switched to **SCIM** automatically. For any other URI, it is set to **Page**. You can change the mode manually if you define a request that doesn't follow this convention.
 
-<br>
+<br/>
 
 ## Returns
 
@@ -101,28 +96,9 @@ HTTP failures raise an error regardless of the response type. Paging stops and n
 
 Errors raised by actions inside the **For each page** branch are not handled by the **Error** port of this action.
 
-<br>
+<br/>
 
 ## API Limits
 
 Stratsys enforces rate limits to maintain stable server performance. If you exceed these limits, the API will return a `429 Too Many Requests` error.
-The action handles this by delaying calls and retrying requests. If the retry limit is reached, an error is returned.
-
-<br/>
-
-## Workflow Example
-
-1. **Configure the Action**:
-   - Select a template such as **Get SCIM users**, or define the endpoint manually.
-   - Set **Items per page** and **Max page count** as needed.
-
-2. **Handle the Response**:
-   - Connect the processing actions to **For each page**, and use the page variable as their input. For example, store the page's raw JSON in a database or file.
-   - Connect the **Error** port to handle failures.
-
-3. **Post-Processing**:
-   - Connect actions to **Continue** to transform or analyze the stored data after all pages have been retrieved.
-
-<br/>
-
-By using the **REST API Request with paging** action, you can effectively retrieve and handle large datasets from Stratsys while adhering to best practices for performance and API compliance.
+The action handles this by delaying the call and retrying each page request up to three attempts in total. If the retry limit is reached, an error is returned.
